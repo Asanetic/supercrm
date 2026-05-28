@@ -1,0 +1,26 @@
+"image_columns" => [
+
+    "product_image",
+
+    "service_image",
+
+    "logo",
+
+],
+
+"static_drop_down_array" => [
+
+    "payment_method" => "Mobile,Cash,Cheque",
+
+    "status" => "Pending,Paid,Cancelled",
+
+],
+
+"rename_cols_array" => [
+
+    "unit_price" => "Selling Price",
+
+    "qty" => "Quantity",
+
+],
+

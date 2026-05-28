@@ -1,0 +1,123 @@
+{
+    "smartapi": {
+        "base": "/api/supercrm/smartapi"
+    },
+    "dashboard": {
+        "admin": "/api/supercrm/dashboard/admin"
+    },
+    "activities": {
+        "base": "/api/supercrm/activities/activities",
+        "delete": "/api/supercrm/activities/delete",
+        "import": "/api/supercrm/activities/activities/import"
+    },
+    "clients": {
+        "base": "/api/supercrm/clients/clients",
+        "delete": "/api/supercrm/clients/delete",
+        "import": "/api/supercrm/clients/clients/import"
+    },
+    "deals": {
+        "base": "/api/supercrm/deals/deals",
+        "delete": "/api/supercrm/deals/delete",
+        "import": "/api/supercrm/deals/deals/import"
+    },
+    "invoiceitems": {
+        "base": "/api/supercrm/invoiceitems/invoiceitems",
+        "delete": "/api/supercrm/invoiceitems/delete",
+        "import": "/api/supercrm/invoiceitems/invoiceitems/import"
+    },
+    "invoices": {
+        "base": "/api/supercrm/invoices/invoices",
+        "delete": "/api/supercrm/invoices/delete",
+        "import": "/api/supercrm/invoices/invoices/import"
+    },
+    "leads": {
+        "base": "/api/supercrm/leads/leads",
+        "delete": "/api/supercrm/leads/delete",
+        "import": "/api/supercrm/leads/leads/import"
+    },
+    "pagemanifest": {
+        "base": "/api/supercrm/pagemanifest/pagemanifest",
+        "delete": "/api/supercrm/pagemanifest/delete",
+        "import": "/api/supercrm/pagemanifest/pagemanifest/import"
+    },
+    "payments": {
+        "base": "/api/supercrm/payments/payments",
+        "delete": "/api/supercrm/payments/delete",
+        "import": "/api/supercrm/payments/payments/import"
+    },
+    "productcategories": {
+        "base": "/api/supercrm/productcategories/productcategories",
+        "delete": "/api/supercrm/productcategories/delete",
+        "import": "/api/supercrm/productcategories/productcategories/import"
+    },
+    "products": {
+        "base": "/api/supercrm/products/products",
+        "delete": "/api/supercrm/products/delete",
+        "import": "/api/supercrm/products/products/import"
+    },
+    "quotationitems": {
+        "base": "/api/supercrm/quotationitems/quotationitems",
+        "delete": "/api/supercrm/quotationitems/delete",
+        "import": "/api/supercrm/quotationitems/quotationitems/import"
+    },
+    "quotations": {
+        "base": "/api/supercrm/quotations/quotations",
+        "delete": "/api/supercrm/quotations/delete",
+        "import": "/api/supercrm/quotations/quotations/import"
+    },
+    "servicecategories": {
+        "base": "/api/supercrm/servicecategories/servicecategories",
+        "delete": "/api/supercrm/servicecategories/delete",
+        "import": "/api/supercrm/servicecategories/servicecategories/import"
+    },
+    "services": {
+        "base": "/api/supercrm/services/services",
+        "delete": "/api/supercrm/services/delete",
+        "import": "/api/supercrm/services/services/import"
+    },
+    "systemmodulemanifest": {
+        "base": "/api/supercrm/systemmodulemanifest/systemmodulemanifest",
+        "delete": "/api/supercrm/systemmodulemanifest/delete",
+        "import": "/api/supercrm/systemmodulemanifest/systemmodulemanifest/import"
+    },
+    "systemrolebundles": {
+        "base": "/api/supercrm/systemrolebundles/systemrolebundles",
+        "delete": "/api/supercrm/systemrolebundles/delete",
+        "import": "/api/supercrm/systemrolebundles/systemrolebundles/import"
+    },
+    "systemusers": {
+        "base": "/api/supercrm/systemusers/systemusers",
+        "delete": "/api/supercrm/systemusers/delete",
+        "import": "/api/supercrm/systemusers/systemusers/import"
+    },
+    "tasks": {
+        "base": "/api/supercrm/tasks/tasks",
+        "delete": "/api/supercrm/tasks/delete",
+        "import": "/api/supercrm/tasks/tasks/import"
+    },
+    "userbundlerolefunctions": {
+        "base": "/api/supercrm/userbundlerolefunctions/userbundlerolefunctions",
+        "delete": "/api/supercrm/userbundlerolefunctions/delete",
+        "import": "/api/supercrm/userbundlerolefunctions/userbundlerolefunctions/import"
+    },
+    "usermanifest": {
+        "base": "/api/supercrm/usermanifest/usermanifest",
+        "delete": "/api/supercrm/usermanifest/delete",
+        "import": "/api/supercrm/usermanifest/usermanifest/import"
+    },
+    "users": {
+        "base": "/api/supercrm/users/users",
+        "delete": "/api/supercrm/users/delete",
+        "import": "/api/supercrm/users/users/import"
+    },
+    "mosysqlrollback": {
+        "base": "/api/supercrm/mosysqlrollback/mosysqlrollback",
+        "delete": "/api/supercrm/mosysqlrollback/delete",
+        "import": "/api/supercrm/mosysqlrollback/mosysqlrollback/import"
+    },
+    "expectedrevenue": {
+        "base": "/api/supercrm/expectedrevenue/expectedrevenue",
+        "delete": "/api/supercrm/expectedrevenue/delete",
+        "import": "/api/supercrm/expectedrevenue/expectedrevenue/import"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "smartapi": {
+        "base": "/api/supercrm/smartapi"
+    },
+    "dashboard": {
+        "admin": "/api/supercrm/dashboard/admin"
+    }
+}

@@ -1,0 +1,129 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Product Categories API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "api/supercrm/productcategories/productcategories": {
+            "get": {
+                "summary": "Get Product Categories",
+                "parameters": [
+                    {
+                        "name": "searchAny",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Base64 search value"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Product Categories",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "category_name": {
+                                        "type": "string",
+                                        "description": "Category name"
+                                    },
+                                    "category_description": {
+                                        "type": "string",
+                                        "description": "Category description"
+                                    },
+                                    "parent_category_id": {
+                                        "type": "string",
+                                        "description": "Parent category id"
+                                    },
+                                    "category_image": {
+                                        "type": "string",
+                                        "description": "Category image"
+                                    },
+                                    "category_status": {
+                                        "type": "string",
+                                        "description": "Category status"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "description": "Created at"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "description": "Updated at"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Created successfully"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Product Categories",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "category_name": {
+                                        "type": "string",
+                                        "description": "Category name"
+                                    },
+                                    "category_description": {
+                                        "type": "string",
+                                        "description": "Category description"
+                                    },
+                                    "parent_category_id": {
+                                        "type": "string",
+                                        "description": "Parent category id"
+                                    },
+                                    "category_image": {
+                                        "type": "string",
+                                        "description": "Category image"
+                                    },
+                                    "category_status": {
+                                        "type": "string",
+                                        "description": "Category status"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "description": "Created at"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "description": "Updated at"
+                                    },
+                                    "Node": {
+                                        "type": "string",
+                                        "description": " Product Categories id to update "
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated successfully"
+                    }
+                }
+            }
+        }
+    }
+}
