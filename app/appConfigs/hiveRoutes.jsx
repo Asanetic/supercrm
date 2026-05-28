@@ -2,8 +2,8 @@
 
 export const hiveRoutes = {
   hiveBaseRoute: '/crm',
-  cms: '/supercrm',      // dairy sacco graders portal   relative to your Next.js routes
-  billing: '/supercrm',      // dairy sacco graders portal   relative to your Next.js routes
-  auth: '/auth'
+  cms: '/crm/supercrm',      // dairy sacco graders portal   relative to your Next.js routes
+  billing: '/crm/supercrm',      // dairy sacco graders portal   relative to your Next.js routes
+  auth: '/crm/auth'
   // add more as needed
 };
