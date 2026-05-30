@@ -756,16 +756,17 @@ export default function UsersProfile({ dataIn = {}, dataOut = {} }) {
           
           <div className="row justify-content-start col-md-12 p-0 m-0 ">
             
-            <div className="form-group col-md-4 hive_data_cell ">
-              <label >Account Status</label>
-              
-              <select name="account_status" id="account_status" className="form-control">
-                <option  value={usersNode?.account_status || ""}>{usersNode?.account_status || "Select Account Status"}</option>
-                <option>Active</option>
-                <option>Inactive</option>
-                
-              </select>
-            </div>
+            <MosySmartField
+            module="users"
+            field="account_status"
+            label="Account Status"
+            value={usersNode?.account_status || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="text"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            />
             
             
             <MosySmartField
@@ -790,11 +791,21 @@ export default function UsersProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="datetime-local"
-            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
             />
             
             
-            <input className="form-control" id="updated_at" name="updated_at" value={usersNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+            <MosySmartField
+            module="users"
+            field="updated_at"
+            label="Updated At"
+            value={usersNode?.updated_at || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="datetime-local"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+            />
             
           </div>
           

@@ -51,7 +51,10 @@ const apiRoutes = getApiRoutes();
 
 import {InteprateInvoicesEvent} from '../../invoices/dataControl/InvoicesRequestHandler';
 import InvoicesList from '../../invoices/uiControl/InvoicesList';
+import {InteprateServicesEvent} from '../../services/dataControl/ServicesRequestHandler';
+import ServicesList from '../../services/uiControl/ServicesList';
 import InvoicesProfile from '../../invoices/uiControl/InvoicesProfile';
+import ServicesProfile from '../../services/uiControl/ServicesProfile';
 // ════════════════════════════════════════════════════════════════
 // PROFILE PAGE FUNCTION IMPORTS
 // ════════════════════════════════════════════════════════════════
@@ -59,6 +62,11 @@ import InvoicesProfile from '../../invoices/uiControl/InvoicesProfile';
 import {
   viewInvoices
 } from '../../invoices/logicControl/invoices-automapper';
+
+// Imports from services-automapper.jsx
+import {
+  viewServices
+} from '../../services/logicControl/services-automapper';
 
 
 
@@ -180,6 +188,25 @@ export default function InvoiceItemsProfile({ dataIn = {}, dataOut = {} }) {
     }
   }, [invoice_itemsNode, setInvoicesCustomProfileQuery]);
   
+  //setServicesCustomProfileQuery Script
+  const setServicesCustomProfileQuery = stateItemSetters.setServicesCustomProfileQuery;
+  const servicesCustomProfileQuery =  stateItem.servicesCustomProfileQuery;
+  
+  useEffect(() => {
+    if (invoice_itemsNode?.primkey && setServicesCustomProfileQuery) {
+      
+      const query = {recordId:btoa(invoice_itemsNode?.item_id)        };
+      
+      const tokenUrl = mosyUrlParam("services_dataNode")
+      
+      if(!tokenUrl)
+      {
+        setServicesCustomProfileQuery(query);
+      }
+      
+    }
+  }, [invoice_itemsNode, setServicesCustomProfileQuery]);
+  
   
   //access control managemant
   const [allowed, setAllowed] = useState(null);
@@ -209,7 +236,7 @@ export default function InvoiceItemsProfile({ dataIn = {}, dataOut = {} }) {
                 {
                   invoice_itemsNode?.primkey ? (
                     
-                    <span>{`Invoice Items / ${invoice_itemsNode?.item_type}`}</span>
+                    <span>{`Invoice Items / ${invoice_itemsNode?.item_id}`}</span>
                     
                   ) : customProfileData?.InvoiceItemsTitle ? (
                     
@@ -267,6 +294,18 @@ export default function InvoiceItemsProfile({ dataIn = {}, dataOut = {} }) {
                   onClick={()=>{
                     
                     viewInvoices({childCol:`recordId`,parentColVal:invoice_itemsNode.invoice_id,parentName:invoice_itemsNode.item_name})
+                    
+                  }}
+                  />
+                  <MosyActionButton
+                  source="InvoiceItemsProfile"
+                  action="view_service_detail_profile_action_btn"
+                  label="View Service detail"
+                  icon="list"
+                  
+                  onClick={()=>{
+                    
+                    viewServices({childCol:`recordId`,parentColVal:invoice_itemsNode.item_id,parentName:invoice_itemsNode.item_name})
                     
                   }}
                   />
@@ -342,58 +381,37 @@ export default function InvoiceItemsProfile({ dataIn = {}, dataOut = {} }) {
                   }`}
                   context={{hostParent : hostParent}}
                   />
-                  
-                  <div className="form-group col-md-4 hive_data_cell ">
-                    <label className="d-none">Item Type</label>
-                    
-                    <SmartDropdown
-                    apiEndpoint={apiRoutes.invoiceitems.base}
-                    idField="primkey"
-                    labelField="item_type"
-                    inputName="item_type"
-                    label="Item Type"
-                    onSelect={(val) => console.log('Selected:', val)}
-                    defaultValue={invoice_itemsNode?.item_type || ""}
-                    />
-                  </div>
-                  
-                  
-                  <MosySmartField
-                  module="invoice_items"
-                  field="item_id"
-                  label="Item Id"
-                  value={invoice_itemsNode?.item_id || ""}
-                  onChange={handleInputChange}
-                  context={{ hostParent: hostParent  }}
-                  inputOverrides={{}}
-                  type="title"
-                  cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
+                  <LiveSearchDropdown
+                  apiEndpoint={apiRoutes.services.base}
+                  tblName="services"
+                  parentTable="invoice_items"
+                  inputName="_services_service_name_item_id"
+                  hiddenInputName="item_id"
+                  valueField="record_id"
+                  displayField="service_name"
+                  label="Service Name"
+                  defaultValue={{ record_id: invoice_itemsNode?.item_id || "", service_name: invoice_itemsNode?._services_service_name_item_id || "" }}
+                  onSelect={(id) => console.log("Just the ID:", id)}
+                  onSelectFull={(dataRes) =>  console.log("Data seleted")}
+                  onInputChange={handleInputChange}
+                  defaultColSize={`col-md-4 hive_data_cell  hive_data_cell ${
+                    customProfileData?.item_id
+                    ? 'd-none'
+                    : ''
+                  }`}
+                  context={{hostParent : hostParent}}
                   />
                   
-                  
                   <MosySmartField
                   module="invoice_items"
-                  field="item_name"
-                  label="Item Name"
-                  value={invoice_itemsNode?.item_name || ""}
+                  field="invoice_item_name"
+                  label="Invoice Item Name"
+                  value={invoice_itemsNode?.invoice_item_name || ""}
                   onChange={handleInputChange}
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
                   type="text"
                   cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
-                  />
-                  
-                  
-                  <MosySmartField
-                  module="invoice_items"
-                  field="item_description"
-                  label="Item Description"
-                  value={invoice_itemsNode?.item_description || ""}
-                  onChange={handleInputChange}
-                  context={{ hostParent: hostParent  }}
-                  inputOverrides={{}}
-                  type="textarea"
-                  cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
                   />
                   
                   
@@ -422,6 +440,32 @@ export default function InvoiceItemsProfile({ dataIn = {}, dataOut = {} }) {
                   cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
                   />
                   
+                  
+                  <MosySmartField
+                  module="invoice_items"
+                  field="item_total_amount"
+                  label="Item Total Amount"
+                  value={invoice_itemsNode?.item_total_amount || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="text"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  />
+                  
+                  
+                  <MosySmartField
+                  module="invoice_items"
+                  field="item_description"
+                  label="Item Description"
+                  value={invoice_itemsNode?.item_description || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="textarea"
+                  cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
+                  />
+                  
                 </div>
                 
               </div>
@@ -439,19 +483,6 @@ export default function InvoiceItemsProfile({ dataIn = {}, dataOut = {} }) {
                   
                   <MosySmartField
                   module="invoice_items"
-                  field="item_total_amount"
-                  label="Item Total Amount"
-                  value={invoice_itemsNode?.item_total_amount || ""}
-                  onChange={handleInputChange}
-                  context={{ hostParent: hostParent  }}
-                  inputOverrides={{}}
-                  type="text"
-                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
-                  />
-                  
-                  
-                  <MosySmartField
-                  module="invoice_items"
                   field="created_at"
                   label="Created At"
                   value={invoice_itemsNode?.created_at || ""}
@@ -459,11 +490,21 @@ export default function InvoiceItemsProfile({ dataIn = {}, dataOut = {} }) {
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
                   type="datetime-local"
-                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
                   />
                   
                   
-                  <input className="form-control" id="updated_at" name="updated_at" value={invoice_itemsNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+                  <MosySmartField
+                  module="invoice_items"
+                  field="updated_at"
+                  label="Updated At"
+                  value={invoice_itemsNode?.updated_at || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="datetime-local"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+                  />
                   
                 </div>
                 
@@ -524,6 +565,37 @@ export default function InvoiceItemsProfile({ dataIn = {}, dataOut = {} }) {
             />
             
           )}
+          {invoice_itemsNode?.primkey && (
+            <MosyProfileSection
+            title={`Service detail`}
+            source="invoice_items_ServicesProfile"
+            component={ServicesProfile}
+            table="invoice_items"
+            key={`ServicesProfile-${localEventSignature}`}
+            dataIn={{
+              
+              parentStateSetters : stateItemSetters,
+              parentUseEffectKey : localEventSignature,
+              showNavigationIsle:false,
+              customQueryStr : servicesCustomProfileQuery,
+              hostParent : "InvoiceItemsProfile",
+              parentProfileItemId : activeScrollId,
+              customProfileData : {
+                _invoice_items_item_name_record_id:invoice_itemsNode?.item_name,
+                record_id:invoice_itemsNode?.item_id
+              }
+              
+            }}
+            
+            dataOut={{
+              
+              setChildDataOut: InteprateServicesEvent,
+              setChildDataOutSignature: (sig) => console.log("Signature changed:", sig),
+              
+            }}
+            />
+            
+          )}
           
           
           {invoice_itemsNode?.primkey && (
@@ -546,6 +618,31 @@ export default function InvoiceItemsProfile({ dataIn = {}, dataOut = {} }) {
             
             dataOut={{
               setChildDataOut: InteprateInvoicesEvent,
+              setChildDataOutSignature: (sig) => console.log("Signature changed:", sig),
+            }}
+            />
+          )}
+          
+          {invoice_itemsNode?.primkey && (
+            <MosyProfileSection
+            viewAllLink={`../services/list?invoice_items_mosyfilter=${btoa(`{recordId:btoa(invoice_itemsNode?.item_id)        }`)}`}
+            title={`Service detail`}
+            source="invoice_items_ServicesList"
+            component={ServicesList}
+            table="invoice_items"
+            key={`ServicesList-${localEventSignature}`}
+            dataIn={{
+              parentStateSetters : stateItemSetters,
+              parentUseEffectKey : localEventSignature,
+              showNavigationIsle:false,
+              showDataControlSections:false,
+              customQueryStr : {recordId:btoa(invoice_itemsNode?.item_id)        },
+              customProfilePath:"../services/profile"
+              
+            }}
+            
+            dataOut={{
+              setChildDataOut: InteprateServicesEvent,
               setChildDataOutSignature: (sig) => console.log("Signature changed:", sig),
             }}
             />

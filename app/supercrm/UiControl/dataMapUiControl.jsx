@@ -15,7 +15,7 @@
     ];
   
     const sourceVisibilityWhitelist = [
-      "assets_AssetPricingProfile",
+      "invoice_items_InvoiceItemsList",
       "assets_AssetPricingList",
       "assets_SubscriptionsList",
       "dashboardAssetsList",

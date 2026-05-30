@@ -65,15 +65,15 @@ import {
   filterOutOfStockProducts
 } from '../logicControl/out-of-stock-products';
 
+// Imports from filter-prod-types.jsx
+import {
+  filterProdByCategory
+} from '../logicControl/filter-prod-types';
+
 // Imports from active-products.jsx
 import {
   filterActiveProducts
 } from '../logicControl/active-products';
-
-// Imports from product_categories-automapper.jsx
-import {
-  viewProductCategories
-} from '../../productcategories/logicControl/product_categories-automapper';
 
 
 
@@ -140,12 +140,6 @@ export default function ProductsList({ dataIn = {}, dataOut = {} }) {
   // Compute unit_price totals
   const sumproducts_unit_price = stateItem.productsListData?.reduce(
     (sum, row) => sum + Number(row.unit_price || 0),
-    0
-  );
-  
-  // Compute discount_price totals
-  const sumproducts_discount_price = stateItem.productsListData?.reduce(
-    (sum, row) => sum + Number(row.discount_price || 0),
     0
   );
   
@@ -240,7 +234,7 @@ export default function ProductsList({ dataIn = {}, dataOut = {} }) {
             source="ProductsProfile"
             action="products_DataMapQCol_filterOutOfStockProducts_btn"
             label="Out Of Stock Products"
-            icon="alert-triangle"
+            icon="exclamation-triangle"
             
             onClick={()=>{
               
@@ -255,6 +249,30 @@ export default function ProductsList({ dataIn = {}, dataOut = {} }) {
                 colVal: "Out Of Stock",
                 
                 tableName: "products",
+                
+              })
+              
+            }}
+            />
+            <MosyActionButton
+            source="ProductsProfile"
+            action="products_DataMapQCol_filterProdByCategory_btn"
+            label="Filter Categories"
+            icon="tags"
+            
+            onClick={()=>{
+              
+              filterProdByCategory({
+                
+                customQueryStr : customQueryStr,
+                
+                stateItemSetters: stateItemSetters,
+                
+                title: "Search Categories",
+                
+                parentColName: "category",
+                
+                parentTableName: "products",
                 
               })
               
@@ -322,11 +340,11 @@ export default function ProductsList({ dataIn = {}, dataOut = {} }) {
           <th scope="col">#</th>
           <th>Product Image</th>
           <th scope="col"><b>Product Name</b></th>
-          <th scope="col"><b>Product Code</b></th>
-          <th scope="col"><b>Undefined</b></th>
-          <th scope="col"><b>Product Description</b></th>
+          <th scope="col"><b>Price Range</b></th>
           <th scope="col"><b>Unit Price</b></th>
-          <th scope="col"><b>Discount Price</b></th>
+          <th scope="col"><b>Product Code</b></th>
+          <th scope="col"><b>Category</b></th>
+          <th scope="col"><b>Product Description</b></th>
           
         </tr>
         
@@ -367,14 +385,6 @@ export default function ProductsList({ dataIn = {}, dataOut = {} }) {
                           
                           />
                           
-                          <MosyGridRowOptions
-                          src="ProductsList"
-                          action="_category_details"
-                          label=" Category Details"
-                          icon="list "
-                          dataIn={() => viewProductCategories({childCol:`recordId`,parentColVal:listproducts_result.product_category_id,parentName:listproducts_result.product_name})}   // only runs on click now
-                          callBack={(incomingRequest) => {setChildDataOut(incomingRequest) }}
-                          />
                         </div>
                       </div>
                     </td>
@@ -388,8 +398,10 @@ export default function ProductsList({ dataIn = {}, dataOut = {} }) {
                       />
                     </td>
                     <td scope="col"><span title={listproducts_result.product_name}>{magicTrimText(listproducts_result.product_name, 70)}</span></td>
+                    <td scope="col"><span title={listproducts_result.price_range}>{magicTrimText(listproducts_result.price_range, 70)}</span></td>
+                    <td scope="col"><span>{mosyTonum(listproducts_result.unit_price)}</span></td>
                     <td scope="col"><span title={listproducts_result.product_code}>{magicTrimText(listproducts_result.product_code, 70)}</span></td>
-                    <td scope="col"><span title={listproducts_result.product_category_id}>{magicTrimText(listproducts_result._product_categories_undefined_product_category_id, 70)}</span></td>
+                    <td scope="col"><span title={listproducts_result.category}>{magicTrimText(listproducts_result.category, 70)}</span></td>
                     <td scope="col"><span>
                       <ReactMarkdown>
                         
@@ -397,8 +409,6 @@ export default function ProductsList({ dataIn = {}, dataOut = {} }) {
                         
                       </ReactMarkdown>
                     </span></td>
-                    <td scope="col"><span>{mosyTonum(listproducts_result.unit_price)}</span></td>
-                    <td scope="col"><span>{mosyTonum(listproducts_result.discount_price)}</span></td>
                     
                   </tr>
                   
@@ -427,10 +437,10 @@ export default function ProductsList({ dataIn = {}, dataOut = {} }) {
               <th></th>
               <th scope="col"><b></b></th>
               <th scope="col"><b></b></th>
-              <th scope="col"><b></b></th>
-              <th scope="col"><b></b></th>
               <th scope="col"><b><span>{mosyTonum(sumproducts_unit_price)}</span></b></th>
-              <th scope="col"><b><span>{mosyTonum(sumproducts_discount_price)}</span></b></th>
+              <th scope="col"><b></b></th>
+              <th scope="col"><b></b></th>
+              <th scope="col"><b></b></th>
               
             </tr>
           </tbody>

@@ -23,7 +23,7 @@ export async function generateMetadata({ searchParams }) {
 
 export default function UploadCsvPage() {
 
-   const colsArray = ['primkey','record_id','invoice_id','item_type','item_id','item_name','item_description','item_quantity','item_unit_price','item_total_amount','created_at','updated_at','hive_site_id','hive_site_name']
+   const colsArray = ['primkey','record_id','invoice_id','item_id','invoice_item_name','item_quantity','item_unit_price','item_total_amount','item_description','created_at','updated_at','hive_site_id','hive_site_name']
 
    return (
      <>

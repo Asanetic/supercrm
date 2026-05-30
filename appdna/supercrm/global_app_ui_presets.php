@@ -8,13 +8,9 @@ $global_input_presets_page_layout_preset = [
 
     "product_image",
 
-    "service_image",
-
 ],
 
 "textarea_array" => [
-
-    "revenue_description",
 
     "activity_description",
 
@@ -25,6 +21,8 @@ $global_input_presets_page_layout_preset = [
     "deal_description",
 
     "deal_notes",
+
+    "revenue_description",
 
     "item_description",
 
@@ -94,13 +92,23 @@ $global_input_presets_page_layout_preset = [
 
 ],
 
+"hidden_inputs" => [
+
+    "created_at",
+
+    "updated_at",
+
+],
+
 "sum_cols_list" => [
 
-    "tax_number",
+    "item_quantity",
+
+    "stock_quantity",
 
     "deal_value",
 
-    "item_quantity",
+    "expected_amount",
 
     "item_unit_price",
 
@@ -120,13 +128,9 @@ $global_input_presets_page_layout_preset = [
 
     "discount_price",
 
-    "stock_quantity",
-
     "quotation_amount",
 
     "service_price",
-
-    "expected_amount",
 
 ],
 
@@ -136,6 +140,8 @@ $global_input_presets_page_layout_preset = [
 
     "deal_title",
 
+    "revenue_title",
+
     "invoice_title",
 
     "lead_title",
@@ -144,41 +150,49 @@ $global_input_presets_page_layout_preset = [
 
     "task_title",
 
+    "item_name",
+
 ],
 
 "static_drop_down_array" => [
 
-    "activity_status" => "Pending,Completed,Cancelled",
+    "activity_status" => "Planned,In Progress,Completed,Cancelled",
 
-    "client_status" => "Active,Inactive,Lead",
+    "client_status" => "Prospect,Active,Inactive,Blacklisted",
 
-    "deal_status" => "Open,Won,Lost",
+    "deal_status" => "Open,In Progress,Won,Lost,On Hold,Cancelled",
 
-    "priority_level" => "Low,Medium,High,Urgent",
+    "priority_level" => "Low,Medium,High,Urgent,Critical",
 
-    "invoice_status" => "Draft,Pending,Paid,Overdue,Cancelled",
+    "payment_status" => "Pending,Processing,Completed,Failed,Refunded,Cancelled",
 
-    "lead_status" => "New,Contacted,Qualified,Converted,Lost",
+    "revenue_status" => "Expected,Received,Pending,Cancelled",
 
-    "payment_status" => "Complete,Pending",
+    "invoice_status" => "Draft,Sent,Partially Paid,Paid,Overdue,Cancelled",
 
-    "product_status" => "Active,Inactive,Out of Stock,Discontinued",
+    "lead_status" => "New,Contacted,Qualified,Proposal Sent,Negotiation,Won,Lost",
 
-    "account_status" => "Active,Inactive",
+    "product_status" => "Active,Inactive,Out Of Stock,Discontinued",
 
-    "category_status" => "Active,Inactive",
+    "quotation_status" => "Draft,Sent,Accepted,Rejected,Expired",
+
+    "service_status" => "Active,Inactive,Suspended,Discontinued",
+
+    "task_priority" => "Low,Medium,High,Urgent",
+
+    "task_status" => "Pending,In Progress,Completed,Cancelled",
+
+    "account_status" => "Active,Inactive,Suspended,Pending Verification,Archived",
+
+    "deal_probability" => "Very Low,Low,Medium,High,Very High",
 
 ],
 
 "dynamic_drop_down_array" => [
 
-    "quotation_status",
+    "assigned_sales_rep",
 
-    "service_status",
-
-    "task_priority",
-
-    "task_status",
+    "assigned_to",
 
     "activity_type",
 
@@ -196,7 +210,9 @@ $global_input_presets_page_layout_preset = [
 
     "deal_stage",
 
-    "deal_probability",
+    "currency_code",
+
+    "revenue_source_type",
 
     "item_type",
 
@@ -206,25 +222,7 @@ $global_input_presets_page_layout_preset = [
 
     "payment_method",
 
-    "currency_code",
-
-    "probability_percent",
-
-    "revenue_source_type",
-
-    "revenue_month",
-
-    "revenue_status",
-
-    "category_name",
-
-    "category_description",
-
-    "category_image",
-
-    "category_status",
-
-    "tax_percentage",
+    "category",
 
     "billing_type",
 

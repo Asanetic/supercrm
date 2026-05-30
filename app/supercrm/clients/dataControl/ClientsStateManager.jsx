@@ -30,6 +30,7 @@ invoicesCustomProfileQuery : ``,
 paymentsCustomProfileQuery : ``,
 tasksCustomProfileQuery : ``,
 activitiesCustomProfileQuery : ``,
+expectedRevenueCustomProfileQuery : ``,
 
   
   // ... other base defaults

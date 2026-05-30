@@ -310,7 +310,7 @@ export default function ExpectedRevenueList({ dataIn = {}, dataOut = {} }) {
             source="ExpectedRevenueProfile"
             action="expected_revenue_DataMapQCol_filterRevenueByStatus_btn"
             label="Filter By Status"
-            icon="layers"
+            icon="list-alt"
             
             onClick={()=>{
               
@@ -334,7 +334,7 @@ export default function ExpectedRevenueList({ dataIn = {}, dataOut = {} }) {
             source="ExpectedRevenueProfile"
             action="expected_revenue_DataMapQCol_filterRevenueByMonth_btn"
             label="Filter By Month"
-            icon="layers"
+            icon="calendar"
             
             onClick={()=>{
               

@@ -49,9 +49,9 @@ import { getApiRoutes } from '../../AppRoutes/apiRoutesHandler';
 // Use default base root (/)
 const apiRoutes = getApiRoutes();
 
-import {InteprateServiceCategoriesEvent} from '../../servicecategories/dataControl/ServiceCategoriesRequestHandler';
-import ServiceCategoriesList from '../../servicecategories/uiControl/ServiceCategoriesList';
-import ServiceCategoriesProfile from '../../servicecategories/uiControl/ServiceCategoriesProfile';
+import {InteprateInvoiceItemsEvent} from '../../invoiceitems/dataControl/InvoiceItemsRequestHandler';
+import InvoiceItemsList from '../../invoiceitems/uiControl/InvoiceItemsList';
+import InvoiceItemsProfile from '../../invoiceitems/uiControl/InvoiceItemsProfile';
 // ════════════════════════════════════════════════════════════════
 // PROFILE PAGE FUNCTION IMPORTS
 // ════════════════════════════════════════════════════════════════
@@ -65,10 +65,10 @@ import {
   disableService
 } from '../logicControl/disable-service';
 
-// Imports from service_categories-automapper.jsx
+// Imports from invoice_items-automapper.jsx
 import {
-  viewServiceCategories
-} from '../../servicecategories/logicControl/service_categories-automapper';
+  viewInvoiceItems
+} from '../../invoiceitems/logicControl/invoice_items-automapper';
 
 
 
@@ -171,24 +171,24 @@ export default function ServicesProfile({ dataIn = {}, dataOut = {} }) {
   
   //child queries use effect
   
-  //setServiceCategoriesCustomProfileQuery Script
-  const setServiceCategoriesCustomProfileQuery = stateItemSetters.setServiceCategoriesCustomProfileQuery;
-  const serviceCategoriesCustomProfileQuery =  stateItem.serviceCategoriesCustomProfileQuery;
+  //setInvoiceItemsCustomProfileQuery Script
+  const setInvoiceItemsCustomProfileQuery = stateItemSetters.setInvoiceItemsCustomProfileQuery;
+  const invoiceItemsCustomProfileQuery =  stateItem.invoiceItemsCustomProfileQuery;
   
   useEffect(() => {
-    if (servicesNode?.primkey && setServiceCategoriesCustomProfileQuery) {
+    if (servicesNode?.primkey && setInvoiceItemsCustomProfileQuery) {
       
-      const query = {recordId:btoa(servicesNode?.service_category_id)    };
+      const query = {itemId:btoa(servicesNode?.record_id)    };
       
-      const tokenUrl = mosyUrlParam("service_categories_dataNode")
+      const tokenUrl = mosyUrlParam("invoice_items_dataNode")
       
       if(!tokenUrl)
       {
-        setServiceCategoriesCustomProfileQuery(query);
+        setInvoiceItemsCustomProfileQuery(query);
       }
       
     }
-  }, [servicesNode, setServiceCategoriesCustomProfileQuery]);
+  }, [servicesNode, setInvoiceItemsCustomProfileQuery]);
   
   
   //access control managemant
@@ -219,7 +219,7 @@ export default function ServicesProfile({ dataIn = {}, dataOut = {} }) {
                 {
                   servicesNode?.primkey ? (
                     
-                    <span>{`Services / ${servicesNode?.service_code}`}</span>
+                    <span>{`Services / ${servicesNode?.service_name}`}</span>
                     
                   ) : customProfileData?.ServicesTitle ? (
                     
@@ -330,13 +330,13 @@ export default function ServicesProfile({ dataIn = {}, dataOut = {} }) {
                   />
                   <MosyActionButton
                   source="ServicesProfile"
-                  action="view_category_details_profile_action_btn"
-                  label="View Category Details"
+                  action="view_invoice_items_profile_action_btn"
+                  label="View Invoice Items"
                   icon="list"
                   
                   onClick={()=>{
                     
-                    viewServiceCategories({childCol:`recordId`,parentColVal:servicesNode.service_category_id,parentName:servicesNode.service_name})
+                    viewInvoiceItems({childCol:`itemId`,parentColVal:servicesNode.record_id,parentName:servicesNode.service_name})
                     
                   }}
                   />
@@ -373,28 +373,6 @@ export default function ServicesProfile({ dataIn = {}, dataOut = {} }) {
         <div className="row justify-content-center m-0 p-0 col-md-12" id="">
           {/*    Image section isle      */}
           
-          <div className="col-md-6 mr-lg-5">
-            
-            <div className="col-md-12 p-0 text-center mb-3">
-              <div className="col-md-12 m-2"><b>Service Image</b></div>
-              <MosyImageViewer
-              media={`/api/mediaroom?media=${btoa((servicesNode?.service_image || ""))}`}
-              mediaRoot={""}
-              defaultLogo={logo.src}
-              imageClass="product_image"
-              />
-              
-              <div className="">
-                <MosyFileUploadButton
-                tblName="services"
-                attribute="service_image"
-                />
-              </div>
-              <input type="hidden" name="media_services_service_image" value={servicesNode?.service_image || ""}/>
-            </div>
-            
-            
-          </div>
           {/*    Image section isle      */}
           
           {/*  //-------------    main content starts here  ------------------------------ */}
@@ -417,6 +395,19 @@ export default function ServicesProfile({ dataIn = {}, dataOut = {} }) {
                   
                   <MosySmartField
                   module="services"
+                  field="service_code"
+                  label="Service Code"
+                  value={servicesNode?.service_code || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="text"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  />
+                  
+                  
+                  <MosySmartField
+                  module="services"
                   field="service_name"
                   label="Service Name"
                   value={servicesNode?.service_name || ""}
@@ -428,49 +419,31 @@ export default function ServicesProfile({ dataIn = {}, dataOut = {} }) {
                   />
                   
                   
+                  <div className="form-group col-md-4 hive_data_cell ">
+                    <label className="d-none">Category</label>
+                    
+                    <SmartDropdown
+                    apiEndpoint={apiRoutes.services.base}
+                    idField="primkey"
+                    labelField="category"
+                    inputName="category"
+                    label="Category"
+                    onSelect={(val) => console.log('Selected:', val)}
+                    defaultValue={servicesNode?.category || ""}
+                    />
+                  </div>
+                  
+                  
                   <MosySmartField
                   module="services"
-                  field="service_code"
-                  label="Service Code"
-                  value={servicesNode?.service_code || ""}
+                  field="price_range"
+                  label="Price Range"
+                  value={servicesNode?.price_range || ""}
                   onChange={handleInputChange}
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
                   type="text"
                   cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
-                  />
-                  
-                  <LiveSearchDropdown
-                  apiEndpoint={apiRoutes.servicecategories.base}
-                  tblName="service_categories"
-                  parentTable="services"
-                  inputName="_service_categories_undefined_service_category_id"
-                  hiddenInputName="service_category_id"
-                  valueField="record_id"
-                  displayField="undefined"
-                  label="Undefined"
-                  defaultValue={{ record_id: servicesNode?.service_category_id || "", undefined: servicesNode?._service_categories_undefined_service_category_id || "" }}
-                  onSelect={(id) => console.log("Just the ID:", id)}
-                  onSelectFull={(dataRes) =>  console.log("Data seleted")}
-                  onInputChange={handleInputChange}
-                  defaultColSize={`col-md-4 hive_data_cell  hive_data_cell ${
-                    customProfileData?.service_category_id
-                    ? 'd-none'
-                    : ''
-                  }`}
-                  context={{hostParent : hostParent}}
-                  />
-                  
-                  <MosySmartField
-                  module="services"
-                  field="service_description"
-                  label="Service Description"
-                  value={servicesNode?.service_description || ""}
-                  onChange={handleInputChange}
-                  context={{ hostParent: hostParent  }}
-                  inputOverrides={{}}
-                  type="textarea"
-                  cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
                   />
                   
                   
@@ -489,15 +462,30 @@ export default function ServicesProfile({ dataIn = {}, dataOut = {} }) {
                   
                   <MosySmartField
                   module="services"
-                  field="estimated_duration"
-                  label="Estimated Duration"
-                  value={servicesNode?.estimated_duration || ""}
+                  field="service_description"
+                  label="Service Description"
+                  value={servicesNode?.service_description || ""}
                   onChange={handleInputChange}
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
-                  type="text"
-                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  type="textarea"
+                  cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
                   />
+                  
+                  
+                  <div className="form-group col-md-4 hive_data_cell ">
+                    <label className="d-none">Billing Type</label>
+                    
+                    <SmartDropdown
+                    apiEndpoint={apiRoutes.services.base}
+                    idField="primkey"
+                    labelField="billing_type"
+                    inputName="billing_type"
+                    label="Billing Type"
+                    onSelect={(val) => console.log('Selected:', val)}
+                    defaultValue={servicesNode?.billing_type || ""}
+                    />
+                  </div>
                   
                 </div>
                 
@@ -514,34 +502,17 @@ export default function ServicesProfile({ dataIn = {}, dataOut = {} }) {
                 
                 <div className="row justify-content-start col-md-12 p-0 m-0 ">
                   
-                  <div className="form-group col-md-4 hive_data_cell ">
-                    <label className="d-none">Billing Type</label>
-                    
-                    <SmartDropdown
-                    apiEndpoint={apiRoutes.services.base}
-                    idField="primkey"
-                    labelField="billing_type"
-                    inputName="billing_type"
-                    label="Billing Type"
-                    onSelect={(val) => console.log('Selected:', val)}
-                    defaultValue={servicesNode?.billing_type || ""}
-                    />
-                  </div>
-                  
-                  
-                  <div className="form-group col-md-4 hive_data_cell ">
-                    <label className="d-none">Service Status</label>
-                    
-                    <SmartDropdown
-                    apiEndpoint={apiRoutes.services.base}
-                    idField="primkey"
-                    labelField="service_status"
-                    inputName="service_status"
-                    label="Service Status"
-                    onSelect={(val) => console.log('Selected:', val)}
-                    defaultValue={servicesNode?.service_status || ""}
-                    />
-                  </div>
+                  <MosySmartField
+                  module="services"
+                  field="service_status"
+                  label="Service Status"
+                  value={servicesNode?.service_status || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="text"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  />
                   
                   
                   <MosySmartField
@@ -553,11 +524,21 @@ export default function ServicesProfile({ dataIn = {}, dataOut = {} }) {
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
                   type="datetime-local"
-                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
                   />
                   
                   
-                  <input className="form-control" id="updated_at" name="updated_at" value={servicesNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+                  <MosySmartField
+                  module="services"
+                  field="updated_at"
+                  label="Updated At"
+                  value={servicesNode?.updated_at || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="datetime-local"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+                  />
                   
                 </div>
                 
@@ -589,29 +570,29 @@ export default function ServicesProfile({ dataIn = {}, dataOut = {} }) {
           
           {servicesNode?.primkey && (
             <MosyProfileSection
-            title={`Category Details`}
-            source="services_ServiceCategoriesProfile"
-            component={ServiceCategoriesProfile}
+            title={`Invoice Items`}
+            source="services_InvoiceItemsProfile"
+            component={InvoiceItemsProfile}
             table="services"
-            key={`ServiceCategoriesProfile-${localEventSignature}`}
+            key={`InvoiceItemsProfile-${localEventSignature}`}
             dataIn={{
               
               parentStateSetters : stateItemSetters,
               parentUseEffectKey : localEventSignature,
               showNavigationIsle:false,
-              customQueryStr : serviceCategoriesCustomProfileQuery,
+              customQueryStr : invoiceItemsCustomProfileQuery,
               hostParent : "ServicesProfile",
               parentProfileItemId : activeScrollId,
               customProfileData : {
-                _services_service_name_record_id:servicesNode?.service_name,
-                record_id:servicesNode?.service_category_id
+                _services_service_name_item_id:servicesNode?.service_name,
+                item_id:servicesNode?.record_id
               }
               
             }}
             
             dataOut={{
               
-              setChildDataOut: InteprateServiceCategoriesEvent,
+              setChildDataOut: InteprateInvoiceItemsEvent,
               setChildDataOutSignature: (sig) => console.log("Signature changed:", sig),
               
             }}
@@ -622,24 +603,24 @@ export default function ServicesProfile({ dataIn = {}, dataOut = {} }) {
           
           {servicesNode?.primkey && (
             <MosyProfileSection
-            viewAllLink={`../servicecategories/list?services_mosyfilter=${btoa(`{recordId:btoa(servicesNode?.service_category_id)    }`)}`}
-            title={`Category Details`}
-            source="services_ServiceCategoriesList"
-            component={ServiceCategoriesList}
+            viewAllLink={`../invoiceitems/list?services_mosyfilter=${btoa(`{itemId:btoa(servicesNode?.record_id)    }`)}`}
+            title={`Invoice Items`}
+            source="services_InvoiceItemsList"
+            component={InvoiceItemsList}
             table="services"
-            key={`ServiceCategoriesList-${localEventSignature}`}
+            key={`InvoiceItemsList-${localEventSignature}`}
             dataIn={{
               parentStateSetters : stateItemSetters,
               parentUseEffectKey : localEventSignature,
               showNavigationIsle:false,
               showDataControlSections:false,
-              customQueryStr : {recordId:btoa(servicesNode?.service_category_id)    },
-              customProfilePath:"../servicecategories/profile"
+              customQueryStr : {itemId:btoa(servicesNode?.record_id)    },
+              customProfilePath:"../invoiceitems/profile"
               
             }}
             
             dataOut={{
-              setChildDataOut: InteprateServiceCategoriesEvent,
+              setChildDataOut: InteprateInvoiceItemsEvent,
               setChildDataOutSignature: (sig) => console.log("Signature changed:", sig),
             }}
             />

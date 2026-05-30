@@ -308,7 +308,13 @@ export default function SystemRoleBundlesList({ dataIn = {}, dataOut = {} }) {
                     
                     <td scope="col"><span title={listsystem_role_bundles_result.bundle_id}>{magicTrimText(listsystem_role_bundles_result._user_bundle_role_functions_role_name_bundle_id, 70)}</span></td>
                     <td scope="col"><span title={listsystem_role_bundles_result.bundle_name}>{magicTrimText(listsystem_role_bundles_result.bundle_name, 70)}</span></td>
-                    <td scope="col"><span title={listsystem_role_bundles_result.remark}>{magicTrimText(listsystem_role_bundles_result.remark, 70)}</span></td>
+                    <td scope="col"><span>
+                      <ReactMarkdown>
+                        
+                        {magicTrimText(listsystem_role_bundles_result.remark, 70)}
+                        
+                      </ReactMarkdown>
+                    </span></td>
                     
                   </tr>
                   

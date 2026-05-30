@@ -34,6 +34,8 @@ Key relationships:
   
   //$page_layout_preset=$global_input_presets_page_layout_preset;
   
+  eval(find_snippet("1246"));
+  
   //Smart schema mapper 
   $connected_cols=
 
@@ -187,79 +189,76 @@ Key relationships:
     // =========================
     // UI schema section
     // =========================
-    "page_layout" => array_replace_recursive(
+ 
+    "page_layout" =>
     [
 
-        // Column order
-        "desired_column_order" => [
-            "quotations" => ["primkey","record_id","quotation_number","quotation_title","quotation_description","client_id","deal_id","quotation_amount","tax_amount","discount_amount","quotation_status","quotation_issued_on","quotation_expiry_date","quotation_notes","created_at","updated_at","hive_site_id","hive_site_name"]
-        ],
+      "desired_column_order" => merge_setting([
+          "quotations" => ["primkey","record_id","quotation_number","quotation_title","quotation_description","client_id","deal_id","quotation_amount","tax_amount","discount_amount","quotation_status","quotation_issued_on","quotation_expiry_date","quotation_notes","created_at","updated_at","hive_site_id","hive_site_name"]
+      ], "desired_column_order"),
 
-        // Grouped inputs
-        "form_input_segmentation_arr" => [
-            "quotations" => [
-                "Basic Information" => ["primkey","record_id","quotation_number","quotation_title","quotation_description","client_id","deal_id","quotation_amount","tax_amount"]
-            ]
-        ],
+      "form_input_segmentation_arr" => merge_setting([
+          "quotations" => [
+              "Basic Information" => ["primkey","record_id","quotation_number","quotation_title","quotation_description","client_id","deal_id","quotation_amount","tax_amount"]
+          ]
+      ], "form_input_segmentation_arr"),
 
-        "image_columns" => [],
-        "default_col_class" => "col-md-4",
+      "image_columns" => merge_setting([], "image_columns"),
 
-        "hidden_inputs" => ["updated_at"],
+      "default_col_class" => "col-md-4",
 
-        "print_tables" => ["quotations"],
+      "hidden_inputs" => merge_setting(["updated_at"], "hidden_inputs"),
 
-        "skip_cols_profile" => [
-            "hive_site_id",
-            "hive_site_name"
-        ],
+      "print_tables" => merge_setting(["quotations"], "print_tables"),
 
-        "skip_cols_list" => ["discount_amount","quotation_status","quotation_issued_on","quotation_expiry_date","quotation_notes","created_at","updated_at","hive_site_id","hive_site_name"],
+      "skip_cols_profile" => merge_setting([
+          "hive_site_id",
+          "hive_site_name"
+      ], "skip_cols_profile"),
 
-        "running_bal_col_tbl" => [],
+      "skip_cols_list" => merge_setting(["discount_amount","quotation_status","quotation_issued_on","quotation_expiry_date","quotation_notes","created_at","updated_at","hive_site_id","hive_site_name"], "skip_cols_list"),
 
-        "grid_tbl" => [],
+      "running_bal_col_tbl" => merge_setting([], "running_bal_col_tbl"),
 
-        "view_tbl_only" => [],
+      "grid_tbl" => merge_setting([], "grid_tbl"),
 
-        "sum_cols_list" => [],
+      "view_tbl_only" => merge_setting([], "view_tbl_only"),
 
-        "textarea_array" => ["quotation_description","quotation_notes"],
+      "sum_cols_list" => merge_setting([], "sum_cols_list"),
 
-        "content_editable" => [],
+      "textarea_array" => merge_setting(["quotation_description","quotation_notes"], "textarea_array"),
 
-        "static_drop_down_array" => [],
+      "content_editable" => merge_setting([], "content_editable"),
 
-        "dynamic_drop_down_array" => [],
+      "static_drop_down_array" => merge_setting([], "static_drop_down_array"),
 
-        "password_columns" => [],
+      "dynamic_drop_down_array" => merge_setting([], "dynamic_drop_down_array"),
 
-        "title_columns" => [],
+      "password_columns" => merge_setting([], "password_columns"),
 
-        "date_columns" => [],
+      "title_columns" => merge_setting([], "title_columns"),
 
-        "datetime_columns" => ["quotation_expiry_date","created_at","updated_at"],
+      "date_columns" => merge_setting([], "date_columns"),
 
-		"rename_cols_array" => ["client_id" => "Full Name","deal_id" => "Deal Title","record_id" => "Invoice Title"],
+      "datetime_columns" => merge_setting(["quotation_expiry_date","created_at","updated_at"], "datetime_columns"),
 
-        "rename_tables_array" => [
-            "quotations" => "Quotations"
-        ],
+      "rename_cols_array" => merge_setting(
+          ["client_id" => "Full Name","deal_id" => "Deal Title","record_id" => "Invoice Title"],
+          "rename_cols_array"
+      ),
 
-        "new_label_buttons_arr" => [
-            "quotations" => "plus-circle:New Quotations:{`Quotations / \${quotationsNode?.quotation_title}`}"
-        ],
+      "rename_tables_array" => merge_setting([
+          "quotations" => "Quotations"
+      ], "rename_tables_array"),
 
-        "profile_pic_style" => "width:120px; height:120px; border-radius:10%;"
+      "new_label_buttons_arr" => merge_setting([
+          "quotations" => "plus-circle:New Quotations:{`Quotations / \${quotationsNode?.quotation_title}`}"
+      ], "new_label_buttons_arr"),
+
+      "profile_pic_style" => "width:120px; height:120px; border-radius:10%;"
 
     ],
 
-    // merge preset if exists
-    isset($global_input_presets_page_layout_preset)
-        ? $global_input_presets_page_layout_preset
-        : []
-
-    ),
     
     "import"=>[
 
@@ -406,59 +405,60 @@ Key relationships:
 
   ];
 
-  ///Ai Notes  append mini list for interlinked data eg farmers & collections dont remove commented code replace instead
-$interlink_lists = isset($interlink_mapping_lists[$primary_table__])
-    ? $interlink_mapping_lists[$primary_table__]
-    : [
-        /* "userPayments"=>[ 
-           "filter_str"=>" account_id='\${app_usersNode?.record_id}'  ",
-           "module_name"=>"Payments",
-           "list_title"=>"Payment History",
-           "event_name"=>"",
-           "custom"=>false,
-           "external"=>true,
-           "alias"=>'payments', 
-           "event_name"=>"",
-           "event_path"=>"",
-           "module_path"=>"",    
-           "list_url"=>"",
-           "profile_url"=>"",
-         ],    
-         "userSubscriptions"=>[ 
-           "filter_str"=>" account_id= '\${app_usersNode?.record_id}' ",
-           "module_name"=>"Subscriptions",
-           "list_title"=>"User Subscriptions",
-           "event_name"=>"",
-           "custom"=>false,
-           "external"=>true,
-           "alias"=>'subscriptions', 
-           "event_name"=>"",
-           "event_path"=>"",
-           "module_path"=>"",    
-           "list_url"=>"",
-           "profile_url"=>"",
-         ]*/
-      ];
-   
-  ///Ai Notes append mini profile for interlinked data dont remove commented code replace instead
+  $interlink_lists = array_replace_recursive(
 
-	$interlink_profile = isset($interlink_mapping_profile[$primary_table__])
-    ? $interlink_mapping_profile[$primary_table__]
-    : [
-       
-       /*"linkedBillingAccount"=>[ 
-         "filter_str"=>"account_id='{appusersNode?.record_id}'",
-         "module_name"=>"BillingAccounts",
-         "profile_title"=>"Billing Account",
-         "custom"=>false,
-         "external"=>true,
-         "alias"=>"billing_accounts",      
-         "event_name"=>"",
-         "event_path"=>"",
-         "list_table_name"=>"billing_accounts",
-       ]*/
-       
-      ];  
+      isset($interlink_mapping_lists[$primary_table__])
+          ? $interlink_mapping_lists[$primary_table__]
+          : [],
+
+      [
+
+ 		 /*"userPayments"=>[
+             "filter_str"=>"{invoiceId:btoa(invoice_itemsNode?.invoice_id)}",
+             "module_name"=>"InvoiceItems",
+             "list_title"=>"Invoice list",
+             "event_name"=>"",
+             "custom"=>false,
+             "external"=>false,
+             "alias"=>"invoiceitems",
+             "event_path"=>"",
+             "module_path"=>"",
+             "list_url"=>"",
+             "profile_url"=>"",
+           ]*/ 
+ 
+
+      ]
+
+  );
+  
+   
+      ///Ai Notes append mini profile for interlinked data dont remove commented code replace instead
+
+    $interlink_profile = array_replace_recursive(
+
+        isset($interlink_mapping_profile[$primary_table__])
+            ? $interlink_mapping_profile[$primary_table__]
+            : [],
+
+        [
+
+          /* "linkedBillingAccount"=>[
+             "filter_str"=>"{invoiceId:btoa(invoice_itemsNode?.invoice_id)}",
+             "module_name"=>"InvoiceItems",
+             "profile_title"=>"Item list",
+             "custom"=>false,
+             "external"=>false,
+             "alias"=>"invoiceitems",
+             "event_name"=>"",
+             "event_path"=>"",
+             "list_table_name"=>"invoice_items",
+           ]
+           */
+
+        ]
+
+    );  
 
   ///for interlinked data included as component
   $customProfileData="{}";

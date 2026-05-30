@@ -992,14 +992,17 @@ export default function ExpectedRevenueProfile({ dataIn = {}, dataOut = {} }) {
             
             
             <div className="form-group col-md-4 hive_data_cell ">
-              <label >Payment Status</label>
+              <label className="d-none">Payment Status</label>
               
-              <select name="payment_status" id="payment_status" className="form-control">
-                <option  value={expected_revenueNode?.payment_status || ""}>{expected_revenueNode?.payment_status || "Select Payment Status"}</option>
-                <option>Complete</option>
-                <option>Pending</option>
-                
-              </select>
+              <SmartDropdown
+              apiEndpoint={apiRoutes.expectedrevenue.base}
+              idField="primkey"
+              labelField="payment_status"
+              inputName="payment_status"
+              label="Payment Status"
+              onSelect={(val) => console.log('Selected:', val)}
+              defaultValue={expected_revenueNode?.payment_status || ""}
+              />
             </div>
             
             <LiveSearchDropdown
@@ -1045,7 +1048,7 @@ export default function ExpectedRevenueProfile({ dataIn = {}, dataOut = {} }) {
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
-            type="date"
+            type="datetime-local"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
@@ -1088,7 +1091,7 @@ export default function ExpectedRevenueProfile({ dataIn = {}, dataOut = {} }) {
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
-            type="text"
+            type="title"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
@@ -1154,17 +1157,19 @@ export default function ExpectedRevenueProfile({ dataIn = {}, dataOut = {} }) {
             />
             
             
-            <MosySmartField
-            module="expected_revenue"
-            field="assigned_to"
-            label="Assigned To"
-            value={expected_revenueNode?.assigned_to || ""}
-            onChange={handleInputChange}
-            context={{ hostParent: hostParent  }}
-            inputOverrides={{}}
-            type="text"
-            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
-            />
+            <div className="form-group col-md-4 hive_data_cell ">
+              <label className="d-none">Assigned To</label>
+              
+              <SmartDropdown
+              apiEndpoint={apiRoutes.expectedrevenue.base}
+              idField="primkey"
+              labelField="assigned_to"
+              inputName="assigned_to"
+              label="Assigned To"
+              onSelect={(val) => console.log('Selected:', val)}
+              defaultValue={expected_revenueNode?.assigned_to || ""}
+              />
+            </div>
             
             
             <MosySmartField
@@ -1176,11 +1181,21 @@ export default function ExpectedRevenueProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="datetime-local"
-            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
             />
             
             
-            <input className="form-control" id="updated_at" name="updated_at" value={expected_revenueNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+            <MosySmartField
+            module="expected_revenue"
+            field="updated_at"
+            label="Updated At"
+            value={expected_revenueNode?.updated_at || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="datetime-local"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+            />
             
           </div>
           

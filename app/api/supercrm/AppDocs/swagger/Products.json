@@ -37,13 +37,21 @@
                                         "type": "string",
                                         "description": "Product name"
                                     },
+                                    "price_range": {
+                                        "type": "string",
+                                        "description": "Price range"
+                                    },
+                                    "unit_price": {
+                                        "type": "string",
+                                        "description": "Unit price"
+                                    },
                                     "product_code": {
                                         "type": "string",
                                         "description": "Product code"
                                     },
-                                    "product_category_id": {
+                                    "category": {
                                         "type": "string",
-                                        "description": "Product category id"
+                                        "description": "Category"
                                     },
                                     "product_description": {
                                         "type": "string",
@@ -52,10 +60,6 @@
                                     "product_image": {
                                         "type": "string",
                                         "description": "Product image"
-                                    },
-                                    "unit_price": {
-                                        "type": "string",
-                                        "description": "Unit price"
                                     },
                                     "discount_price": {
                                         "type": "string",
@@ -109,13 +113,21 @@
                                         "type": "string",
                                         "description": "Product name"
                                     },
+                                    "price_range": {
+                                        "type": "string",
+                                        "description": "Price range"
+                                    },
+                                    "unit_price": {
+                                        "type": "string",
+                                        "description": "Unit price"
+                                    },
                                     "product_code": {
                                         "type": "string",
                                         "description": "Product code"
                                     },
-                                    "product_category_id": {
+                                    "category": {
                                         "type": "string",
-                                        "description": "Product category id"
+                                        "description": "Category"
                                     },
                                     "product_description": {
                                         "type": "string",
@@ -124,10 +136,6 @@
                                     "product_image": {
                                         "type": "string",
                                         "description": "Product image"
-                                    },
-                                    "unit_price": {
-                                        "type": "string",
-                                        "description": "Unit price"
                                     },
                                     "discount_price": {
                                         "type": "string",

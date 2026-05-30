@@ -65,6 +65,11 @@ import {
   viewInvoices
 } from '../../invoices/logicControl/invoices-automapper';
 
+// Imports from services-automapper.jsx
+import {
+  viewServices
+} from '../../services/logicControl/services-automapper';
+
 
 
 //export list
@@ -136,6 +141,12 @@ export default function InvoiceItemsList({ dataIn = {}, dataOut = {} }) {
   // Compute item_unit_price totals
   const suminvoice_items_item_unit_price = stateItem.invoiceItemsListData?.reduce(
     (sum, row) => sum + Number(row.item_unit_price || 0),
+    0
+  );
+  
+  // Compute item_total_amount totals
+  const suminvoice_items_item_total_amount = stateItem.invoiceItemsListData?.reduce(
+    (sum, row) => sum + Number(row.item_total_amount || 0),
     0
   );
   
@@ -264,12 +275,12 @@ export default function InvoiceItemsList({ dataIn = {}, dataOut = {} }) {
           <th scope="col">#</th>
           
           <th scope="col"><b>Invoice Title</b></th>
-          <th scope="col"><b>Item Type</b></th>
-          <th scope="col"><b>Item Id</b></th>
-          <th scope="col"><b>Item Name</b></th>
-          <th scope="col"><b>Item Description</b></th>
+          <th scope="col"><b>Service Name</b></th>
+          <th scope="col"><b>Invoice Item Name</b></th>
           <th scope="col"><b>Item Quantity</b></th>
           <th scope="col"><b>Item Unit Price</b></th>
+          <th scope="col"><b>Item Total Amount</b></th>
+          <th scope="col"><b>Item Description</b></th>
           
         </tr>
         
@@ -318,14 +329,24 @@ export default function InvoiceItemsList({ dataIn = {}, dataOut = {} }) {
                           dataIn={() => viewInvoices({childCol:`recordId`,parentColVal:listinvoice_items_result.invoice_id,parentName:listinvoice_items_result.item_name})}   // only runs on click now
                           callBack={(incomingRequest) => {setChildDataOut(incomingRequest) }}
                           />
+                          <MosyGridRowOptions
+                          src="InvoiceItemsList"
+                          action="_service_detail"
+                          label=" Service detail"
+                          icon="list "
+                          dataIn={() => viewServices({childCol:`recordId`,parentColVal:listinvoice_items_result.item_id,parentName:listinvoice_items_result.item_name})}   // only runs on click now
+                          callBack={(incomingRequest) => {setChildDataOut(incomingRequest) }}
+                          />
                         </div>
                       </div>
                     </td>
                     
                     <td scope="col"><span title={listinvoice_items_result.invoice_id}>{magicTrimText(listinvoice_items_result._invoices_invoice_title_invoice_id, 70)}</span></td>
-                    <td scope="col"><span title={listinvoice_items_result.item_type}>{magicTrimText(listinvoice_items_result.item_type, 70)}</span></td>
-                    <td scope="col"><span title={listinvoice_items_result.item_id}>{magicTrimText(listinvoice_items_result.item_id, 70)}</span></td>
-                    <td scope="col"><span title={listinvoice_items_result.item_name}>{magicTrimText(listinvoice_items_result.item_name, 70)}</span></td>
+                    <td scope="col"><span title={listinvoice_items_result.item_id}>{magicTrimText(listinvoice_items_result._services_service_name_item_id, 70)}</span></td>
+                    <td scope="col"><span title={listinvoice_items_result.invoice_item_name}>{magicTrimText(listinvoice_items_result.invoice_item_name, 70)}</span></td>
+                    <td scope="col"><span>{mosyTonum(listinvoice_items_result.item_quantity)}</span></td>
+                    <td scope="col"><span>{mosyTonum(listinvoice_items_result.item_unit_price)}</span></td>
+                    <td scope="col"><span>{mosyTonum(listinvoice_items_result.item_total_amount)}</span></td>
                     <td scope="col"><span>
                       <ReactMarkdown>
                         
@@ -333,8 +354,6 @@ export default function InvoiceItemsList({ dataIn = {}, dataOut = {} }) {
                         
                       </ReactMarkdown>
                     </span></td>
-                    <td scope="col"><span>{mosyTonum(listinvoice_items_result.item_quantity)}</span></td>
-                    <td scope="col"><span>{mosyTonum(listinvoice_items_result.item_unit_price)}</span></td>
                     
                   </tr>
                   
@@ -364,10 +383,10 @@ export default function InvoiceItemsList({ dataIn = {}, dataOut = {} }) {
               <th scope="col"><b></b></th>
               <th scope="col"><b></b></th>
               <th scope="col"><b></b></th>
-              <th scope="col"><b></b></th>
-              <th scope="col"><b></b></th>
               <th scope="col"><b><span>{mosyTonum(suminvoice_items_item_quantity)}</span></b></th>
               <th scope="col"><b><span>{mosyTonum(suminvoice_items_item_unit_price)}</span></b></th>
+              <th scope="col"><b><span>{mosyTonum(suminvoice_items_item_total_amount)}</span></b></th>
+              <th scope="col"><b></b></th>
               
             </tr>
           </tbody>

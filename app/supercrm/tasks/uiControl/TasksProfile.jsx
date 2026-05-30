@@ -605,7 +605,7 @@ export default function TasksProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="title"
-            cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
             
@@ -637,55 +637,46 @@ export default function TasksProfile({ dataIn = {}, dataOut = {} }) {
             </div>
             
             
-            <div className="form-group col-md-4 hive_data_cell ">
-              <label className="d-none">Task Priority</label>
-              
-              <SmartDropdown
-              apiEndpoint={apiRoutes.tasks.base}
-              idField="primkey"
-              labelField="task_priority"
-              inputName="task_priority"
-              label="Task Priority"
-              onSelect={(val) => console.log('Selected:', val)}
-              defaultValue={tasksNode?.task_priority || ""}
-              />
-            </div>
-            
-            
-            <div className="form-group col-md-4 hive_data_cell ">
-              <label className="d-none">Task Status</label>
-              
-              <SmartDropdown
-              apiEndpoint={apiRoutes.tasks.base}
-              idField="primkey"
-              labelField="task_status"
-              inputName="task_status"
-              label="Task Status"
-              onSelect={(val) => console.log('Selected:', val)}
-              defaultValue={tasksNode?.task_status || ""}
-              />
-            </div>
-            
-            <LiveSearchDropdown
-            apiEndpoint={apiRoutes.users.base}
-            tblName="users"
-            parentTable="tasks"
-            inputName="_users_full_name_assigned_sales_rep"
-            hiddenInputName="assigned_sales_rep"
-            valueField="record_id"
-            displayField="full_name"
-            label="Full Name"
-            defaultValue={{ record_id: tasksNode?.assigned_sales_rep || "", full_name: tasksNode?._users_full_name_assigned_sales_rep || "" }}
-            onSelect={(id) => console.log("Just the ID:", id)}
-            onSelectFull={(dataRes) =>  console.log("Data seleted")}
-            onInputChange={handleInputChange}
-            defaultColSize={`col-md-4 hive_data_cell  hive_data_cell ${
-              customProfileData?.assigned_sales_rep
-              ? 'd-none'
-              : ''
-            }`}
-            context={{hostParent : hostParent}}
+            <MosySmartField
+            module="tasks"
+            field="task_priority"
+            label="Task Priority"
+            value={tasksNode?.task_priority || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="text"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
+            
+            
+            <MosySmartField
+            module="tasks"
+            field="task_status"
+            label="Task Status"
+            value={tasksNode?.task_status || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="text"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            />
+            
+            
+            <div className="form-group col-md-4 hive_data_cell ">
+              <label className="d-none">Full Name</label>
+              
+              <SmartDropdown
+              apiEndpoint={apiRoutes.tasks.base}
+              idField="primkey"
+              labelField="assigned_sales_rep"
+              inputName="assigned_sales_rep"
+              label="Full Name"
+              onSelect={(val) => console.log('Selected:', val)}
+              defaultValue={tasksNode?.assigned_sales_rep || ""}
+              />
+            </div>
+            
             <LiveSearchDropdown
             apiEndpoint={apiRoutes.clients.base}
             tblName="clients"
@@ -749,7 +740,7 @@ export default function TasksProfile({ dataIn = {}, dataOut = {} }) {
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
-            type="date"
+            type="datetime-local"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
@@ -789,11 +780,21 @@ export default function TasksProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="datetime-local"
-            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
             />
             
             
-            <input className="form-control" id="updated_at" name="updated_at" value={tasksNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+            <MosySmartField
+            module="tasks"
+            field="updated_at"
+            label="Updated At"
+            value={tasksNode?.updated_at || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="datetime-local"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+            />
             
           </div>
           

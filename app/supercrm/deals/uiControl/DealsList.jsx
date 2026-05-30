@@ -463,7 +463,7 @@ export default function DealsList({ dataIn = {}, dataOut = {} }) {
                     <td scope="col"><span title={listdeals_result.client_id}>{magicTrimText(listdeals_result._clients_full_name_client_id, 70)}</span></td>
                     <td scope="col"><span title={listdeals_result.deal_source}>{magicTrimText(listdeals_result.deal_source, 70)}</span></td>
                     <td scope="col"><span>{mosyTonum(listdeals_result.deal_value)}</span></td>
-                    <td scope="col"><span title={listdeals_result.expected_close_date}>{mosyFormatDateOnly(listdeals_result.expected_close_date)}</span></td>
+                    <td scope="col"><span title={listdeals_result.expected_close_date}>{mosyFormatDateTime(listdeals_result.expected_close_date)}</span></td>
                     <td scope="col"><span title={listdeals_result.pipeline_stage}>{magicTrimText(listdeals_result.pipeline_stage, 70)}</span></td>
                     
                   </tr>

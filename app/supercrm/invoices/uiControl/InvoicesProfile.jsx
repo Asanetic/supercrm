@@ -778,7 +778,7 @@ export default function InvoicesProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="title"
-            cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
             
@@ -908,19 +908,17 @@ export default function InvoicesProfile({ dataIn = {}, dataOut = {} }) {
             />
             
             
-            <div className="form-group col-md-4 hive_data_cell ">
-              <label >Invoice Status</label>
-              
-              <select name="invoice_status" id="invoice_status" className="form-control">
-                <option  value={invoicesNode?.invoice_status || ""}>{invoicesNode?.invoice_status || "Select Invoice Status"}</option>
-                <option>Draft</option>
-                <option>Pending</option>
-                <option>Paid</option>
-                <option>Overdue</option>
-                <option>Cancelled</option>
-                
-              </select>
-            </div>
+            <MosySmartField
+            module="invoices"
+            field="invoice_status"
+            label="Invoice Status"
+            value={invoicesNode?.invoice_status || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="text"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            />
             
             
             <MosySmartField
@@ -944,7 +942,7 @@ export default function InvoicesProfile({ dataIn = {}, dataOut = {} }) {
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
-            type="date"
+            type="datetime-local"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
@@ -971,11 +969,21 @@ export default function InvoicesProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="datetime-local"
-            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
             />
             
             
-            <input className="form-control" id="updated_at" name="updated_at" value={invoicesNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+            <MosySmartField
+            module="invoices"
+            field="updated_at"
+            label="Updated At"
+            value={invoicesNode?.updated_at || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="datetime-local"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+            />
             
           </div>
           

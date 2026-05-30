@@ -100,6 +100,11 @@ import {
   viewActivities
 } from '../../activities/logicControl/activities-automapper';
 
+// Imports from expected_revenue-automapper.jsx
+import {
+  viewExpectedRevenue
+} from '../../expectedrevenue/logicControl/expected_revenue-automapper';
+
 
 
 //export list
@@ -277,7 +282,7 @@ export default function ClientsList({ dataIn = {}, dataOut = {} }) {
             source="ClientsProfile"
             action="clients_DataMapQCol_filterInactiveClients_btn"
             label="Inactive Clients"
-            icon="user-x"
+            icon="user-times"
             
             onClick={()=>{
               
@@ -427,6 +432,14 @@ export default function ClientsList({ dataIn = {}, dataOut = {} }) {
                           label=" Activities"
                           icon="list "
                           dataIn={() => viewActivities({childCol:`clientId`,parentColVal:listclients_result.record_id,parentName:listclients_result.full_name})}   // only runs on click now
+                          callBack={(incomingRequest) => {setChildDataOut(incomingRequest) }}
+                          />
+                          <MosyGridRowOptions
+                          src="ClientsList"
+                          action="_expected_revenue"
+                          label=" Expected Revenue"
+                          icon="list "
+                          dataIn={() => viewExpectedRevenue({childCol:`clientId`,parentColVal:listclients_result.record_id,parentName:listclients_result.full_name})}   // only runs on click now
                           callBack={(incomingRequest) => {setChildDataOut(incomingRequest) }}
                           />
                         </div>

@@ -228,7 +228,7 @@ export default function LeadsList({ dataIn = {}, dataOut = {} }) {
             source="LeadsProfile"
             action="leads_DataMapQCol_filterHotLeads_btn"
             label="Hot Leads"
-            icon="flame"
+            icon="fire"
             
             onClick={()=>{
               
@@ -252,7 +252,7 @@ export default function LeadsList({ dataIn = {}, dataOut = {} }) {
             source="LeadsProfile"
             action="leads_DataMapQCol_filterQualifiedLeads_btn"
             label="Qualified Leads"
-            icon="badge-check"
+            icon="check-circle"
             
             onClick={()=>{
               

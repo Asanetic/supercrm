@@ -364,8 +364,8 @@ export default function SystemRoleBundlesProfile({ dataIn = {}, dataOut = {} }) 
                   onChange={handleInputChange}
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
-                  type="text"
-                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  type="textarea"
+                  cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
                   />
                   
                 </div>

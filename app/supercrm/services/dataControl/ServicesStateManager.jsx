@@ -24,7 +24,7 @@ const defaultServicesStateDefaults = {
   
   //dataScript
   servicesCustomProfileQuery : '',
-  serviceCategoriesCustomProfileQuery : ``,
+  invoiceItemsCustomProfileQuery : ``,
 
   
   // ... other base defaults

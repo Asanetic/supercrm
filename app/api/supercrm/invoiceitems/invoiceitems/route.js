@@ -55,13 +55,12 @@ export async function GET(request) {
     NodeId : "record_id", 
     recordId : "record_id", 
     invoiceId : "invoice_id", 
-    itemType : "item_type", 
     itemId : "item_id", 
-    itemName : "item_name", 
-    itemDescription : "item_description", 
+    invoiceItemName : "invoice_item_name", 
     itemQuantity : "item_quantity", 
     itemUnitPrice : "item_unit_price", 
     itemTotalAmount : "item_total_amount", 
+    itemDescription : "item_description", 
     createdAt : "created_at", 
     updatedAt : "updated_at", 
 
@@ -159,13 +158,12 @@ export async function POST(InvoiceItemsRequest) {
   const InvoiceItemsInputsArr = {
 
     "invoice_id" : "?", 
-    "item_type" : "?", 
     "item_id" : "?", 
-    "item_name" : "?", 
-    "item_description" : "?", 
+    "invoice_item_name" : "?", 
     "item_quantity" : "?", 
     "item_unit_price" : "?", 
     "item_total_amount" : "?", 
+    "item_description" : "?", 
     "created_at" : "?", 
     "updated_at" : "?", 
 
@@ -263,13 +261,12 @@ export async function PUT(InvoiceItemsRequest) {
   const InvoiceItemsInputsArr = {
 
     "invoice_id" : "?", 
-    "item_type" : "?", 
     "item_id" : "?", 
-    "item_name" : "?", 
-    "item_description" : "?", 
+    "invoice_item_name" : "?", 
     "item_quantity" : "?", 
     "item_unit_price" : "?", 
     "item_total_amount" : "?", 
+    "item_description" : "?", 
     "created_at" : "?", 
     "updated_at" : "?", 
 

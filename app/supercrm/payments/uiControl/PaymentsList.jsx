@@ -268,7 +268,7 @@ export default function PaymentsList({ dataIn = {}, dataOut = {} }) {
             source="PaymentsProfile"
             action="payments_DataMapQCol_filterSuccessfulPayments_btn"
             label="Successful Payments"
-            icon="badge-check"
+            icon="check-circle"
             
             onClick={()=>{
               
@@ -377,7 +377,7 @@ export default function PaymentsList({ dataIn = {}, dataOut = {} }) {
                           action="_invoice_details"
                           label=" Invoice Details"
                           icon="list "
-                          dataIn={() => viewInvoices({childCol:`recordId`,parentColVal:listpayments_result.invoice_id,parentName:listpayments_result.payment_for})}   // only runs on click now
+                          dataIn={() => viewInvoices({childCol:`recordId`,parentColVal:listpayments_result.invoice_id,parentName:listpayments_result.transaction_ref})}   // only runs on click now
                           callBack={(incomingRequest) => {setChildDataOut(incomingRequest) }}
                           />
                           <MosyGridRowOptions
@@ -385,7 +385,7 @@ export default function PaymentsList({ dataIn = {}, dataOut = {} }) {
                           action="_deal_details"
                           label=" Deal Details"
                           icon="list "
-                          dataIn={() => viewDeals({childCol:`recordId`,parentColVal:listpayments_result.deal_id,parentName:listpayments_result.payment_for})}   // only runs on click now
+                          dataIn={() => viewDeals({childCol:`recordId`,parentColVal:listpayments_result.deal_id,parentName:listpayments_result.transaction_ref})}   // only runs on click now
                           callBack={(incomingRequest) => {setChildDataOut(incomingRequest) }}
                           />
                           <MosyGridRowOptions
@@ -393,7 +393,7 @@ export default function PaymentsList({ dataIn = {}, dataOut = {} }) {
                           action="_client_details"
                           label=" Client Details"
                           icon="list "
-                          dataIn={() => viewClients({childCol:`recordId`,parentColVal:listpayments_result.client_id,parentName:listpayments_result.payment_for})}   // only runs on click now
+                          dataIn={() => viewClients({childCol:`recordId`,parentColVal:listpayments_result.client_id,parentName:listpayments_result.transaction_ref})}   // only runs on click now
                           callBack={(incomingRequest) => {setChildDataOut(incomingRequest) }}
                           />
                         </div>

@@ -312,7 +312,13 @@ export default function UserBundleRoleFunctionsList({ dataIn = {}, dataOut = {} 
                     <td scope="col"><span title={listuser_bundle_role_functions_result.bundle_name}>{magicTrimText(listuser_bundle_role_functions_result.bundle_name, 70)}</span></td>
                     <td scope="col"><span title={listuser_bundle_role_functions_result.role_id}>{magicTrimText(listuser_bundle_role_functions_result.role_id, 70)}</span></td>
                     <td scope="col"><span title={listuser_bundle_role_functions_result.role_name}>{magicTrimText(listuser_bundle_role_functions_result.role_name, 70)}</span></td>
-                    <td scope="col"><span title={listuser_bundle_role_functions_result.remark}>{magicTrimText(listuser_bundle_role_functions_result.remark, 70)}</span></td>
+                    <td scope="col"><span>
+                      <ReactMarkdown>
+                        
+                        {magicTrimText(listuser_bundle_role_functions_result.remark, 70)}
+                        
+                      </ReactMarkdown>
+                    </span></td>
                     
                   </tr>
                   

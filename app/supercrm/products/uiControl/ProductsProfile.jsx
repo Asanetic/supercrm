@@ -49,9 +49,7 @@ import { getApiRoutes } from '../../AppRoutes/apiRoutesHandler';
 // Use default base root (/)
 const apiRoutes = getApiRoutes();
 
-import {InteprateProductCategoriesEvent} from '../../productcategories/dataControl/ProductCategoriesRequestHandler';
-import ProductCategoriesList from '../../productcategories/uiControl/ProductCategoriesList';
-import ProductCategoriesProfile from '../../productcategories/uiControl/ProductCategoriesProfile';
+
 // ════════════════════════════════════════════════════════════════
 // PROFILE PAGE FUNCTION IMPORTS
 // ════════════════════════════════════════════════════════════════
@@ -65,17 +63,9 @@ import {
   disableProduct
 } from '../logicControl/disable-product';
 
-// Imports from product_categories-automapper.jsx
-import {
-  viewProductCategories
-} from '../../productcategories/logicControl/product_categories-automapper';
-
 
 
 // export profile
-
-//import minilist component manager
-import { MosyProfileSection} from '../../UiControl/dataMapUiControl';
 
 
 ///component access control key
@@ -171,25 +161,6 @@ export default function ProductsProfile({ dataIn = {}, dataOut = {} }) {
   
   //child queries use effect
   
-  //setProductCategoriesCustomProfileQuery Script
-  const setProductCategoriesCustomProfileQuery = stateItemSetters.setProductCategoriesCustomProfileQuery;
-  const productCategoriesCustomProfileQuery =  stateItem.productCategoriesCustomProfileQuery;
-  
-  useEffect(() => {
-    if (productsNode?.primkey && setProductCategoriesCustomProfileQuery) {
-      
-      const query = {recordId:btoa(productsNode?.product_category_id)    };
-      
-      const tokenUrl = mosyUrlParam("product_categories_dataNode")
-      
-      if(!tokenUrl)
-      {
-        setProductCategoriesCustomProfileQuery(query);
-      }
-      
-    }
-  }, [productsNode, setProductCategoriesCustomProfileQuery]);
-  
   
   //access control managemant
   const [allowed, setAllowed] = useState(null);
@@ -219,7 +190,7 @@ export default function ProductsProfile({ dataIn = {}, dataOut = {} }) {
                 {
                   productsNode?.primkey ? (
                     
-                    <span>{`Products / ${productsNode?.product_code}`}</span>
+                    <span>{`Products / ${productsNode?.price_range}`}</span>
                     
                   ) : customProfileData?.ProductsTitle ? (
                     
@@ -328,18 +299,6 @@ export default function ProductsProfile({ dataIn = {}, dataOut = {} }) {
                     
                   }}
                   />
-                  <MosyActionButton
-                  source="ProductsProfile"
-                  action="view_category_details_profile_action_btn"
-                  label="View Category Details"
-                  icon="list"
-                  
-                  onClick={()=>{
-                    
-                    viewProductCategories({childCol:`recordId`,parentColVal:productsNode.product_category_id,parentName:productsNode.product_name})
-                    
-                  }}
-                  />
                 </>
               )}
               
@@ -430,47 +389,14 @@ export default function ProductsProfile({ dataIn = {}, dataOut = {} }) {
                   
                   <MosySmartField
                   module="products"
-                  field="product_code"
-                  label="Product Code"
-                  value={productsNode?.product_code || ""}
+                  field="price_range"
+                  label="Price Range"
+                  value={productsNode?.price_range || ""}
                   onChange={handleInputChange}
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
                   type="text"
                   cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
-                  />
-                  
-                  <LiveSearchDropdown
-                  apiEndpoint={apiRoutes.productcategories.base}
-                  tblName="product_categories"
-                  parentTable="products"
-                  inputName="_product_categories_undefined_product_category_id"
-                  hiddenInputName="product_category_id"
-                  valueField="record_id"
-                  displayField="undefined"
-                  label="Undefined"
-                  defaultValue={{ record_id: productsNode?.product_category_id || "", undefined: productsNode?._product_categories_undefined_product_category_id || "" }}
-                  onSelect={(id) => console.log("Just the ID:", id)}
-                  onSelectFull={(dataRes) =>  console.log("Data seleted")}
-                  onInputChange={handleInputChange}
-                  defaultColSize={`col-md-4 hive_data_cell  hive_data_cell ${
-                    customProfileData?.product_category_id
-                    ? 'd-none'
-                    : ''
-                  }`}
-                  context={{hostParent : hostParent}}
-                  />
-                  
-                  <MosySmartField
-                  module="products"
-                  field="product_description"
-                  label="Product Description"
-                  value={productsNode?.product_description || ""}
-                  onChange={handleInputChange}
-                  context={{ hostParent: hostParent  }}
-                  inputOverrides={{}}
-                  type="textarea"
-                  cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
                   />
                   
                   
@@ -489,14 +415,42 @@ export default function ProductsProfile({ dataIn = {}, dataOut = {} }) {
                   
                   <MosySmartField
                   module="products"
-                  field="discount_price"
-                  label="Discount Price"
-                  value={productsNode?.discount_price || ""}
+                  field="product_code"
+                  label="Product Code"
+                  value={productsNode?.product_code || ""}
                   onChange={handleInputChange}
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
                   type="text"
                   cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  />
+                  
+                  
+                  <div className="form-group col-md-4 hive_data_cell ">
+                    <label className="d-none">Category</label>
+                    
+                    <SmartDropdown
+                    apiEndpoint={apiRoutes.products.base}
+                    idField="primkey"
+                    labelField="category"
+                    inputName="category"
+                    label="Category"
+                    onSelect={(val) => console.log('Selected:', val)}
+                    defaultValue={productsNode?.category || ""}
+                    />
+                  </div>
+                  
+                  
+                  <MosySmartField
+                  module="products"
+                  field="product_description"
+                  label="Product Description"
+                  value={productsNode?.product_description || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="textarea"
+                  cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
                   />
                   
                 </div>
@@ -514,19 +468,30 @@ export default function ProductsProfile({ dataIn = {}, dataOut = {} }) {
                 
                 <div className="row justify-content-start col-md-12 p-0 m-0 ">
                   
-                  <div className="form-group col-md-4 hive_data_cell ">
-                    <label className="d-none">Tax Percentage</label>
-                    
-                    <SmartDropdown
-                    apiEndpoint={apiRoutes.products.base}
-                    idField="primkey"
-                    labelField="tax_percentage"
-                    inputName="tax_percentage"
-                    label="Tax Percentage"
-                    onSelect={(val) => console.log('Selected:', val)}
-                    defaultValue={productsNode?.tax_percentage || ""}
-                    />
-                  </div>
+                  <MosySmartField
+                  module="products"
+                  field="discount_price"
+                  label="Discount Price"
+                  value={productsNode?.discount_price || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="text"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  />
+                  
+                  
+                  <MosySmartField
+                  module="products"
+                  field="tax_percentage"
+                  label="Tax Percentage"
+                  value={productsNode?.tax_percentage || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="text"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  />
                   
                   
                   <div className="form-group col-md-4 hive_data_cell ">
@@ -557,18 +522,17 @@ export default function ProductsProfile({ dataIn = {}, dataOut = {} }) {
                   />
                   
                   
-                  <div className="form-group col-md-4 hive_data_cell ">
-                    <label >Product Status</label>
-                    
-                    <select name="product_status" id="product_status" className="form-control">
-                      <option  value={productsNode?.product_status || ""}>{productsNode?.product_status || "Select Product Status"}</option>
-                      <option>Active</option>
-                      <option>Inactive</option>
-                      <option>Out of Stock</option>
-                      <option>Discontinued</option>
-                      
-                    </select>
-                  </div>
+                  <MosySmartField
+                  module="products"
+                  field="product_status"
+                  label="Product Status"
+                  value={productsNode?.product_status || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="text"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  />
                   
                   
                   <MosySmartField
@@ -580,11 +544,21 @@ export default function ProductsProfile({ dataIn = {}, dataOut = {} }) {
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
                   type="datetime-local"
-                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
                   />
                   
                   
-                  <input className="form-control" id="updated_at" name="updated_at" value={productsNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+                  <MosySmartField
+                  module="products"
+                  field="updated_at"
+                  label="Updated At"
+                  value={productsNode?.updated_at || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="datetime-local"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+                  />
                   
                 </div>
                 
@@ -614,63 +588,7 @@ export default function ProductsProfile({ dataIn = {}, dataOut = {} }) {
         <div className="row justify-content-center m-0 pr-lg-1 pl-lg-1 pt-0 col-md-12" id="">
           {/*<hive_mini_list/>*/}
           
-          {productsNode?.primkey && (
-            <MosyProfileSection
-            title={`Category Details`}
-            source="products_ProductCategoriesProfile"
-            component={ProductCategoriesProfile}
-            table="products"
-            key={`ProductCategoriesProfile-${localEventSignature}`}
-            dataIn={{
-              
-              parentStateSetters : stateItemSetters,
-              parentUseEffectKey : localEventSignature,
-              showNavigationIsle:false,
-              customQueryStr : productCategoriesCustomProfileQuery,
-              hostParent : "ProductsProfile",
-              parentProfileItemId : activeScrollId,
-              customProfileData : {
-                _products_product_name_record_id:productsNode?.product_name,
-                record_id:productsNode?.product_category_id
-              }
-              
-            }}
-            
-            dataOut={{
-              
-              setChildDataOut: InteprateProductCategoriesEvent,
-              setChildDataOutSignature: (sig) => console.log("Signature changed:", sig),
-              
-            }}
-            />
-            
-          )}
           
-          
-          {productsNode?.primkey && (
-            <MosyProfileSection
-            viewAllLink={`../productcategories/list?products_mosyfilter=${btoa(`{recordId:btoa(productsNode?.product_category_id)    }`)}`}
-            title={`Category Details`}
-            source="products_ProductCategoriesList"
-            component={ProductCategoriesList}
-            table="products"
-            key={`ProductCategoriesList-${localEventSignature}`}
-            dataIn={{
-              parentStateSetters : stateItemSetters,
-              parentUseEffectKey : localEventSignature,
-              showNavigationIsle:false,
-              showDataControlSections:false,
-              customQueryStr : {recordId:btoa(productsNode?.product_category_id)    },
-              customProfilePath:"../productcategories/profile"
-              
-            }}
-            
-            dataOut={{
-              setChildDataOut: InteprateProductCategoriesEvent,
-              setChildDataOutSignature: (sig) => console.log("Signature changed:", sig),
-            }}
-            />
-          )}
         </div>
       </div>
     </div>

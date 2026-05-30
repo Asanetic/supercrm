@@ -504,7 +504,7 @@ export default function DealsProfile({ dataIn = {}, dataOut = {} }) {
                   source="DealsProfile"
                   action="deals_DataMap_createDealQuotation_btn"
                   label="Create Quotation"
-                  icon="file-plus"
+                  icon="file-text-o"
                   
                   onClick={()=>{
                     
@@ -849,7 +849,7 @@ export default function DealsProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="title"
-            cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
             
@@ -922,7 +922,7 @@ export default function DealsProfile({ dataIn = {}, dataOut = {} }) {
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
-            type="date"
+            type="datetime-local"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
@@ -971,24 +971,11 @@ export default function DealsProfile({ dataIn = {}, dataOut = {} }) {
             </div>
             
             
-            <div className="form-group col-md-4 hive_data_cell ">
-              <label >Deal Status</label>
-              
-              <select name="deal_status" id="deal_status" className="form-control">
-                <option  value={dealsNode?.deal_status || ""}>{dealsNode?.deal_status || "Select Deal Status"}</option>
-                <option>Open</option>
-                <option>Won</option>
-                <option>Lost</option>
-                
-              </select>
-            </div>
-            
-            
             <MosySmartField
             module="deals"
-            field="assigned_sales_rep"
-            label="Assigned Sales Rep"
-            value={dealsNode?.assigned_sales_rep || ""}
+            field="deal_status"
+            label="Deal Status"
+            value={dealsNode?.deal_status || ""}
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
@@ -998,32 +985,44 @@ export default function DealsProfile({ dataIn = {}, dataOut = {} }) {
             
             
             <div className="form-group col-md-4 hive_data_cell ">
-              <label >Priority Level</label>
-              
-              <select name="priority_level" id="priority_level" className="form-control">
-                <option  value={dealsNode?.priority_level || ""}>{dealsNode?.priority_level || "Select Priority Level"}</option>
-                <option>Low</option>
-                <option>Medium</option>
-                <option>High</option>
-                <option>Urgent</option>
-                
-              </select>
-            </div>
-            
-            
-            <div className="form-group col-md-4 hive_data_cell ">
-              <label className="d-none">Deal Probability</label>
+              <label className="d-none">Assigned Sales Rep</label>
               
               <SmartDropdown
               apiEndpoint={apiRoutes.deals.base}
               idField="primkey"
-              labelField="deal_probability"
-              inputName="deal_probability"
-              label="Deal Probability"
+              labelField="assigned_sales_rep"
+              inputName="assigned_sales_rep"
+              label="Assigned Sales Rep"
               onSelect={(val) => console.log('Selected:', val)}
-              defaultValue={dealsNode?.deal_probability || ""}
+              defaultValue={dealsNode?.assigned_sales_rep || ""}
               />
             </div>
+            
+            
+            <MosySmartField
+            module="deals"
+            field="priority_level"
+            label="Priority Level"
+            value={dealsNode?.priority_level || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="text"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            />
+            
+            
+            <MosySmartField
+            module="deals"
+            field="deal_probability"
+            label="Deal Probability"
+            value={dealsNode?.deal_probability || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="text"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            />
             
             
             <MosySmartField
@@ -1034,7 +1033,7 @@ export default function DealsProfile({ dataIn = {}, dataOut = {} }) {
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
-            type="date"
+            type="datetime-local"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
@@ -1061,11 +1060,21 @@ export default function DealsProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="datetime-local"
-            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
             />
             
             
-            <input className="form-control" id="updated_at" name="updated_at" value={dealsNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+            <MosySmartField
+            module="deals"
+            field="updated_at"
+            label="Updated At"
+            value={dealsNode?.updated_at || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="datetime-local"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+            />
             
           </div>
           

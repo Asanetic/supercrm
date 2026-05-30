@@ -32,10 +32,10 @@ export async function GET(request) {
     // SIMPLE ROLE VALIDATION
     // -----------------------------
     const canSelect = validateRoleAccess({
-      table: 'service_categories',
+      table: '',
       source: 'ServiceCategories',
       action : 'select',
-      role: 'view_service_categories',
+      role: 'view_',
       authData
     });
 
@@ -48,29 +48,13 @@ export async function GET(request) {
     }
 
     
-    // service_categories column DictionaryMap
-  const ServiceCategoriesColumnDictionary={
-
-    Node : "primkey", 
-    NodeId : "record_id", 
-    recordId : "record_id", 
-    categoryName : "category_name", 
-    categoryDescription : "category_description", 
-    parentCategoryId : "parent_category_id", 
-    categoryImage : "category_image", 
-    categoryStatus : "category_status", 
-    createdAt : "created_at", 
-    updatedAt : "updated_at", 
-
-  }
-
-
+    
     
     
     
     
    const result = await mosySecureSelect({
-      table: `service_categories`,
+      table: ``,
       recordIdColumn: `record_id`,
       dictionary: ServiceCategoriesColumnDictionary,
       searchParams,
@@ -132,10 +116,10 @@ export async function POST(ServiceCategoriesRequest) {
     // SIMPLE ROLE VALIDATION
     // -----------------------------
     const canPost = validateRoleAccess({
-      table: 'service_categories',
+      table: '',
       source: 'ServiceCategories',
       action : 'create',
-      role: 'manage_service_categories',
+      role: 'manage_',
       authData
     });
 
@@ -151,24 +135,8 @@ export async function POST(ServiceCategoriesRequest) {
     const newId = magicRandomStr(7);
 
 		
-  
-  //--- Begin  service_categories inputs array ---// 
-  const ServiceCategoriesInputsArr = {
-
-    "category_name" : "?", 
-    "category_description" : "?", 
-    "parent_category_id" : "?", 
-    "category_image" : "?", 
-    "category_status" : "?", 
-    "created_at" : "?", 
-    "updated_at" : "?", 
-
-  };
-
-  //--- End service_categories inputs array --//
-
     //mutate requested values eg add authData.hive_site_id or add more values that only the back end control etc 
-    const mutatedDataArray =mutateInputArray('service_categories',ServiceCategoriesInputsArr, ServiceCategoriesRequest, newId, authData)
+    const mutatedDataArray =mutateInputArray('',ServiceCategoriesInputsArr, ServiceCategoriesRequest, newId, authData)
 
       
       mutatedDataArray.record_id = newId;
@@ -181,7 +149,7 @@ export async function POST(ServiceCategoriesRequest) {
       return Response.json({
         status: 'success',
         message: result.message,
-        service_categories_dataNode: result.record_id
+        _dataNode: result.record_id
       });
       
     
@@ -231,10 +199,10 @@ export async function PUT(ServiceCategoriesRequest) {
     // SIMPLE ROLE VALIDATION
     // -----------------------------
     const canUpdate = validateRoleAccess({
-      table: 'service_categories',
+      table: '',
       source: 'ServiceCategories',
       action : 'update',
-      role: 'manage_service_categories',
+      role: 'manage_',
       authData
     });
 
@@ -246,40 +214,24 @@ export async function PUT(ServiceCategoriesRequest) {
       });
     }
     
-    const ServiceCategoriesFormAction = body.service_categories_mosy_action;
-    const service_categories_dataNode_value = base64Decode(body.service_categories_dataNode);
+    const ServiceCategoriesFormAction = body._mosy_action;
+    const _dataNode_value = base64Decode(body._dataNode);
     
     const newId = magicRandomStr(7);
 
 		
-  
-  //--- Begin  service_categories inputs array ---// 
-  const ServiceCategoriesInputsArr = {
-
-    "category_name" : "?", 
-    "category_description" : "?", 
-    "parent_category_id" : "?", 
-    "category_image" : "?", 
-    "category_status" : "?", 
-    "created_at" : "?", 
-    "updated_at" : "?", 
-
-  };
-
-  //--- End service_categories inputs array --//
-
     //mutate requested values eg add authData.hive_site_id or add more values that only the back end control etc 
-    const mutatedDataArray =mutateInputArray('service_categories',ServiceCategoriesInputsArr, ServiceCategoriesRequest, newId, authData)
+    const mutatedDataArray =mutateInputArray('',ServiceCategoriesInputsArr, ServiceCategoriesRequest, newId, authData)
        
       // update table ServiceCategories
-      const result = await UpdateServiceCategories(newId, mutatedDataArray, body, authData, `primkey='${service_categories_dataNode_value}'`)
+      const result = await UpdateServiceCategories(newId, mutatedDataArray, body, authData, `primkey='${_dataNode_value}'`)
 
       
 
       return Response.json({
         status: 'success',
         message: result.message,
-        service_categories_dataNode: service_categories_dataNode_value
+        _dataNode: _dataNode_value
       });
  
 

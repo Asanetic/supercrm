@@ -23,10 +23,10 @@ export async function GET(request) {
     // SIMPLE ROLE VALIDATION
     // -----------------------------
     const canDelete = validateRoleAccess({
-      table: 'product_categories',
+      table: '',
       source: 'ProductCategories',
       action : 'delete',
-      role: 'manage_product_categories',
+      role: 'manage_',
       authData
     });
 
@@ -41,12 +41,12 @@ export async function GET(request) {
     
   const { searchParams } = new URL(request.url);
 
-  const deleteToken = searchParams.get('_product_categories_delete_record');
+  const deleteToken = searchParams.get('__delete_record');
   const deleteTokenDecode = base64Decode(deleteToken);
 
   if (deleteToken) {
     // Customize table and WHERE clause here
-    const table = 'product_categories'; // Replace with your actual table
+    const table = ''; // Replace with your actual table
     
      
     

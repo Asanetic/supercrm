@@ -366,8 +366,8 @@ export default function QuotationItemsProfile({ dataIn = {}, dataOut = {} }) {
                   onChange={handleInputChange}
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
-                  type="title"
-                  cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
+                  type="text"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
                   />
                   
                   
@@ -459,11 +459,21 @@ export default function QuotationItemsProfile({ dataIn = {}, dataOut = {} }) {
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
                   type="datetime-local"
-                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
                   />
                   
                   
-                  <input className="form-control" id="updated_at" name="updated_at" value={quotation_itemsNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+                  <MosySmartField
+                  module="quotation_items"
+                  field="updated_at"
+                  label="Updated At"
+                  value={quotation_itemsNode?.updated_at || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="datetime-local"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+                  />
                   
                 </div>
                 

@@ -61,12 +61,15 @@ import {InteprateTasksEvent} from '../../tasks/dataControl/TasksRequestHandler';
 import TasksList from '../../tasks/uiControl/TasksList';
 import {InteprateActivitiesEvent} from '../../activities/dataControl/ActivitiesRequestHandler';
 import ActivitiesList from '../../activities/uiControl/ActivitiesList';
+import {InteprateExpectedRevenueEvent} from '../../expectedrevenue/dataControl/ExpectedRevenueRequestHandler';
+import ExpectedRevenueList from '../../expectedrevenue/uiControl/ExpectedRevenueList';
 import DealsProfile from '../../deals/uiControl/DealsProfile';
 import QuotationsProfile from '../../quotations/uiControl/QuotationsProfile';
 import InvoicesProfile from '../../invoices/uiControl/InvoicesProfile';
 import PaymentsProfile from '../../payments/uiControl/PaymentsProfile';
 import TasksProfile from '../../tasks/uiControl/TasksProfile';
 import ActivitiesProfile from '../../activities/uiControl/ActivitiesProfile';
+import ExpectedRevenueProfile from '../../expectedrevenue/uiControl/ExpectedRevenueProfile';
 // ════════════════════════════════════════════════════════════════
 // PROFILE PAGE FUNCTION IMPORTS
 // ════════════════════════════════════════════════════════════════
@@ -79,6 +82,11 @@ import {
 import {
   suspendClient
 } from '../logicControl/suspend-client';
+
+// Imports from create-revenue-projection.jsx
+import {
+  createClientRevenueProjections
+} from '../logicControl/create-revenue-projection';
 
 // Imports from create-deal.jsx
 import {
@@ -119,6 +127,11 @@ import {
 import {
   viewActivities
 } from '../../activities/logicControl/activities-automapper';
+
+// Imports from expected_revenue-automapper.jsx
+import {
+  viewExpectedRevenue
+} from '../../expectedrevenue/logicControl/expected_revenue-automapper';
 
 
 
@@ -335,6 +348,25 @@ export default function ClientsProfile({ dataIn = {}, dataOut = {} }) {
     }
   }, [clientsNode, setActivitiesCustomProfileQuery]);
   
+  //setExpectedRevenueCustomProfileQuery Script
+  const setExpectedRevenueCustomProfileQuery = stateItemSetters.setExpectedRevenueCustomProfileQuery;
+  const expectedRevenueCustomProfileQuery =  stateItem.expectedRevenueCustomProfileQuery;
+  
+  useEffect(() => {
+    if (clientsNode?.primkey && setExpectedRevenueCustomProfileQuery) {
+      
+      const query = {clientId:btoa(clientsNode?.record_id)                            };
+      
+      const tokenUrl = mosyUrlParam("expected_revenue_dataNode")
+      
+      if(!tokenUrl)
+      {
+        setExpectedRevenueCustomProfileQuery(query);
+      }
+      
+    }
+  }, [clientsNode, setExpectedRevenueCustomProfileQuery]);
+  
   
   //access control managemant
   const [allowed, setAllowed] = useState(null);
@@ -475,6 +507,36 @@ export default function ClientsProfile({ dataIn = {}, dataOut = {} }) {
                   />
                   <MosyActionButton
                   source="ClientsProfile"
+                  action="clients_DataMap_createClientRevenueProjections_btn"
+                  label="Create payment request"
+                  icon="line-chart"
+                  
+                  onClick={()=>{
+                    
+                    createClientRevenueProjections({
+                      
+                      title: `Add payment request for {{full_name}}`,
+                      
+                      component: ExpectedRevenueProfile,
+                      
+                      stateitemsetters: stateItemSetters,
+                      
+                      parentTable: "clients",
+                      
+                      destTable: "expected_revenue",
+                      
+                      fieldsetstr: "clients:full_name|record_id:client_id",
+                      
+                      profileDataNode: clientsNode,
+                      
+                      dataInterpreter: InteprateClientsEvent
+                      
+                    })
+                    
+                  }}
+                  />
+                  <MosyActionButton
+                  source="ClientsProfile"
                   action="clients_DataMap_createClientDeal_btn"
                   label="Create Deal"
                   icon="briefcase"
@@ -492,36 +554,6 @@ export default function ClientsProfile({ dataIn = {}, dataOut = {} }) {
                       parentTable: "clients",
                       
                       destTable: "deals",
-                      
-                      fieldsetstr: "clients:full_name|record_id:client_id",
-                      
-                      profileDataNode: clientsNode,
-                      
-                      dataInterpreter: InteprateClientsEvent
-                      
-                    })
-                    
-                  }}
-                  />
-                  <MosyActionButton
-                  source="ClientsProfile"
-                  action="clients_DataMap_createClientInvoice_btn"
-                  label="Create Invoice"
-                  icon="file-text"
-                  
-                  onClick={()=>{
-                    
-                    createClientInvoice({
-                      
-                      title: `Create invoice for {{full_name}}`,
-                      
-                      component: InvoicesProfile,
-                      
-                      stateitemsetters: stateItemSetters,
-                      
-                      parentTable: "clients",
-                      
-                      destTable: "invoices",
                       
                       fieldsetstr: "clients:full_name|record_id:client_id",
                       
@@ -651,6 +683,39 @@ export default function ClientsProfile({ dataIn = {}, dataOut = {} }) {
                       
                       <MosyActionButton
                       source="ClientsProfile"
+                      action="clients_DataMap_createClientInvoice_btn"
+                      label="Create Invoice"
+                      icon="file-text"
+                      
+                      onClick={()=>{
+                        
+                        createClientInvoice({
+                          
+                          title: `Create invoice for {{full_name}}`,
+                          
+                          component: InvoicesProfile,
+                          
+                          stateitemsetters: stateItemSetters,
+                          
+                          parentTable: "clients",
+                          
+                          destTable: "invoices",
+                          
+                          fieldsetstr: "clients:full_name|record_id:client_id",
+                          
+                          profileDataNode: clientsNode,
+                          
+                          dataInterpreter: InteprateClientsEvent
+                          
+                        })
+                        
+                      }}
+                      />
+                    </div>
+                    <div className="col-auto p-1">
+                      
+                      <MosyActionButton
+                      source="ClientsProfile"
                       action="view_deals_profile_action_btn"
                       label="View Deals"
                       icon="list"
@@ -733,6 +798,21 @@ export default function ClientsProfile({ dataIn = {}, dataOut = {} }) {
                       onClick={()=>{
                         
                         viewActivities({childCol:`clientId`,parentColVal:clientsNode.record_id,parentName:clientsNode.full_name})
+                        
+                      }}
+                      />
+                    </div>
+                    <div className="col-auto p-1">
+                      
+                      <MosyActionButton
+                      source="ClientsProfile"
+                      action="view_expected_revenue_profile_action_btn"
+                      label="View Expected Revenue"
+                      icon="list"
+                      
+                      onClick={()=>{
+                        
+                        viewExpectedRevenue({childCol:`clientId`,parentColVal:clientsNode.record_id,parentName:clientsNode.full_name})
                         
                       }}
                       />
@@ -972,30 +1052,32 @@ export default function ClientsProfile({ dataIn = {}, dataOut = {} }) {
             </div>
             
             
-            <div className="form-group col-md-4 hive_data_cell ">
-              <label >Client Status</label>
-              
-              <select name="client_status" id="client_status" className="form-control">
-                <option  value={clientsNode?.client_status || ""}>{clientsNode?.client_status || "Select Client Status"}</option>
-                <option>Active</option>
-                <option>Inactive</option>
-                <option>Lead</option>
-                
-              </select>
-            </div>
-            
-            
             <MosySmartField
             module="clients"
-            field="assigned_sales_rep"
-            label="Assigned Sales Rep"
-            value={clientsNode?.assigned_sales_rep || ""}
+            field="client_status"
+            label="Client Status"
+            value={clientsNode?.client_status || ""}
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="text"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
+            
+            
+            <div className="form-group col-md-4 hive_data_cell ">
+              <label className="d-none">Assigned Sales Rep</label>
+              
+              <SmartDropdown
+              apiEndpoint={apiRoutes.clients.base}
+              idField="primkey"
+              labelField="assigned_sales_rep"
+              inputName="assigned_sales_rep"
+              label="Assigned Sales Rep"
+              onSelect={(val) => console.log('Selected:', val)}
+              defaultValue={clientsNode?.assigned_sales_rep || ""}
+              />
+            </div>
             
             
             <MosySmartField
@@ -1045,7 +1127,7 @@ export default function ClientsProfile({ dataIn = {}, dataOut = {} }) {
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
-            type="date"
+            type="datetime-local"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
@@ -1059,11 +1141,21 @@ export default function ClientsProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="datetime-local"
-            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
             />
             
             
-            <input className="form-control" id="updated_at" name="updated_at" value={clientsNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+            <MosySmartField
+            module="clients"
+            field="updated_at"
+            label="Updated At"
+            value={clientsNode?.updated_at || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="datetime-local"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+            />
             
           </div>
           
@@ -1279,6 +1371,37 @@ export default function ClientsProfile({ dataIn = {}, dataOut = {} }) {
       />
       
     )}
+    {clientsNode?.primkey && (
+      <MosyProfileSection
+      title={`Expected Revenue`}
+      source="clients_ExpectedRevenueProfile"
+      component={ExpectedRevenueProfile}
+      table="clients"
+      key={`ExpectedRevenueProfile-${localEventSignature}`}
+      dataIn={{
+        
+        parentStateSetters : stateItemSetters,
+        parentUseEffectKey : localEventSignature,
+        showNavigationIsle:false,
+        customQueryStr : expectedRevenueCustomProfileQuery,
+        hostParent : "ClientsProfile",
+        parentProfileItemId : activeScrollId,
+        customProfileData : {
+          _clients_full_name_client_id:clientsNode?.full_name,
+          client_id:clientsNode?.record_id
+        }
+        
+      }}
+      
+      dataOut={{
+        
+        setChildDataOut: InteprateExpectedRevenueEvent,
+        setChildDataOutSignature: (sig) => console.log("Signature changed:", sig),
+        
+      }}
+      />
+      
+    )}
     
     
     {clientsNode?.primkey && (
@@ -1426,6 +1549,31 @@ export default function ClientsProfile({ dataIn = {}, dataOut = {} }) {
       
       dataOut={{
         setChildDataOut: InteprateActivitiesEvent,
+        setChildDataOutSignature: (sig) => console.log("Signature changed:", sig),
+      }}
+      />
+    )}
+    
+    {clientsNode?.primkey && (
+      <MosyProfileSection
+      viewAllLink={`../expectedrevenue/list?clients_mosyfilter=${btoa(`{clientId:btoa(clientsNode?.record_id)                            }`)}`}
+      title={`Expected Revenue`}
+      source="clients_ExpectedRevenueList"
+      component={ExpectedRevenueList}
+      table="clients"
+      key={`ExpectedRevenueList-${localEventSignature}`}
+      dataIn={{
+        parentStateSetters : stateItemSetters,
+        parentUseEffectKey : localEventSignature,
+        showNavigationIsle:false,
+        showDataControlSections:false,
+        customQueryStr : {clientId:btoa(clientsNode?.record_id)                            },
+        customProfilePath:"../expectedrevenue/profile"
+        
+      }}
+      
+      dataOut={{
+        setChildDataOut: InteprateExpectedRevenueEvent,
         setChildDataOutSignature: (sig) => console.log("Signature changed:", sig),
       }}
       />

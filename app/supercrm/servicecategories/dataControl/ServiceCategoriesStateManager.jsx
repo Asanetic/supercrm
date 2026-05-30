@@ -13,8 +13,8 @@ const defaultServiceCategoriesStateDefaults = {
 
   
   //for profile page
-  service_categoriesNode : {},
-  serviceCategoriesActionStatus : 'add_service_categories',
+  Node : {},
+  serviceCategoriesActionStatus : 'add_',
   paramserviceCategoriesUptoken  : '',
   snackMessage : '',
   snackOnDone : ()=>()=>{},

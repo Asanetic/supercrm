@@ -298,7 +298,7 @@ export default function MosySqlRollBackList({ dataIn = {}, dataOut = {} }) {
                     <td scope="col"><span title={listmosy_sql_roll_back_result.table_name}>{magicTrimText(listmosy_sql_roll_back_result.table_name, 70)}</span></td>
                     <td scope="col"><span title={listmosy_sql_roll_back_result.roll_type}>{magicTrimText(listmosy_sql_roll_back_result.roll_type, 70)}</span></td>
                     <td scope="col"><span title={listmosy_sql_roll_back_result.where_str}>{magicTrimText(listmosy_sql_roll_back_result.where_str, 70)}</span></td>
-                    <td scope="col"><span title={listmosy_sql_roll_back_result.roll_timestamp}>{magicTrimText(listmosy_sql_roll_back_result.roll_timestamp, 70)}</span></td>
+                    <td scope="col"><span title={listmosy_sql_roll_back_result.roll_timestamp}>{mosyFormatDateTime(listmosy_sql_roll_back_result.roll_timestamp)}</span></td>
                     <td scope="col"><span title={listmosy_sql_roll_back_result.value_entries}>{magicTrimText(listmosy_sql_roll_back_result.value_entries, 70)}</span></td>
                     
                   </tr>

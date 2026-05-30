@@ -20,10 +20,10 @@ const apiRoutes = getApiRoutes();
 
 //insert data
 export async function insertProductCategories() {
- //console.log(`Form product_categories insert sent `)
+ //console.log(`Form  insert sent `)
 
   return await mosyPostFormData({
-    formId: 'product_categories_profile_form',
+    formId: '_profile_form',
     url: apiRoutes.productcategories.base,
     method: 'POST',
     isMultipart: true,
@@ -33,10 +33,10 @@ export async function insertProductCategories() {
 //update record 
 export async function updateProductCategories() {
 
-  //console.log(`Form product_categories update sent `)
+  //console.log(`Form  update sent `)
 
   return await mosyPostFormData({
-    formId: 'product_categories_profile_form',
+    formId: '_profile_form',
     url: apiRoutes.productcategories.base,
     method: 'PUT',
     isMultipart: true,
@@ -50,22 +50,22 @@ export async function inteprateProductCategoriesFormAction(e, setters) {
 
   const form = e.target;
   const formDataObj = new FormData(form);
-  const actionType = formDataObj.get('product_categories_mosy_action');
+  const actionType = formDataObj.get('_mosy_action');
  
- //console.log(`Form product_categories submission received action : ${actionType}`)
+ //console.log(`Form  submission received action : ${actionType}`)
 
   try {
     let result = null;
     let actionMessage ='Record added succesfully!';
 
-    if (actionType === 'add_product_categories') {
+    if (actionType === 'add_') {
 
       actionMessage ='Record added succesfully!';
 
       result = await insertProductCategories();
     }
 
-    if (actionType === 'update_product_categories') {
+    if (actionType === 'update_') {
 
       actionMessage ='Record updated succesfully!';
 
@@ -74,24 +74,24 @@ export async function inteprateProductCategoriesFormAction(e, setters) {
 
     if (result?.status === 'success') {
       
-      const product_categoriesUptoken = btoa(result.product_categories_dataNode || '');
+      const Uptoken = btoa(result._dataNode || '');
 
       //set id key
-      setters.setProductCategoriesUptoken(product_categoriesUptoken);
+      setters.setProductCategoriesUptoken(Uptoken);
       
-      //update url with new product_categoriesUptoken
-      mosyUpdateUrlParam('product_categories_dataNode', product_categoriesUptoken)
+      //update url with new Uptoken
+      mosyUpdateUrlParam('_dataNode', Uptoken)
 
-      setters.setProductCategoriesActionStatus('update_product_categories')
+      setters.setProductCategoriesActionStatus('update_')
     
       setters.setSnackMessage(actionMessage);
 
       return {
         status: 'success',
         message: actionMessage,
-        newToken: product_categoriesUptoken,
+        newToken: Uptoken,
         actionName : actionType,
-        actionType : 'product_categories_form_submission'
+        actionType : '_form_submission'
       };
             
       
@@ -172,7 +172,7 @@ export async function DeleteProductCategories(token = '') {
       const response = await mosyGetData({
         endpoint: apiRoutes.productcategories.delete,
         params: { 
-          _product_categories_delete_record: (token), 
+          __delete_record: (token), 
           },
       });
 
@@ -204,7 +204,7 @@ export async function DeleteProductCategories(token = '') {
 export async function getProductCategoriesListData(qstr = {}) {
 
   //manage pagination 
-  const pageNo = mosyUrlParam('qproduct_categories_page','0')
+  const pageNo = mosyUrlParam('q_page','0')
   const recordsPerPage = mosyGetLSData('systemDataLimit', '11')
 
   try {
@@ -240,7 +240,7 @@ export async function getProductCategoriesListData(qstr = {}) {
 
 export async function loadProductCategoriesListData(customQueryStr, setters) {
 
-    const gftProductCategories = MosySecureFilterEngine('product_categories');
+    const gftProductCategories = MosySecureFilterEngine('');
     let finalFilterStr = (gftProductCategories);    
 
     if(customQueryStr!='')
@@ -265,9 +265,9 @@ export async function loadProductCategoriesListData(customQueryStr, setters) {
   
 export async function productCategoriesProfileData(customQueryStr, setters, router, customProfileData={}) {
 
-    const productCategoriesTokenId = mosyUrlParam('product_categories_dataNode');
+    const productCategoriesTokenId = mosyUrlParam('_dataNode');
     
-    const deleteParam = mosyUrlParam('product_categories_delete');
+    const deleteParam = mosyUrlParam('_delete');
 
     //manage  the staff_uptoken value  basically detect primkey
     let decodedProductCategoriesToken = '0';
@@ -275,7 +275,7 @@ export async function productCategoriesProfileData(customQueryStr, setters, rout
       
       decodedProductCategoriesToken = atob(productCategoriesTokenId); // Decode the record_id
       setters.setProductCategoriesUptoken(productCategoriesTokenId);
-      setters.setProductCategoriesActionStatus('update_product_categories');
+      setters.setProductCategoriesActionStatus('update_');
       
     }
     
@@ -283,7 +283,7 @@ export async function productCategoriesProfileData(customQueryStr, setters, rout
     let rawProductCategoriesQueryStr ={Node:btoa(decodedProductCategoriesToken)}
     if(customQueryStr!='')
     {
-      // if no product_categories_dataNode set , use customQueryStr
+      // if no _dataNode set , use customQueryStr
       if (!productCategoriesTokenId) {
        rawProductCategoriesQueryStr = customQueryStr
       }
@@ -317,7 +317,7 @@ export function InteprateProductCategoriesEvent(data) {
 
   const childActionName = { [actionName]: true };
 
-  if(childActionName.select_product_categories){
+  if(childActionName.select_){
 
     if(data?.profile)
     {
@@ -331,7 +331,7 @@ export function InteprateProductCategoriesEvent(data) {
     parentSetter?.setActiveScrollId('ProductCategoriesProfileTray')
 
     
-    mosyUpdateUrlParam('product_categories_dataNode', btoa(data?.token))
+    mosyUpdateUrlParam('_dataNode', btoa(data?.token))
     
     const router = data?.router
       
@@ -352,17 +352,17 @@ export function InteprateProductCategoriesEvent(data) {
     parentSetter?.setActiveScrollId('ProductCategoriesProfileTray')
 
     
-    mosyUpdateUrlParam('product_categories_dataNode', btoa(data?.token))
+    mosyUpdateUrlParam('_dataNode', btoa(data?.token))
     
     }
   }
 
-  if(childActionName.add_product_categories){
+  if(childActionName.add_){
 
     const stateSetter =data?.setters.childStateSetters
     const parentStateSetter =data?.setters.parentStateSetters
 
-    //console.log(`add product_categories `, data?.setters)
+    //console.log(`add  `, data?.setters)
 
     if(stateSetter.setLocalEventSignature){
      stateSetter?.setLocalEventSignature(magicRandomStr())
@@ -377,11 +377,11 @@ export function InteprateProductCategoriesEvent(data) {
      
   }
 
-  if(childActionName.update_product_categories){
+  if(childActionName.update_){
     const stateSetter =data?.setters.childStateSetters
     const parentStateSetter =data?.setters.parentStateSetters
 
-    //console.log(`update product_categories `, data?.setters)
+    //console.log(`update  `, data?.setters)
 
     if(stateSetter.setLocalEventSignature){
      stateSetter?.setLocalEventSignature(magicRandomStr())
@@ -396,7 +396,7 @@ export function InteprateProductCategoriesEvent(data) {
     }
   }
 
-  if(childActionName.delete_product_categories){
+  if(childActionName.delete_){
 
     popDeleteDialog(btoa(data?.token), data?.setters)
 
@@ -442,7 +442,7 @@ export function popDeleteDialog(deleteToken, setters, router, afterDeleteUrl='..
   
       // Remove the param from the URL
        closeMosyModal()
-       deleteUrlParam('product_categories_delete');
+       deleteUrlParam('_delete');
         
     }
   

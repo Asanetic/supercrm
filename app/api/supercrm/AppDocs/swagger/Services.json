@@ -33,33 +33,29 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "service_name": {
-                                        "type": "string",
-                                        "description": "Service name"
-                                    },
                                     "service_code": {
                                         "type": "string",
                                         "description": "Service code"
                                     },
-                                    "service_category_id": {
+                                    "service_name": {
                                         "type": "string",
-                                        "description": "Service category id"
+                                        "description": "Service name"
                                     },
-                                    "service_description": {
+                                    "category": {
                                         "type": "string",
-                                        "description": "Service description"
+                                        "description": "Category"
                                     },
-                                    "service_image": {
+                                    "price_range": {
                                         "type": "string",
-                                        "description": "Service image"
+                                        "description": "Price range"
                                     },
                                     "service_price": {
                                         "type": "string",
                                         "description": "Service price"
                                     },
-                                    "estimated_duration": {
+                                    "service_description": {
                                         "type": "string",
-                                        "description": "Estimated duration"
+                                        "description": "Service description"
                                     },
                                     "billing_type": {
                                         "type": "string",
@@ -97,33 +93,29 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "service_name": {
-                                        "type": "string",
-                                        "description": "Service name"
-                                    },
                                     "service_code": {
                                         "type": "string",
                                         "description": "Service code"
                                     },
-                                    "service_category_id": {
+                                    "service_name": {
                                         "type": "string",
-                                        "description": "Service category id"
+                                        "description": "Service name"
                                     },
-                                    "service_description": {
+                                    "category": {
                                         "type": "string",
-                                        "description": "Service description"
+                                        "description": "Category"
                                     },
-                                    "service_image": {
+                                    "price_range": {
                                         "type": "string",
-                                        "description": "Service image"
+                                        "description": "Price range"
                                     },
                                     "service_price": {
                                         "type": "string",
                                         "description": "Service price"
                                     },
-                                    "estimated_duration": {
+                                    "service_description": {
                                         "type": "string",
-                                        "description": "Estimated duration"
+                                        "description": "Service description"
                                     },
                                     "billing_type": {
                                         "type": "string",

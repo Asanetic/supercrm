@@ -5,11 +5,11 @@
  */
 
 export const ServicesBatchMutations = {
-"_service_categories_undefined_service_category_id": {"type":"join","table":"service_categories","link":"service_category_id:record_id","select":{"_service_categories_undefined_service_category_id":"undefined"}}
+"_invoice_items_invoice_item_name_record_id": {"type":"join","table":"invoice_items","link":"record_id:item_id","select":{"_invoice_items_invoice_item_name_record_id":"invoice_item_name"}}
 };
 
 export const listServicesMutationKeys = {
-"_service_categories_undefined_service_category_id": [],
+"_invoice_items_invoice_item_name_record_id": [],
 
 };
 

@@ -49,7 +49,7 @@
 
 // Columns :
 
-//"primkey","record_id","invoice_id","item_type","item_id","item_name","item_description","item_quantity","item_unit_price","item_total_amount","created_at","updated_at","hive_site_id","hive_site_name"
+//"primkey","record_id","invoice_id","item_id","invoice_item_name","item_quantity","item_unit_price","item_total_amount","item_description","created_at","updated_at","hive_site_id","hive_site_name"
 
 
 //=============================================================================
@@ -101,7 +101,7 @@ $invoice_items_page_layout_preset=[
         
         "invoice_items" => [
 
-            "primkey","record_id","invoice_id","item_type","item_id","item_name","item_description","item_quantity","item_unit_price","item_total_amount","created_at","updated_at","hive_site_id","hive_site_name"
+            "primkey","record_id","invoice_id","item_id","invoice_item_name","item_quantity","item_unit_price","item_total_amount","item_description","created_at","updated_at","hive_site_id","hive_site_name"
 
         ]
 

@@ -698,7 +698,7 @@ export default function QuotationsProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="title"
-            cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
             
@@ -808,19 +808,17 @@ export default function QuotationsProfile({ dataIn = {}, dataOut = {} }) {
             />
             
             
-            <div className="form-group col-md-4 hive_data_cell ">
-              <label className="d-none">Quotation Status</label>
-              
-              <SmartDropdown
-              apiEndpoint={apiRoutes.quotations.base}
-              idField="primkey"
-              labelField="quotation_status"
-              inputName="quotation_status"
-              label="Quotation Status"
-              onSelect={(val) => console.log('Selected:', val)}
-              defaultValue={quotationsNode?.quotation_status || ""}
-              />
-            </div>
+            <MosySmartField
+            module="quotations"
+            field="quotation_status"
+            label="Quotation Status"
+            value={quotationsNode?.quotation_status || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="text"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            />
             
             
             <MosySmartField
@@ -844,7 +842,7 @@ export default function QuotationsProfile({ dataIn = {}, dataOut = {} }) {
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
-            type="date"
+            type="datetime-local"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
@@ -871,11 +869,21 @@ export default function QuotationsProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="datetime-local"
-            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
             />
             
             
-            <input className="form-control" id="updated_at" name="updated_at" value={quotationsNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+            <MosySmartField
+            module="quotations"
+            field="updated_at"
+            label="Updated At"
+            value={quotationsNode?.updated_at || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="datetime-local"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+            />
             
           </div>
           

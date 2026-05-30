@@ -24,8 +24,7 @@ const defaultProductsStateDefaults = {
   
   //dataScript
   productsCustomProfileQuery : '',
-  productCategoriesCustomProfileQuery : ``,
-
+  
   
   // ... other base defaults
 };

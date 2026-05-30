@@ -32,36 +32,7 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "properties": {
-                                    "category_name": {
-                                        "type": "string",
-                                        "description": "Category name"
-                                    },
-                                    "category_description": {
-                                        "type": "string",
-                                        "description": "Category description"
-                                    },
-                                    "parent_category_id": {
-                                        "type": "string",
-                                        "description": "Parent category id"
-                                    },
-                                    "category_image": {
-                                        "type": "string",
-                                        "description": "Category image"
-                                    },
-                                    "category_status": {
-                                        "type": "string",
-                                        "description": "Category status"
-                                    },
-                                    "created_at": {
-                                        "type": "string",
-                                        "description": "Created at"
-                                    },
-                                    "updated_at": {
-                                        "type": "string",
-                                        "description": "Updated at"
-                                    }
-                                }
+                                "properties": []
                             }
                         }
                     }
@@ -81,34 +52,6 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "category_name": {
-                                        "type": "string",
-                                        "description": "Category name"
-                                    },
-                                    "category_description": {
-                                        "type": "string",
-                                        "description": "Category description"
-                                    },
-                                    "parent_category_id": {
-                                        "type": "string",
-                                        "description": "Parent category id"
-                                    },
-                                    "category_image": {
-                                        "type": "string",
-                                        "description": "Category image"
-                                    },
-                                    "category_status": {
-                                        "type": "string",
-                                        "description": "Category status"
-                                    },
-                                    "created_at": {
-                                        "type": "string",
-                                        "description": "Created at"
-                                    },
-                                    "updated_at": {
-                                        "type": "string",
-                                        "description": "Updated at"
-                                    },
                                     "Node": {
                                         "type": "string",
                                         "description": " Product Categories id to update "

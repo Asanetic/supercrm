@@ -7,11 +7,11 @@ import { InteprateProductCategoriesEvent } from '../dataControl/ProductCategorie
 import { hiveRoutes } from '../../../appConfigs/hiveRoutes';
 
 export async function generateMetadata({ searchParams }) {
-  const mosyTitle = "Product Categories "//searchParams?.mosyTitle || "Product Categories";
+  const mosyTitle = " "//searchParams?.mosyTitle || "";
 
   return {
-    title: mosyTitle ? decodeURIComponent(mosyTitle) : `Product Categories`,
-    description: 'supercrm Product Categories',
+    title: mosyTitle ? decodeURIComponent(mosyTitle) : ``,
+    description: 'supercrm ',
     
     icons: {
       icon: `${hiveRoutes.hiveBaseRoute}/logo.png`

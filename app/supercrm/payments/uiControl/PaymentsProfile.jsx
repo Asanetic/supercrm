@@ -356,7 +356,7 @@ export default function PaymentsProfile({ dataIn = {}, dataOut = {} }) {
                   source="PaymentsProfile"
                   action="payments_DataMap_refundPayment_btn"
                   label="Refund Payment"
-                  icon="rotate-ccw"
+                  icon="undo"
                   
                   onClick={()=>{
                     
@@ -390,7 +390,7 @@ export default function PaymentsProfile({ dataIn = {}, dataOut = {} }) {
                   
                   onClick={()=>{
                     
-                    viewInvoices({childCol:`recordId`,parentColVal:paymentsNode.invoice_id,parentName:paymentsNode.payment_for})
+                    viewInvoices({childCol:`recordId`,parentColVal:paymentsNode.invoice_id,parentName:paymentsNode.transaction_ref})
                     
                   }}
                   />
@@ -402,7 +402,7 @@ export default function PaymentsProfile({ dataIn = {}, dataOut = {} }) {
                   
                   onClick={()=>{
                     
-                    viewDeals({childCol:`recordId`,parentColVal:paymentsNode.deal_id,parentName:paymentsNode.payment_for})
+                    viewDeals({childCol:`recordId`,parentColVal:paymentsNode.deal_id,parentName:paymentsNode.transaction_ref})
                     
                   }}
                   />
@@ -530,7 +530,7 @@ export default function PaymentsProfile({ dataIn = {}, dataOut = {} }) {
                       
                       onClick={()=>{
                         
-                        viewClients({childCol:`recordId`,parentColVal:paymentsNode.client_id,parentName:paymentsNode.payment_for})
+                        viewClients({childCol:`recordId`,parentColVal:paymentsNode.client_id,parentName:paymentsNode.transaction_ref})
                         
                       }}
                       />
@@ -778,16 +778,17 @@ export default function PaymentsProfile({ dataIn = {}, dataOut = {} }) {
             </div>
             
             
-            <div className="form-group col-md-4 hive_data_cell ">
-              <label >Payment Status</label>
-              
-              <select name="payment_status" id="payment_status" className="form-control">
-                <option  value={paymentsNode?.payment_status || ""}>{paymentsNode?.payment_status || "Select Payment Status"}</option>
-                <option>Complete</option>
-                <option>Pending</option>
-                
-              </select>
-            </div>
+            <MosySmartField
+            module="payments"
+            field="payment_status"
+            label="Payment Status"
+            value={paymentsNode?.payment_status || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="text"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            />
             
             
             <div className="form-group col-md-4 hive_data_cell ">
@@ -814,11 +815,21 @@ export default function PaymentsProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="datetime-local"
-            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
             />
             
             
-            <input className="form-control" id="updated_at" name="updated_at" value={paymentsNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+            <MosySmartField
+            module="payments"
+            field="updated_at"
+            label="Updated At"
+            value={paymentsNode?.updated_at || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="datetime-local"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+            />
             
           </div>
           
@@ -864,7 +875,7 @@ export default function PaymentsProfile({ dataIn = {}, dataOut = {} }) {
         hostParent : "PaymentsProfile",
         parentProfileItemId : activeScrollId,
         customProfileData : {
-          _payments_payment_for_record_id:paymentsNode?.payment_for,
+          _payments_transaction_ref_record_id:paymentsNode?.transaction_ref,
           record_id:paymentsNode?.invoice_id
         }
         
@@ -895,7 +906,7 @@ export default function PaymentsProfile({ dataIn = {}, dataOut = {} }) {
         hostParent : "PaymentsProfile",
         parentProfileItemId : activeScrollId,
         customProfileData : {
-          _payments_payment_for_record_id:paymentsNode?.payment_for,
+          _payments_transaction_ref_record_id:paymentsNode?.transaction_ref,
           record_id:paymentsNode?.deal_id
         }
         
@@ -926,7 +937,7 @@ export default function PaymentsProfile({ dataIn = {}, dataOut = {} }) {
         hostParent : "PaymentsProfile",
         parentProfileItemId : activeScrollId,
         customProfileData : {
-          _payments_payment_for_record_id:paymentsNode?.payment_for,
+          _payments_transaction_ref_record_id:paymentsNode?.transaction_ref,
           record_id:paymentsNode?.client_id
         }
         

@@ -54,13 +54,12 @@ export async function GET(request) {
     Node : "primkey", 
     NodeId : "record_id", 
     recordId : "record_id", 
-    serviceName : "service_name", 
     serviceCode : "service_code", 
-    serviceCategoryId : "service_category_id", 
-    serviceDescription : "service_description", 
-    serviceImage : "service_image", 
+    serviceName : "service_name", 
+    category : "category", 
+    priceRange : "price_range", 
     servicePrice : "service_price", 
-    estimatedDuration : "estimated_duration", 
+    serviceDescription : "service_description", 
     billingType : "billing_type", 
     serviceStatus : "service_status", 
     createdAt : "created_at", 
@@ -159,13 +158,12 @@ export async function POST(ServicesRequest) {
   //--- Begin  services inputs array ---// 
   const ServicesInputsArr = {
 
-    "service_name" : "?", 
     "service_code" : "?", 
-    "service_category_id" : "?", 
-    "service_description" : "?", 
-    "service_image" : "?", 
+    "service_name" : "?", 
+    "category" : "?", 
+    "price_range" : "?", 
     "service_price" : "?", 
-    "estimated_duration" : "?", 
+    "service_description" : "?", 
     "billing_type" : "?", 
     "service_status" : "?", 
     "created_at" : "?", 
@@ -185,28 +183,6 @@ export async function POST(ServicesRequest) {
       const result = await AddServices(newId, mutatedDataArray, body, authData);     
 
        
-                // Now handle the file upload for service_image, if any
-                if (body.fileservices_service_image) {
-                  if(body["fileservices_service_image"].size>0){
-                  try {
-                    
-                    const filePath = await mosyUploadFile(body[ "fileservices_service_image"], "media/services");
-                    
-                    ServicesInputsArr.service_image = filePath; // Update file path in the database
-
-                    // After file upload, update the database with the file path
-                    await UpdateServices(newId, { service_image: filePath }, body, authData,  `primkey='${result.record_id}'`)
-                    
-                    let fileToDelete = body.media_services_service_image;
-                      
-                    //Delete file if need be
-
-                  } catch (fileErr) {
-                    console.error("File upload failed:", fileErr);
-                    // You can either handle this error or return a partial success message
-                  }
-                }
-               }
 
       return Response.json({
         status: 'success',
@@ -286,13 +262,12 @@ export async function PUT(ServicesRequest) {
   //--- Begin  services inputs array ---// 
   const ServicesInputsArr = {
 
-    "service_name" : "?", 
     "service_code" : "?", 
-    "service_category_id" : "?", 
-    "service_description" : "?", 
-    "service_image" : "?", 
+    "service_name" : "?", 
+    "category" : "?", 
+    "price_range" : "?", 
     "service_price" : "?", 
-    "estimated_duration" : "?", 
+    "service_description" : "?", 
     "billing_type" : "?", 
     "service_status" : "?", 
     "created_at" : "?", 
@@ -309,30 +284,6 @@ export async function PUT(ServicesRequest) {
       const result = await UpdateServices(newId, mutatedDataArray, body, authData, `primkey='${services_dataNode_value}'`)
 
       
-                // Now handle the file upload for service_image, if any
-                if (body.fileservices_service_image) {
-                  if(body["fileservices_service_image"].size>0){
-                  try {
-                    
-                    const filePath = await mosyUploadFile(body[ "fileservices_service_image"], "media/services");
-                    
-                    ServicesInputsArr.service_image = filePath; // Update file path in the database
-
-                    // After file upload, update the database with the file path
-                    await UpdateServices(newId, { service_image: filePath }, body, authData,  `primkey='${services_dataNode_value}'`)
-                    
-                    let fileToDelete = body.media_services_service_image;
-                      
-                    //Delete old file
-mosyDeleteFile(fileToDelete);
-// Log or store deleted file: fileToDelete
-
-                  } catch (fileErr) {
-                    console.error("File upload failed:", fileErr);
-                    // You can either handle this error or return a partial success message
-                  }
-                }
-               }
 
       return Response.json({
         status: 'success',

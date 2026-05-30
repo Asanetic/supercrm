@@ -21,11 +21,11 @@ leads:mark-lost:profile|'record_id'|x-circle,Mark Lost,markLostLead,../logicCont
 
 leads:add-task:profile|'record_id'|check-square,Add Task,addLeadTask,../logicControl
 @addLeadTask:DataMapAdd:tasks=Add task for {{full_name}},leads:full_name|record_id:lead_id
-
-leads:hot-leads:list|'Hot'|flame,Hot Leads,filterHotLeads,../logicControl
+//2528 07 01 311 687 
+leads:hot-leads:list|'Hot'|fire,Hot Leads,filterHotLeads,../logicControl
 @filterHotLeads:DataQueryCol:leads=leadTemperature,Hot
 
-leads:qualified-leads:list|'Qualified'|badge-check,Qualified Leads,filterQualifiedLeads,../logicControl
+leads:qualified-leads:list|'Qualified'|check-circle,Qualified Leads,filterQualifiedLeads,../logicControl
 @filterQualifiedLeads:DataQueryCol:leads=leadStatus,Qualified
 
 
@@ -37,6 +37,9 @@ clients:activate-client:profile|'record_id'|check-circle,Activate Client,activat
 clients:suspend-client:profile|'record_id'|pause-circle,Suspend Client,suspendClient,../logicControl
 @suspendClient:DataMapUpdate:clients=Suspend {{full_name}} client,client_status|Suspended
 
+clients:create-revenue-projection:profile|'record_id'|line-chart,Create payment request, createClientRevenueProjections, ../logicControl
+@createClientRevenueProjections:DataMapAdd:expected_revenue=Add payment request for {{full_name}},clients:full_name|record_id:client_id
+
 clients:create-deal:profile|'record_id'|briefcase,Create Deal,createClientDeal,../logicControl
 @createClientDeal:DataMapAdd:deals=Create deal for {{full_name}},clients:full_name|record_id:client_id
 
@@ -46,7 +49,7 @@ clients:create-invoice:profile|'record_id'|file-text,Create Invoice,createClient
 clients:active-clients:list|'Active'|user-check,Active Clients,filterActiveClients,../logicControl
 @filterActiveClients:DataQueryCol:clients=clientStatus,Active
 
-clients:inactive-clients:list|'Inactive'|user-x,Inactive Clients,filterInactiveClients,../logicControl
+clients:inactive-clients:list|'Inactive'|user-times,Inactive Clients,filterInactiveClients,../logicControl
 @filterInactiveClients:DataQueryCol:clients=clientStatus,Inactive
 
 
@@ -58,7 +61,7 @@ deals:mark-won:profile|'record_id'|trophy,Mark Won,markDealWon,../logicControl
 deals:mark-lost:profile|'record_id'|x-circle,Mark Lost,markDealLost,../logicControl
 @markDealLost:DataMapUpdate:deals=Mark {{deal_title}} lost,deal_status|Lost
 
-deals:create-quotation:profile|'record_id'|file-plus,Create Quotation,createDealQuotation,../logicControl
+deals:create-quotation:profile|'record_id'|file-text-o,Create Quotation,createDealQuotation,../logicControl
 @createDealQuotation:DataMapAdd:quotations=Create quotation for {{deal_title}},deals:deal_title|record_id:deal_id
 
 deals:add-followup-task:profile|'record_id'|calendar,Add Follow Up,addDealFollowupTask,../logicControl
@@ -79,8 +82,11 @@ products:activate-product:profile|'record_id'|check-circle,Activate Product,acti
 products:disable-product:profile|'record_id'|pause-circle,Disable Product,disableProduct,../logicControl
 @disableProduct:DataMapUpdate:products=Disable {{product_name}} product,product_status|Inactive
 
-products:out-of-stock-products:list|'Out Of Stock'|alert-triangle,Out Of Stock Products,filterOutOfStockProducts,../logicControl
+products:out-of-stock-products:list|'Out Of Stock'|exclamation-triangle,Out Of Stock Products, filterOutOfStockProducts, ../logicControl
 @filterOutOfStockProducts:DataQueryCol:products=productStatus,Out Of Stock
+
+products:filter-prod-types:list|'?'|tags,Filter Categories,filterProdByCategory,../logicControl
+@filterProdByCategory :DataQueryGroupCol:products=Search Categories , category
 
 products:active-products:list|'Active'|check-circle,Active Products,filterActiveProducts,../logicControl
 @filterActiveProducts:DataQueryCol:products=productStatus,Active
@@ -94,12 +100,8 @@ services:activate-service:profile|'record_id'|check-circle,Activate Service,acti
 services:disable-service:profile|'record_id'|pause-circle,Disable Service,disableService,../logicControl
 @disableService:DataMapUpdate:services=Disable {{service_name}} service,service_status|Inactive
 
-services:recurring-services:list|'Recurring'|refresh-cw,Recurring Services,filterRecurringServices,../logicControl
-@filterRecurringServices:DataQueryCol:services=billingType,Recurring
-
-services:one-time-services:list|'One Time'|credit-card,One Time Services,filterOneTimeServices,../logicControl
-@filterOneTimeServices:DataQueryCol:services=billingType,One Time
-
+services:filter-types:list|'?'|bolt,Filter Categories , filterByCategory ,../logicControl
+@filterByCategory :DataQueryGroupCol:services=Search Categories , category
 
 // QUOTATIONS
 
@@ -139,13 +141,13 @@ invoices:pending-invoices:list|'Pending'|clock,Pending Invoices,filterPendingInv
 payments:confirm-payment:profile|'record_id'|check-circle,Confirm Payment,confirmPayment,../logicControl
 @confirmPayment:DataMapUpdate:payments=Confirm payment transaction,payment_status|Paid
 
-payments:refund-payment:profile|'record_id'|rotate-ccw,Refund Payment,refundPayment,../logicControl
+payments:refund-payment:profile|'record_id'|undo,Refund Payment,refundPayment,../logicControl
 @refundPayment:DataMapUpdate:payments=Refund payment transaction,payment_status|Refunded
 
 payments:failed-payments:list|'Failed'|x-circle,Failed Payments,filterFailedPayments,../logicControl
 @filterFailedPayments:DataQueryCol:payments=paymentStatus,Failed
 
-payments:successful-payments:list|'Paid'|badge-check,Successful Payments,filterSuccessfulPayments,../logicControl
+payments:successful-payments:list|'Paid'|check-circle,Successful Payments,filterSuccessfulPayments,../logicControl
 @filterSuccessfulPayments:DataQueryCol:payments=paymentStatus,Paid
 
 
@@ -223,10 +225,10 @@ expected_revenue:client-revenue:list|'client_id'|building,Filter By Client,filte
 expected_revenue:deal-revenue:list|'deal_id'|briefcase,Filter By Deal,filterRevenueByDeal,../logicControl
 @filterRevenueByDeal:DataQueryMap:expected_revenue=Filter by deal, deals:deal_title|record_id:deal_id
 
-expected_revenue:status-revenue:list|'revenue_status'|layers,Filter By Status,filterRevenueByStatus,../logicControl
+expected_revenue:status-revenue:list|'revenue_status'|list-alt,Filter By Status,filterRevenueByStatus,../logicControl
 @filterRevenueByStatus:DataQueryGroupCol:expected_revenue=Filter by status , payment_status
 
-expected_revenue:filter-by-month:list|'revenue_status'|layers,Filter By Month , filterRevenueByMonth,../logicControl
+expected_revenue:filter-by-month:list|'revenue_status'|calendar,Filter By Month,filterRevenueByMonth,../logicControl
 @filterRevenueByMonth:DataQueryGroupCol:expected_revenue=Filter by Month, revenue_month
 
 
@@ -294,7 +296,7 @@ $eventMappingArray=[
 
         "list"=>[
 
-            "flame: Hot Leads" => [
+            "fire: Hot Leads" => [
                 "fe" => "filterHotLeads('Hot')",
                 "be" => "filterHotLeads()",
                 "file" => "hot-leads",
@@ -305,7 +307,7 @@ $eventMappingArray=[
                 "basePath"=>"../logicControl"
             ],
 
-            "badge-check: Qualified Leads" => [
+            "check-circle: Qualified Leads" => [
                 "fe" => "filterQualifiedLeads('Qualified')",
                 "be" => "filterQualifiedLeads()",
                 "file" => "qualified-leads",
@@ -346,6 +348,17 @@ $eventMappingArray=[
                 "basePath"=>"../logicControl"
             ],
 
+            "line-chart: Create payment request" => [
+                "fe" => "createClientRevenueProjections('record_id')",
+                "be" => "createClientRevenueProjections()",
+                "file" => "create-revenue-projection",
+                "funName" => "createClientRevenueProjections",
+                "destTable" => "expected_revenue",
+                "logicFlow" => "Add payment request for {{full_name}},clients:full_name|record_id:client_id",
+                "functionType" => "DataMapAdd",
+                "basePath"=>"../logicControl"
+            ],
+
             "briefcase: Create Deal" => [
                 "fe" => "createClientDeal('record_id')",
                 "be" => "createClientDeal()",
@@ -383,7 +396,7 @@ $eventMappingArray=[
                 "basePath"=>"../logicControl"
             ],
 
-            "user-x: Inactive Clients" => [
+            "user-times: Inactive Clients" => [
                 "fe" => "filterInactiveClients('Inactive')",
                 "be" => "filterInactiveClients()",
                 "file" => "inactive-clients",
@@ -424,7 +437,7 @@ $eventMappingArray=[
                 "basePath"=>"../logicControl"
             ],
 
-            "file-plus: Create Quotation" => [
+            "file-text-o: Create Quotation" => [
                 "fe" => "createDealQuotation('record_id')",
                 "be" => "createDealQuotation()",
                 "file" => "create-quotation",
@@ -506,7 +519,7 @@ $eventMappingArray=[
 
         "list"=>[
 
-            "alert-triangle: Out Of Stock Products" => [
+            "exclamation-triangle: Out Of Stock Products" => [
                 "fe" => "filterOutOfStockProducts('Out Of Stock')",
                 "be" => "filterOutOfStockProducts()",
                 "file" => "out-of-stock-products",
@@ -514,6 +527,17 @@ $eventMappingArray=[
                 "destTable" => "products",
                 "logicFlow" => "productStatus,Out Of Stock",
                 "functionType" => "DataQueryCol",
+                "basePath"=>"../logicControl"
+            ],
+
+            "tags: Filter Categories" => [
+                "fe" => "filterProdByCategory('?')",
+                "be" => "filterProdByCategory()",
+                "file" => "filter-prod-types",
+                "funName" => "filterProdByCategory",
+                "destTable" => "products",
+                "logicFlow" => "Search Categories , category",
+                "functionType" => "DataQueryGroupCol",
                 "basePath"=>"../logicControl"
             ],
 
@@ -562,25 +586,14 @@ $eventMappingArray=[
 
         "list"=>[
 
-            "refresh-cw: Recurring Services" => [
-                "fe" => "filterRecurringServices('Recurring')",
-                "be" => "filterRecurringServices()",
-                "file" => "recurring-services",
-                "funName" => "filterRecurringServices",
+            "bolt: Filter Categories" => [
+                "fe" => "filterByCategory('?')",
+                "be" => "filterByCategory()",
+                "file" => "filter-types",
+                "funName" => "filterByCategory",
                 "destTable" => "services",
-                "logicFlow" => "billingType,Recurring",
-                "functionType" => "DataQueryCol",
-                "basePath"=>"../logicControl"
-            ],
-
-            "credit-card: One Time Services" => [
-                "fe" => "filterOneTimeServices('One Time')",
-                "be" => "filterOneTimeServices()",
-                "file" => "one-time-services",
-                "funName" => "filterOneTimeServices",
-                "destTable" => "services",
-                "logicFlow" => "billingType,One Time",
-                "functionType" => "DataQueryCol",
+                "logicFlow" => "Search Categories , category",
+                "functionType" => "DataQueryGroupCol",
                 "basePath"=>"../logicControl"
             ],
 
@@ -726,7 +739,7 @@ $eventMappingArray=[
                 "basePath"=>"../logicControl"
             ],
 
-            "rotate-ccw: Refund Payment" => [
+            "undo: Refund Payment" => [
                 "fe" => "refundPayment('record_id')",
                 "be" => "refundPayment()",
                 "file" => "refund-payment",
@@ -752,7 +765,7 @@ $eventMappingArray=[
                 "basePath"=>"../logicControl"
             ],
 
-            "badge-check: Successful Payments" => [
+            "check-circle: Successful Payments" => [
                 "fe" => "filterSuccessfulPayments('Paid')",
                 "be" => "filterSuccessfulPayments()",
                 "file" => "successful-payments",
@@ -1042,7 +1055,7 @@ $eventMappingArray=[
                 "basePath"=>"../logicControl"
             ],
 
-            "layers: Filter By Status" => [
+            "list-alt: Filter By Status" => [
                 "fe" => "filterRevenueByStatus('revenue_status')",
                 "be" => "filterRevenueByStatus()",
                 "file" => "status-revenue",
@@ -1053,7 +1066,7 @@ $eventMappingArray=[
                 "basePath"=>"../logicControl"
             ],
 
-            "layers: Filter By Month" => [
+            "calendar: Filter By Month" => [
                 "fe" => "filterRevenueByMonth('revenue_status')",
                 "be" => "filterRevenueByMonth()",
                 "file" => "filter-by-month",

@@ -500,7 +500,7 @@ export default function ActivitiesProfile({ dataIn = {}, dataOut = {} }) {
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
                   type="title"
-                  cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
                   />
                   
                   
@@ -517,17 +517,17 @@ export default function ActivitiesProfile({ dataIn = {}, dataOut = {} }) {
                   />
                   
                   
-                  <div className="form-group col-md-4 hive_data_cell ">
-                    <label >Activity Status</label>
-                    
-                    <select name="activity_status" id="activity_status" className="form-control">
-                      <option  value={activitiesNode?.activity_status || ""}>{activitiesNode?.activity_status || "Select Activity Status"}</option>
-                      <option>Pending</option>
-                      <option>Completed</option>
-                      <option>Cancelled</option>
-                      
-                    </select>
-                  </div>
+                  <MosySmartField
+                  module="activities"
+                  field="activity_status"
+                  label="Activity Status"
+                  value={activitiesNode?.activity_status || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="text"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  />
                   
                   <LiveSearchDropdown
                   apiEndpoint={apiRoutes.users.base}
@@ -572,7 +572,7 @@ export default function ActivitiesProfile({ dataIn = {}, dataOut = {} }) {
                   onChange={handleInputChange}
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
-                  type="date"
+                  type="datetime-local"
                   cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
                   />
                   
@@ -585,7 +585,7 @@ export default function ActivitiesProfile({ dataIn = {}, dataOut = {} }) {
                   onChange={handleInputChange}
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
-                  type="date"
+                  type="datetime-local"
                   cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
                   />
                   
@@ -599,11 +599,21 @@ export default function ActivitiesProfile({ dataIn = {}, dataOut = {} }) {
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
                   type="datetime-local"
-                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
                   />
                   
                   
-                  <input className="form-control" id="updated_at" name="updated_at" value={activitiesNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+                  <MosySmartField
+                  module="activities"
+                  field="updated_at"
+                  label="Updated At"
+                  value={activitiesNode?.updated_at || ""}
+                  onChange={handleInputChange}
+                  context={{ hostParent: hostParent  }}
+                  inputOverrides={{}}
+                  type="datetime-local"
+                  cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+                  />
                   
                 </div>
                 

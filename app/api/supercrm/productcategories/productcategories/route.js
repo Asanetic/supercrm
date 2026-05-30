@@ -32,10 +32,10 @@ export async function GET(request) {
     // SIMPLE ROLE VALIDATION
     // -----------------------------
     const canSelect = validateRoleAccess({
-      table: 'product_categories',
+      table: '',
       source: 'ProductCategories',
       action : 'select',
-      role: 'view_product_categories',
+      role: 'view_',
       authData
     });
 
@@ -48,29 +48,13 @@ export async function GET(request) {
     }
 
     
-    // product_categories column DictionaryMap
-  const ProductCategoriesColumnDictionary={
-
-    Node : "primkey", 
-    NodeId : "record_id", 
-    recordId : "record_id", 
-    categoryName : "category_name", 
-    categoryDescription : "category_description", 
-    parentCategoryId : "parent_category_id", 
-    categoryImage : "category_image", 
-    categoryStatus : "category_status", 
-    createdAt : "created_at", 
-    updatedAt : "updated_at", 
-
-  }
-
-
+    
     
     
     
     
    const result = await mosySecureSelect({
-      table: `product_categories`,
+      table: ``,
       recordIdColumn: `record_id`,
       dictionary: ProductCategoriesColumnDictionary,
       searchParams,
@@ -132,10 +116,10 @@ export async function POST(ProductCategoriesRequest) {
     // SIMPLE ROLE VALIDATION
     // -----------------------------
     const canPost = validateRoleAccess({
-      table: 'product_categories',
+      table: '',
       source: 'ProductCategories',
       action : 'create',
-      role: 'manage_product_categories',
+      role: 'manage_',
       authData
     });
 
@@ -151,24 +135,8 @@ export async function POST(ProductCategoriesRequest) {
     const newId = magicRandomStr(7);
 
 		
-  
-  //--- Begin  product_categories inputs array ---// 
-  const ProductCategoriesInputsArr = {
-
-    "category_name" : "?", 
-    "category_description" : "?", 
-    "parent_category_id" : "?", 
-    "category_image" : "?", 
-    "category_status" : "?", 
-    "created_at" : "?", 
-    "updated_at" : "?", 
-
-  };
-
-  //--- End product_categories inputs array --//
-
     //mutate requested values eg add authData.hive_site_id or add more values that only the back end control etc 
-    const mutatedDataArray =mutateInputArray('product_categories',ProductCategoriesInputsArr, ProductCategoriesRequest, newId, authData)
+    const mutatedDataArray =mutateInputArray('',ProductCategoriesInputsArr, ProductCategoriesRequest, newId, authData)
 
       
       mutatedDataArray.record_id = newId;
@@ -181,7 +149,7 @@ export async function POST(ProductCategoriesRequest) {
       return Response.json({
         status: 'success',
         message: result.message,
-        product_categories_dataNode: result.record_id
+        _dataNode: result.record_id
       });
       
     
@@ -231,10 +199,10 @@ export async function PUT(ProductCategoriesRequest) {
     // SIMPLE ROLE VALIDATION
     // -----------------------------
     const canUpdate = validateRoleAccess({
-      table: 'product_categories',
+      table: '',
       source: 'ProductCategories',
       action : 'update',
-      role: 'manage_product_categories',
+      role: 'manage_',
       authData
     });
 
@@ -246,40 +214,24 @@ export async function PUT(ProductCategoriesRequest) {
       });
     }
     
-    const ProductCategoriesFormAction = body.product_categories_mosy_action;
-    const product_categories_dataNode_value = base64Decode(body.product_categories_dataNode);
+    const ProductCategoriesFormAction = body._mosy_action;
+    const _dataNode_value = base64Decode(body._dataNode);
     
     const newId = magicRandomStr(7);
 
 		
-  
-  //--- Begin  product_categories inputs array ---// 
-  const ProductCategoriesInputsArr = {
-
-    "category_name" : "?", 
-    "category_description" : "?", 
-    "parent_category_id" : "?", 
-    "category_image" : "?", 
-    "category_status" : "?", 
-    "created_at" : "?", 
-    "updated_at" : "?", 
-
-  };
-
-  //--- End product_categories inputs array --//
-
     //mutate requested values eg add authData.hive_site_id or add more values that only the back end control etc 
-    const mutatedDataArray =mutateInputArray('product_categories',ProductCategoriesInputsArr, ProductCategoriesRequest, newId, authData)
+    const mutatedDataArray =mutateInputArray('',ProductCategoriesInputsArr, ProductCategoriesRequest, newId, authData)
        
       // update table ProductCategories
-      const result = await UpdateProductCategories(newId, mutatedDataArray, body, authData, `primkey='${product_categories_dataNode_value}'`)
+      const result = await UpdateProductCategories(newId, mutatedDataArray, body, authData, `primkey='${_dataNode_value}'`)
 
       
 
       return Response.json({
         status: 'success',
         message: result.message,
-        product_categories_dataNode: product_categories_dataNode_value
+        _dataNode: _dataNode_value
       });
  
 

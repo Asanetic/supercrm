@@ -60,20 +60,15 @@ const apiRoutes = getApiRoutes();
 // ════════════════════════════════════════════════════════════════
 // LIST PAGE FUNCTION IMPORTS
 // ════════════════════════════════════════════════════════════════
-// Imports from recurring-services.jsx
+// Imports from filter-types.jsx
 import {
-  filterRecurringServices
-} from '../logicControl/recurring-services';
+  filterByCategory
+} from '../logicControl/filter-types';
 
-// Imports from one-time-services.jsx
+// Imports from invoice_items-automapper.jsx
 import {
-  filterOneTimeServices
-} from '../logicControl/one-time-services';
-
-// Imports from service_categories-automapper.jsx
-import {
-  viewServiceCategories
-} from '../../servicecategories/logicControl/service_categories-automapper';
+  viewInvoiceItems
+} from '../../invoiceitems/logicControl/invoice_items-automapper';
 
 
 
@@ -232,47 +227,23 @@ export default function ServicesList({ dataIn = {}, dataOut = {} }) {
             
             <MosyActionButton
             source="ServicesProfile"
-            action="services_DataMapQCol_filterRecurringServices_btn"
-            label="Recurring Services"
-            icon="refresh-cw"
+            action="services_DataMapQCol_filterByCategory_btn"
+            label="Filter Categories"
+            icon="bolt"
             
             onClick={()=>{
               
-              filterRecurringServices({
+              filterByCategory({
                 
                 customQueryStr : customQueryStr,
                 
                 stateItemSetters: stateItemSetters,
                 
-                colName: "billingType",
+                title: "Search Categories",
                 
-                colVal: "Recurring",
+                parentColName: "category",
                 
-                tableName: "services",
-                
-              })
-              
-            }}
-            />
-            <MosyActionButton
-            source="ServicesProfile"
-            action="services_DataMapQCol_filterOneTimeServices_btn"
-            label="One Time Services"
-            icon="credit-card"
-            
-            onClick={()=>{
-              
-              filterOneTimeServices({
-                
-                customQueryStr : customQueryStr,
-                
-                stateItemSetters: stateItemSetters,
-                
-                colName: "billingType",
-                
-                colVal: "One Time",
-                
-                tableName: "services",
+                parentTableName: "services",
                 
               })
               
@@ -314,13 +285,14 @@ export default function ServicesList({ dataIn = {}, dataOut = {} }) {
       <thead className="text-uppercase">
         <tr>
           <th scope="col">#</th>
-          <th>Service Image</th>
-          <th scope="col"><b>Service Name</b></th>
+          
           <th scope="col"><b>Service Code</b></th>
-          <th scope="col"><b>Undefined</b></th>
-          <th scope="col"><b>Service Description</b></th>
+          <th scope="col"><b>Service Name</b></th>
+          <th scope="col"><b>Category</b></th>
+          <th scope="col"><b>Price Range</b></th>
           <th scope="col"><b>Service Price</b></th>
-          <th scope="col"><b>Estimated Duration</b></th>
+          <th scope="col"><b>Service Description</b></th>
+          <th scope="col"><b>Billing Type</b></th>
           
         </tr>
         
@@ -329,7 +301,7 @@ export default function ServicesList({ dataIn = {}, dataOut = {} }) {
         {stateItem.servicesLoading ? (
           <tr>
             <th scope="col">#</th>
-            <td colSpan="7" className="text-muted">
+            <td colSpan="8" className="text-muted">
               <h5 className="col-md-12 text-center p-3 mb-5 text-muted"><i className="fa fa-spinner fa-spin"></i> Loading Services ...</h5>
             </td>
           </tr>
@@ -363,27 +335,21 @@ export default function ServicesList({ dataIn = {}, dataOut = {} }) {
                           
                           <MosyGridRowOptions
                           src="ServicesList"
-                          action="_category_details"
-                          label=" Category Details"
+                          action="_invoice_items"
+                          label=" Invoice Items"
                           icon="list "
-                          dataIn={() => viewServiceCategories({childCol:`recordId`,parentColVal:listservices_result.service_category_id,parentName:listservices_result.service_name})}   // only runs on click now
+                          dataIn={() => viewInvoiceItems({childCol:`itemId`,parentColVal:listservices_result.record_id,parentName:listservices_result.service_name})}   // only runs on click now
                           callBack={(incomingRequest) => {setChildDataOut(incomingRequest) }}
                           />
                         </div>
                       </div>
                     </td>
                     
-                    <td>
-                      <MosyImageViewer
-                      media={`/api/mediaroom?media=${btoa((listservices_result.service_image || ""))}`}
-                      mediaRoot={""}
-                      defaultLogo={logo.src}
-                      imageClass="small_thumbnail"
-                      />
-                    </td>
-                    <td scope="col"><span title={listservices_result.service_name}>{magicTrimText(listservices_result.service_name, 70)}</span></td>
                     <td scope="col"><span title={listservices_result.service_code}>{magicTrimText(listservices_result.service_code, 70)}</span></td>
-                    <td scope="col"><span title={listservices_result.service_category_id}>{magicTrimText(listservices_result._service_categories_undefined_service_category_id, 70)}</span></td>
+                    <td scope="col"><span title={listservices_result.service_name}>{magicTrimText(listservices_result.service_name, 70)}</span></td>
+                    <td scope="col"><span title={listservices_result.category}>{magicTrimText(listservices_result.category, 70)}</span></td>
+                    <td scope="col"><span title={listservices_result.price_range}>{magicTrimText(listservices_result.price_range, 70)}</span></td>
+                    <td scope="col"><span>{mosyTonum(listservices_result.service_price)}</span></td>
                     <td scope="col"><span>
                       <ReactMarkdown>
                         
@@ -391,8 +357,7 @@ export default function ServicesList({ dataIn = {}, dataOut = {} }) {
                         
                       </ReactMarkdown>
                     </span></td>
-                    <td scope="col"><span>{mosyTonum(listservices_result.service_price)}</span></td>
-                    <td scope="col"><span title={listservices_result.estimated_duration}>{magicTrimText(listservices_result.estimated_duration, 70)}</span></td>
+                    <td scope="col"><span title={listservices_result.billing_type}>{magicTrimText(listservices_result.billing_type, 70)}</span></td>
                     
                   </tr>
                   
@@ -418,12 +383,13 @@ export default function ServicesList({ dataIn = {}, dataOut = {} }) {
             
             <tr className="bg-light">
               <th></th>
-              <th></th>
+              
               <th scope="col"><b></b></th>
               <th scope="col"><b></b></th>
               <th scope="col"><b></b></th>
               <th scope="col"><b></b></th>
               <th scope="col"><b><span>{mosyTonum(sumservices_service_price)}</span></b></th>
+              <th scope="col"><b></b></th>
               <th scope="col"><b></b></th>
               
             </tr>

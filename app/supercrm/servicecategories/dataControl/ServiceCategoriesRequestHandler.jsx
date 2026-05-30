@@ -20,10 +20,10 @@ const apiRoutes = getApiRoutes();
 
 //insert data
 export async function insertServiceCategories() {
- //console.log(`Form service_categories insert sent `)
+ //console.log(`Form  insert sent `)
 
   return await mosyPostFormData({
-    formId: 'service_categories_profile_form',
+    formId: '_profile_form',
     url: apiRoutes.servicecategories.base,
     method: 'POST',
     isMultipart: true,
@@ -33,10 +33,10 @@ export async function insertServiceCategories() {
 //update record 
 export async function updateServiceCategories() {
 
-  //console.log(`Form service_categories update sent `)
+  //console.log(`Form  update sent `)
 
   return await mosyPostFormData({
-    formId: 'service_categories_profile_form',
+    formId: '_profile_form',
     url: apiRoutes.servicecategories.base,
     method: 'PUT',
     isMultipart: true,
@@ -50,22 +50,22 @@ export async function inteprateServiceCategoriesFormAction(e, setters) {
 
   const form = e.target;
   const formDataObj = new FormData(form);
-  const actionType = formDataObj.get('service_categories_mosy_action');
+  const actionType = formDataObj.get('_mosy_action');
  
- //console.log(`Form service_categories submission received action : ${actionType}`)
+ //console.log(`Form  submission received action : ${actionType}`)
 
   try {
     let result = null;
     let actionMessage ='Record added succesfully!';
 
-    if (actionType === 'add_service_categories') {
+    if (actionType === 'add_') {
 
       actionMessage ='Record added succesfully!';
 
       result = await insertServiceCategories();
     }
 
-    if (actionType === 'update_service_categories') {
+    if (actionType === 'update_') {
 
       actionMessage ='Record updated succesfully!';
 
@@ -74,24 +74,24 @@ export async function inteprateServiceCategoriesFormAction(e, setters) {
 
     if (result?.status === 'success') {
       
-      const service_categoriesUptoken = btoa(result.service_categories_dataNode || '');
+      const Uptoken = btoa(result._dataNode || '');
 
       //set id key
-      setters.setServiceCategoriesUptoken(service_categoriesUptoken);
+      setters.setServiceCategoriesUptoken(Uptoken);
       
-      //update url with new service_categoriesUptoken
-      mosyUpdateUrlParam('service_categories_dataNode', service_categoriesUptoken)
+      //update url with new Uptoken
+      mosyUpdateUrlParam('_dataNode', Uptoken)
 
-      setters.setServiceCategoriesActionStatus('update_service_categories')
+      setters.setServiceCategoriesActionStatus('update_')
     
       setters.setSnackMessage(actionMessage);
 
       return {
         status: 'success',
         message: actionMessage,
-        newToken: service_categoriesUptoken,
+        newToken: Uptoken,
         actionName : actionType,
-        actionType : 'service_categories_form_submission'
+        actionType : '_form_submission'
       };
             
       
@@ -172,7 +172,7 @@ export async function DeleteServiceCategories(token = '') {
       const response = await mosyGetData({
         endpoint: apiRoutes.servicecategories.delete,
         params: { 
-          _service_categories_delete_record: (token), 
+          __delete_record: (token), 
           },
       });
 
@@ -204,7 +204,7 @@ export async function DeleteServiceCategories(token = '') {
 export async function getServiceCategoriesListData(qstr = {}) {
 
   //manage pagination 
-  const pageNo = mosyUrlParam('qservice_categories_page','0')
+  const pageNo = mosyUrlParam('q_page','0')
   const recordsPerPage = mosyGetLSData('systemDataLimit', '11')
 
   try {
@@ -240,7 +240,7 @@ export async function getServiceCategoriesListData(qstr = {}) {
 
 export async function loadServiceCategoriesListData(customQueryStr, setters) {
 
-    const gftServiceCategories = MosySecureFilterEngine('service_categories');
+    const gftServiceCategories = MosySecureFilterEngine('');
     let finalFilterStr = (gftServiceCategories);    
 
     if(customQueryStr!='')
@@ -265,9 +265,9 @@ export async function loadServiceCategoriesListData(customQueryStr, setters) {
   
 export async function serviceCategoriesProfileData(customQueryStr, setters, router, customProfileData={}) {
 
-    const serviceCategoriesTokenId = mosyUrlParam('service_categories_dataNode');
+    const serviceCategoriesTokenId = mosyUrlParam('_dataNode');
     
-    const deleteParam = mosyUrlParam('service_categories_delete');
+    const deleteParam = mosyUrlParam('_delete');
 
     //manage  the staff_uptoken value  basically detect primkey
     let decodedServiceCategoriesToken = '0';
@@ -275,7 +275,7 @@ export async function serviceCategoriesProfileData(customQueryStr, setters, rout
       
       decodedServiceCategoriesToken = atob(serviceCategoriesTokenId); // Decode the record_id
       setters.setServiceCategoriesUptoken(serviceCategoriesTokenId);
-      setters.setServiceCategoriesActionStatus('update_service_categories');
+      setters.setServiceCategoriesActionStatus('update_');
       
     }
     
@@ -283,7 +283,7 @@ export async function serviceCategoriesProfileData(customQueryStr, setters, rout
     let rawServiceCategoriesQueryStr ={Node:btoa(decodedServiceCategoriesToken)}
     if(customQueryStr!='')
     {
-      // if no service_categories_dataNode set , use customQueryStr
+      // if no _dataNode set , use customQueryStr
       if (!serviceCategoriesTokenId) {
        rawServiceCategoriesQueryStr = customQueryStr
       }
@@ -317,7 +317,7 @@ export function InteprateServiceCategoriesEvent(data) {
 
   const childActionName = { [actionName]: true };
 
-  if(childActionName.select_service_categories){
+  if(childActionName.select_){
 
     if(data?.profile)
     {
@@ -331,7 +331,7 @@ export function InteprateServiceCategoriesEvent(data) {
     parentSetter?.setActiveScrollId('ServiceCategoriesProfileTray')
 
     
-    mosyUpdateUrlParam('service_categories_dataNode', btoa(data?.token))
+    mosyUpdateUrlParam('_dataNode', btoa(data?.token))
     
     const router = data?.router
       
@@ -352,17 +352,17 @@ export function InteprateServiceCategoriesEvent(data) {
     parentSetter?.setActiveScrollId('ServiceCategoriesProfileTray')
 
     
-    mosyUpdateUrlParam('service_categories_dataNode', btoa(data?.token))
+    mosyUpdateUrlParam('_dataNode', btoa(data?.token))
     
     }
   }
 
-  if(childActionName.add_service_categories){
+  if(childActionName.add_){
 
     const stateSetter =data?.setters.childStateSetters
     const parentStateSetter =data?.setters.parentStateSetters
 
-    //console.log(`add service_categories `, data?.setters)
+    //console.log(`add  `, data?.setters)
 
     if(stateSetter.setLocalEventSignature){
      stateSetter?.setLocalEventSignature(magicRandomStr())
@@ -377,11 +377,11 @@ export function InteprateServiceCategoriesEvent(data) {
      
   }
 
-  if(childActionName.update_service_categories){
+  if(childActionName.update_){
     const stateSetter =data?.setters.childStateSetters
     const parentStateSetter =data?.setters.parentStateSetters
 
-    //console.log(`update service_categories `, data?.setters)
+    //console.log(`update  `, data?.setters)
 
     if(stateSetter.setLocalEventSignature){
      stateSetter?.setLocalEventSignature(magicRandomStr())
@@ -396,7 +396,7 @@ export function InteprateServiceCategoriesEvent(data) {
     }
   }
 
-  if(childActionName.delete_service_categories){
+  if(childActionName.delete_){
 
     popDeleteDialog(btoa(data?.token), data?.setters)
 
@@ -442,7 +442,7 @@ export function popDeleteDialog(deleteToken, setters, router, afterDeleteUrl='..
   
       // Remove the param from the URL
        closeMosyModal()
-       deleteUrlParam('service_categories_delete');
+       deleteUrlParam('_delete');
         
     }
   

@@ -9,9 +9,12 @@
 
 /*
 
+
+
+
 // CLIENTS RELATIONSHIPS
 
-clients:full_name|record_id:client_id:deals(Deals),record_id:client_id:quotations(Quotations),record_id:client_id:invoices(Invoices),record_id:client_id:payments(Payments),record_id:client_id:tasks(Tasks),record_id:client_id:activities(Activities)
+clients:full_name|record_id:client_id:deals(Deals),record_id:client_id:quotations(Quotations),record_id:client_id:invoices(Invoices),record_id:client_id:payments(Payments),record_id:client_id:tasks(Tasks),record_id:client_id:activities(Activities), record_id:client_id:expected_revenue
 
 
 // LEADS RELATIONSHIPS
@@ -30,15 +33,6 @@ deals:deal_title|client_id:record_id:clients(Client Details),record_id:deal_id:q
 //EXPECTED REVENUE 
 expected_revenue:revenue_title|client_id:record_id:clients(Client Details),deal_id:record_id:deals(Deal),invoice_id:record_id:invoices(Invoices), payment_ref_no:transaction_ref:payments(Payments), record_id:deal_id:activities(Activities)
 
-// PRODUCTS RELATIONSHIPS
-
-products:product_name|product_category_id:record_id:product_categories(Category Details)
-
-
-// SERVICES RELATIONSHIPS
-
-services:service_name|service_category_id:record_id:service_categories(Category Details)
-
 // QUOTATIONS RELATIONSHIPS
 
 quotations:quotation_title|client_id:record_id:clients(Client Details),deal_id:record_id:deals(Deal Details),record_id:quotation_id:quotation_items(Quotation Items),record_id:quotation_id:invoices(Invoices)
@@ -56,7 +50,8 @@ invoices:invoice_title|client_id:record_id:clients(Client Details),deal_id:recor
 
 // INVOICE ITEMS RELATIONSHIPS
 
-invoice_items:item_name|invoice_id:record_id:invoices(Invoice Details)
+invoice_items:invoice_item_name|invoice_id:record_id:invoices(Invoice Details),item_id:record_id:services(Service detail)
+services:service_name|record_id:item_id:invoice_items
 
 
 // PAYMENTS RELATIONSHIPS
@@ -107,6 +102,8 @@ page_manifest_:page_url|project_id:project_id:system_users(Project Users)
 // SYSTEM MODULE MANIFEST RELATIONSHIPS
 
 system_module_manifest_:module_name|module_key:module_key:page_manifest_(Related Pages)
+
+
  
 */
 
@@ -210,6 +207,21 @@ $interlink_mapping_lists=[
             "external"=>true,
             "enabled"=>true,
             "alias"=>'activities',
+            "event_path"=>"",
+            "module_path"=>"",
+            "list_url"=>"",
+            "profile_url"=>"",
+        ],
+
+        "clients_expected_revenue"=>[
+            "filter_str"=>"{clientId:btoa(clientsNode?.record_id)                            }",
+            "module_name"=>"ExpectedRevenue",
+            "list_title"=>"Expected Revenue",
+            "event_name"=>"",
+            "custom"=>false,
+            "external"=>true,
+            "enabled"=>true,
+            "alias"=>'expectedrevenue',
             "event_path"=>"",
             "module_path"=>"",
             "list_url"=>"",
@@ -425,44 +437,6 @@ $interlink_mapping_lists=[
 
     ],
 
-    "products"=>[
-
-        "products_product_categories"=>[
-            "filter_str"=>"{recordId:btoa(productsNode?.product_category_id)    }",
-            "module_name"=>"ProductCategories",
-            "list_title"=>"Category Details",
-            "event_name"=>"",
-            "custom"=>false,
-            "external"=>true,
-            "enabled"=>true,
-            "alias"=>'productcategories',
-            "event_path"=>"",
-            "module_path"=>"",
-            "list_url"=>"",
-            "profile_url"=>"",
-        ],
-
-    ],
-
-    "services"=>[
-
-        "services_service_categories"=>[
-            "filter_str"=>"{recordId:btoa(servicesNode?.service_category_id)    }",
-            "module_name"=>"ServiceCategories",
-            "list_title"=>"Category Details",
-            "event_name"=>"",
-            "custom"=>false,
-            "external"=>true,
-            "enabled"=>true,
-            "alias"=>'servicecategories',
-            "event_path"=>"",
-            "module_path"=>"",
-            "list_url"=>"",
-            "profile_url"=>"",
-        ],
-
-    ],
-
     "quotations"=>[
 
         "quotations_clients"=>[
@@ -636,6 +610,40 @@ $interlink_mapping_lists=[
             "external"=>true,
             "enabled"=>true,
             "alias"=>'invoices',
+            "event_path"=>"",
+            "module_path"=>"",
+            "list_url"=>"",
+            "profile_url"=>"",
+        ],
+
+        "invoice_items_services"=>[
+            "filter_str"=>"{recordId:btoa(invoice_itemsNode?.item_id)        }",
+            "module_name"=>"Services",
+            "list_title"=>"Service detail",
+            "event_name"=>"",
+            "custom"=>false,
+            "external"=>true,
+            "enabled"=>true,
+            "alias"=>'services',
+            "event_path"=>"",
+            "module_path"=>"",
+            "list_url"=>"",
+            "profile_url"=>"",
+        ],
+
+    ],
+
+    "services"=>[
+
+        "services_invoice_items"=>[
+            "filter_str"=>"{itemId:btoa(servicesNode?.record_id)    }",
+            "module_name"=>"InvoiceItems",
+            "list_title"=>"Invoice Items",
+            "event_name"=>"",
+            "custom"=>false,
+            "external"=>true,
+            "enabled"=>true,
+            "alias"=>'invoiceitems',
             "event_path"=>"",
             "module_path"=>"",
             "list_url"=>"",
@@ -1071,6 +1079,19 @@ $interlink_mapping_profile=[
             "list_table_name"=>"activities",
         ],
 
+        "clients_expected_revenue"=>[
+            "filter_str"=>"{clientId:btoa(clientsNode?.record_id)                            }",
+            "module_name"=>"ExpectedRevenue",
+            "profile_title"=>"Expected Revenue",
+            "custom"=>false,
+            "external"=>true,
+            "enabled"=>true,
+            "alias"=>"expectedrevenue",
+            "event_name"=>"",
+            "event_path"=>"",
+            "list_table_name"=>"expected_revenue",
+        ],
+
     ],
 
     "leads"=>[
@@ -1254,40 +1275,6 @@ $interlink_mapping_profile=[
 
     ],
 
-    "products"=>[
-
-        "products_product_categories"=>[
-            "filter_str"=>"{recordId:btoa(productsNode?.product_category_id)    }",
-            "module_name"=>"ProductCategories",
-            "profile_title"=>"Category Details",
-            "custom"=>false,
-            "external"=>true,
-            "enabled"=>true,
-            "alias"=>"productcategories",
-            "event_name"=>"",
-            "event_path"=>"",
-            "list_table_name"=>"product_categories",
-        ],
-
-    ],
-
-    "services"=>[
-
-        "services_service_categories"=>[
-            "filter_str"=>"{recordId:btoa(servicesNode?.service_category_id)    }",
-            "module_name"=>"ServiceCategories",
-            "profile_title"=>"Category Details",
-            "custom"=>false,
-            "external"=>true,
-            "enabled"=>true,
-            "alias"=>"servicecategories",
-            "event_name"=>"",
-            "event_path"=>"",
-            "list_table_name"=>"service_categories",
-        ],
-
-    ],
-
     "quotations"=>[
 
         "quotations_clients"=>[
@@ -1443,6 +1430,36 @@ $interlink_mapping_profile=[
             "event_name"=>"",
             "event_path"=>"",
             "list_table_name"=>"invoices",
+        ],
+
+        "invoice_items_services"=>[
+            "filter_str"=>"{recordId:btoa(invoice_itemsNode?.item_id)        }",
+            "module_name"=>"Services",
+            "profile_title"=>"Service detail",
+            "custom"=>false,
+            "external"=>true,
+            "enabled"=>true,
+            "alias"=>"services",
+            "event_name"=>"",
+            "event_path"=>"",
+            "list_table_name"=>"services",
+        ],
+
+    ],
+
+    "services"=>[
+
+        "services_invoice_items"=>[
+            "filter_str"=>"{itemId:btoa(servicesNode?.record_id)    }",
+            "module_name"=>"InvoiceItems",
+            "profile_title"=>"Invoice Items",
+            "custom"=>false,
+            "external"=>true,
+            "enabled"=>true,
+            "alias"=>"invoiceitems",
+            "event_name"=>"",
+            "event_path"=>"",
+            "list_table_name"=>"invoice_items",
         ],
 
     ],
@@ -1755,7 +1772,7 @@ $interlink_mapping_profile=[
 $connection_col_mapping=[
 
     "clients"=>[
-        "record_id" => "activities:client_id:activity_title:apiRoutes.activities.base",
+        "record_id" => "expected_revenue:client_id:revenue_title:apiRoutes.expectedrevenue.base",
     ],
 
     "leads"=>[
@@ -1773,14 +1790,6 @@ $connection_col_mapping=[
         "invoice_id" => "invoices:record_id:invoice_title:apiRoutes.invoices.base",
         "payment_ref_no" => "payments:transaction_ref:transaction_ref:apiRoutes.payments.base",
         "record_id" => "activities:deal_id:activity_title:apiRoutes.activities.base",
-    ],
-
-    "products"=>[
-        "product_category_id" => "product_categories:record_id:undefined:apiRoutes.productcategories.base",
-    ],
-
-    "services"=>[
-        "service_category_id" => "service_categories:record_id:undefined:apiRoutes.servicecategories.base",
     ],
 
     "quotations"=>[
@@ -1802,6 +1811,11 @@ $connection_col_mapping=[
 
     "invoice_items"=>[
         "invoice_id" => "invoices:record_id:invoice_title:apiRoutes.invoices.base",
+        "item_id" => "services:record_id:service_name:apiRoutes.services.base",
+    ],
+
+    "services"=>[
+        "record_id" => "invoice_items:item_id:invoice_item_name:apiRoutes.invoiceitems.base",
     ],
 
     "payments"=>[
@@ -1942,6 +1956,20 @@ $list_drop_down_mappper=[
             "alias"=>"activities",
             "functionType"=>"autoMapper",
             "basepath"=>"../../activities/logicControl"
+        ],
+
+        "list : Expected Revenue"=>[
+            "fe"=>"viewExpectedRevenue({childCol:`clientId`,parentColVal:listclients_result.record_id,parentName:listclients_result.full_name})",
+            "file"=>"expected_revenue-automapper",
+            "module_name"=>"ExpectedRevenue",
+            "functionType"=>"autoMapper",
+            "parentName"=>"ExpectedRevenueList",
+            "parentTable"=>"clients",
+            "childTable"=>"expected_revenue",
+            "fileTitle"=>"Expected Revenue",
+            "alias"=>"expectedrevenue",
+            "functionType"=>"autoMapper",
+            "basepath"=>"../../expectedrevenue/logicControl"
         ],
 
     ],
@@ -2140,42 +2168,6 @@ $list_drop_down_mappper=[
 
     ],
 
-    "products"=>[
-
-        "list : Category Details"=>[
-            "fe"=>"viewProductCategories({childCol:`recordId`,parentColVal:listproducts_result.product_category_id,parentName:listproducts_result.product_name})",
-            "file"=>"product_categories-automapper",
-            "module_name"=>"ProductCategories",
-            "functionType"=>"autoMapper",
-            "parentName"=>"ProductCategoriesList",
-            "parentTable"=>"products",
-            "childTable"=>"product_categories",
-            "fileTitle"=>"Category Details",
-            "alias"=>"productcategories",
-            "functionType"=>"autoMapper",
-            "basepath"=>"../../productcategories/logicControl"
-        ],
-
-    ],
-
-    "services"=>[
-
-        "list : Category Details"=>[
-            "fe"=>"viewServiceCategories({childCol:`recordId`,parentColVal:listservices_result.service_category_id,parentName:listservices_result.service_name})",
-            "file"=>"service_categories-automapper",
-            "module_name"=>"ServiceCategories",
-            "functionType"=>"autoMapper",
-            "parentName"=>"ServiceCategoriesList",
-            "parentTable"=>"services",
-            "childTable"=>"service_categories",
-            "fileTitle"=>"Category Details",
-            "alias"=>"servicecategories",
-            "functionType"=>"autoMapper",
-            "basepath"=>"../../servicecategories/logicControl"
-        ],
-
-    ],
-
     "quotations"=>[
 
         "list : Client Details"=>[
@@ -2331,7 +2323,7 @@ $list_drop_down_mappper=[
     "invoice_items"=>[
 
         "list : Invoice Details"=>[
-            "fe"=>"viewInvoices({childCol:`recordId`,parentColVal:listinvoice_items_result.invoice_id,parentName:listinvoice_items_result.item_name})",
+            "fe"=>"viewInvoices({childCol:`recordId`,parentColVal:listinvoice_items_result.invoice_id,parentName:listinvoice_items_result.invoice_item_name})",
             "file"=>"invoices-automapper",
             "module_name"=>"Invoices",
             "functionType"=>"autoMapper",
@@ -2342,6 +2334,38 @@ $list_drop_down_mappper=[
             "alias"=>"invoices",
             "functionType"=>"autoMapper",
             "basepath"=>"../../invoices/logicControl"
+        ],
+
+        "list : Service detail"=>[
+            "fe"=>"viewServices({childCol:`recordId`,parentColVal:listinvoice_items_result.item_id,parentName:listinvoice_items_result.invoice_item_name})",
+            "file"=>"services-automapper",
+            "module_name"=>"Services",
+            "functionType"=>"autoMapper",
+            "parentName"=>"ServicesList",
+            "parentTable"=>"invoice_items",
+            "childTable"=>"services",
+            "fileTitle"=>"Service detail",
+            "alias"=>"services",
+            "functionType"=>"autoMapper",
+            "basepath"=>"../../services/logicControl"
+        ],
+
+    ],
+
+    "services"=>[
+
+        "list : Invoice Items"=>[
+            "fe"=>"viewInvoiceItems({childCol:`itemId`,parentColVal:listservices_result.record_id,parentName:listservices_result.service_name})",
+            "file"=>"invoice_items-automapper",
+            "module_name"=>"InvoiceItems",
+            "functionType"=>"autoMapper",
+            "parentName"=>"InvoiceItemsList",
+            "parentTable"=>"services",
+            "childTable"=>"invoice_items",
+            "fileTitle"=>"Invoice Items",
+            "alias"=>"invoiceitems",
+            "functionType"=>"autoMapper",
+            "basepath"=>"../../invoiceitems/logicControl"
         ],
 
     ],
@@ -2758,6 +2782,20 @@ $profile_mapper_buttons_list_=[
             "basepath"=>"../../activities/logicControl"
         ],
 
+        "list : View Expected Revenue"=>[
+            "module_name"=>"ExpectedRevenue",
+            "fe"=>"viewExpectedRevenue({childCol:`clientId`,parentColVal:clientsNode.record_id,parentName:clientsNode.full_name})",
+            "alias"=>"expectedrevenue",
+            "file"=>"expected_revenue-automapper",
+            "functionType"=>"autoMapper",
+            "parentName"=>"ExpectedRevenueList",
+            "parentTable"=>"clients",
+            "childTable"=>"expected_revenue",
+            "fileTitle"=>"Expected Revenue",
+            "functionType"=>"autoMapper",
+            "basepath"=>"../../expectedrevenue/logicControl"
+        ],
+
     ],
 
     "leads"=>[
@@ -2954,42 +2992,6 @@ $profile_mapper_buttons_list_=[
 
     ],
 
-    "products"=>[
-
-        "list : View Category Details"=>[
-            "module_name"=>"ProductCategories",
-            "fe"=>"viewProductCategories({childCol:`recordId`,parentColVal:productsNode.product_category_id,parentName:productsNode.product_name})",
-            "alias"=>"productcategories",
-            "file"=>"product_categories-automapper",
-            "functionType"=>"autoMapper",
-            "parentName"=>"ProductCategoriesList",
-            "parentTable"=>"products",
-            "childTable"=>"product_categories",
-            "fileTitle"=>"Category Details",
-            "functionType"=>"autoMapper",
-            "basepath"=>"../../productcategories/logicControl"
-        ],
-
-    ],
-
-    "services"=>[
-
-        "list : View Category Details"=>[
-            "module_name"=>"ServiceCategories",
-            "fe"=>"viewServiceCategories({childCol:`recordId`,parentColVal:servicesNode.service_category_id,parentName:servicesNode.service_name})",
-            "alias"=>"servicecategories",
-            "file"=>"service_categories-automapper",
-            "functionType"=>"autoMapper",
-            "parentName"=>"ServiceCategoriesList",
-            "parentTable"=>"services",
-            "childTable"=>"service_categories",
-            "fileTitle"=>"Category Details",
-            "functionType"=>"autoMapper",
-            "basepath"=>"../../servicecategories/logicControl"
-        ],
-
-    ],
-
     "quotations"=>[
 
         "list : View Client Details"=>[
@@ -3146,7 +3148,7 @@ $profile_mapper_buttons_list_=[
 
         "list : View Invoice Details"=>[
             "module_name"=>"Invoices",
-            "fe"=>"viewInvoices({childCol:`recordId`,parentColVal:invoice_itemsNode.invoice_id,parentName:invoice_itemsNode.item_name})",
+            "fe"=>"viewInvoices({childCol:`recordId`,parentColVal:invoice_itemsNode.invoice_id,parentName:invoice_itemsNode.invoice_item_name})",
             "alias"=>"invoices",
             "file"=>"invoices-automapper",
             "functionType"=>"autoMapper",
@@ -3156,6 +3158,38 @@ $profile_mapper_buttons_list_=[
             "fileTitle"=>"Invoice Details",
             "functionType"=>"autoMapper",
             "basepath"=>"../../invoices/logicControl"
+        ],
+
+        "list : View Service detail"=>[
+            "module_name"=>"Services",
+            "fe"=>"viewServices({childCol:`recordId`,parentColVal:invoice_itemsNode.item_id,parentName:invoice_itemsNode.invoice_item_name})",
+            "alias"=>"services",
+            "file"=>"services-automapper",
+            "functionType"=>"autoMapper",
+            "parentName"=>"ServicesList",
+            "parentTable"=>"invoice_items",
+            "childTable"=>"services",
+            "fileTitle"=>"Service detail",
+            "functionType"=>"autoMapper",
+            "basepath"=>"../../services/logicControl"
+        ],
+
+    ],
+
+    "services"=>[
+
+        "list : View Invoice Items"=>[
+            "module_name"=>"InvoiceItems",
+            "fe"=>"viewInvoiceItems({childCol:`itemId`,parentColVal:servicesNode.record_id,parentName:servicesNode.service_name})",
+            "alias"=>"invoiceitems",
+            "file"=>"invoice_items-automapper",
+            "functionType"=>"autoMapper",
+            "parentName"=>"InvoiceItemsList",
+            "parentTable"=>"services",
+            "childTable"=>"invoice_items",
+            "fileTitle"=>"Invoice Items",
+            "functionType"=>"autoMapper",
+            "basepath"=>"../../invoiceitems/logicControl"
         ],
 
     ],
@@ -3519,6 +3553,11 @@ $profile_mapper_buttons_list_=[
             "client_id"=>"clientsNode?.record_id",
         ],
 
+        "expected_revenue"=>[
+            "_clients_full_name_client_id"=>"clientsNode?.full_name",
+            "client_id"=>"clientsNode?.record_id",
+        ],
+
     ],
 
     "leads"=>[
@@ -3598,24 +3637,6 @@ $profile_mapper_buttons_list_=[
 
     ],
 
-    "products"=>[
-
-        "product_categories"=>[
-            "_products_product_name_record_id"=>"productsNode?.product_name",
-            "record_id"=>"productsNode?.product_category_id",
-        ],
-
-    ],
-
-    "services"=>[
-
-        "service_categories"=>[
-            "_services_service_name_record_id"=>"servicesNode?.service_name",
-            "record_id"=>"servicesNode?.service_category_id",
-        ],
-
-    ],
-
     "quotations"=>[
 
         "clients"=>[
@@ -3681,8 +3702,22 @@ $profile_mapper_buttons_list_=[
     "invoice_items"=>[
 
         "invoices"=>[
-            "_invoice_items_item_name_record_id"=>"invoice_itemsNode?.item_name",
+            "_invoice_items_invoice_item_name_record_id"=>"invoice_itemsNode?.invoice_item_name",
             "record_id"=>"invoice_itemsNode?.invoice_id",
+        ],
+
+        "services"=>[
+            "_invoice_items_invoice_item_name_record_id"=>"invoice_itemsNode?.invoice_item_name",
+            "record_id"=>"invoice_itemsNode?.item_id",
+        ],
+
+    ],
+
+    "services"=>[
+
+        "invoice_items"=>[
+            "_services_service_name_item_id"=>"servicesNode?.service_name",
+            "item_id"=>"servicesNode?.record_id",
         ],
 
     ],

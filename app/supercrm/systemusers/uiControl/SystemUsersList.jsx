@@ -328,7 +328,7 @@ export default function SystemUsersList({ dataIn = {}, dataOut = {} }) {
                     <td scope="col"><span title={listsystem_users_result.tel}>{magicTrimText(listsystem_users_result.tel, 70)}</span></td>
                     <td scope="col"><span title={listsystem_users_result.login_password}>{magicTrimText(listsystem_users_result.login_password, 70)}</span></td>
                     <td scope="col"><span title={listsystem_users_result.ref_id}>{magicTrimText(listsystem_users_result.ref_id, 70)}</span></td>
-                    <td scope="col"><span title={listsystem_users_result.regdate}>{magicTrimText(listsystem_users_result.regdate, 70)}</span></td>
+                    <td scope="col"><span title={listsystem_users_result.regdate}>{mosyFormatDateTime(listsystem_users_result.regdate)}</span></td>
                     <td scope="col"><span title={listsystem_users_result.user_no}>{magicTrimText(listsystem_users_result.user_no, 70)}</span></td>
                     
                   </tr>

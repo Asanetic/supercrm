@@ -329,7 +329,7 @@ export default function MosySqlRollBackProfile({ dataIn = {}, dataOut = {} }) {
                   onChange={handleInputChange}
                   context={{ hostParent: hostParent  }}
                   inputOverrides={{}}
-                  type="text"
+                  type="datetime-local"
                   cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
                   />
                   

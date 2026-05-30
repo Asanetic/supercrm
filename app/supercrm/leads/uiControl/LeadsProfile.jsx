@@ -619,7 +619,7 @@ export default function LeadsProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="title"
-            cellOverrides={{additionalClass: "col-md-12 hive_data_cell"}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
             
@@ -745,19 +745,17 @@ export default function LeadsProfile({ dataIn = {}, dataOut = {} }) {
             </div>
             
             
-            <div className="form-group col-md-4 hive_data_cell ">
-              <label >Lead Status</label>
-              
-              <select name="lead_status" id="lead_status" className="form-control">
-                <option  value={leadsNode?.lead_status || ""}>{leadsNode?.lead_status || "Select Lead Status"}</option>
-                <option>New</option>
-                <option>Contacted</option>
-                <option>Qualified</option>
-                <option>Converted</option>
-                <option>Lost</option>
-                
-              </select>
-            </div>
+            <MosySmartField
+            module="leads"
+            field="lead_status"
+            label="Lead Status"
+            value={leadsNode?.lead_status || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="text"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            />
             
             
             <div className="form-group col-md-4 hive_data_cell ">
@@ -774,26 +772,21 @@ export default function LeadsProfile({ dataIn = {}, dataOut = {} }) {
               />
             </div>
             
-            <LiveSearchDropdown
-            apiEndpoint={apiRoutes.users.base}
-            tblName="users"
-            parentTable="leads"
-            inputName="_users_full_name_assigned_sales_rep"
-            hiddenInputName="assigned_sales_rep"
-            valueField="record_id"
-            displayField="full_name"
-            label="Full Name"
-            defaultValue={{ record_id: leadsNode?.assigned_sales_rep || "", full_name: leadsNode?._users_full_name_assigned_sales_rep || "" }}
-            onSelect={(id) => console.log("Just the ID:", id)}
-            onSelectFull={(dataRes) =>  console.log("Data seleted")}
-            onInputChange={handleInputChange}
-            defaultColSize={`col-md-4 hive_data_cell  hive_data_cell ${
-              customProfileData?.assigned_sales_rep
-              ? 'd-none'
-              : ''
-            }`}
-            context={{hostParent : hostParent}}
-            />
+            
+            <div className="form-group col-md-4 hive_data_cell ">
+              <label className="d-none">Full Name</label>
+              
+              <SmartDropdown
+              apiEndpoint={apiRoutes.leads.base}
+              idField="primkey"
+              labelField="assigned_sales_rep"
+              inputName="assigned_sales_rep"
+              label="Full Name"
+              onSelect={(val) => console.log('Selected:', val)}
+              defaultValue={leadsNode?.assigned_sales_rep || ""}
+              />
+            </div>
+            
             
             <MosySmartField
             module="leads"
@@ -816,7 +809,7 @@ export default function LeadsProfile({ dataIn = {}, dataOut = {} }) {
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
-            type="date"
+            type="datetime-local"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
@@ -885,7 +878,7 @@ export default function LeadsProfile({ dataIn = {}, dataOut = {} }) {
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
-            type="date"
+            type="datetime-local"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
@@ -898,7 +891,7 @@ export default function LeadsProfile({ dataIn = {}, dataOut = {} }) {
             onChange={handleInputChange}
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
-            type="date"
+            type="datetime-local"
             cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
             />
             
@@ -912,11 +905,21 @@ export default function LeadsProfile({ dataIn = {}, dataOut = {} }) {
             context={{ hostParent: hostParent  }}
             inputOverrides={{}}
             type="datetime-local"
-            cellOverrides={{additionalClass: "col-md-4 hive_data_cell "}}
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
             />
             
             
-            <input className="form-control" id="updated_at" name="updated_at" value={leadsNode?.updated_at || ""} placeholder="Updated At" type="hidden"/>
+            <MosySmartField
+            module="leads"
+            field="updated_at"
+            label="Updated At"
+            value={leadsNode?.updated_at || ""}
+            onChange={handleInputChange}
+            context={{ hostParent: hostParent  }}
+            inputOverrides={{}}
+            type="datetime-local"
+            cellOverrides={{additionalClass: "col-md-4 hive_data_cell  d-none"}}
+            />
             
           </div>
           

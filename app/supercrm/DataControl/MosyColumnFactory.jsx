@@ -13,7 +13,7 @@ const MosyColumnFactory = {
   expected_revenue: ["record_id", "revenue_month", "client_id", "deal_id", "expected_amount", "currency_code", "payment_status", "payment_ref_no", "expected_close_date", "probability_percent", "revenue_source_type", "revenue_title", "invoice_id", "lead_id", "revenue_status", "revenue_description", "assigned_to", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
 
    //-- invoice_items cols--//
-  invoice_items: ["record_id", "invoice_id", "item_type", "item_id", "item_name", "item_description", "item_quantity", "item_unit_price", "item_total_amount", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
+  invoice_items: ["record_id", "invoice_id", "item_id", "invoice_item_name", "item_quantity", "item_unit_price", "item_total_amount", "item_description", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
 
    //-- invoices cols--//
   invoices: ["record_id", "invoice_number", "invoice_title", "invoice_description", "client_id", "deal_id", "quotation_id", "invoice_amount", "tax_amount", "discount_amount", "invoice_status", "invoice_issued_on", "invoice_due_date", "billing_notes", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
@@ -30,11 +30,8 @@ const MosyColumnFactory = {
    //-- payments cols--//
   payments: ["record_id", "paid_on", "amount_paid", "payment_for", "payment_notes", "transaction_ref", "receipt_number", "invoice_id", "deal_id", "client_id", "payment_channel", "payment_method", "payment_status", "currency_code", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
 
-   //-- product_categories cols--//
-  product_categories: ["record_id", "category_name", "category_description", "parent_category_id", "category_image", "category_status", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
-
    //-- products cols--//
-  products: ["record_id", "product_name", "product_code", "product_category_id", "product_description", "product_image", "unit_price", "discount_price", "tax_percentage", "currency_code", "stock_quantity", "product_status", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
+  products: ["record_id", "product_name", "price_range", "unit_price", "product_code", "category", "product_description", "product_image", "discount_price", "tax_percentage", "currency_code", "stock_quantity", "product_status", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
 
    //-- quotation_items cols--//
   quotation_items: ["record_id", "quotation_id", "item_type", "item_id", "item_name", "item_description", "item_quantity", "item_unit_price", "item_total_amount", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
@@ -42,11 +39,8 @@ const MosyColumnFactory = {
    //-- quotations cols--//
   quotations: ["record_id", "quotation_number", "quotation_title", "quotation_description", "client_id", "deal_id", "quotation_amount", "tax_amount", "discount_amount", "quotation_status", "quotation_issued_on", "quotation_expiry_date", "quotation_notes", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
 
-   //-- service_categories cols--//
-  service_categories: ["record_id", "category_name", "category_description", "parent_category_id", "category_image", "category_status", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
-
    //-- services cols--//
-  services: ["record_id", "service_name", "service_code", "service_category_id", "service_description", "service_image", "service_price", "estimated_duration", "billing_type", "service_status", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
+  services: ["record_id", "service_code", "service_name", "category", "price_range", "service_price", "service_description", "billing_type", "service_status", "created_at", "updated_at", "hive_site_id", "hive_site_name"],
 
    //-- system_module_manifest_ cols--//
   system_module_manifest_: ["record_id", "component_name", "module_key", "module_name", "permission_type", "capability_key", "access_name", "relative_path", "hive_site_id", "hive_site_name"],

@@ -100,21 +100,13 @@
                                         "type": "string",
                                         "description": "Invoice id"
                                     },
-                                    "item_type": {
-                                        "type": "string",
-                                        "description": "Item type"
-                                    },
                                     "item_id": {
                                         "type": "string",
                                         "description": "Item id"
                                     },
-                                    "item_name": {
+                                    "invoice_item_name": {
                                         "type": "string",
-                                        "description": "Item name"
-                                    },
-                                    "item_description": {
-                                        "type": "string",
-                                        "description": "Item description"
+                                        "description": "Invoice item name"
                                     },
                                     "item_quantity": {
                                         "type": "string",
@@ -127,6 +119,10 @@
                                     "item_total_amount": {
                                         "type": "string",
                                         "description": "Item total amount"
+                                    },
+                                    "item_description": {
+                                        "type": "string",
+                                        "description": "Item description"
                                     },
                                     "created_at": {
                                         "type": "string",
@@ -160,21 +156,13 @@
                                         "type": "string",
                                         "description": "Invoice id"
                                     },
-                                    "item_type": {
-                                        "type": "string",
-                                        "description": "Item type"
-                                    },
                                     "item_id": {
                                         "type": "string",
                                         "description": "Item id"
                                     },
-                                    "item_name": {
+                                    "invoice_item_name": {
                                         "type": "string",
-                                        "description": "Item name"
-                                    },
-                                    "item_description": {
-                                        "type": "string",
-                                        "description": "Item description"
+                                        "description": "Invoice item name"
                                     },
                                     "item_quantity": {
                                         "type": "string",
@@ -187,6 +175,10 @@
                                     "item_total_amount": {
                                         "type": "string",
                                         "description": "Item total amount"
+                                    },
+                                    "item_description": {
+                                        "type": "string",
+                                        "description": "Item description"
                                     },
                                     "created_at": {
                                         "type": "string",

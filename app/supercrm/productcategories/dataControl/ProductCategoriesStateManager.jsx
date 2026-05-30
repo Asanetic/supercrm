@@ -13,8 +13,8 @@ const defaultProductCategoriesStateDefaults = {
 
   
   //for profile page
-  product_categoriesNode : {},
-  productCategoriesActionStatus : 'add_product_categories',
+  Node : {},
+  productCategoriesActionStatus : 'add_',
   paramproductCategoriesUptoken  : '',
   snackMessage : '',
   snackOnDone : ()=>()=>{},

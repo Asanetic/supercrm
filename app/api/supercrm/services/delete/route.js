@@ -49,12 +49,6 @@ export async function GET(request) {
     const table = 'services'; // Replace with your actual table
     
      
-          
-          const deleteAttachedMedia = await mosyQddata('services', 'primkey', deleteTokenDecode);
-          
-          const fileToDelete = deleteAttachedMedia?.service_image
-         
-          mosyDeleteFile(fileToDelete);
     
     const whereStr = `WHERE primkey = '${deleteTokenDecode}'`;
 
