@@ -1,0 +1,153 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Approvals API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "api/supercrmv2/approvals/approvals": {
+            "get": {
+                "summary": "Get Approvals",
+                "parameters": [
+                    {
+                        "name": "searchAny",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Base64 search value"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Approvals",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "request_id": {
+                                        "type": "string",
+                                        "description": "Request id"
+                                    },
+                                    "staff_id": {
+                                        "type": "string",
+                                        "description": "Staff id"
+                                    },
+                                    "approval_level": {
+                                        "type": "string",
+                                        "description": "Approval level"
+                                    },
+                                    "approved_by": {
+                                        "type": "string",
+                                        "description": "Approved by"
+                                    },
+                                    "approval_action": {
+                                        "type": "string",
+                                        "description": "Approval action"
+                                    },
+                                    "approval_comments": {
+                                        "type": "string",
+                                        "description": "Approval comments"
+                                    },
+                                    "approved_on": {
+                                        "type": "string",
+                                        "description": "Approved on"
+                                    },
+                                    "approval_status": {
+                                        "type": "string",
+                                        "description": "Approval status"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "description": "Created at"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "description": "Updated at"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Created successfully"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Approvals",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "request_id": {
+                                        "type": "string",
+                                        "description": "Request id"
+                                    },
+                                    "staff_id": {
+                                        "type": "string",
+                                        "description": "Staff id"
+                                    },
+                                    "approval_level": {
+                                        "type": "string",
+                                        "description": "Approval level"
+                                    },
+                                    "approved_by": {
+                                        "type": "string",
+                                        "description": "Approved by"
+                                    },
+                                    "approval_action": {
+                                        "type": "string",
+                                        "description": "Approval action"
+                                    },
+                                    "approval_comments": {
+                                        "type": "string",
+                                        "description": "Approval comments"
+                                    },
+                                    "approved_on": {
+                                        "type": "string",
+                                        "description": "Approved on"
+                                    },
+                                    "approval_status": {
+                                        "type": "string",
+                                        "description": "Approval status"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "description": "Created at"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "description": "Updated at"
+                                    },
+                                    "Node": {
+                                        "type": "string",
+                                        "description": " Approvals id to update "
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated successfully"
+                    }
+                }
+            }
+        }
+    }
+}

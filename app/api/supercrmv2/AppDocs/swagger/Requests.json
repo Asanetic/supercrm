@@ -1,0 +1,185 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Requests API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "api/supercrmv2/requests/requests": {
+            "get": {
+                "summary": "Get Requests",
+                "parameters": [
+                    {
+                        "name": "searchAny",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Base64 search value"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Requests",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "staff_id": {
+                                        "type": "string",
+                                        "description": "Staff id"
+                                    },
+                                    "request_number": {
+                                        "type": "string",
+                                        "description": "Request number"
+                                    },
+                                    "amount_requested": {
+                                        "type": "string",
+                                        "description": "Amount requested"
+                                    },
+                                    "request_reason": {
+                                        "type": "string",
+                                        "description": "Request reason"
+                                    },
+                                    "amount_approved": {
+                                        "type": "string",
+                                        "description": "Amount approved"
+                                    },
+                                    "current_balance": {
+                                        "type": "string",
+                                        "description": "Current balance"
+                                    },
+                                    "requested_on": {
+                                        "type": "string",
+                                        "description": "Requested on"
+                                    },
+                                    "approved_on": {
+                                        "type": "string",
+                                        "description": "Approved on"
+                                    },
+                                    "paid_on": {
+                                        "type": "string",
+                                        "description": "Paid on"
+                                    },
+                                    "cleared_on": {
+                                        "type": "string",
+                                        "description": "Cleared on"
+                                    },
+                                    "request_status": {
+                                        "type": "string",
+                                        "description": "Request status"
+                                    },
+                                    "request_remarks": {
+                                        "type": "string",
+                                        "description": "Request remarks"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "description": "Created at"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "description": "Updated at"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Created successfully"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Requests",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "staff_id": {
+                                        "type": "string",
+                                        "description": "Staff id"
+                                    },
+                                    "request_number": {
+                                        "type": "string",
+                                        "description": "Request number"
+                                    },
+                                    "amount_requested": {
+                                        "type": "string",
+                                        "description": "Amount requested"
+                                    },
+                                    "request_reason": {
+                                        "type": "string",
+                                        "description": "Request reason"
+                                    },
+                                    "amount_approved": {
+                                        "type": "string",
+                                        "description": "Amount approved"
+                                    },
+                                    "current_balance": {
+                                        "type": "string",
+                                        "description": "Current balance"
+                                    },
+                                    "requested_on": {
+                                        "type": "string",
+                                        "description": "Requested on"
+                                    },
+                                    "approved_on": {
+                                        "type": "string",
+                                        "description": "Approved on"
+                                    },
+                                    "paid_on": {
+                                        "type": "string",
+                                        "description": "Paid on"
+                                    },
+                                    "cleared_on": {
+                                        "type": "string",
+                                        "description": "Cleared on"
+                                    },
+                                    "request_status": {
+                                        "type": "string",
+                                        "description": "Request status"
+                                    },
+                                    "request_remarks": {
+                                        "type": "string",
+                                        "description": "Request remarks"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "description": "Created at"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "description": "Updated at"
+                                    },
+                                    "Node": {
+                                        "type": "string",
+                                        "description": " Requests id to update "
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated successfully"
+                    }
+                }
+            }
+        }
+    }
+}

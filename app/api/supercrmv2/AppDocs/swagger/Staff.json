@@ -1,0 +1,169 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Staff API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "api/supercrmv2/staff/staff": {
+            "get": {
+                "summary": "Get Staff",
+                "parameters": [
+                    {
+                        "name": "searchAny",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Base64 search value"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Staff",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string",
+                                        "description": "Full name"
+                                    },
+                                    "staff_number": {
+                                        "type": "string",
+                                        "description": "Staff number"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "description": "Phone number"
+                                    },
+                                    "email_address": {
+                                        "type": "string",
+                                        "description": "Email address"
+                                    },
+                                    "department": {
+                                        "type": "string",
+                                        "description": "Department"
+                                    },
+                                    "position": {
+                                        "type": "string",
+                                        "description": "Position"
+                                    },
+                                    "advance_limit": {
+                                        "type": "string",
+                                        "description": "Advance limit"
+                                    },
+                                    "current_outstanding_balance": {
+                                        "type": "string",
+                                        "description": "Current outstanding balance"
+                                    },
+                                    "staff_status": {
+                                        "type": "string",
+                                        "description": "Staff status"
+                                    },
+                                    "registered_on": {
+                                        "type": "string",
+                                        "description": "Registered on"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "description": "Created at"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "description": "Updated at"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Created successfully"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Staff",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string",
+                                        "description": "Full name"
+                                    },
+                                    "staff_number": {
+                                        "type": "string",
+                                        "description": "Staff number"
+                                    },
+                                    "phone_number": {
+                                        "type": "string",
+                                        "description": "Phone number"
+                                    },
+                                    "email_address": {
+                                        "type": "string",
+                                        "description": "Email address"
+                                    },
+                                    "department": {
+                                        "type": "string",
+                                        "description": "Department"
+                                    },
+                                    "position": {
+                                        "type": "string",
+                                        "description": "Position"
+                                    },
+                                    "advance_limit": {
+                                        "type": "string",
+                                        "description": "Advance limit"
+                                    },
+                                    "current_outstanding_balance": {
+                                        "type": "string",
+                                        "description": "Current outstanding balance"
+                                    },
+                                    "staff_status": {
+                                        "type": "string",
+                                        "description": "Staff status"
+                                    },
+                                    "registered_on": {
+                                        "type": "string",
+                                        "description": "Registered on"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "description": "Created at"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "description": "Updated at"
+                                    },
+                                    "Node": {
+                                        "type": "string",
+                                        "description": " Staff id to update "
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated successfully"
+                    }
+                }
+            }
+        }
+    }
+}

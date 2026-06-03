@@ -1,0 +1,169 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Settings API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "api/supercrmv2/settings/settings": {
+            "get": {
+                "summary": "Get Settings",
+                "parameters": [
+                    {
+                        "name": "searchAny",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Base64 search value"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Settings",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "approval_levels": {
+                                        "type": "string",
+                                        "description": "Approval levels"
+                                    },
+                                    "default_currency": {
+                                        "type": "string",
+                                        "description": "Default currency"
+                                    },
+                                    "sms_notifications": {
+                                        "type": "string",
+                                        "description": "Sms notifications"
+                                    },
+                                    "email_notifications": {
+                                        "type": "string",
+                                        "description": "Email notifications"
+                                    },
+                                    "allow_partial_payments": {
+                                        "type": "string",
+                                        "description": "Allow partial payments"
+                                    },
+                                    "allow_partial_recoveries": {
+                                        "type": "string",
+                                        "description": "Allow partial recoveries"
+                                    },
+                                    "auto_generate_request_numbers": {
+                                        "type": "string",
+                                        "description": "Auto generate request numbers"
+                                    },
+                                    "default_approval_workflow": {
+                                        "type": "string",
+                                        "description": "Default approval workflow"
+                                    },
+                                    "system_status": {
+                                        "type": "string",
+                                        "description": "System status"
+                                    },
+                                    "setting_remarks": {
+                                        "type": "string",
+                                        "description": "Setting remarks"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "description": "Created at"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "description": "Updated at"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Created successfully"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Settings",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "approval_levels": {
+                                        "type": "string",
+                                        "description": "Approval levels"
+                                    },
+                                    "default_currency": {
+                                        "type": "string",
+                                        "description": "Default currency"
+                                    },
+                                    "sms_notifications": {
+                                        "type": "string",
+                                        "description": "Sms notifications"
+                                    },
+                                    "email_notifications": {
+                                        "type": "string",
+                                        "description": "Email notifications"
+                                    },
+                                    "allow_partial_payments": {
+                                        "type": "string",
+                                        "description": "Allow partial payments"
+                                    },
+                                    "allow_partial_recoveries": {
+                                        "type": "string",
+                                        "description": "Allow partial recoveries"
+                                    },
+                                    "auto_generate_request_numbers": {
+                                        "type": "string",
+                                        "description": "Auto generate request numbers"
+                                    },
+                                    "default_approval_workflow": {
+                                        "type": "string",
+                                        "description": "Default approval workflow"
+                                    },
+                                    "system_status": {
+                                        "type": "string",
+                                        "description": "System status"
+                                    },
+                                    "setting_remarks": {
+                                        "type": "string",
+                                        "description": "Setting remarks"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "description": "Created at"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "description": "Updated at"
+                                    },
+                                    "Node": {
+                                        "type": "string",
+                                        "description": " Settings id to update "
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated successfully"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,163 @@
+{
+    "smartapi": {
+        "base": "/api/supercrmv2/smartapi"
+    },
+    "dashboard": {
+        "admin": "/api/supercrmv2/dashboard/admin"
+    },
+    "activities": {
+        "base": "/api/supercrmv2/activities/activities",
+        "delete": "/api/supercrmv2/activities/delete",
+        "import": "/api/supercrmv2/activities/activities/import"
+    },
+    "approvals": {
+        "base": "/api/supercrmv2/approvals/approvals",
+        "delete": "/api/supercrmv2/approvals/delete",
+        "import": "/api/supercrmv2/approvals/approvals/import"
+    },
+    "clients": {
+        "base": "/api/supercrmv2/clients/clients",
+        "delete": "/api/supercrmv2/clients/delete",
+        "import": "/api/supercrmv2/clients/clients/import"
+    },
+    "deals": {
+        "base": "/api/supercrmv2/deals/deals",
+        "delete": "/api/supercrmv2/deals/delete",
+        "import": "/api/supercrmv2/deals/deals/import"
+    },
+    "disbursements": {
+        "base": "/api/supercrmv2/disbursements/disbursements",
+        "delete": "/api/supercrmv2/disbursements/delete",
+        "import": "/api/supercrmv2/disbursements/disbursements/import"
+    },
+    "expectedrevenue": {
+        "base": "/api/supercrmv2/expectedrevenue/expectedrevenue",
+        "delete": "/api/supercrmv2/expectedrevenue/delete",
+        "import": "/api/supercrmv2/expectedrevenue/expectedrevenue/import"
+    },
+    "invoiceitems": {
+        "base": "/api/supercrmv2/invoiceitems/invoiceitems",
+        "delete": "/api/supercrmv2/invoiceitems/delete",
+        "import": "/api/supercrmv2/invoiceitems/invoiceitems/import"
+    },
+    "invoices": {
+        "base": "/api/supercrmv2/invoices/invoices",
+        "delete": "/api/supercrmv2/invoices/delete",
+        "import": "/api/supercrmv2/invoices/invoices/import"
+    },
+    "leads": {
+        "base": "/api/supercrmv2/leads/leads",
+        "delete": "/api/supercrmv2/leads/delete",
+        "import": "/api/supercrmv2/leads/leads/import"
+    },
+    "mosysqlrollback": {
+        "base": "/api/supercrmv2/mosysqlrollback/mosysqlrollback",
+        "delete": "/api/supercrmv2/mosysqlrollback/delete",
+        "import": "/api/supercrmv2/mosysqlrollback/mosysqlrollback/import"
+    },
+    "pagemanifest": {
+        "base": "/api/supercrmv2/pagemanifest/pagemanifest",
+        "delete": "/api/supercrmv2/pagemanifest/delete",
+        "import": "/api/supercrmv2/pagemanifest/pagemanifest/import"
+    },
+    "payments": {
+        "base": "/api/supercrmv2/payments/payments",
+        "delete": "/api/supercrmv2/payments/delete",
+        "import": "/api/supercrmv2/payments/payments/import"
+    },
+    "products": {
+        "base": "/api/supercrmv2/products/products",
+        "delete": "/api/supercrmv2/products/delete",
+        "import": "/api/supercrmv2/products/products/import"
+    },
+    "quotationitems": {
+        "base": "/api/supercrmv2/quotationitems/quotationitems",
+        "delete": "/api/supercrmv2/quotationitems/delete",
+        "import": "/api/supercrmv2/quotationitems/quotationitems/import"
+    },
+    "quotations": {
+        "base": "/api/supercrmv2/quotations/quotations",
+        "delete": "/api/supercrmv2/quotations/delete",
+        "import": "/api/supercrmv2/quotations/quotations/import"
+    },
+    "requests": {
+        "base": "/api/supercrmv2/requests/requests",
+        "delete": "/api/supercrmv2/requests/delete",
+        "import": "/api/supercrmv2/requests/requests/import"
+    },
+    "services": {
+        "base": "/api/supercrmv2/services/services",
+        "delete": "/api/supercrmv2/services/delete",
+        "import": "/api/supercrmv2/services/services/import"
+    },
+    "settings": {
+        "base": "/api/supercrmv2/settings/settings",
+        "delete": "/api/supercrmv2/settings/delete",
+        "import": "/api/supercrmv2/settings/settings/import"
+    },
+    "smartmessagetemplates": {
+        "base": "/api/supercrmv2/smartmessagetemplates/smartmessagetemplates",
+        "delete": "/api/supercrmv2/smartmessagetemplates/delete",
+        "import": "/api/supercrmv2/smartmessagetemplates/smartmessagetemplates/import"
+    },
+    "smartmessages": {
+        "base": "/api/supercrmv2/smartmessages/smartmessages",
+        "delete": "/api/supercrmv2/smartmessages/delete",
+        "import": "/api/supercrmv2/smartmessages/smartmessages/import"
+    },
+    "smartpaymentrequests": {
+        "base": "/api/supercrmv2/smartpaymentrequests/smartpaymentrequests",
+        "delete": "/api/supercrmv2/smartpaymentrequests/delete",
+        "import": "/api/supercrmv2/smartpaymentrequests/smartpaymentrequests/import"
+    },
+    "smartpaymentsettings": {
+        "base": "/api/supercrmv2/smartpaymentsettings/smartpaymentsettings",
+        "delete": "/api/supercrmv2/smartpaymentsettings/delete",
+        "import": "/api/supercrmv2/smartpaymentsettings/smartpaymentsettings/import"
+    },
+    "smartpayments": {
+        "base": "/api/supercrmv2/smartpayments/smartpayments",
+        "delete": "/api/supercrmv2/smartpayments/delete",
+        "import": "/api/supercrmv2/smartpayments/smartpayments/import"
+    },
+    "staff": {
+        "base": "/api/supercrmv2/staff/staff",
+        "delete": "/api/supercrmv2/staff/delete",
+        "import": "/api/supercrmv2/staff/staff/import"
+    },
+    "systemmodulemanifest": {
+        "base": "/api/supercrmv2/systemmodulemanifest/systemmodulemanifest",
+        "delete": "/api/supercrmv2/systemmodulemanifest/delete",
+        "import": "/api/supercrmv2/systemmodulemanifest/systemmodulemanifest/import"
+    },
+    "systemrolebundles": {
+        "base": "/api/supercrmv2/systemrolebundles/systemrolebundles",
+        "delete": "/api/supercrmv2/systemrolebundles/delete",
+        "import": "/api/supercrmv2/systemrolebundles/systemrolebundles/import"
+    },
+    "systemusers": {
+        "base": "/api/supercrmv2/systemusers/systemusers",
+        "delete": "/api/supercrmv2/systemusers/delete",
+        "import": "/api/supercrmv2/systemusers/systemusers/import"
+    },
+    "tasks": {
+        "base": "/api/supercrmv2/tasks/tasks",
+        "delete": "/api/supercrmv2/tasks/delete",
+        "import": "/api/supercrmv2/tasks/tasks/import"
+    },
+    "userbundlerolefunctions": {
+        "base": "/api/supercrmv2/userbundlerolefunctions/userbundlerolefunctions",
+        "delete": "/api/supercrmv2/userbundlerolefunctions/delete",
+        "import": "/api/supercrmv2/userbundlerolefunctions/userbundlerolefunctions/import"
+    },
+    "usermanifest": {
+        "base": "/api/supercrmv2/usermanifest/usermanifest",
+        "delete": "/api/supercrmv2/usermanifest/delete",
+        "import": "/api/supercrmv2/usermanifest/usermanifest/import"
+    },
+    "users": {
+        "base": "/api/supercrmv2/users/users",
+        "delete": "/api/supercrmv2/users/delete",
+        "import": "/api/supercrmv2/users/users/import"
+    }
+}
