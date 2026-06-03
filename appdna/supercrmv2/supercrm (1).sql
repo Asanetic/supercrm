@@ -1,0 +1,1706 @@
+-- phpMyAdmin SQL Dump
+-- version 4.3.11
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jun 03, 2026 at 10:41 AM
+-- Server version: 5.6.24
+-- PHP Version: 5.6.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `supercrm`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activities`
+--
+
+CREATE TABLE IF NOT EXISTS `activities` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `client_id` varchar(500) DEFAULT NULL,
+  `deal_id` varchar(500) DEFAULT NULL,
+  `activity_type` varchar(500) DEFAULT NULL,
+  `activity_title` varchar(500) DEFAULT NULL,
+  `activity_description` longtext,
+  `activity_status` varchar(500) DEFAULT NULL,
+  `performed_by` varchar(500) DEFAULT NULL,
+  `activity_date` datetime DEFAULT NULL,
+  `next_action_date` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `approvals`
+--
+
+CREATE TABLE IF NOT EXISTS `approvals` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `request_id` varchar(500) DEFAULT NULL,
+  `staff_id` varchar(500) DEFAULT NULL,
+  `approval_level` varchar(500) DEFAULT NULL,
+  `approved_by` varchar(500) DEFAULT NULL,
+  `approval_action` varchar(500) DEFAULT NULL,
+  `approval_comments` longtext,
+  `approved_on` datetime DEFAULT NULL,
+  `approval_status` varchar(500) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clients`
+--
+
+CREATE TABLE IF NOT EXISTS `clients` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `full_name` varchar(500) DEFAULT NULL,
+  `business_name` varchar(500) DEFAULT NULL,
+  `phone_number` varchar(50) DEFAULT NULL,
+  `alternative_phone_number` varchar(50) DEFAULT NULL,
+  `email_address` varchar(255) DEFAULT NULL,
+  `website_url` varchar(500) DEFAULT NULL,
+  `industry_type` varchar(500) DEFAULT NULL,
+  `lead_source` varchar(500) DEFAULT NULL,
+  `country_name` varchar(500) DEFAULT NULL,
+  `city_name` varchar(500) DEFAULT NULL,
+  `client_status` varchar(500) DEFAULT NULL,
+  `converted_lead_id` varchar(500) NOT NULL,
+  `assigned_sales_rep` varchar(500) DEFAULT NULL,
+  `business_address` longtext,
+  `tax_number` varchar(500) DEFAULT NULL,
+  `profile_photo` text,
+  `notes` longtext,
+  `last_contact_date` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`primkey`, `record_id`, `full_name`, `business_name`, `phone_number`, `alternative_phone_number`, `email_address`, `website_url`, `industry_type`, `lead_source`, `country_name`, `city_name`, `client_status`, `converted_lead_id`, `assigned_sales_rep`, `business_address`, `tax_number`, `profile_photo`, `notes`, `last_contact_date`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, '5V77BHR', 'Jeremiah Alex', 'Asanetic digital', '0710766390', '', 'jereasanya@gmail.com', '', '', '', 'Kenya', 'nairobi', '', '', '', 'Nairobi - Namanga Road', '', NULL, '', '2026-05-27 20:22:00', '2026-05-27 20:22:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, 'A98QVSQ', 'Tropical dessert cafe', 'Tropical dessert cafe', '0710766390', '', 'jereasanya@gmail.com', '', '', '', 'Kenya', 'nairobi', 'Active', '', '', 'Nairobi - Namanga Road', '', NULL, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, 'QHMUBY5', 'Trufinds Kargo', 'Trufind Kargo', '0710766390', '', 'jereasanya@gmail.com', '', '', '', 'Kenya', 'nairobi', 'Suspended', '', '', 'Nairobi - Namanga Road', '', NULL, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, 'XRJ6DII', 'Infolink', 'Infolink communications', '0710766390', '', 'jereasanya@gmail.com', '', 'ISP', 'Refferal', 'Kenya', 'nairobi', 'Active', '', '', 'Nairobi - Namanga Road', '', NULL, '', '2026-05-28 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(6, 'ICG6O5J', 'Summit Lilian', 'Summit surds', '0710766390', '', 'jereasanya@gmail.com', '', '', 'Refferal', 'Kenya', 'nairobi', 'Active', '', '', 'Nairobi - Namanga Road', '', NULL, '', '2026-05-28 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(7, 'DWB8037', 'Mara welfare', 'Mara welfare', '0710766390', '', 'jereasanya@gmail.com', '', 'Welfare', 'Refferal', 'Kenya', 'nairobi', 'Active', '', '', 'Nairobi - Namanga Road', '', 'media/clients/1780454696555_Biscoff-milkshake01790-3.jpg', '', '2026-05-28 00:00:00', '2026-06-03 05:43:00', '2026-06-03 05:43:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(8, '81SESHR', 'Nyaroche realty', 'Nyaroche realty & bazzar', '0710766390', '', 'jereasanya@gmail.com', '', 'Welfare', 'Refferal', 'Kenya', 'nairobi', 'Active', '', '', 'Nairobi - Namanga Road', '', NULL, '', '2026-05-28 00:00:00', '2026-05-28 17:24:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(9, '53UC6IT', 'Eugene Chrysolite', 'Chrysolite', '0710766390', '', 'jereasanya@gmail.com', '', 'Welfare', 'Refferal', 'Kenya', 'nairobi', 'Suspended', '', '', 'Nairobi - Namanga Road', '', NULL, '', '2026-05-28 00:00:00', '2026-05-28 17:24:00', '2026-05-30 11:43:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(10, 'YX5HPME', 'Shapeskills foundation', 'Asanetic digital', '0710766390', '0710766390', 'jereasanya@gmail.com', 'sh.com', 'ISP', '', '', '', '', '', '', '', '', NULL, '', '2026-06-03 04:52:00', '2026-06-03 04:52:00', '2026-06-03 04:52:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(12, 'VOJJI8H', 'Chrispine nyaroche', 'Nyaroche realty', '0710766390', '0710766390', 'jereasanya@gmail.com', 'sh.com', 'ISP', 'Refferal', '', '', 'Active', 'CRVZPM2', '', '', '', NULL, '', '2026-06-03 05:16:00', '2026-06-03 05:16:00', '2026-06-03 05:16:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(13, '3ZS1ZS4', 'Chrispine nyaroche', 'Nyaroche realty', '0710766390', '0710766390', 'jereasanya@gmail.com', 'sh.com', 'ISP', 'Refferal', '', '', '', 'CRVZPM2', '', '', '', NULL, '', '2026-06-03 06:03:00', '2026-06-03 06:03:00', '2026-06-03 06:03:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deals`
+--
+
+CREATE TABLE IF NOT EXISTS `deals` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `deal_title` varchar(500) DEFAULT NULL,
+  `deal_description` longtext,
+  `client_id` varchar(500) DEFAULT NULL,
+  `deal_source` varchar(500) DEFAULT NULL,
+  `deal_value` decimal(10,2) DEFAULT NULL,
+  `expected_close_date` datetime DEFAULT NULL,
+  `pipeline_stage` varchar(500) DEFAULT NULL,
+  `deal_stage` varchar(500) DEFAULT NULL,
+  `deal_status` varchar(500) DEFAULT NULL,
+  `assigned_sales_rep` varchar(500) DEFAULT NULL,
+  `priority_level` varchar(500) DEFAULT NULL,
+  `deal_probability` varchar(500) DEFAULT NULL,
+  `next_follow_up_date` datetime DEFAULT NULL,
+  `deal_notes` longtext,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `deals`
+--
+
+INSERT INTO `deals` (`primkey`, `record_id`, `deal_title`, `deal_description`, `client_id`, `deal_source`, `deal_value`, `expected_close_date`, `pipeline_stage`, `deal_stage`, `deal_status`, `assigned_sales_rep`, `priority_level`, `deal_probability`, `next_follow_up_date`, `deal_notes`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, '8BKE07M', 'Combo design flow', '', 'A98QVSQ', '', '9500.00', '0000-00-00 00:00:00', '', '', 'Won', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, 'AX101KB', 'Trufind kargo web design close', '', 'QHMUBY5', '', '0.00', '0000-00-00 00:00:00', '', '', 'Won', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, '0TZ5QCI', 'Web design nyaroche', '', 'QHMUBY5', '', '45000.00', '2026-05-28 00:00:00', '', '', 'Won', '', 'Urgent', '', '2026-05-28 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(4, 'ZIPZ8PC', 'SMS portal Redesign', 'Borrow from Dlm', 'XRJ6DII', 'Up sell', '9500.00', '2026-05-28 00:00:00', 'Development', 'In progress', 'Won', '', 'High', '', '2026-05-28 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, 'E8YDQNI', 'Web design balance', '', 'A98QVSQ', 'Web desing', '6000.00', '2026-05-28 00:00:00', 'Complete', 'Cleaimin', 'Won', '', '', '', '2026-05-28 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(6, '9ST6ZP2', 'Server and renewal restoration', 'Renewal Restoration', 'XRJ6DII', '', '9500.00', '2026-05-28 00:00:00', '', 'In progress', 'Won', '', '', '', '2026-05-28 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(7, '4XEAAXU', 'Training manual Summit', '', 'ICG6O5J', 'New task', '5000.00', '2026-05-28 00:00:00', 'Complete', 'Complete', 'Won', '', 'High', '', '2026-05-28 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(8, 'E5X16AV', 'Mara welfare Platform Development balance', '', 'DWB8037', 'New task', '65000.00', '2026-05-28 00:00:00', 'Complete', '', '', '', '', '', '2026-05-28 00:00:00', '', '2026-05-13 11:59:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(9, 'RI4N4JG', 'Web design nyaroche', '', '81SESHR', '', '0.00', '2026-05-28 00:00:00', '', '', '', '', '', '', '2026-05-28 00:00:00', '', '2026-05-28 17:24:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(10, 'UEEX1EJ', 'Mpesa restoration', '', '53UC6IT', '', '0.00', '2026-05-30 11:46:00', '', '', '', '', '', '', '2026-05-30 11:46:00', '', '2026-05-30 11:46:00', '2026-05-30 11:46:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(11, 'ORWZ3TR', 'Web design nyaroche', '', '53UC6IT', '', '9500.00', '2026-05-30 12:33:00', '', '', 'Won', '', '', '', '2026-05-30 12:33:00', '', '2026-05-30 12:33:00', '2026-05-30 12:33:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `disbursements`
+--
+
+CREATE TABLE IF NOT EXISTS `disbursements` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `request_id` varchar(500) DEFAULT NULL,
+  `staff_id` varchar(500) DEFAULT NULL,
+  `disbursement_number` varchar(500) DEFAULT NULL,
+  `amount_disbursed` decimal(10,2) DEFAULT NULL,
+  `reference_number` varchar(500) DEFAULT NULL,
+  `payment_method` varchar(500) DEFAULT NULL,
+  `disbursement_notes` longtext,
+  `disbursed_by` varchar(500) DEFAULT NULL,
+  `disbursed_on` datetime DEFAULT NULL,
+  `disbursement_status` varchar(500) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `expected_revenue`
+--
+
+CREATE TABLE IF NOT EXISTS `expected_revenue` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `revenue_month` varchar(500) DEFAULT NULL,
+  `client_id` varchar(100) DEFAULT NULL,
+  `deal_id` varchar(100) DEFAULT NULL,
+  `expected_amount` decimal(18,2) DEFAULT NULL,
+  `currency_code` varchar(20) DEFAULT NULL,
+  `payment_status` varchar(500) NOT NULL,
+  `payment_ref_no` varchar(500) NOT NULL,
+  `expected_close_date` date DEFAULT NULL,
+  `probability_percent` varchar(20) DEFAULT NULL,
+  `revenue_source_type` varchar(100) DEFAULT NULL,
+  `revenue_title` varchar(500) DEFAULT NULL,
+  `invoice_id` varchar(100) DEFAULT NULL,
+  `lead_id` varchar(100) DEFAULT NULL,
+  `revenue_status` varchar(100) DEFAULT NULL,
+  `revenue_description` longtext,
+  `assigned_to` varchar(100) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `expected_revenue`
+--
+
+INSERT INTO `expected_revenue` (`primkey`, `record_id`, `revenue_month`, `client_id`, `deal_id`, `expected_amount`, `currency_code`, `payment_status`, `payment_ref_no`, `expected_close_date`, `probability_percent`, `revenue_source_type`, `revenue_title`, `invoice_id`, `lead_id`, `revenue_status`, `revenue_description`, `assigned_to`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(2, 'A5XYBCW', 'May 2026', 'XRJ6DII', 'ZIPZ8PC', '9600.00', 'KES', 'Unpaid', '', '2026-05-28', '', '', '', NULL, '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, 'A6LNSXA', 'May 2026', 'A98QVSQ', '8BKE07M', '8000.00', 'KES', 'Unpaid', '', '2026-05-28', '', '', '', NULL, '', 'Pending', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(4, 'JNZ54LK', 'May 2026', 'A98QVSQ', 'E8YDQNI', '6000.00', '', 'Unpaid', '', '2026-05-28', '', '', '', NULL, '', 'Pending', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, 'LFYUXTQ', 'May 2026', 'XRJ6DII', '9ST6ZP2', '9600.00', 'KES', 'Unpaid', '', '2026-05-28', '', '', '', NULL, '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(6, 'UZE6DSB', 'May 2026', 'ICG6O5J', '4XEAAXU', '5000.00', 'KES', 'Paid', '', '2026-05-28', '', '', '', NULL, '', 'Completed', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(7, 'AESSSGF', 'May 2026', 'DWB8037', 'E5X16AV', '20000.00', 'KES', 'Unpaid', '', '2026-05-28', '', '', '', NULL, '', 'Completed', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(8, 'FI0EYVR', 'May 2026', 'QHMUBY5', 'E8YDQNI', '8500.00', '', 'Unpaid', 'SDJKSJDSDJ-tROPICAL dESSERT', '2026-05-28', '', '', 'Trufinds Kargo', '3URUWIG', '', 'Pending', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(9, '9IIDG6R', 'May 2026', '81SESHR', 'RI4N4JG', '7500.00', '', 'Unpaid', 'SDJKSJDSDJ-tROPICAL dESSERT', '2026-05-28', '', '', 'Trufinds Kargo', '3URUWIG', '', 'Pending', '', '', '2026-05-28 17:25:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(11, 'YNX80G1', 'May 2026', '53UC6IT', 'UEEX1EJ', '7500.00', 'KES', 'Unpaid', 'SDJKSJDSDJ-tROPICAL dESSERT', '2026-05-30', '', '', '', NULL, '', 'Postponed', '', '', '2026-05-30 11:47:00', '2026-05-30 11:47:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(12, '02VOEB1', 'May 2026', 'VOJJI8H', 'UEEX1EJ', '8500.00', '', 'Unpaid', '', '2026-06-03', '', '', '', NULL, '', 'Postponed', '', '', '2026-06-03 05:20:00', '2026-06-03 05:20:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoices`
+--
+
+CREATE TABLE IF NOT EXISTS `invoices` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `invoice_number` varchar(500) DEFAULT NULL,
+  `invoice_title` varchar(500) DEFAULT NULL,
+  `invoice_description` longtext,
+  `client_id` varchar(500) DEFAULT NULL,
+  `deal_id` varchar(500) DEFAULT NULL,
+  `quotation_id` varchar(500) DEFAULT NULL,
+  `invoice_amount` decimal(10,2) DEFAULT NULL,
+  `tax_amount` decimal(10,2) DEFAULT NULL,
+  `discount_amount` decimal(10,2) DEFAULT NULL,
+  `invoice_status` varchar(500) DEFAULT NULL,
+  `invoice_issued_on` datetime DEFAULT NULL,
+  `invoice_due_date` datetime DEFAULT NULL,
+  `billing_notes` longtext,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `invoices`
+--
+
+INSERT INTO `invoices` (`primkey`, `record_id`, `invoice_number`, `invoice_title`, `invoice_description`, `client_id`, `deal_id`, `quotation_id`, `invoice_amount`, `tax_amount`, `discount_amount`, `invoice_status`, `invoice_issued_on`, `invoice_due_date`, `billing_notes`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(4, 'TYPESON', '3t53353', ' Mara welfare Platform Development balance', ' Mara welfare Platform Development balance', 'DWB8037', 'E5X16AV', '272DAFU', '20000.00', '0.00', '0.00', '', '2026-05-28 00:00:00', '2026-05-28 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, 'IQIVGE3', 'COMBOINCO', 'Tropical dessert combo file', '', 'A98QVSQ', '8BKE07M', 'CPBIDH6', '9500.00', '0.00', '0.00', '', '2026-06-01 00:00:00', '2026-06-01 12:34:00', '', '2026-06-01 12:34:00', '2026-06-01 12:34:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(6, 'UCTWSHP', 'COMBOINCO', 'Combo web design', '', NULL, NULL, 'Y7HK5PC', '0.00', '0.00', '0.00', '', '2026-06-03 00:00:00', '2026-06-03 06:29:00', '', '2026-06-03 06:29:00', '2026-06-03 06:29:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice_items`
+--
+
+CREATE TABLE IF NOT EXISTS `invoice_items` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `invoice_id` varchar(500) DEFAULT NULL,
+  `item_id` varchar(500) DEFAULT NULL,
+  `invoice_item_name` varchar(500) DEFAULT NULL,
+  `item_quantity` varchar(500) DEFAULT NULL,
+  `item_unit_price` decimal(10,2) DEFAULT NULL,
+  `item_total_amount` decimal(10,2) DEFAULT NULL,
+  `item_description` longtext,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `invoice_items`
+--
+
+INSERT INTO `invoice_items` (`primkey`, `record_id`, `invoice_id`, `item_id`, `invoice_item_name`, `item_quantity`, `item_unit_price`, `item_total_amount`, `item_description`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, 'ZHLZYLN', '3URUWIG', '', 'Admin portal', '', '0.00', '0.00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, 'EIU2SOW', 'TYPESON', '9TWA8PIUH9', 'Client Portal design', '', '0.00', '0.00', 'des', '2026-05-30 11:10:00', '2026-05-30 11:10:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, 'Z149GZW', 'TYPESON', '9TWA8PIUH9', '', '3', '600.00', '0.00', '', '2026-05-30 11:32:00', '2026-05-30 11:32:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(4, 'ZQPPMSD', 'TYPESON', 'RMWDH94MW3', '', '3', '7000.00', '0.00', '', '2026-05-30 11:36:00', '2026-05-30 11:36:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, 'L3J2BJO', 'UCTWSHP', 'F5TRPD51Y0', '', '', '0.00', '0.00', '', '2026-06-03 06:29:00', '2026-06-03 06:29:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leads`
+--
+
+CREATE TABLE IF NOT EXISTS `leads` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `lead_title` varchar(500) DEFAULT NULL,
+  `full_name` varchar(500) DEFAULT NULL,
+  `business_name` varchar(500) DEFAULT NULL,
+  `phone_number` varchar(50) DEFAULT NULL,
+  `alternative_phone_number` varchar(50) DEFAULT NULL,
+  `email_address` varchar(255) DEFAULT NULL,
+  `website_url` varchar(500) DEFAULT NULL,
+  `industry_type` varchar(500) DEFAULT NULL,
+  `lead_source` varchar(500) DEFAULT NULL,
+  `lead_status` varchar(500) DEFAULT NULL,
+  `converted_client_id` varchar(500) NOT NULL,
+  `lead_temperature` varchar(500) DEFAULT NULL,
+  `assigned_sales_rep` varchar(500) DEFAULT NULL,
+  `estimated_deal_value` decimal(10,2) DEFAULT NULL,
+  `expected_conversion_date` datetime DEFAULT NULL,
+  `country_name` varchar(500) DEFAULT NULL,
+  `city_name` varchar(500) DEFAULT NULL,
+  `business_address` longtext,
+  `notes` longtext,
+  `next_follow_up_date` datetime DEFAULT NULL,
+  `last_contact_date` datetime DEFAULT NULL,
+  `profile_photo` text,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `leads`
+--
+
+INSERT INTO `leads` (`primkey`, `record_id`, `lead_title`, `full_name`, `business_name`, `phone_number`, `alternative_phone_number`, `email_address`, `website_url`, `industry_type`, `lead_source`, `lead_status`, `converted_client_id`, `lead_temperature`, `assigned_sales_rep`, `estimated_deal_value`, `expected_conversion_date`, `country_name`, `city_name`, `business_address`, `notes`, `next_follow_up_date`, `last_contact_date`, `profile_photo`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, 'V5S9XZL', '', 'Nyaroche realty', 'Asanetic digital', '0710766390', '0710766390', 'jereasanya@gmail.com', 'sh.com', 'ISP', 'Refferal', 'Qualified', '53UC6IT', 'warm', '', '0.00', '2026-06-03 04:34:00', '', '', '', '', '2026-06-03 04:34:00', '2026-06-03 04:34:00', 'media/leads/1780451581891_images_coffee.jfif', '2026-06-03 04:34:00', '2026-06-03 04:34:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, 'CRVZPM2', '', 'Chrispine nyaroche', 'Nyaroche realty', '0710766390', '0710766390', 'jereasanya@gmail.com', 'sh.com', 'ISP', 'Refferal', 'Qualified', 'VOJJI8H', 'warm', '', '0.00', '2026-06-03 04:34:00', '', '', '', '', '2026-06-03 04:34:00', '2026-06-03 04:34:00', 'media/leads/1780452901903_Biscoff-milkshake01790-3.jpg', '2026-06-03 04:34:00', '2026-06-03 04:34:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mosy_sql_roll_back`
+--
+
+CREATE TABLE IF NOT EXISTS `mosy_sql_roll_back` (
+  `primkey` int(255) NOT NULL,
+  `roll_bk_key` varchar(500) NOT NULL,
+  `table_name` varchar(500) NOT NULL,
+  `roll_type` varchar(500) NOT NULL,
+  `where_str` varchar(500) NOT NULL,
+  `roll_timestamp` datetime NOT NULL,
+  `value_entries` longblob NOT NULL,
+  `hive_site_id` varchar(500) NOT NULL,
+  `hive_site_name` varchar(500) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mosy_sql_roll_back`
+--
+
+INSERT INTO `mosy_sql_roll_back` (`primkey`, `roll_bk_key`, `table_name`, `roll_type`, `where_str`, `roll_timestamp`, `value_entries`, `hive_site_id`, `hive_site_name`) VALUES
+(1, 'rbk_1779903137605_26', 'payments', 'UPDATE', 'primkey=''1''', '2026-05-27 20:32:18', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2258514549345547222c22706169645f6f6e223a6e756c6c2c22616d6f756e745f70616964223a22302e3030222c227061796d656e745f666f72223a22222c227061796d656e745f6e6f746573223a22222c227472616e73616374696f6e5f726566223a22222c22726563656970745f6e756d626572223a22222c22696e766f6963655f6964223a6e756c6c2c226465616c5f6964223a6e756c6c2c22636c69656e745f6964223a2235563737424852222c227061796d656e745f6368616e6e656c223a22222c227061796d656e745f6d6574686f64223a22222c227061796d656e745f737461747573223a22222c2263757272656e63795f636f6465223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, 'rbk_1779903218127_342', 'deals', 'UPDATE', 'primkey=''1''', '2026-05-27 20:33:38', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2238424b4530374d222c226465616c5f7469746c65223a22436f6d626f2064657369676e20666c6f77222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2241393851565351222c226465616c5f736f75726365223a22222c226465616c5f76616c7565223a22302e3030222c2265787065637465645f636c6f73655f64617465223a6e756c6c2c22706970656c696e655f7374616765223a22222c226465616c5f7374616765223a22222c226465616c5f737461747573223a22222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a6e756c6c2c226465616c5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, 'rbk_1779903224629_265', 'deals', 'UPDATE', 'primkey=''1''', '2026-05-27 20:33:45', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2238424b4530374d222c226465616c5f7469746c65223a22436f6d626f2064657369676e20666c6f77222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2241393851565351222c226465616c5f736f75726365223a22222c226465616c5f76616c7565223a22393530302e3030222c2265787065637465645f636c6f73655f64617465223a6e756c6c2c22706970656c696e655f7374616765223a22222c226465616c5f7374616765223a22222c226465616c5f737461747573223a22222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a6e756c6c2c226465616c5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(4, 'rbk_1779903324521_669', 'deals', 'UPDATE', 'primkey=''1''', '2026-05-27 20:35:25', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2238424b4530374d222c226465616c5f7469746c65223a22436f6d626f2064657369676e20666c6f77222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2241393851565351222c226465616c5f736f75726365223a22222c226465616c5f76616c7565223a22393530302e3030222c2265787065637465645f636c6f73655f64617465223a6e756c6c2c22706970656c696e655f7374616765223a22222c226465616c5f7374616765223a22222c226465616c5f737461747573223a22576f6e222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a6e756c6c2c226465616c5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, 'rbk_1779903427693_980', 'payments', 'UPDATE', 'primkey=''1''', '2026-05-27 20:37:08', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2258514549345547222c22706169645f6f6e223a6e756c6c2c22616d6f756e745f70616964223a22302e3030222c227061796d656e745f666f72223a22222c227061796d656e745f6e6f746573223a22222c227472616e73616374696f6e5f726566223a22222c22726563656970745f6e756d626572223a22222c22696e766f6963655f6964223a6e756c6c2c226465616c5f6964223a6e756c6c2c22636c69656e745f6964223a2235563737424852222c227061796d656e745f6368616e6e656c223a22222c227061796d656e745f6d6574686f64223a22222c227061796d656e745f737461747573223a2250616964222c2263757272656e63795f636f6465223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(6, 'rbk_1779903915980_504', 'payments', 'UPDATE', 'primkey=''2''', '2026-05-27 20:45:16', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2235384930524c44222c22706169645f6f6e223a6e756c6c2c22616d6f756e745f70616964223a22353030302e3030222c227061796d656e745f666f72223a22222c227061796d656e745f6e6f746573223a22222c227472616e73616374696f6e5f726566223a22222c22726563656970745f6e756d626572223a22222c22696e766f6963655f6964223a2233555255574947222c226465616c5f6964223a6e756c6c2c22636c69656e745f6964223a6e756c6c2c227061796d656e745f6368616e6e656c223a22222c227061796d656e745f6d6574686f64223a22222c227061796d656e745f737461747573223a22222c2263757272656e63795f636f6465223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(7, 'rbk_1779903937878_121', 'invoices', 'UPDATE', 'primkey=''1''', '2026-05-27 20:45:38', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2233555255574947222c22696e766f6963655f6e756d626572223a22494e562d4b5756544a5443222c22696e766f6963655f7469746c65223a22436f6d626f207765622064657369676e222c22696e766f6963655f6465736372697074696f6e223a22222c22636c69656e745f6964223a2241393851565351222c226465616c5f6964223a2238424b4530374d222c2271756f746174696f6e5f6964223a2257434e4f314457222c22696e766f6963655f616d6f756e74223a22393530302e3030222c227461785f616d6f756e74223a22302e3030222c22646973636f756e745f616d6f756e74223a22302e3030222c22696e766f6963655f737461747573223a22222c22696e766f6963655f6973737565645f6f6e223a6e756c6c2c22696e766f6963655f6475655f64617465223a6e756c6c2c2262696c6c696e675f6e6f746573223a22222c22637265617465645f6174223a22323032362d30352d32375431373a34323a30302e3030305a222c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(8, 'rbk_1779904923892_977', 'services', 'UPDATE', 'primkey=''1''', '2026-05-27 21:02:04', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2242524a59595257222c22736572766963655f6e616d65223a225369746520657874656e73696f6e20546965722031222c22736572766963655f636f6465223a22532d455431222c22736572766963655f63617465676f72795f6964223a6e756c6c2c22736572766963655f6465736372697074696f6e223a22222c22736572766963655f696d616765223a6e756c6c2c22736572766963655f7072696365223a22393530302e3030222c22657374696d617465645f6475726174696f6e223a22222c2262696c6c696e675f74797065223a22222c22736572766963655f737461747573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(9, 'rbk_1779904997078_118', 'services', 'UPDATE', 'primkey=''1''', '2026-05-27 21:03:17', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2242524a59595257222c22736572766963655f6e616d65223a225369746520657874656e73696f6e20546965722031222c22736572766963655f636f6465223a22532d455431222c22736572766963655f63617465676f72795f6964223a6e756c6c2c22736572766963655f6465736372697074696f6e223a22222c22736572766963655f696d616765223a6e756c6c2c22736572766963655f7072696365223a22393530302e3030222c22657374696d617465645f6475726174696f6e223a22222c2262696c6c696e675f74797065223a22222c22736572766963655f737461747573223a22416374697665222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(10, 'rbk_1779905252963_356', 'tasks', 'UPDATE', 'primkey=''1''', '2026-05-27 21:07:33', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2253315a5549524f222c227461736b5f7469746c65223a2243616c6c204a696d6d79206b65726d616c222c227461736b5f6465736372697074696f6e223a22222c227461736b5f74797065223a22222c227461736b5f7072696f72697479223a22222c227461736b5f737461747573223a22222c2261737369676e65645f73616c65735f726570223a6e756c6c2c22636c69656e745f6964223a6e756c6c2c226465616c5f6964223a2238424b4530374d222c226475655f64617465223a6e756c6c2c22636f6d706c657465645f6f6e223a6e756c6c2c227461736b5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(11, 'rbk_1779905292449_358', 'tasks', 'UPDATE', 'primkey=''1''', '2026-05-27 21:08:12', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2253315a5549524f222c227461736b5f7469746c65223a2243616c6c204a696d6d79206b65726d616c222c227461736b5f6465736372697074696f6e223a22222c227461736b5f74797065223a22222c227461736b5f7072696f72697479223a22222c227461736b5f737461747573223a224f766572647565222c2261737369676e65645f73616c65735f726570223a6e756c6c2c22636c69656e745f6964223a6e756c6c2c226465616c5f6964223a2238424b4530374d222c226475655f64617465223a6e756c6c2c22636f6d706c657465645f6f6e223a6e756c6c2c227461736b5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(12, 'rbk_1779905391261_226', 'clients', 'UPDATE', 'primkey=''3''', '2026-05-27 21:09:51', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2251484d55425935222c2266756c6c5f6e616d65223a2254727566696e6473204b6172676f222c22627573696e6573735f6e616d65223a2254727566696e64204b6172676f222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a22222c226c6561645f736f75726365223a22222c22636f756e7472795f6e616d65223a224b656e7961222c22636974795f6e616d65223a226e6169726f6269222c22636c69656e745f737461747573223a22222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a224e6169726f6269202d204e616d616e676120526f6164222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(13, 'rbk_1779905581962_87', 'deals', 'UPDATE', 'primkey=''2''', '2026-05-27 21:13:02', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2241583130314b42222c226465616c5f7469746c65223a2254727566696e64206b6172676f207765622064657369676e20636c6f7365222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2251484d55425935222c226465616c5f736f75726365223a22222c226465616c5f76616c7565223a22302e3030222c2265787065637465645f636c6f73655f64617465223a6e756c6c2c22706970656c696e655f7374616765223a22222c226465616c5f7374616765223a22222c226465616c5f737461747573223a22222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a6e756c6c2c226465616c5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(14, 'rbk_1779905618605_296', 'quotations', 'UPDATE', 'primkey=''2''', '2026-05-27 21:13:39', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2243504249444836222c2271756f746174696f6e5f6e756d626572223a22343536353736222c2271756f746174696f6e5f7469746c65223a22436f6d626f207765627369746520456e68616e63656d656e74222c2271756f746174696f6e5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2241583130314b42222c2271756f746174696f6e5f616d6f756e74223a22383530302e3030222c227461785f616d6f756e74223a22302e3030222c22646973636f756e745f616d6f756e74223a22302e3030222c2271756f746174696f6e5f737461747573223a22222c2271756f746174696f6e5f6973737565645f6f6e223a6e756c6c2c2271756f746174696f6e5f6578706972795f64617465223a6e756c6c2c2271756f746174696f6e5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(15, 'rbk_1779905648765_821', 'invoices', 'UPDATE', 'primkey=''2''', '2026-05-27 21:14:09', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2257594c434a4d31222c22696e766f6963655f6e756d626572223a22494e562d4b5756544a5443222c22696e766f6963655f7469746c65223a22436f6d626f207765622064657369676e222c22696e766f6963655f6465736372697074696f6e223a22222c22636c69656e745f6964223a6e756c6c2c226465616c5f6964223a6e756c6c2c2271756f746174696f6e5f6964223a2243504249444836222c22696e766f6963655f616d6f756e74223a22302e3030222c227461785f616d6f756e74223a22302e3030222c22646973636f756e745f616d6f756e74223a22302e3030222c22696e766f6963655f737461747573223a22222c22696e766f6963655f6973737565645f6f6e223a6e756c6c2c22696e766f6963655f6475655f64617465223a6e756c6c2c2262696c6c696e675f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(16, 'rbk_1779905659586_757', 'invoices', 'UPDATE', 'primkey=''2''', '2026-05-27 21:14:20', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2257594c434a4d31222c22696e766f6963655f6e756d626572223a22494e562d4b5756544a5443222c22696e766f6963655f7469746c65223a2274727566696e64206b6172676f2066696e697368207570222c22696e766f6963655f6465736372697074696f6e223a22222c22636c69656e745f6964223a6e756c6c2c226465616c5f6964223a6e756c6c2c2271756f746174696f6e5f6964223a2243504249444836222c22696e766f6963655f616d6f756e74223a22302e3030222c227461785f616d6f756e74223a22302e3030222c22646973636f756e745f616d6f756e74223a22302e3030222c22696e766f6963655f737461747573223a22222c22696e766f6963655f6973737565645f6f6e223a6e756c6c2c22696e766f6963655f6475655f64617465223a6e756c6c2c2262696c6c696e675f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(17, 'rbk_1779905945258_762', 'payments', 'UPDATE', 'primkey=''1''', '2026-05-27 21:19:05', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2258514549345547222c22706169645f6f6e223a6e756c6c2c22616d6f756e745f70616964223a22302e3030222c227061796d656e745f666f72223a22222c227061796d656e745f6e6f746573223a22222c227472616e73616374696f6e5f726566223a22222c22726563656970745f6e756d626572223a22222c22696e766f6963655f6964223a6e756c6c2c226465616c5f6964223a2238424b4530374d222c22636c69656e745f6964223a2241393851565351222c227061796d656e745f6368616e6e656c223a22222c227061796d656e745f6d6574686f64223a22222c227061796d656e745f737461747573223a2250616964222c2263757272656e63795f636f6465223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(18, 'rbk_1779905950427_12', 'payments', 'UPDATE', 'primkey=''1''', '2026-05-27 21:19:10', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2258514549345547222c22706169645f6f6e223a6e756c6c2c22616d6f756e745f70616964223a22393530302e3030222c227061796d656e745f666f72223a22222c227061796d656e745f6e6f746573223a22222c227472616e73616374696f6e5f726566223a22222c22726563656970745f6e756d626572223a22222c22696e766f6963655f6964223a6e756c6c2c226465616c5f6964223a2238424b4530374d222c22636c69656e745f6964223a2241393851565351222c227061796d656e745f6368616e6e656c223a22222c227061796d656e745f6d6574686f64223a22222c227061796d656e745f737461747573223a2250616964222c2263757272656e63795f636f6465223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(19, 'rbk_1779905954413_788', 'payments', 'UPDATE', 'primkey=''1''', '2026-05-27 21:19:14', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2258514549345547222c22706169645f6f6e223a6e756c6c2c22616d6f756e745f70616964223a22393530302e3030222c227061796d656e745f666f72223a22222c227061796d656e745f6e6f746573223a22222c227472616e73616374696f6e5f726566223a22222c22726563656970745f6e756d626572223a22222c22696e766f6963655f6964223a6e756c6c2c226465616c5f6964223a2238424b4530374d222c22636c69656e745f6964223a2241393851565351222c227061796d656e745f6368616e6e656c223a22222c227061796d656e745f6d6574686f64223a22222c227061796d656e745f737461747573223a2250616964222c2263757272656e63795f636f6465223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(20, 'rbk_1779906698976_821', 'leads', 'UPDATE', 'primkey=''1''', '2026-05-27 21:31:39', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2256355339585a4c222c226c6561645f7469746c65223a22222c2266756c6c5f6e616d65223a224a6572656d69616820416c6578222c22627573696e6573735f6e616d65223a224173616e65746963206469676974616c222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a22222c226c6561645f736f75726365223a22222c226c6561645f737461747573223a22222c226c6561645f74656d7065726174757265223a227761726d222c2261737369676e65645f73616c65735f726570223a6e756c6c2c22657374696d617465645f6465616c5f76616c7565223a22302e3030222c2265787065637465645f636f6e76657273696f6e5f64617465223a6e756c6c2c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22627573696e6573735f61646472657373223a22222c226e6f746573223a22222c226e6578745f666f6c6c6f775f75705f64617465223a6e756c6c2c226c6173745f636f6e746163745f64617465223a6e756c6c2c2270726f66696c655f70686f746f223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(21, 'rbk_1779913404744_482', 'quotations', 'UPDATE', 'primkey=''2''', '2026-05-27 23:23:25', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2243504249444836222c2271756f746174696f6e5f6e756d626572223a22343536353736222c2271756f746174696f6e5f7469746c65223a22436f6d626f207765627369746520456e68616e63656d656e74222c2271756f746174696f6e5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2241583130314b42222c2271756f746174696f6e5f616d6f756e74223a22383530302e3030222c227461785f616d6f756e74223a22302e3030222c22646973636f756e745f616d6f756e74223a22302e3030222c2271756f746174696f6e5f737461747573223a22417070726f766564222c2271756f746174696f6e5f6973737565645f6f6e223a6e756c6c2c2271756f746174696f6e5f6578706972795f64617465223a6e756c6c2c2271756f746174696f6e5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(22, 'rbk_1779913510817_419', 'invoices', 'DELETE', 'WHERE primkey = ''3''', '2026-05-27 23:25:11', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a22364d47384a4e59222c22696e766f6963655f6e756d626572223a22222c22696e766f6963655f7469746c65223a22222c22696e766f6963655f6465736372697074696f6e223a22222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2241583130314b42222c2271756f746174696f6e5f6964223a2243504249444836222c22696e766f6963655f616d6f756e74223a22393530302e3030222c227461785f616d6f756e74223a22302e3030222c22646973636f756e745f616d6f756e74223a22302e3030222c22696e766f6963655f737461747573223a22222c22696e766f6963655f6973737565645f6f6e223a6e756c6c2c22696e766f6963655f6475655f64617465223a6e756c6c2c2262696c6c696e675f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(23, 'rbk_1779948203027_75', 'clients', 'DELETE', 'WHERE primkey = ''4''', '2026-05-28 09:03:23', 0x5b7b227072696d6b6579223a342c227265636f72645f6964223a224d56504a315837222c2266756c6c5f6e616d65223a22222c22627573696e6573735f6e616d65223a22222c2270686f6e655f6e756d626572223a22222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a22222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a22222c226c6561645f736f75726365223a22222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22636c69656e745f737461747573223a22222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a22222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22637265617465645f6174223a22323032362d30352d32375432323a30363a30302e3030305a222c22757064617465645f6174223a22323032362d30352d32375432323a30363a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(24, 'rbk_1779948263212_820', 'deals', 'UPDATE', 'primkey=''3''', '2026-05-28 09:04:23', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2230545a35514349222c226465616c5f7469746c65223a22222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2251484d55425935222c226465616c5f736f75726365223a22222c226465616c5f76616c7565223a2234353030302e3030222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22706970656c696e655f7374616765223a22222c226465616c5f7374616765223a22222c226465616c5f737461747573223a224f70656e222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22557267656e74222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c226465616c5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(25, 'rbk_1779948266868_174', 'deals', 'UPDATE', 'primkey=''3''', '2026-05-28 09:04:27', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2230545a35514349222c226465616c5f7469746c65223a225765622064657369676e206e7961726f636865222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2251484d55425935222c226465616c5f736f75726365223a22222c226465616c5f76616c7565223a2234353030302e3030222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22706970656c696e655f7374616765223a22222c226465616c5f7374616765223a22222c226465616c5f737461747573223a224f70656e222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22557267656e74222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c226465616c5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(26, 'rbk_1779948589696_61', 'invoices', 'DELETE', 'WHERE primkey = ''2''', '2026-05-28 09:09:50', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2257594c434a4d31222c22696e766f6963655f6e756d626572223a22494e562d4b5756544a5443222c22696e766f6963655f7469746c65223a2274727566696e64206b6172676f2066696e697368207570222c22696e766f6963655f6465736372697074696f6e223a22222c22636c69656e745f6964223a6e756c6c2c226465616c5f6964223a6e756c6c2c2271756f746174696f6e5f6964223a2243504249444836222c22696e766f6963655f616d6f756e74223a22302e3030222c227461785f616d6f756e74223a22302e3030222c22646973636f756e745f616d6f756e74223a22302e3030222c22696e766f6963655f737461747573223a224f766572647565222c22696e766f6963655f6973737565645f6f6e223a6e756c6c2c22696e766f6963655f6475655f64617465223a6e756c6c2c2262696c6c696e675f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(27, 'rbk_1779949668483_397', 'clients', 'UPDATE', 'primkey=''2''', '2026-05-28 09:27:48', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2241393851565351222c2266756c6c5f6e616d65223a2254726f706963616c20646573736572742063616665222c22627573696e6573735f6e616d65223a2254726f706963616c20646573736572742063616665222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a22222c226c6561645f736f75726365223a22222c22636f756e7472795f6e616d65223a224b656e7961222c22636974795f6e616d65223a226e6169726f6269222c22636c69656e745f737461747573223a22222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a224e6169726f6269202d204e616d616e676120526f6164222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(28, 'rbk_1779949754341_13', 'clients', 'UPDATE', 'primkey=''3''', '2026-05-28 09:29:14', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2251484d55425935222c2266756c6c5f6e616d65223a2254727566696e6473204b6172676f222c22627573696e6573735f6e616d65223a2254727566696e64204b6172676f222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a22222c226c6561645f736f75726365223a22222c22636f756e7472795f6e616d65223a224b656e7961222c22636974795f6e616d65223a226e6169726f6269222c22636c69656e745f737461747573223a22416374697665222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a224e6169726f6269202d204e616d616e676120526f6164222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(29, 'rbk_1779951844891_163', 'expected_revenue', 'UPDATE', 'primkey=''1''', '2026-05-28 10:04:05', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22726576656e75655f7469746c65223a22747275222c2265787065637465645f616d6f756e74223a22302e3030222c22636c69656e745f6964223a22222c226465616c5f6964223a22222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22696e766f6963655f6964223a22222c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(30, 'rbk_1779952548713_753', 'expected_revenue', 'UPDATE', 'primkey=''1''', '2026-05-28 10:15:49', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22726576656e75655f7469746c65223a22747275222c2265787065637465645f616d6f756e74223a22383530302e3030222c22636c69656e745f6964223a22222c226465616c5f6964223a22222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22696e766f6963655f6964223a22222c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(31, 'rbk_1779953344236_11', 'expected_revenue', 'UPDATE', 'primkey=''1''', '2026-05-28 10:29:04', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22726576656e75655f7469746c65223a22747275222c2265787065637465645f616d6f756e74223a22383530302e3030222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2230545a35514349222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22436f6d706c657465222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(32, 'rbk_1779953347751_798', 'expected_revenue', 'UPDATE', 'primkey=''1''', '2026-05-28 10:29:08', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22726576656e75655f7469746c65223a22747275222c2265787065637465645f616d6f756e74223a22383530302e3030222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2230545a35514349222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22436f6d706c657465222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a22436f6d706c65746564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(33, 'rbk_1779953382459_459', 'expected_revenue', 'UPDATE', 'primkey=''1''', '2026-05-28 10:29:42', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22726576656e75655f7469746c65223a22747275222c2265787065637465645f616d6f756e74223a22383530302e3030222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2230545a35514349222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22436f6d706c657465222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(34, 'rbk_1779953526714_932', 'expected_revenue', 'UPDATE', 'primkey=''1''', '2026-05-28 10:32:07', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22726576656e75655f7469746c65223a22747275222c2265787065637465645f616d6f756e74223a22383530302e3030222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2230545a35514349222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22436f6d706c657465222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2243616e63656c6c6564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(35, 'rbk_1779953533347_721', 'expected_revenue', 'UPDATE', 'primkey=''1''', '2026-05-28 10:32:13', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22726576656e75655f7469746c65223a22747275222c2265787065637465645f616d6f756e74223a22383530302e3030222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2230545a35514349222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a2250616964222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2243616e63656c6c6564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(36, 'rbk_1779954784521_208', 'tasks', 'UPDATE', 'primkey=''2''', '2026-05-28 10:53:05', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a224e5238514c5052222c227461736b5f7469746c65223a225365742061206d6565742077697468207472752066696e6473222c227461736b5f6465736372697074696f6e223a22222c227461736b5f74797065223a22222c227461736b5f7072696f72697479223a22557267656e74222c227461736b5f737461747573223a22222c2261737369676e65645f73616c65735f726570223a6e756c6c2c22636c69656e745f6964223a6e756c6c2c226465616c5f6964223a2230545a35514349222c226475655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22636f6d706c657465645f6f6e223a22323032362d30352d32375432313a30303a30302e3030305a222c227461736b5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(37, 'rbk_1779954799788_445', 'tasks', 'UPDATE', 'primkey=''2''', '2026-05-28 10:53:20', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a224e5238514c5052222c227461736b5f7469746c65223a225365742061206d6565742077697468207472752066696e6473222c227461736b5f6465736372697074696f6e223a22222c227461736b5f74797065223a22222c227461736b5f7072696f72697479223a22557267656e74222c227461736b5f737461747573223a224f766572647565222c2261737369676e65645f73616c65735f726570223a6e756c6c2c22636c69656e745f6964223a6e756c6c2c226465616c5f6964223a2230545a35514349222c226475655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22636f6d706c657465645f6f6e223a22323032362d30352d32375432313a30303a30302e3030305a222c227461736b5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(38, 'rbk_1779954899180_458', 'expected_revenue', 'UPDATE', 'primkey=''1''', '2026-05-28 10:54:59', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22726576656e75655f7469746c65223a22747275222c2265787065637465645f616d6f756e74223a22383530302e3030222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2230545a35514349222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2243616e63656c6c6564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(39, 'rbk_1779955003822_51', 'clients', 'UPDATE', 'primkey=''5''', '2026-05-28 10:56:44', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a2258524a36444949222c2266756c6c5f6e616d65223a22496e666f6c696e6b222c22627573696e6573735f6e616d65223a22496e666f6c696e6b20636f6d6d756e69636174696f6e73222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c22636f756e7472795f6e616d65223a224b656e7961222c22636974795f6e616d65223a226e6169726f6269222c22636c69656e745f737461747573223a2253757370656e646564222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a224e6169726f6269202d204e616d616e676120526f6164222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(40, 'rbk_1779955086384_106', 'deals', 'UPDATE', 'primkey=''4''', '2026-05-28 10:58:06', 0x5b7b227072696d6b6579223a342c227265636f72645f6964223a225a49505a385043222c226465616c5f7469746c65223a22534d5320706f7274616c20526564657369676e222c226465616c5f6465736372697074696f6e223a22426f72726f772066726f6d20446c6d222c22636c69656e745f6964223a2258524a36444949222c226465616c5f736f75726365223a2255702073656c6c222c226465616c5f76616c7565223a22393530302e3030222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22706970656c696e655f7374616765223a22446576656c6f706d656e74222c226465616c5f7374616765223a22496e2070726f6772657373222c226465616c5f737461747573223a22222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a2248696768222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c226465616c5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(41, 'rbk_1779955525082_14', 'payments', 'UPDATE', 'primkey=''2''', '2026-05-28 11:05:25', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2235384930524c44222c22706169645f6f6e223a6e756c6c2c22616d6f756e745f70616964223a22353030302e3030222c227061796d656e745f666f72223a22222c227061796d656e745f6e6f746573223a22222c227472616e73616374696f6e5f726566223a22222c22726563656970745f6e756d626572223a22222c22696e766f6963655f6964223a2233555255574947222c226465616c5f6964223a2238424b4530374d222c22636c69656e745f6964223a2241393851565351222c227061796d656e745f6368616e6e656c223a22222c227061796d656e745f6d6574686f64223a22222c227061796d656e745f737461747573223a22222c2263757272656e63795f636f6465223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(42, 'rbk_1779955546249_523', 'expected_revenue', 'UPDATE', 'primkey=''1''', '2026-05-28 11:05:46', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22726576656e75655f7469746c65223a2254727566696e6473204b6172676f222c2265787065637465645f616d6f756e74223a22383530302e3030222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2230545a35514349222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2243616e63656c6c6564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(43, 'rbk_1779955559548_287', 'expected_revenue', 'UPDATE', 'primkey=''1''', '2026-05-28 11:06:00', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22726576656e75655f7469746c65223a2254727566696e6473204b6172676f222c2265787065637465645f616d6f756e74223a22383530302e3030222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2230545a35514349222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2243616e63656c6c6564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+INSERT INTO `mosy_sql_roll_back` (`primkey`, `roll_bk_key`, `table_name`, `roll_type`, `where_str`, `roll_timestamp`, `value_entries`, `hive_site_id`, `hive_site_name`) VALUES
+(44, 'rbk_1779955846339_19', 'deals', 'UPDATE', 'primkey=''5''', '2026-05-28 11:10:46', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a2245385944514e49222c226465616c5f7469746c65223a225765622064657369676e2062616c616e6365222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2241393851565351222c226465616c5f736f75726365223a2257656220646573696e67222c226465616c5f76616c7565223a22363030302e3030222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22706970656c696e655f7374616765223a22436f6d706c657465222c226465616c5f7374616765223a22436c6561696d696e222c226465616c5f737461747573223a22576f6e222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c226465616c5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(45, 'rbk_1779956007078_399', 'expected_revenue', 'UPDATE', 'primkey=''4''', '2026-05-28 11:13:27', 0x5b7b227072696d6b6579223a342c227265636f72645f6964223a224a4e5a35344c4b222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2241393851565351222c226465616c5f6964223a2245385944514e49222c2265787065637465645f616d6f756e74223a22363030302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(46, 'rbk_1779956069377_11', 'deals', 'UPDATE', 'primkey=''6''', '2026-05-28 11:14:29', 0x5b7b227072696d6b6579223a362c227265636f72645f6964223a22395354365a5032222c226465616c5f7469746c65223a2253657276657220616e642072656e6577616c20726573746f726174696f6e222c226465616c5f6465736372697074696f6e223a2252656e6577616c20526573746f726174696f6e222c22636c69656e745f6964223a2258524a36444949222c226465616c5f736f75726365223a22222c226465616c5f76616c7565223a22393530302e3030222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22706970656c696e655f7374616765223a22222c226465616c5f7374616765223a22496e2070726f6772657373222c226465616c5f737461747573223a224f70656e222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c226465616c5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(47, 'rbk_1779956131192_981', 'clients', 'UPDATE', 'primkey=''5''', '2026-05-28 11:15:31', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a2258524a36444949222c2266756c6c5f6e616d65223a22496e666f6c696e6b222c22627573696e6573735f6e616d65223a22496e666f6c696e6b20636f6d6d756e69636174696f6e73222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c22636f756e7472795f6e616d65223a224b656e7961222c22636974795f6e616d65223a226e6169726f6269222c22636c69656e745f737461747573223a22416374697665222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a224e6169726f6269202d204e616d616e676120526f6164222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(48, 'rbk_1779956186065_84', 'clients', 'UPDATE', 'primkey=''5''', '2026-05-28 11:16:26', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a2258524a36444949222c2266756c6c5f6e616d65223a22496e666f6c696e6b222c22627573696e6573735f6e616d65223a22496e666f6c696e6b20636f6d6d756e69636174696f6e73222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c22636f756e7472795f6e616d65223a224b656e7961222c22636974795f6e616d65223a226e6169726f6269222c22636c69656e745f737461747573223a22416374697665222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a224e6169726f6269202d204e616d616e676120526f6164222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(49, 'rbk_1779956291336_737', 'clients', 'UPDATE', 'primkey=''6''', '2026-05-28 11:18:11', 0x5b7b227072696d6b6579223a362c227265636f72645f6964223a22494347364f354a222c2266756c6c5f6e616d65223a2253756d6d6974204c696c69616e222c22627573696e6573735f6e616d65223a2253756d6d6974207375726473222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a22222c226c6561645f736f75726365223a22526566666572616c222c22636f756e7472795f6e616d65223a224b656e7961222c22636974795f6e616d65223a226e6169726f6269222c22636c69656e745f737461747573223a22416374697665222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a224e6169726f6269202d204e616d616e676120526f6164222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(50, 'rbk_1779956349428_428', 'deals', 'UPDATE', 'primkey=''7''', '2026-05-28 11:19:09', 0x5b7b227072696d6b6579223a372c227265636f72645f6964223a2234584541415855222c226465616c5f7469746c65223a22547261696e696e67206d616e75616c2053756d6d6974222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a22494347364f354a222c226465616c5f736f75726365223a224e6577207461736b222c226465616c5f76616c7565223a22353030302e3030222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22706970656c696e655f7374616765223a22436f6d706c657465222c226465616c5f7374616765223a22436f6d706c657465222c226465616c5f737461747573223a22576f6e222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a2248696768222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c226465616c5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(51, 'rbk_1779956382918_202', 'expected_revenue', 'UPDATE', 'primkey=''6''', '2026-05-28 11:19:43', 0x5b7b227072696d6b6579223a362c227265636f72645f6964223a22555a4536445342222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a22494347364f354a222c226465616c5f6964223a2234584541415855222c2265787065637465645f616d6f756e74223a22353030302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22436f6d706c657465222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(52, 'rbk_1779956562173_261', 'expected_revenue', 'UPDATE', 'primkey=''7''', '2026-05-28 11:22:42', 0x5b7b227072696d6b6579223a372c227265636f72645f6964223a2241455353534746222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2244574238303337222c226465616c5f6964223a2245355831364156222c2265787065637465645f616d6f756e74223a2232303030302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(53, 'rbk_1779956580582_106', 'expected_revenue', 'UPDATE', 'primkey=''1''', '2026-05-28 11:23:01', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2230545a35514349222c2265787065637465645f616d6f756e74223a22383530302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a2250616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a2254727566696e6473204b6172676f222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2243616e63656c6c6564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(54, 'rbk_1779956596026_374', 'expected_revenue', 'UPDATE', 'primkey=''6''', '2026-05-28 11:23:16', 0x5b7b227072696d6b6579223a362c227265636f72645f6964223a22555a4536445342222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a22494347364f354a222c226465616c5f6964223a2234584541415855222c2265787065637465645f616d6f756e74223a22353030302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22436f6d706c657465222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22436f6d706c65746564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(55, 'rbk_1779956640784_688', 'expected_revenue', 'DELETE', 'WHERE primkey = ''1''', '2026-05-28 11:24:01', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2248364b38374153222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2230545a35514349222c2265787065637465645f616d6f756e74223a22383530302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a2250616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a2254727566696e6473204b6172676f222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(56, 'rbk_1779956823328_73', 'payments', 'UPDATE', 'primkey=''3''', '2026-05-28 11:27:03', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2257345859393037222c22706169645f6f6e223a6e756c6c2c22616d6f756e745f70616964223a22393530302e3030222c227061796d656e745f666f72223a22204d6172612077656c6661726520506c6174666f726d20446576656c6f706d656e742062616c616e6365222c227061796d656e745f6e6f746573223a22222c227472616e73616374696f6e5f726566223a22222c22726563656970745f6e756d626572223a22222c22696e766f6963655f6964223a2254595045534f4e222c226465616c5f6964223a2245355831364156222c22636c69656e745f6964223a2244574238303337222c227061796d656e745f6368616e6e656c223a22222c227061796d656e745f6d6574686f64223a22222c227061796d656e745f737461747573223a22222c2263757272656e63795f636f6465223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(57, 'rbk_1779958774627_907', 'deals', 'UPDATE', 'primkey=''8''', '2026-05-28 11:59:35', 0x5b7b227072696d6b6579223a382c227265636f72645f6964223a2245355831364156222c226465616c5f7469746c65223a224d6172612077656c6661726520506c6174666f726d20446576656c6f706d656e742062616c616e6365222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2244574238303337222c226465616c5f736f75726365223a224e6577207461736b222c226465616c5f76616c7565223a2236353030302e3030222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22706970656c696e655f7374616765223a22436f6d706c657465222c226465616c5f7374616765223a22222c226465616c5f737461747573223a22222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c226465616c5f6e6f746573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(58, 'rbk_1779958787111_438', 'deals', 'UPDATE', 'primkey=''8''', '2026-05-28 11:59:47', 0x5b7b227072696d6b6579223a382c227265636f72645f6964223a2245355831364156222c226465616c5f7469746c65223a224d6172612077656c6661726520506c6174666f726d20446576656c6f706d656e742062616c616e6365222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2244574238303337222c226465616c5f736f75726365223a224e6577207461736b222c226465616c5f76616c7565223a2236353030302e3030222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22706970656c696e655f7374616765223a22436f6d706c657465222c226465616c5f7374616765223a22222c226465616c5f737461747573223a22222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c226465616c5f6e6f746573223a22222c22637265617465645f6174223a22323032362d30352d32385430383a35393a30302e3030305a222c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(59, 'rbk_1779959020358_916', 'product_categories', 'UPDATE', 'primkey=''1''', '2026-05-28 12:03:40', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2259495357454446222c2263617465676f72795f6e616d65223a225765622064657369676e222c2263617465676f72795f6465736372697074696f6e223a22222c22706172656e745f63617465676f72795f6964223a22222c2263617465676f72795f696d616765223a22222c2263617465676f72795f737461747573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(60, 'rbk_1779959033972_165', 'product_categories', 'UPDATE', 'primkey=''1''', '2026-05-28 12:03:54', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2259495357454446222c2263617465676f72795f6e616d65223a225765622064657369676e222c2263617465676f72795f6465736372697074696f6e223a22222c22706172656e745f63617465676f72795f6964223a22222c2263617465676f72795f696d616765223a22222c2263617465676f72795f737461747573223a22222c22637265617465645f6174223a22323032362d30352d32385430393a30333a30302e3030305a222c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(61, 'rbk_1779959063519_495', 'product_categories', 'UPDATE', 'primkey=''1''', '2026-05-28 12:04:24', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2259495357454446222c2263617465676f72795f6e616d65223a225765622064657369676e222c2263617465676f72795f6465736372697074696f6e223a22222c22706172656e745f63617465676f72795f6964223a22222c2263617465676f72795f696d616765223a22222c2263617465676f72795f737461747573223a22416374697665222c22637265617465645f6174223a22323032362d30352d32385430393a30333a30302e3030305a222c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(62, 'rbk_1779978438632_964', 'expected_revenue', 'UPDATE', 'primkey=''9''', '2026-05-28 17:27:19', 0x5b7b227072696d6b6579223a392c227265636f72645f6964223a2239494944473652222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2238315345534852222c226465616c5f6964223a225249344e344a47222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a2250616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a2254727566696e6473204b6172676f222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d32385431343a32353a30302e3030305a222c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(63, 'rbk_1779978452334_957', 'expected_revenue', 'UPDATE', 'primkey=''7''', '2026-05-28 17:27:32', 0x5b7b227072696d6b6579223a372c227265636f72645f6964223a2241455353534746222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2244574238303337222c226465616c5f6964223a2245355831364156222c2265787065637465645f616d6f756e74223a2232303030302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(64, 'rbk_1779978460732_513', 'expected_revenue', 'UPDATE', 'primkey=''7''', '2026-05-28 17:27:41', 0x5b7b227072696d6b6579223a372c227265636f72645f6964223a2241455353534746222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2244574238303337222c226465616c5f6964223a2245355831364156222c2265787065637465645f616d6f756e74223a2232303030302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(65, 'rbk_1779978472385_648', 'expected_revenue', 'UPDATE', 'primkey=''7''', '2026-05-28 17:27:52', 0x5b7b227072696d6b6579223a372c227265636f72645f6964223a2241455353534746222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2244574238303337222c226465616c5f6964223a2245355831364156222c2265787065637465645f616d6f756e74223a2232303030302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(66, 'rbk_1779978505794_753', 'expected_revenue', 'UPDATE', 'primkey=''8''', '2026-05-28 17:28:26', 0x5b7b227072696d6b6579223a382c227265636f72645f6964223a2246493045595652222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2251484d55425935222c226465616c5f6964223a2245385944514e49222c2265787065637465645f616d6f756e74223a22383530302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a2250616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a2254727566696e6473204b6172676f222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(67, 'rbk_1779978527017_763', 'expected_revenue', 'UPDATE', 'primkey=''9''', '2026-05-28 17:28:47', 0x5b7b227072696d6b6579223a392c227265636f72645f6964223a2239494944473652222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2238315345534852222c226465616c5f6964223a225249344e344a47222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a2250616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a2254727566696e6473204b6172676f222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d32385431343a32353a30302e3030305a222c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(68, 'rbk_1779978545892_305', 'expected_revenue', 'UPDATE', 'primkey=''4''', '2026-05-28 17:29:06', 0x5b7b227072696d6b6579223a342c227265636f72645f6964223a224a4e5a35344c4b222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2241393851565351222c226465616c5f6964223a2245385944514e49222c2265787065637465645f616d6f756e74223a22363030302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(69, 'rbk_1779978588253_283', 'expected_revenue', 'UPDATE', 'primkey=''2''', '2026-05-28 17:29:48', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2241355859424357222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2258524a36444949222c226465616c5f6964223a225a49505a385043222c2265787065637465645f616d6f756e74223a22393630302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a2250656e64696e67222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(70, 'rbk_1779978601910_70', 'expected_revenue', 'UPDATE', 'primkey=''5''', '2026-05-28 17:30:02', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a224c465955585451222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2258524a36444949222c226465616c5f6964223a22395354365a5032222c2265787065637465645f616d6f756e74223a22393630302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a2250656e64696e67222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(71, 'rbk_1779978612047_250', 'expected_revenue', 'UPDATE', 'primkey=''3''', '2026-05-28 17:30:12', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2241364c4e535841222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2241393851565351222c226465616c5f6964223a2238424b4530374d222c2265787065637465645f616d6f756e74223a22383030302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a2250656e64696e67222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(72, 'rbk_1779978642671_714', 'expected_revenue', 'UPDATE', 'primkey=''3''', '2026-05-28 17:30:43', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2241364c4e535841222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2241393851565351222c226465616c5f6964223a2238424b4530374d222c2265787065637465645f616d6f756e74223a22383030302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a2250656e64696e67222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(73, 'rbk_1779978771550_308', 'expected_revenue', 'UPDATE', 'primkey=''7''', '2026-05-28 17:32:52', 0x5b7b227072696d6b6579223a372c227265636f72645f6964223a2241455353534746222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2244574238303337222c226465616c5f6964223a2245355831364156222c2265787065637465645f616d6f756e74223a2232303030302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(74, 'rbk_1779978778183_699', 'expected_revenue', 'UPDATE', 'primkey=''7''', '2026-05-28 17:32:58', 0x5b7b227072696d6b6579223a372c227265636f72645f6964223a2241455353534746222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2244574238303337222c226465616c5f6964223a2245355831364156222c2265787065637465645f616d6f756e74223a2232303030302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22436f6d706c65746564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(75, 'rbk_1780114190962_542', 'services', 'UPDATE', 'primkey=''2''', '2026-05-30 07:09:51', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a225157474f45314a222c22736572766963655f636f6465223a22532d455431222c22736572766963655f6e616d65223a225369746520657874656e73696f6e20546965722031222c2263617465676f7279223a22222c22736572766963655f7072696365223a22302e3030222c22736572766963655f6465736372697074696f6e223a22222c2262696c6c696e675f74797065223a22222c22736572766963655f737461747573223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(76, 'rbk_1780116142719_63', 'products', 'UPDATE', 'primkey=''1''', '2026-05-30 07:42:23', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a22563256565a4846222c2270726f647563745f6e616d65223a22504f532053616153222c2270726963655f72616e6765223a2237353030202d20313030303030222c22756e69745f7072696365223a2237303030302e3030222c2270726f647563745f636f6465223a22222c2263617465676f7279223a2253616153222c2270726f647563745f6465736372697074696f6e223a22222c2270726f647563745f696d616765223a6e756c6c2c22646973636f756e745f7072696365223a22302e3030222c227461785f70657263656e74616765223a22222c2263757272656e63795f636f6465223a22222c2273746f636b5f7175616e74697479223a22222c2270726f647563745f737461747573223a22416374697665222c22637265617465645f6174223a22323032362d30352d33305430343a34323a30302e3030305a222c22757064617465645f6174223a22323032362d30352d32395432313a30303a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(77, 'rbk_1780128625086_502', 'invoice_items', 'UPDATE', 'primkey=''2''', '2026-05-30 11:10:25', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2245495532534f57222c22696e766f6963655f6964223a2233555255574947222c226974656d5f6964223a22222c22696e766f6963655f6974656d5f6e616d65223a22436c69656e7420506f7274616c2064657369676e222c226974656d5f7175616e74697479223a22222c226974656d5f756e69745f7072696365223a22302e3030222c226974656d5f746f74616c5f616d6f756e74223a22302e3030222c226974656d5f6465736372697074696f6e223a22646573222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(78, 'rbk_1780130212710_450', 'invoice_items', 'UPDATE', 'primkey=''4''', '2026-05-30 11:36:53', 0x5b7b227072696d6b6579223a342c227265636f72645f6964223a225a5150504d5344222c22696e766f6963655f6964223a2254595045534f4e222c226974656d5f6964223a22524d57444839344d5733222c22696e766f6963655f6974656d5f6e616d65223a22222c226974656d5f7175616e74697479223a2233222c226974656d5f756e69745f7072696365223a22373030302e3030222c226974656d5f746f74616c5f616d6f756e74223a22302e3030222c226974656d5f6465736372697074696f6e223a22222c22637265617465645f6174223a22323032362d30352d33305430383a33363a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a33363a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(79, 'rbk_1780130863639_447', 'expected_revenue', 'UPDATE', 'primkey=''11''', '2026-05-30 11:47:44', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a22594e5838304731222c22726576656e75655f6d6f6e7468223a22323032362d30352d3330222c22636c69656e745f6964223a2235335543364954222c226465616c5f6964223a225545455831454a222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32395432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(80, 'rbk_1780130888810_142', 'expected_revenue', 'DELETE', 'WHERE primkey = ''10''', '2026-05-30 11:48:09', 0x5b7b227072696d6b6579223a31302c227265636f72645f6964223a22443743334a4738222c22726576656e75655f6d6f6e7468223a22323032362d30352d3031222c22636c69656e745f6964223a2235335543364954222c226465616c5f6964223a225249344e344a47222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a2254727566696e6473204b6172676f222c22696e766f6963655f6964223a2233555255574947222c226c6561645f6964223a22222c22726576656e75655f737461747573223a2250656e64696e67222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d32385431343a32353a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a34353a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(81, 'rbk_1780131138790_445', 'expected_revenue', 'UPDATE', 'primkey=''11''', '2026-05-30 11:52:19', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a22594e5838304731222c22726576656e75655f6d6f6e7468223a22323032362d30352d3330222c22636c69656e745f6964223a2235335543364954222c226465616c5f6964223a225545455831454a222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32395432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(82, 'rbk_1780132918630_887', 'expected_revenue', 'UPDATE', 'primkey=''11''', '2026-05-30 12:21:59', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a22594e5838304731222c22726576656e75655f6d6f6e7468223a22323032362d30352d3330222c22636c69656e745f6964223a2235335543364954222c226465616c5f6964223a225545455831454a222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32395432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(83, 'rbk_1780133475627_404', 'expected_revenue', 'DELETE', 'WHERE primkey = ''12''', '2026-05-30 12:31:16', 0x5b7b227072696d6b6579223a31322c227265636f72645f6964223a224c444e36345659222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2235335543364954222c226465616c5f6964223a225545455831454a222c2265787065637465645f616d6f756e74223a22373830302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32395432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a2254595045534f4e222c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d33305430393a33303a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430393a33303a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(84, 'rbk_1780133541743_649', 'clients', 'UPDATE', 'primkey=''9''', '2026-05-30 12:32:22', 0x5b7b227072696d6b6579223a392c227265636f72645f6964223a2235335543364954222c2266756c6c5f6e616d65223a22457567656e652043687279736f6c697465222c22627573696e6573735f6e616d65223a2243687279736f6c697465222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a2257656c66617265222c226c6561645f736f75726365223a22526566666572616c222c22636f756e7472795f6e616d65223a224b656e7961222c22636974795f6e616d65223a226e6169726f6269222c22636c69656e745f737461747573223a22416374697665222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a224e6169726f6269202d204e616d616e676120526f6164222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22637265617465645f6174223a22323032362d30352d32385431343a32343a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a34333a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+INSERT INTO `mosy_sql_roll_back` (`primkey`, `roll_bk_key`, `table_name`, `roll_type`, `where_str`, `roll_timestamp`, `value_entries`, `hive_site_id`, `hive_site_name`) VALUES
+(85, 'rbk_1780133591089_760', 'deals', 'UPDATE', 'primkey=''11''', '2026-05-30 12:33:11', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a224f52575a335452222c226465616c5f7469746c65223a225765622064657369676e206e7961726f636865222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2235335543364954222c226465616c5f736f75726365223a22222c226465616c5f76616c7565223a22393530302e3030222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d33305430393a33323a30302e3030305a222c22706970656c696e655f7374616765223a22222c226465616c5f7374616765223a22222c226465616c5f737461747573223a22222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30352d33305430393a33323a30302e3030305a222c226465616c5f6e6f746573223a22222c22637265617465645f6174223a22323032362d30352d33305430393a33323a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430393a33323a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(86, 'rbk_1780133864150_748', 'expected_revenue', 'UPDATE', 'primkey=''11''', '2026-05-30 12:37:44', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a22594e5838304731222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2235335543364954222c226465616c5f6964223a225545455831454a222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32395432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(87, 'rbk_1780134077643_208', 'expected_revenue', 'UPDATE', 'primkey=''11''', '2026-05-30 12:41:18', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a22594e5838304731222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2235335543364954222c226465616c5f6964223a225545455831454a222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32395432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22506f7374706f6e6564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(88, 'rbk_1780134115760_674', 'expected_revenue', 'UPDATE', 'primkey=''11''', '2026-05-30 12:41:56', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a22594e5838304731222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2235335543364954222c226465616c5f6964223a225545455831454a222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32395432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22506f7374706f6e6564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(89, 'rbk_1780134118445_676', 'expected_revenue', 'UPDATE', 'primkey=''11''', '2026-05-30 12:41:58', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a22594e5838304731222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2235335543364954222c226465616c5f6964223a225545455831454a222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32395432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22436f6d706c65746564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(90, 'rbk_1780134123355_42', 'expected_revenue', 'UPDATE', 'primkey=''11''', '2026-05-30 12:42:03', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a22594e5838304731222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2235335543364954222c226465616c5f6964223a225545455831454a222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32395432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22506f7374706f6e6564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(91, 'rbk_1780134126335_750', 'expected_revenue', 'UPDATE', 'primkey=''11''', '2026-05-30 12:42:06', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a22594e5838304731222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a2235335543364954222c226465616c5f6964223a225545455831454a222c2265787065637465645f616d6f756e74223a22373530302e3030222c2263757272656e63795f636f6465223a224b4553222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a2253444a4b534a4453444a2d74524f504943414c2064455353455254222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d32395432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a2243616e63656c6c6564222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a34373a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(92, 'rbk_1780134268304_150', 'invoices', 'DELETE', 'WHERE primkey = ''1''', '2026-05-30 12:44:28', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2233555255574947222c22696e766f6963655f6e756d626572223a22494e562d4b5756544a5443222c22696e766f6963655f7469746c65223a22436f6d626f207765622064657369676e222c22696e766f6963655f6465736372697074696f6e223a22222c22636c69656e745f6964223a2241393851565351222c226465616c5f6964223a2238424b4530374d222c2271756f746174696f6e5f6964223a2257434e4f314457222c22696e766f6963655f616d6f756e74223a22393530302e3030222c227461785f616d6f756e74223a22302e3030222c22646973636f756e745f616d6f756e74223a22302e3030222c22696e766f6963655f737461747573223a2250616964222c22696e766f6963655f6973737565645f6f6e223a6e756c6c2c22696e766f6963655f6475655f64617465223a6e756c6c2c2262696c6c696e675f6e6f746573223a22222c22637265617465645f6174223a22323032362d30352d32375431373a34323a30302e3030305a222c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(93, 'rbk_1780236553330_21', 'invoice_items', 'UPDATE', 'primkey=''2''', '2026-05-31 17:09:13', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a2245495532534f57222c22696e766f6963655f6964223a2233555255574947222c226974656d5f6964223a2239545741385049554839222c22696e766f6963655f6974656d5f6e616d65223a22436c69656e7420506f7274616c2064657369676e222c226974656d5f7175616e74697479223a22222c226974656d5f756e69745f7072696365223a22302e3030222c226974656d5f746f74616c5f616d6f756e74223a22302e3030222c226974656d5f6465736372697074696f6e223a22646573222c22637265617465645f6174223a22323032362d30352d33305430383a31303a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430383a31303a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(94, 'rbk_1780244206758_143', 'message_templates', 'UPDATE', 'primkey=''1''', '2026-05-31 19:16:47', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2230304d37503647222c2274656d706c6174655f6e616d65223a22576562736974652053746167652038222c2274656d706c6174655f636f6465223a22222c2274656d706c6174655f63617465676f7279223a22222c226d6573736167655f6368616e6e656c223a22222c227375626a656374223a22222c226d6573736167655f636f6e74656e74223a22222c2274656d706c6174655f737461747573223a22222c22637265617465645f6279223a22222c226c6173745f757064617465645f6279223a22323032362d30352d33315431363a31363a30302e3030305a222c22637265617465645f6f6e223a6e756c6c2c22757064617465645f6f6e223a22323032362d30352d33315431363a31363a30302e3030305a222c22637265617465645f6174223a22323032362d30352d33315431363a31363a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33315431363a31363a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(95, 'rbk_1780244310009_435', 'message_templates', 'UPDATE', 'primkey=''1''', '2026-05-31 19:18:30', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2230304d37503647222c2274656d706c6174655f6e616d65223a22576562736974652053746167652038222c2274656d706c6174655f636f6465223a225061796d656e745f42616c616e63655f72656d696e646572222c2274656d706c6174655f63617465676f7279223a22222c226d6573736167655f6368616e6e656c223a22222c227375626a656374223a22222c226d6573736167655f636f6e74656e74223a22222c2274656d706c6174655f737461747573223a22222c22637265617465645f6279223a22222c226c6173745f757064617465645f6279223a22323032362d30352d33315431363a31363a30302e3030305a222c22637265617465645f6f6e223a6e756c6c2c22757064617465645f6f6e223a22323032362d30352d33315431363a31363a30302e3030305a222c22637265617465645f6174223a22323032362d30352d33315431363a31363a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33315431363a31363a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(96, 'rbk_1780249877382_251', 'message_templates', 'UPDATE', 'primkey=''3''', '2026-05-31 20:51:17', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2255434239524c47222c2274656d706c6174655f6e616d65223a22576562736974652053746167652038222c2274656d706c6174655f636f6465223a225061796d656e745f42616c616e63655f72656d696e646572222c2274656d706c6174655f63617465676f7279223a2253657574222c226d6573736167655f6368616e6e656c223a22222c227375626a656374223a22222c226d6573736167655f636f6e74656e74223a2248656c6c6f207b66756c6c5f6e616d657d20467269656e646c792072656d696e64657220746f20726576696577207468652070726f706f73616c20776520736861726564207769746820796f752e2050686f6e65206e756d626572207b70686f6e655f6e756d6265727d222c2274656d706c6174655f737461747573223a22222c22637265617465645f6279223a22222c226c6173745f757064617465645f6279223a22323032362d30352d33315431363a31363a30302e3030305a222c22637265617465645f6f6e223a6e756c6c2c22757064617465645f6f6e223a22323032362d30352d33315431363a31363a30302e3030305a222c22637265617465645f6174223a22323032362d30352d33315431363a31363a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33315431363a31363a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(97, 'rbk_1780251129677_895', 'message_templates', 'UPDATE', 'primkey=''3''', '2026-05-31 21:12:10', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2255434239524c47222c2274656d706c6174655f6e616d65223a22576562736974652053746167652038222c2274656d706c6174655f636f6465223a225061796d656e745f42616c616e63655f72656d696e646572222c2274656d706c6174655f63617465676f7279223a2253657574222c226d6573736167655f6368616e6e656c223a22222c227375626a656374223a224a6f737072697820686172647761726520504f532053616c6573205265706f7274222c226d6573736167655f636f6e74656e74223a2248656c6c6f207b66756c6c5f6e616d657d20467269656e646c792072656d696e64657220746f20726576696577207468652070726f706f73616c20776520736861726564207769746820796f752e2050686f6e65206e756d626572207b70686f6e655f6e756d6265727d222c2274656d706c6174655f737461747573223a22222c22637265617465645f6279223a22222c226c6173745f757064617465645f6279223a22323032362d30352d33315431363a31363a30302e3030305a222c22637265617465645f6f6e223a6e756c6c2c22757064617465645f6f6e223a22323032362d30352d33315431363a31363a30302e3030305a222c22637265617465645f6174223a22323032362d30352d33315431363a31363a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33315431363a31363a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(98, 'rbk_1780251517279_37', 'messages', 'UPDATE', 'primkey=''25''', '2026-05-31 21:18:37', 0x5b7b227072696d6b6579223a32352c227265636f72645f6964223a224b31514f465437222c226d6573736167655f6e756d626572223a22222c2272656c617465645f7265636f72645f6964223a2258524a36444949222c22726563697069656e745f6e616d65223a22496e666f6c696e6b222c22726563697069656e745f70686f6e65223a2230373130373636333930222c22726563697069656e745f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c226d6573736167655f6368616e6e656c223a226472616674222c226d6573736167655f7375626a656374223a22576562736974652053746167652038222c226d6573736167655f636f6e74656e74223a22546865206b6579206e6f746520737065616b6572222c226d6573736167655f737461747573223a226472616674222c2264656c69766572795f737461747573223a226472616674222c22726571756573745f736f75726365223a22636c69656e74735f736d6172745f6d6573736167655f6472616674222c22726571756573745f6964223a22222c2273656e745f6279223a22222c227363686564756c65645f666f72223a6e756c6c2c2273656e745f6f6e223a6e756c6c2c2264656c6976657265645f6f6e223a6e756c6c2c22726561645f6f6e223a6e756c6c2c226661696c65645f6f6e223a6e756c6c2c226661696c7572655f726561736f6e223a22222c22637265617465645f6f6e223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(99, 'rbk_1780251555092_613', 'messages', 'UPDATE', 'primkey=''25''', '2026-05-31 21:19:15', 0x5b7b227072696d6b6579223a32352c227265636f72645f6964223a224b31514f465437222c226d6573736167655f6e756d626572223a22222c2272656c617465645f7265636f72645f6964223a2258524a36444949222c22726563697069656e745f6e616d65223a22496e666f6c696e6b222c22726563697069656e745f70686f6e65223a2230373130373636333930222c22726563697069656e745f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c226d6573736167655f6368616e6e656c223a226472616674222c226d6573736167655f7375626a656374223a22576562736974652053746167652038222c226d6573736167655f636f6e74656e74223a22546865206b6579206e6f746520737065616b657220477265656e206c616e7465726e222c226d6573736167655f737461747573223a226472616674222c2264656c69766572795f737461747573223a226472616674222c22726571756573745f736f75726365223a22636c69656e74735f736d6172745f6d6573736167655f6472616674222c22726571756573745f6964223a22222c2273656e745f6279223a22222c227363686564756c65645f666f72223a6e756c6c2c2273656e745f6f6e223a6e756c6c2c2264656c6976657265645f6f6e223a6e756c6c2c22726561645f6f6e223a6e756c6c2c226661696c65645f6f6e223a6e756c6c2c226661696c7572655f726561736f6e223a22222c22637265617465645f6f6e223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(100, 'rbk_1780251585890_715', 'messages', 'UPDATE', 'primkey=''25''', '2026-05-31 21:19:46', 0x5b7b227072696d6b6579223a32352c227265636f72645f6964223a224b31514f465437222c226d6573736167655f6e756d626572223a22222c2272656c617465645f7265636f72645f6964223a2258524a36444949222c22726563697069656e745f6e616d65223a22496e666f6c696e6b222c22726563697069656e745f70686f6e65223a2230373130373636333930222c22726563697069656e745f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c226d6573736167655f6368616e6e656c223a226472616674222c226d6573736167655f7375626a656374223a22496e766f696365207061796d656e742072656d61696e646572222c226d6573736167655f636f6e74656e74223a22546865206b6579206e6f746520737065616b657220477265656e206c616e7465726e222c226d6573736167655f737461747573223a226472616674222c2264656c69766572795f737461747573223a226472616674222c22726571756573745f736f75726365223a22636c69656e74735f736d6172745f6d6573736167655f6472616674222c22726571756573745f6964223a22222c2273656e745f6279223a22222c227363686564756c65645f666f72223a6e756c6c2c2273656e745f6f6e223a6e756c6c2c2264656c6976657265645f6f6e223a6e756c6c2c22726561645f6f6e223a6e756c6c2c226661696c65645f6f6e223a6e756c6c2c226661696c7572655f726561736f6e223a22222c22637265617465645f6f6e223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(101, 'rbk_1780252421560_887', 'messages', 'UPDATE', 'primkey=''27''', '2026-05-31 21:33:42', 0x5b7b227072696d6b6579223a32372c227265636f72645f6964223a22344e4449595457222c226d6573736167655f6e756d626572223a22222c2272656c617465645f7265636f72645f6964223a22222c22726563697069656e745f6e616d65223a22436c69656e74222c22726563697069656e745f70686f6e65223a22222c22726563697069656e745f656d61696c223a22222c226d6573736167655f6368616e6e656c223a226472616674222c226d6573736167655f7375626a656374223a22496e766f69636573202d20636f6e746578742020706f70204a6f737072697820686172647761726520504f532053616c6573205265706f7274222c226d6573736167655f636f6e74656e74223a2248656c6c6f207b66756c6c5f6e616d657d20467269656e646c792072656d696e64657220746f20726576696577207468652070726f706f73616c20776520736861726564207769746820796f752e2050686f6e65206e756d626572207b70686f6e655f6e756d6265727d222c226d6573736167655f737461747573223a226472616674222c2264656c69766572795f737461747573223a226472616674222c22726571756573745f736f75726365223a22636c69656e74735f736d6172745f6d6573736167655f6472616674222c22726571756573745f6964223a22222c2273656e745f6279223a22222c227363686564756c65645f666f72223a6e756c6c2c2273656e745f6f6e223a6e756c6c2c2264656c6976657265645f6f6e223a6e756c6c2c22726561645f6f6e223a6e756c6c2c226661696c65645f6f6e223a6e756c6c2c226661696c7572655f726561736f6e223a22222c22637265617465645f6f6e223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(102, 'rbk_1780290499020_58', 'message_templates', 'UPDATE', 'primkey=''4''', '2026-06-01 08:08:19', 0x5b7b227072696d6b6579223a342c227265636f72645f6964223a2237584334335735222c2274656d706c6174655f6e616d65223a22526564222c2274656d706c6174655f636f6465223a22696e766f6963655f62616c222c2274656d706c6174655f63617465676f7279223a2253657574222c226d6573736167655f6368616e6e656c223a22222c227375626a656374223a22496e766f6963652052656d696e646572222c226d6573736167655f636f6e74656e74223a2248656c6c6f207b6e616d657d2c2074686973206973206120667269656e646c792072656d696e646572207468617420616e206f75747374616e64696e672062616c616e6365206f66207b616d6f756e747d2072656d61696e732064756520666f7220496e766f69636520237b696e766f6963655f6e756d6265727d2e20506c65617365206d616b65207061796d656e74206279207b6475655f646174657d20746f2061766f6964207365727669636520696e74657272757074696f6e2e205468616e6b20796f752e5c725c6e222c2274656d706c6174655f737461747573223a22222c22637265617465645f6279223a22222c226c6173745f757064617465645f6279223a22323032362d30352d33315431363a31363a30302e3030305a222c22637265617465645f6f6e223a6e756c6c2c22757064617465645f6f6e223a22323032362d30352d33315431363a31363a30302e3030305a222c22637265617465645f6174223a22323032362d30352d33315431363a31363a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33315431363a31363a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(103, 'rbk_1780299781170_86', 'smart_payment_requests', 'UPDATE', 'primkey=''2''', '2026-06-01 10:43:01', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a223849384a494554222c22726571756573745f7265666572656e6365223a225350522d31373830323939313739333437222c22726571756573745f7469746c65223a22496e766f696365207061796d656e74222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232353030302e3030222c22616d6f756e745f70616964223a22302e3030222c2262616c616e63655f616d6f756e74223a2232353030302e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a2250656e64696e67222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430343a33323a35392e3030305a222c22637265617465645f6174223a22323032362d30362d30315430343a33323a35392e3030305a222c22757064617465645f6174223a22323032362d30362d30315430343a33323a35392e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(104, 'rbk_1780299955091_508', 'smart_payment_requests', 'UPDATE', 'primkey=''2''', '2026-06-01 10:45:55', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a223849384a494554222c22726571756573745f7265666572656e6365223a225350522d31373830323939313739333437222c22726571756573745f7469746c65223a22496e766f696365207061796d656e74222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232353030302e3030222c22616d6f756e745f70616964223a22302e3030222c2262616c616e63655f616d6f756e74223a2232353030302e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22506c6561736520706179206e6f77206e776f222c226578706972795f64617465223a22323032362d30362d30315430373a34323a30302e3030305a222c22726571756573745f737461747573223a2250656e64696e67222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315431383a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430343a33323a30302e3030305a222c22637265617465645f6174223a22323032362d30362d30315430343a33323a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30315430343a33323a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(105, 'rbk_1780300124938_232', 'smart_payment_requests', 'UPDATE', 'primkey=''3''', '2026-06-01 10:48:45', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a22375a5650504133222c22726571756573745f7265666572656e6365223a225350522d31373830333030313136383436222c22726571756573745f7469746c65223a22496e766f696365207061796d656e74222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232353030302e3030222c22616d6f756e745f70616964223a22302e3030222c2262616c616e63655f616d6f756e74223a2232353030302e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22506c6561736520706179206e6f77206e776f222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a2250656e64696e67222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430343a34383a33362e3030305a222c22637265617465645f6174223a22323032362d30362d30315430343a34383a33362e3030305a222c22757064617465645f6174223a22323032362d30362d30315430343a34383a33362e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(106, 'rbk_1780300626678_489', 'smart_payment_requests', 'UPDATE', 'primkey=''2''', '2026-06-01 10:57:07', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a223849384a494554222c22726571756573745f7265666572656e6365223a225350522d31373830323939393534393836222c22726571756573745f7469746c65223a22496e766f696365207061796d656e74222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232353030302e3030222c22616d6f756e745f70616964223a22302e3030222c2262616c616e63655f616d6f756e74223a2232353030302e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22506c6561736520706179206e6f77206e776f222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a2250656e64696e67222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430343a34353a35342e3030305a222c22637265617465645f6174223a22323032362d30362d30315430343a34353a35342e3030305a222c22757064617465645f6174223a22323032362d30362d30315430343a34353a35342e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(107, 'rbk_1780300651371_744', 'smart_payment_requests', 'UPDATE', 'primkey=''2''', '2026-06-01 10:57:31', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a223849384a494554222c22726571756573745f7265666572656e6365223a225350522d31373830333030363236363539222c22726571756573745f7469746c65223a22496e766f696365207061796d656e74222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232353030302e3030222c22616d6f756e745f70616964223a22302e3030222c2262616c616e63655f616d6f756e74223a2232353030302e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22506c6561736520706179206e6f77206e776f222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a2250656e64696e67222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430343a35373a30362e3030305a222c22637265617465645f6174223a22323032362d30362d30315430343a35373a30362e3030305a222c22757064617465645f6174223a22323032362d30362d30315430343a35373a30362e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(108, 'rbk_1780301960289_663', 'message_templates', 'UPDATE', 'primkey=''6''', '2026-06-01 11:19:20', 0x5b7b227072696d6b6579223a362c227265636f72645f6964223a22594c5941344259222c2274656d706c6174655f6e616d65223a225061796d656e742072657175657374206e6f7465222c2274656d706c6174655f636f6465223a227061796d656e742052657175657374206e6f7465222c2274656d706c6174655f63617465676f7279223a22536d617274204d657373616765222c226d6573736167655f6368616e6e656c223a22222c227375626a656374223a225061796d656e742072657175657374206e6f7465222c226d6573736167655f636f6e74656e74223a2244656172207b6e616d657d2c205c6e4f7572207265636f72647320696e646963617465207468617420796f7572207b726571756573745f7469746c657d2068617320616e206f75747374616e64696e672062616c616e6365206f66207b616d6f756e747d2e5c6e5c6e4b696e646c7920736574746c652074686520616d6f756e74206279207b6475655f646174657d2e205c6e5c6e7b726571756573745f6e6f7465737d5c6e5c6e50617962696c6c206e756d62657220203a207061796d656e745f73686f7274636f64655c6e4163636f756e74203a205c6e205468616e6b20796f752e222c2274656d706c6174655f737461747573223a22416374697665222c22637265617465645f6279223a22222c226c6173745f757064617465645f6279223a6e756c6c2c22637265617465645f6f6e223a6e756c6c2c22757064617465645f6f6e223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(109, 'rbk_1780302041132_407', 'message_templates', 'UPDATE', 'primkey=''6''', '2026-06-01 11:20:41', 0x5b7b227072696d6b6579223a362c227265636f72645f6964223a22594c5941344259222c2274656d706c6174655f6e616d65223a225061796d656e742072657175657374206e6f7465222c2274656d706c6174655f636f6465223a227061796d656e742052657175657374206e6f7465222c2274656d706c6174655f63617465676f7279223a22536d617274204d657373616765222c226d6573736167655f6368616e6e656c223a22222c227375626a656374223a225061796d656e742072657175657374206e6f7465222c226d6573736167655f636f6e74656e74223a2244656172207b6e616d657d2c205c725c6e4f7572207265636f72647320696e646963617465207468617420796f7572207b726571756573745f7469746c657d2068617320616e206f75747374616e64696e672062616c616e6365206f66207b616d6f756e747d2e5c725c6e5c725c6e4b696e646c7920736574746c652074686520616d6f756e74206279207b6475655f646174657d2e205c725c6e5c725c6e7b726571756573745f6e6f7465737d5c725c6e5c725c6e50617962696c6c206e756d62657220203a7b207061796d656e745f73686f7274636f64657d5c725c6e4163636f756e74203a207b726571756573745f7265667d5c725c6e416d6f756e74203a7b616d6f756e747d5c725c6e5c725c6e205468616e6b20796f752e222c2274656d706c6174655f737461747573223a22416374697665222c22637265617465645f6279223a22222c226c6173745f757064617465645f6279223a22323032362d30362d30315430383a31393a30302e3030305a222c22637265617465645f6f6e223a6e756c6c2c22757064617465645f6f6e223a22323032362d30362d30315430383a31393a30302e3030305a222c22637265617465645f6174223a22323032362d30362d30315430383a31393a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30315430383a31393a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(110, 'rbk_1780302055435_728', 'smart_payment_requests', 'UPDATE', 'primkey=''2''', '2026-06-01 11:20:55', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a223849384a494554222c22726571756573745f7265666572656e6365223a225350522d31373830333030363531333536222c22726571756573745f7469746c65223a22496e766f696365207061796d656e74222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a2253756e656b6120696e636f222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232353030302e3030222c22616d6f756e745f70616964223a22302e3030222c2262616c616e63655f616d6f756e74223a2232353030302e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22506c6561736520706179206e6f77206e776f222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a2250656e64696e67222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430343a35373a33312e3030305a222c22637265617465645f6174223a22323032362d30362d30315430343a35373a33312e3030305a222c22757064617465645f6174223a22323032362d30362d30315430343a35373a33312e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(111, 'rbk_1780302270255_93', 'message_templates', 'UPDATE', 'primkey=''6''', '2026-06-01 11:24:30', 0x5b7b227072696d6b6579223a362c227265636f72645f6964223a22594c5941344259222c2274656d706c6174655f6e616d65223a225061796d656e742072657175657374206e6f7465222c2274656d706c6174655f636f6465223a227061796d656e742052657175657374206e6f7465222c2274656d706c6174655f63617465676f7279223a22536d617274204d657373616765222c226d6573736167655f6368616e6e656c223a22222c227375626a656374223a225061796d656e742072657175657374206e6f7465222c226d6573736167655f636f6e74656e74223a2244656172207b6e616d657d2c205c725c6e4f7572207265636f72647320696e646963617465207468617420796f7572207b726571756573745f7469746c657d2068617320616e206f75747374616e64696e672062616c616e6365206f66207b616d6f756e747d2e5c725c6e5c725c6e4b696e646c7920736574746c652074686520616d6f756e74206279207b6475655f646174657d2e205c725c6e5c725c6e7b726571756573745f6e6f7465737d5c725c6e5c725c6e50617962696c6c206e756d62657220203a207b207061796d656e745f73686f7274636f64657d5c725c6e4163636f756e74203a207b726571756573745f7265666572656e63657d5c725c6e416d6f756e74203a207b616d6f756e747d5c725c6e5c725c6e205468616e6b20796f752e222c2274656d706c6174655f737461747573223a22416374697665222c22637265617465645f6279223a22222c226c6173745f757064617465645f6279223a22323032362d30362d30315430383a31393a30302e3030305a222c22637265617465645f6f6e223a6e756c6c2c22757064617465645f6f6e223a22323032362d30362d30315430383a31393a30302e3030305a222c22637265617465645f6174223a22323032362d30362d30315430383a31393a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30315430383a31393a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(112, 'rbk_1780303534615_719', 'smart_payment_requests', 'UPDATE', 'primkey=''5''', '2026-06-01 11:45:35', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a224551494b51484a222c22726571756573745f7265666572656e6365223a2233743533333533222c22726571756573745f7469746c65223a224d6172612077656c6661726520506c6174666f726d20446576656c6f706d656e742062616c616e6365222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232303030302e3030222c22616d6f756e745f70616964223a22302e3030222c2262616c616e63655f616d6f756e74223a2232303030302e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a2250656e64696e67222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430353a33313a32332e3030305a222c22637265617465645f6174223a22323032362d30362d30315430353a33313a32332e3030305a222c22757064617465645f6174223a22323032362d30362d30315430353a33313a32332e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(113, 'rbk_1780305784567_230', 'smart_payment_requests', 'UPDATE', 'primkey=''2''', '2026-06-01 12:23:05', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a223849384a494554222c22726571756573745f7265666572656e6365223a225350522d31373830333030363531333536222c22726571756573745f7469746c65223a22496e766f696365207061796d656e74222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a2253756e656b6120696e636f222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232353030302e3030222c22616d6f756e745f70616964223a22302e3030222c2262616c616e63655f616d6f756e74223a2232353030302e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22506c6561736520706179206e6f77206e776f222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a2250656e64696e67222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430353a32303a35352e3030305a222c22637265617465645f6174223a22323032362d30362d30315430353a32303a35352e3030305a222c22757064617465645f6174223a22323032362d30362d30315430353a32303a35352e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(114, 'rbk_1780306010660_57', 'smart_payment_requests', 'UPDATE', 'primkey=''2''', '2026-06-01 12:26:51', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a223849384a494554222c22726571756573745f7265666572656e6365223a225350522d31373830333030363531333536222c22726571756573745f7469746c65223a22496e766f696365207061796d656e74222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a2253756e656b6120696e636f222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232353030302e3030222c22616d6f756e745f70616964223a223633382e3030222c2262616c616e63655f616d6f756e74223a2232343336322e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22506c6561736520706179206e6f77206e776f222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a225061727469616c6c792050616964222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430393a32333a30342e3030305a222c22637265617465645f6174223a22323032362d30362d30315430353a32303a35352e3030305a222c22757064617465645f6174223a22323032362d30362d30315430393a32333a30342e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(115, 'rbk_1780306286023_993', 'smart_payment_requests', 'UPDATE', 'primkey=''5''', '2026-06-01 12:31:26', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a224551494b51484a222c22726571756573745f7265666572656e6365223a224d4152414a554e32303236222c22726571756573745f7469746c65223a224d6172612077656c6661726520506c6174666f726d20446576656c6f706d656e742062616c616e6365222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232303030302e3030222c22616d6f756e745f70616964223a22302e3030222c2262616c616e63655f616d6f756e74223a2232303030302e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a2250656e64696e67222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430353a34353a33342e3030305a222c22637265617465645f6174223a22323032362d30362d30315430353a34353a33342e3030305a222c22757064617465645f6174223a22323032362d30362d30315430353a34353a33342e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(116, 'rbk_1780306332250_284', 'smart_payment_requests', 'UPDATE', 'primkey=''5''', '2026-06-01 12:32:12', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a224551494b51484a222c22726571756573745f7265666572656e6365223a224d4152414a554e32303236222c22726571756573745f7469746c65223a224d6172612077656c6661726520506c6174666f726d20446576656c6f706d656e742062616c616e6365222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232303030302e3030222c22616d6f756e745f70616964223a22313537332e3030222c2262616c616e63655f616d6f756e74223a2231383432372e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a225061727469616c6c792050616964222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430393a33313a32352e3030305a222c22637265617465645f6174223a22323032362d30362d30315430353a34353a33342e3030305a222c22757064617465645f6174223a22323032362d30362d30315430393a33313a32352e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(117, 'rbk_1780306352963_2', 'smart_payment_requests', 'UPDATE', 'primkey=''5''', '2026-06-01 12:32:33', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a224551494b51484a222c22726571756573745f7265666572656e6365223a224d4152414a554e32303236222c22726571756573745f7469746c65223a224d6172612077656c6661726520506c6174666f726d20446576656c6f706d656e742062616c616e6365222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232303030302e3030222c22616d6f756e745f70616964223a22323034352e3030222c2262616c616e63655f616d6f756e74223a2231373935352e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a225061727469616c6c792050616964222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430393a33323a31322e3030305a222c22637265617465645f6174223a22323032362d30362d30315430353a34353a33342e3030305a222c22757064617465645f6174223a22323032362d30362d30315430393a33323a31322e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+INSERT INTO `mosy_sql_roll_back` (`primkey`, `roll_bk_key`, `table_name`, `roll_type`, `where_str`, `roll_timestamp`, `value_entries`, `hive_site_id`, `hive_site_name`) VALUES
+(118, 'rbk_1780306355133_44', 'smart_payment_requests', 'UPDATE', 'primkey=''5''', '2026-06-01 12:32:35', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a224551494b51484a222c22726571756573745f7265666572656e6365223a224d4152414a554e32303236222c22726571756573745f7469746c65223a224d6172612077656c6661726520506c6174666f726d20446576656c6f706d656e742062616c616e6365222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232303030302e3030222c22616d6f756e745f70616964223a22333837392e3030222c2262616c616e63655f616d6f756e74223a2231363132312e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a225061727469616c6c792050616964222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430393a33323a33322e3030305a222c22637265617465645f6174223a22323032362d30362d30315430353a34353a33342e3030305a222c22757064617465645f6174223a22323032362d30362d30315430393a33323a33322e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(119, 'rbk_1780306355525_163', 'smart_payment_requests', 'UPDATE', 'primkey=''5''', '2026-06-01 12:32:36', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a224551494b51484a222c22726571756573745f7265666572656e6365223a224d4152414a554e32303236222c22726571756573745f7469746c65223a224d6172612077656c6661726520506c6174666f726d20446576656c6f706d656e742062616c616e6365222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232303030302e3030222c22616d6f756e745f70616964223a22343834322e3030222c2262616c616e63655f616d6f756e74223a2231353135382e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a225061727469616c6c792050616964222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430393a33323a33352e3030305a222c22637265617465645f6174223a22323032362d30362d30315430353a34353a33342e3030305a222c22757064617465645f6174223a22323032362d30362d30315430393a33323a33352e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(120, 'rbk_1780306819398_651', 'smart_payment_requests', 'UPDATE', 'primkey=''5''', '2026-06-01 12:40:19', 0x5b7b227072696d6b6579223a352c227265636f72645f6964223a224551494b51484a222c22726571756573745f7265666572656e6365223a224d4152414a554e32303236222c22726571756573745f7469746c65223a224d6172612077656c6661726520506c6174666f726d20446576656c6f706d656e742062616c616e6365222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d696168204173616e7961222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a2232303030302e3030222c22616d6f756e745f70616964223a22363239312e3030222c2262616c616e63655f616d6f756e74223a2231333730392e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a225061727469616c6c792050616964222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430393a33323a33352e3030305a222c22637265617465645f6174223a22323032362d30362d30315430353a34353a33342e3030305a222c22757064617465645f6174223a22323032362d30362d30315430393a33323a33352e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(121, 'rbk_1780309865459_652', 'smart_payment_requests', 'UPDATE', 'primkey=''7''', '2026-06-01 13:31:05', 0x5b7b227072696d6b6579223a372c227265636f72645f6964223a22444a4a33415030222c22726571756573745f7265666572656e6365223a22544b594b3442222c22726571756573745f7469746c65223a22496e766f696365207061796d656e74222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a2254727566696e6473204b6172676f222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a22383030302e3030222c22616d6f756e745f70616964223a22302e3030222c2262616c616e63655f616d6f756e74223a22383030302e3030222c227061796d656e745f73686f7274636f6465223a22343930393233222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a2250656e64696e67222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30352d33315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30315430373a32383a34312e3030305a222c22637265617465645f6174223a22323032362d30362d30315430373a32383a34312e3030305a222c22757064617465645f6174223a22323032362d30362d30315430373a32383a34312e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(122, 'rbk_1780391291332_255', 'smart_message_templates', 'DELETE', 'WHERE primkey = ''8''', '2026-06-02 12:08:11', 0x5b7b227072696d6b6579223a382c227265636f72645f6964223a22594f5533535950222c2274656d706c6174655f6e616d65223a6e756c6c2c2274656d706c6174655f636f6465223a6e756c6c2c2274656d706c6174655f63617465676f7279223a6e756c6c2c226d6573736167655f6368616e6e656c223a226472616674222c227375626a656374223a6e756c6c2c226d6573736167655f636f6e74656e74223a2244656172204a6572656d69616820416c65782c205c6e4f7572207265636f72647320696e646963617465207468617420796f7572207b726571756573745f7469746c657d2068617320616e206f75747374616e64696e672062616c616e6365206f66207b616d6f756e747d2e5c6e5c6e4b696e646c7920736574746c652074686520616d6f756e74206279207b6475655f646174657d2e205c6e5c6e7b726571756573745f6e6f7465737d5c6e5c6e50617962696c6c206e756d62657220203a207b7061796d656e745f73686f7274636f64657d5c6e4163636f756e74203a207b726571756573745f7265666572656e63657d5c6e416d6f756e74203a207b616d6f756e747d5c6e5c6e205468616e6b20796f752e222c2274656d706c6174655f737461747573223a6e756c6c2c22637265617465645f6279223a6e756c6c2c226c6173745f757064617465645f6279223a6e756c6c2c22637265617465645f6f6e223a6e756c6c2c22757064617465645f6f6e223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(123, 'rbk_1780391294606_354', 'smart_message_templates', 'DELETE', 'WHERE primkey = ''7''', '2026-06-02 12:08:15', 0x5b7b227072696d6b6579223a372c227265636f72645f6964223a22494a3737423434222c2274656d706c6174655f6e616d65223a6e756c6c2c2274656d706c6174655f636f6465223a6e756c6c2c2274656d706c6174655f63617465676f7279223a6e756c6c2c226d6573736167655f6368616e6e656c223a226472616674222c227375626a656374223a6e756c6c2c226d6573736167655f636f6e74656e74223a2244656172204a6572656d69616820416c65782c205c6e4f7572207265636f72647320696e646963617465207468617420796f7572207b726571756573745f7469746c657d2068617320616e206f75747374616e64696e672062616c616e6365206f66207b616d6f756e747d2e5c6e5c6e4b696e646c7920736574746c652074686520616d6f756e74206279207b6475655f646174657d2e205c6e5c6e7b726571756573745f6e6f7465737d5c6e5c6e50617962696c6c206e756d62657220203a207b7061796d656e745f73686f7274636f64657d5c6e4163636f756e74203a207b726571756573745f7265666572656e63657d5c6e416d6f756e74203a207b616d6f756e747d5c6e5c6e205468616e6b20796f752e222c2274656d706c6174655f737461747573223a6e756c6c2c22637265617465645f6279223a6e756c6c2c226c6173745f757064617465645f6279223a6e756c6c2c22637265617465645f6f6e223a6e756c6c2c22757064617465645f6f6e223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(124, 'rbk_1780397671706_474', 'smart_messages', 'UPDATE', 'primkey=''13''', '2026-06-02 13:54:32', 0x5b7b227072696d6b6579223a31332c227265636f72645f6964223a224f44304f374b46222c226d6573736167655f6e756d626572223a22222c2272656c617465645f7265636f72645f6964223a22222c22726563697069656e745f6e616d65223a224a6572656d69616820416c6578222c22726563697069656e745f70686f6e65223a2230373130373636333930222c22726563697069656e745f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c226d6573736167655f6368616e6e656c223a226472616674222c226d6573736167655f7375626a656374223a225061796d656e742052657175657374222c226d6573736167655f636f6e74656e74223a2248656c6c6f207b6e616d657d206d616d616973222c226d6573736167655f737461747573223a226472616674222c2264656c69766572795f737461747573223a226472616674222c22726571756573745f736f75726365223a22636c69656e74735f736d6172745f6d6573736167655f6472616674222c22726571756573745f6964223a22222c2273656e745f6279223a22222c227363686564756c65645f666f72223a6e756c6c2c2273656e745f6f6e223a6e756c6c2c2264656c6976657265645f6f6e223a6e756c6c2c22726561645f6f6e223a6e756c6c2c226661696c65645f6f6e223a6e756c6c2c226661696c7572655f726561736f6e223a22222c22637265617465645f6f6e223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(125, 'rbk_1780397709817_253', 'smart_messages', 'UPDATE', 'primkey=''1''', '2026-06-02 13:55:10', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2251584948573158222c226d6573736167655f6e756d626572223a22222c2272656c617465645f7265636f72645f6964223a22222c22726563697069656e745f6e616d65223a224a6572656d69616820416c6578222c22726563697069656e745f70686f6e65223a2230373130373636333930222c22726563697069656e745f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c226d6573736167655f6368616e6e656c223a226472616674222c226d6573736167655f7375626a656374223a225061796d656e74205265717565737420736f206e6577206e6577222c226d6573736167655f636f6e74656e74223a2248656c6c6f207b6e616d657d222c226d6573736167655f737461747573223a226472616674222c2264656c69766572795f737461747573223a226472616674222c22726571756573745f736f75726365223a22636c69656e74735f736d6172745f6d6573736167655f6472616674222c22726571756573745f6964223a22222c2273656e745f6279223a22222c227363686564756c65645f666f72223a6e756c6c2c2273656e745f6f6e223a6e756c6c2c2264656c6976657265645f6f6e223a6e756c6c2c22726561645f6f6e223a6e756c6c2c226661696c65645f6f6e223a6e756c6c2c226661696c7572655f726561736f6e223a22222c22637265617465645f6f6e223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(126, 'rbk_1780397745726_938', 'smart_messages', 'UPDATE', 'primkey=''2''', '2026-06-02 13:55:46', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a224a594744465736222c226d6573736167655f6e756d626572223a22222c2272656c617465645f7265636f72645f6964223a22222c22726563697069656e745f6e616d65223a224a6572656d69616820416c6578222c22726563697069656e745f70686f6e65223a2230373130373636333930222c22726563697069656e745f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c226d6573736167655f6368616e6e656c223a226472616674222c226d6573736167655f7375626a656374223a225061796d656e74205265717565737420736f206e6577206e6577222c226d6573736167655f636f6e74656e74223a2248656c6c6f207b6e616d657d207570646174656420627574206e6577222c226d6573736167655f737461747573223a226472616674222c2264656c69766572795f737461747573223a226472616674222c22726571756573745f736f75726365223a22636c69656e74735f736d6172745f6d6573736167655f6472616674222c22726571756573745f6964223a22222c2273656e745f6279223a22222c227363686564756c65645f666f72223a6e756c6c2c2273656e745f6f6e223a6e756c6c2c2264656c6976657265645f6f6e223a6e756c6c2c22726561645f6f6e223a6e756c6c2c226661696c65645f6f6e223a6e756c6c2c226661696c7572655f726561736f6e223a22222c22637265617465645f6f6e223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(127, 'rbk_1780400421557_568', 'smart_payment_requests', 'UPDATE', 'primkey=''11''', '2026-06-02 14:40:22', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a2242394d3235474f222c22726571756573745f7265666572656e6365223a224a4146583138222c22726571756573745f7469746c65223a22537570657220736163636f20696e636f222c2272656c617465645f6d6f64756c65223a22736d6172747061796d656e747265717565737473222c2272656c617465645f7265636f72645f6964223a22222c2270617965725f6e616d65223a224a6572656d69616820416c6578222c2270617965725f70686f6e65223a2230373130373636333930222c2270617965725f656d61696c223a226a6572656173616e796140676d61696c2e636f6d222c22616d6f756e745f726571756573746564223a22313030302e3030222c22616d6f756e745f70616964223a22302e3030222c2262616c616e63655f616d6f756e74223a22313030302e3030222c227061796d656e745f73686f7274636f6465223a2234303931393631222c227061796d656e745f6c696e6b223a22222c22726571756573745f6e6f746573223a22222c226578706972795f64617465223a6e756c6c2c22726571756573745f737461747573223a2250656e64696e67222c22637265617465645f6279223a22737570657261646d696e222c22637265617465645f6f6e223a22323032362d30362d30315432313a30303a30302e3030305a222c22757064617465645f6f6e223a22323032362d30362d30325430383a33373a35352e3030305a222c22637265617465645f6174223a22323032362d30362d30325430383a33373a35352e3030305a222c22757064617465645f6174223a22323032362d30362d30325430383a33373a35352e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(128, 'rbk_1780450449334_353', 'leads', 'UPDATE', 'primkey=''1''', '2026-06-03 04:34:09', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2256355339585a4c222c226c6561645f7469746c65223a22222c2266756c6c5f6e616d65223a224a6572656d69616820416c6578222c22627573696e6573735f6e616d65223a224173616e65746963206469676974616c222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a22222c226c6561645f736f75726365223a22222c226c6561645f737461747573223a225175616c6966696564222c22636f6e7665727465645f636c69656e745f6964223a22222c226c6561645f74656d7065726174757265223a227761726d222c2261737369676e65645f73616c65735f726570223a6e756c6c2c22657374696d617465645f6465616c5f76616c7565223a22302e3030222c2265787065637465645f636f6e76657273696f6e5f64617465223a6e756c6c2c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22627573696e6573735f61646472657373223a22222c226e6f746573223a22222c226e6578745f666f6c6c6f775f75705f64617465223a6e756c6c2c226c6173745f636f6e746163745f64617465223a6e756c6c2c2270726f66696c655f70686f746f223a6e756c6c2c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(129, 'rbk_1780451547324_254', 'leads', 'UPDATE', 'primkey=''1''', '2026-06-03 04:52:27', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2256355339585a4c222c226c6561645f7469746c65223a22222c2266756c6c5f6e616d65223a224a6572656d69616820416c6578222c22627573696e6573735f6e616d65223a224173616e65746963206469676974616c222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a22222c226c6561645f736f75726365223a22222c226c6561645f737461747573223a225175616c6966696564222c22636f6e7665727465645f636c69656e745f6964223a2235335543364954222c226c6561645f74656d7065726174757265223a227761726d222c2261737369676e65645f73616c65735f726570223a22222c22657374696d617465645f6465616c5f76616c7565223a22302e3030222c2265787065637465645f636f6e76657273696f6e5f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22627573696e6573735f61646472657373223a22222c226e6f746573223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c2270726f66696c655f70686f746f223a6e756c6c2c22637265617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(130, 'rbk_1780451581864_730', 'leads', 'UPDATE', 'primkey=''1''', '2026-06-03 04:53:02', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2256355339585a4c222c226c6561645f7469746c65223a22222c2266756c6c5f6e616d65223a225368617065736b696c6c7320666f756e646174696f6e222c22627573696e6573735f6e616d65223a224173616e65746963206469676974616c222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a2230373130373636333930222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a2273682e636f6d222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c226c6561645f737461747573223a225175616c6966696564222c22636f6e7665727465645f636c69656e745f6964223a2235335543364954222c226c6561645f74656d7065726174757265223a227761726d222c2261737369676e65645f73616c65735f726570223a22222c22657374696d617465645f6465616c5f76616c7565223a22302e3030222c2265787065637465645f636f6e76657273696f6e5f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22627573696e6573735f61646472657373223a22222c226e6f746573223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c2270726f66696c655f70686f746f223a6e756c6c2c22637265617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(131, 'rbk_1780451581912_475', 'leads', 'UPDATE', 'primkey=''1''', '2026-06-03 04:53:02', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2256355339585a4c222c226c6561645f7469746c65223a22222c2266756c6c5f6e616d65223a225368617065736b696c6c7320666f756e646174696f6e222c22627573696e6573735f6e616d65223a224173616e65746963206469676974616c222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a2230373130373636333930222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a2273682e636f6d222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c226c6561645f737461747573223a225175616c6966696564222c22636f6e7665727465645f636c69656e745f6964223a2235335543364954222c226c6561645f74656d7065726174757265223a227761726d222c2261737369676e65645f73616c65735f726570223a22222c22657374696d617465645f6465616c5f76616c7565223a22302e3030222c2265787065637465645f636f6e76657273696f6e5f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22627573696e6573735f61646472657373223a22222c226e6f746573223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c2270726f66696c655f70686f746f223a6e756c6c2c22637265617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(132, 'rbk_1780451596431_290', 'clients', 'UPDATE', 'primkey=''10''', '2026-06-03 04:53:16', 0x5b7b227072696d6b6579223a31302c227265636f72645f6964223a2259583548504d45222c2266756c6c5f6e616d65223a225368617065736b696c6c7320666f756e646174696f6e222c22627573696e6573735f6e616d65223a224173616e65746963206469676974616c222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a2230373130373636333930222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a2273682e636f6d222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22636c69656e745f737461747573223a22222c22636f6e7665727465645f6c6561645f6964223a22222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a22222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430313a35323a30302e3030305a222c22637265617465645f6174223a22323032362d30362d30335430313a35323a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430313a35323a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(133, 'rbk_1780452189621_511', 'clients', 'DELETE', 'WHERE primkey = ''11''', '2026-06-03 05:03:10', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a224c483535544b38222c2266756c6c5f6e616d65223a225368617065736b696c6c7320666f756e646174696f6e222c22627573696e6573735f6e616d65223a224173616e65746963206469676974616c222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a2230373130373636333930222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a2273682e636f6d222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22636c69656e745f737461747573223a22222c22636f6e7665727465645f6c6561645f6964223a22222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a22222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430323a30323a30302e3030305a222c22637265617465645f6174223a22323032362d30362d30335430323a30323a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430323a30323a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(134, 'rbk_1780452641646_363', 'leads', 'UPDATE', 'primkey=''1''', '2026-06-03 05:10:42', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a2256355339585a4c222c226c6561645f7469746c65223a22222c2266756c6c5f6e616d65223a225368617065736b696c6c7320666f756e646174696f6e222c22627573696e6573735f6e616d65223a224173616e65746963206469676974616c222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a2230373130373636333930222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a2273682e636f6d222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c226c6561645f737461747573223a225175616c6966696564222c22636f6e7665727465645f636c69656e745f6964223a2235335543364954222c226c6561645f74656d7065726174757265223a227761726d222c2261737369676e65645f73616c65735f726570223a22222c22657374696d617465645f6465616c5f76616c7565223a22302e3030222c2265787065637465645f636f6e76657273696f6e5f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22627573696e6573735f61646472657373223a22222c226e6f746573223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c2270726f66696c655f70686f746f223a226d656469612f6c656164732f313738303435313538313839315f696d616765735f636f666665652e6a666966222c22637265617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(135, 'rbk_1780452683119_187', 'leads', 'UPDATE', 'primkey=''2''', '2026-06-03 05:11:23', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a224352565a504d32222c226c6561645f7469746c65223a22222c2266756c6c5f6e616d65223a22436872697370696e65206e7961726f636865222c22627573696e6573735f6e616d65223a224e7961726f636865207265616c7479222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a2230373130373636333930222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a2273682e636f6d222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c226c6561645f737461747573223a225175616c6966696564222c22636f6e7665727465645f636c69656e745f6964223a2235335543364954222c226c6561645f74656d7065726174757265223a227761726d222c2261737369676e65645f73616c65735f726570223a22222c22657374696d617465645f6465616c5f76616c7565223a22302e3030222c2265787065637465645f636f6e76657273696f6e5f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22627573696e6573735f61646472657373223a22222c226e6f746573223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c2270726f66696c655f70686f746f223a6e756c6c2c22637265617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(136, 'rbk_1780452683181_402', 'leads', 'UPDATE', 'primkey=''2''', '2026-06-03 05:11:23', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a224352565a504d32222c226c6561645f7469746c65223a22222c2266756c6c5f6e616d65223a22436872697370696e65206e7961726f636865222c22627573696e6573735f6e616d65223a224e7961726f636865207265616c7479222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a2230373130373636333930222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a2273682e636f6d222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c226c6561645f737461747573223a225175616c6966696564222c22636f6e7665727465645f636c69656e745f6964223a2235335543364954222c226c6561645f74656d7065726174757265223a227761726d222c2261737369676e65645f73616c65735f726570223a22222c22657374696d617465645f6465616c5f76616c7565223a22302e3030222c2265787065637465645f636f6e76657273696f6e5f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22627573696e6573735f61646472657373223a22222c226e6f746573223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c2270726f66696c655f70686f746f223a6e756c6c2c22637265617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(137, 'rbk_1780452901714_100', 'leads', 'UPDATE', 'primkey=''2''', '2026-06-03 05:15:02', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a224352565a504d32222c226c6561645f7469746c65223a22222c2266756c6c5f6e616d65223a22436872697370696e65206e7961726f636865222c22627573696e6573735f6e616d65223a224e7961726f636865207265616c7479222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a2230373130373636333930222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a2273682e636f6d222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c226c6561645f737461747573223a225175616c6966696564222c22636f6e7665727465645f636c69656e745f6964223a2235335543364954222c226c6561645f74656d7065726174757265223a227761726d222c2261737369676e65645f73616c65735f726570223a22222c22657374696d617465645f6465616c5f76616c7565223a22302e3030222c2265787065637465645f636f6e76657273696f6e5f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22627573696e6573735f61646472657373223a22222c226e6f746573223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c2270726f66696c655f70686f746f223a226d656469612f6c656164732f313738303435323638333133355f736e6f77666c616b652d6d617274696e692d363830783435332e6a7067222c22637265617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(138, 'rbk_1780452902446_431', 'leads', 'UPDATE', 'primkey=''2''', '2026-06-03 05:15:02', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a224352565a504d32222c226c6561645f7469746c65223a22222c2266756c6c5f6e616d65223a22436872697370696e65206e7961726f636865222c22627573696e6573735f6e616d65223a224e7961726f636865207265616c7479222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a2230373130373636333930222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a2273682e636f6d222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c226c6561645f737461747573223a225175616c6966696564222c22636f6e7665727465645f636c69656e745f6964223a2235335543364954222c226c6561645f74656d7065726174757265223a227761726d222c2261737369676e65645f73616c65735f726570223a22222c22657374696d617465645f6465616c5f76616c7565223a22302e3030222c2265787065637465645f636f6e76657273696f6e5f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22627573696e6573735f61646472657373223a22222c226e6f746573223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c2270726f66696c655f70686f746f223a226d656469612f6c656164732f313738303435323638333133355f736e6f77666c616b652d6d617274696e692d363830783435332e6a7067222c22637265617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(139, 'rbk_1780453045388_184', 'leads', 'UPDATE', 'primkey=''2''', '2026-06-03 05:17:25', 0x5b7b227072696d6b6579223a322c227265636f72645f6964223a224352565a504d32222c226c6561645f7469746c65223a22222c2266756c6c5f6e616d65223a22436872697370696e65206e7961726f636865222c22627573696e6573735f6e616d65223a224e7961726f636865207265616c7479222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a2230373130373636333930222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a2273682e636f6d222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c226c6561645f737461747573223a225175616c6966696564222c22636f6e7665727465645f636c69656e745f6964223a2235335543364954222c226c6561645f74656d7065726174757265223a227761726d222c2261737369676e65645f73616c65735f726570223a22222c22657374696d617465645f6465616c5f76616c7565223a22302e3030222c2265787065637465645f636f6e76657273696f6e5f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22627573696e6573735f61646472657373223a22222c226e6f746573223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430313a33343a30302e3030305a222c2270726f66696c655f70686f746f223a226d656469612f6c656164732f313738303435323930313930335f426973636f66662d6d696c6b7368616b6530313739302d332e6a7067222c22637265617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430313a33343a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(140, 'rbk_1780453116694_195', 'clients', 'UPDATE', 'primkey=''12''', '2026-06-03 05:18:37', 0x5b7b227072696d6b6579223a31322c227265636f72645f6964223a22564f4a4a493848222c2266756c6c5f6e616d65223a22436872697370696e65206e7961726f636865222c22627573696e6573735f6e616d65223a224e7961726f636865207265616c7479222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a2230373130373636333930222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a2273682e636f6d222c22696e6475737472795f74797065223a22495350222c226c6561645f736f75726365223a22526566666572616c222c22636f756e7472795f6e616d65223a22222c22636974795f6e616d65223a22222c22636c69656e745f737461747573223a22222c22636f6e7665727465645f6c6561645f6964223a224352565a504d32222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a22222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a22323032362d30362d30335430323a31363a30302e3030305a222c22637265617465645f6174223a22323032362d30362d30335430323a31363a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430323a31363a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(141, 'rbk_1780454696540_198', 'clients', 'UPDATE', 'primkey=''7''', '2026-06-03 05:44:57', 0x5b7b227072696d6b6579223a372c227265636f72645f6964223a2244574238303337222c2266756c6c5f6e616d65223a224d6172612077656c66617265222c22627573696e6573735f6e616d65223a224d6172612077656c66617265222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a2257656c66617265222c226c6561645f736f75726365223a22526566666572616c222c22636f756e7472795f6e616d65223a224b656e7961222c22636974795f6e616d65223a226e6169726f6269222c22636c69656e745f737461747573223a22416374697665222c22636f6e7665727465645f6c6561645f6964223a22222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a224e6169726f6269202d204e616d616e676120526f6164222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(142, 'rbk_1780454696570_256', 'clients', 'UPDATE', 'primkey=''7''', '2026-06-03 05:44:57', 0x5b7b227072696d6b6579223a372c227265636f72645f6964223a2244574238303337222c2266756c6c5f6e616d65223a224d6172612077656c66617265222c22627573696e6573735f6e616d65223a224d6172612077656c66617265222c2270686f6e655f6e756d626572223a2230373130373636333930222c22616c7465726e61746976655f70686f6e655f6e756d626572223a22222c22656d61696c5f61646472657373223a226a6572656173616e796140676d61696c2e636f6d222c22776562736974655f75726c223a22222c22696e6475737472795f74797065223a2257656c66617265222c226c6561645f736f75726365223a22526566666572616c222c22636f756e7472795f6e616d65223a224b656e7961222c22636974795f6e616d65223a226e6169726f6269222c22636c69656e745f737461747573223a22416374697665222c22636f6e7665727465645f6c6561645f6964223a22222c2261737369676e65645f73616c65735f726570223a22222c22627573696e6573735f61646472657373223a224e6169726f6269202d204e616d616e676120526f6164222c227461785f6e756d626572223a22222c2270726f66696c655f70686f746f223a6e756c6c2c226e6f746573223a22222c226c6173745f636f6e746163745f64617465223a22323032362d30352d32375432313a30303a30302e3030305a222c22637265617465645f6174223a22323032362d30362d30335430323a34333a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430323a34333a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(143, 'rbk_1780456398912_402', 'deals', 'UPDATE', 'primkey=''11''', '2026-06-03 06:13:19', 0x5b7b227072696d6b6579223a31312c227265636f72645f6964223a224f52575a335452222c226465616c5f7469746c65223a225765622064657369676e206e7961726f636865222c226465616c5f6465736372697074696f6e223a22222c22636c69656e745f6964223a2235335543364954222c226465616c5f736f75726365223a22222c226465616c5f76616c7565223a22393530302e3030222c2265787065637465645f636c6f73655f64617465223a22323032362d30352d33305430393a33333a30302e3030305a222c22706970656c696e655f7374616765223a22222c226465616c5f7374616765223a22222c226465616c5f737461747573223a226772656174222c2261737369676e65645f73616c65735f726570223a22222c227072696f726974795f6c6576656c223a22222c226465616c5f70726f626162696c697479223a22222c226e6578745f666f6c6c6f775f75705f64617465223a22323032362d30352d33305430393a33333a30302e3030305a222c226465616c5f6e6f746573223a22222c22637265617465645f6174223a22323032362d30352d33305430393a33333a30302e3030305a222c22757064617465645f6174223a22323032362d30352d33305430393a33333a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(144, 'rbk_1780456637826_728', 'products', 'UPDATE', 'primkey=''1''', '2026-06-03 06:17:18', 0x5b7b227072696d6b6579223a312c227265636f72645f6964223a22563256565a4846222c2270726f647563745f6e616d65223a22504f532053616153222c2270726963655f72616e6765223a2237353030202d20313030303030222c22756e69745f7072696365223a2237303030302e3030222c2270726f647563745f636f6465223a22222c2263617465676f7279223a2253616153222c2270726f647563745f6465736372697074696f6e223a22222c2270726f647563745f696d616765223a6e756c6c2c22646973636f756e745f7072696365223a22302e3030222c227461785f70657263656e74616765223a22222c2263757272656e63795f636f6465223a22222c2273746f636b5f7175616e74697479223a22222c2270726f647563745f737461747573223a22416374697665222c22637265617465645f6174223a22323032362d30352d33305430343a34323a30302e3030305a222c22757064617465645f6174223a22323032362d30352d32395432313a30303a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(145, 'rbk_1780458861451_648', 'payments', 'UPDATE', 'primkey=''3''', '2026-06-03 06:54:21', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2257345859393037222c22706169645f6f6e223a6e756c6c2c22616d6f756e745f70616964223a22393530302e3030222c227061796d656e745f666f72223a22204d6172612077656c6661726520506c6174666f726d20446576656c6f706d656e742062616c616e6365222c227061796d656e745f6e6f746573223a22222c227472616e73616374696f6e5f726566223a22222c22726563656970745f6e756d626572223a22222c22696e766f6963655f6964223a2254595045534f4e222c226465616c5f6964223a2245355831364156222c22636c69656e745f6964223a2244574238303337222c227061796d656e745f6368616e6e656c223a22222c227061796d656e745f6d6574686f64223a22222c227061796d656e745f737461747573223a2250616964222c2263757272656e63795f636f6465223a22222c22637265617465645f6174223a6e756c6c2c22757064617465645f6174223a6e756c6c2c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(146, 'rbk_1780459292349_170', 'payments', 'UPDATE', 'primkey=''3''', '2026-06-03 07:01:32', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2257345859393037222c22706169645f6f6e223a22323032362d30362d30335430333a35343a30302e3030305a222c22616d6f756e745f70616964223a22302e3030222c227061796d656e745f666f72223a22222c227061796d656e745f6e6f746573223a22222c227472616e73616374696f6e5f726566223a22222c22726563656970745f6e756d626572223a22222c22696e766f6963655f6964223a2254595045534f4e222c226465616c5f6964223a2245355831364156222c22636c69656e745f6964223a22494347364f354a222c227061796d656e745f6368616e6e656c223a22222c227061796d656e745f6d6574686f64223a22222c227061796d656e745f737461747573223a22222c2263757272656e63795f636f6465223a22222c22637265617465645f6174223a22323032362d30362d30335430333a35343a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430333a35343a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(147, 'rbk_1780459755916_589', 'payments', 'UPDATE', 'primkey=''3''', '2026-06-03 07:09:16', 0x5b7b227072696d6b6579223a332c227265636f72645f6964223a2257345859393037222c22706169645f6f6e223a22323032362d30362d30335430333a35343a30302e3030305a222c22616d6f756e745f70616964223a22302e3030222c227061796d656e745f666f72223a224d7065736120726573746f726174696f6e222c227061796d656e745f6e6f746573223a22222c227472616e73616374696f6e5f726566223a22222c22726563656970745f6e756d626572223a22222c22696e766f6963655f6964223a2254595045534f4e222c226465616c5f6964223a2245355831364156222c22636c69656e745f6964223a22494347364f354a222c227061796d656e745f6368616e6e656c223a22222c227061796d656e745f6d6574686f64223a22222c227061796d656e745f737461747573223a22222c2263757272656e63795f636f6465223a22222c22637265617465645f6174223a22323032362d30362d30335430333a35343a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430333a35343a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(148, 'rbk_1780472496761_338', 'expected_revenue', 'UPDATE', 'primkey=''12''', '2026-06-03 10:41:37', 0x5b7b227072696d6b6579223a31322c227265636f72645f6964223a223032564f454231222c22726576656e75655f6d6f6e7468223a224d61792032303236222c22636c69656e745f6964223a22564f4a4a493848222c226465616c5f6964223a225545455831454a222c2265787065637465645f616d6f756e74223a22383530302e3030222c2263757272656e63795f636f6465223a22222c227061796d656e745f737461747573223a22556e70616964222c227061796d656e745f7265665f6e6f223a22222c2265787065637465645f636c6f73655f64617465223a22323032362d30362d30325432313a30303a30302e3030305a222c2270726f626162696c6974795f70657263656e74223a22222c22726576656e75655f736f757263655f74797065223a22222c22726576656e75655f7469746c65223a22222c22696e766f6963655f6964223a6e756c6c2c226c6561645f6964223a22222c22726576656e75655f737461747573223a22222c22726576656e75655f6465736372697074696f6e223a22222c2261737369676e65645f746f223a22222c22637265617465645f6174223a22323032362d30362d30335430323a32303a30302e3030305a222c22757064617465645f6174223a22323032362d30362d30335430323a32303a30302e3030305a222c22686976655f736974655f6964223a224c4c5252305a4b4f585254434f484e5f323032342d31322d32382d30372d34352d35362d706d222c22686976655f736974655f6e616d65223a22537570657261646d696e227d5d, 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `page_manifest_`
+--
+
+CREATE TABLE IF NOT EXISTS `page_manifest_` (
+  `primkey` int(255) NOT NULL,
+  `manikey` varchar(500) NOT NULL,
+  `page_group` varchar(500) NOT NULL,
+  `site_id` varchar(500) NOT NULL,
+  `page_url` varchar(500) NOT NULL,
+  `hive_site_id` varchar(500) NOT NULL,
+  `hive_site_name` varchar(500) NOT NULL,
+  `project_id` varchar(500) NOT NULL,
+  `project_name` varchar(500) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `page_manifest_`
+--
+
+INSERT INTO `page_manifest_` (`primkey`, `manikey`, `page_group`, `site_id`, `page_url`, `hive_site_id`, `hive_site_name`, `project_id`, `project_name`) VALUES
+(1, 'appdna', 'Mpesa', '', 'appdna', '', '', '', ''),
+(2, 'disbursmentwebhook', 'Mpesa', '', 'disbursmentwebhook', '', '', '', ''),
+(3, 'initrecon', 'Mpesa', '', 'initrecon', '', '', '', ''),
+(4, 'mosy_paginate', 'Mpesa', '', 'mosy_paginate', '', '', '', ''),
+(5, 'mpesacollections_list', 'Mpesa', '', 'mpesacollections_list', '', '', '', ''),
+(6, 'mpesacollections_profile', 'Mpesa', '', 'mpesacollections_profile', '', '', '', ''),
+(7, 'overall_user_functions_list', 'Mpesa', '', 'overall_user_functions_list', '', '', '', ''),
+(8, 'paymentwebhook', 'Mpesa', '', 'paymentwebhook', '', '', '', ''),
+(9, 'reconciliations_list', 'Mpesa', '', 'reconciliations_list', '', '', '', ''),
+(10, 'reconciliations_profile', 'Mpesa', '', 'reconciliations_profile', '', '', '', ''),
+(11, 'role_functions_list', 'Mpesa', '', 'role_functions_list', '', '', '', ''),
+(12, 'role_functions_profile', 'Mpesa', '', 'role_functions_profile', '', '', '', ''),
+(13, 'sysconfigs_list', 'Mpesa', '', 'sysconfigs_list', '', '', '', ''),
+(14, 'sysconfigs_profile', 'Mpesa', '', 'sysconfigs_profile', '', '', '', ''),
+(15, 'system_role_bundles_list', 'User role management', '', 'system_role_bundles_list', '', '', '', ''),
+(16, 'system_role_bundles_profile', 'User role management', '', 'system_role_bundles_profile', '', '', '', ''),
+(17, 'system_users_list', 'Mpesa', '', 'system_users_list', '', '', '', ''),
+(18, 'system_users_profile', 'Mpesa', '', 'system_users_profile', '', '', '', ''),
+(19, 'system_users_w_roles_list', 'Mpesa', '', 'system_users_w_roles_list', '', '', '', ''),
+(20, 'system_users_w_roles_profile', 'Mpesa', '', 'system_users_w_roles_profile', '', '', '', ''),
+(21, 'trxrecon', 'Mpesa', '', 'trxrecon', '', '', '', ''),
+(22, 'acc_control', 'User roles', '', 'acc_control', '', '', '', ''),
+(23, 'bundle_functions_list', 'User roles', '', 'bundle_functions_list', '', '', '', ''),
+(24, 'bundle_functions_profile', 'User roles', '', 'bundle_functions_profile', '', '', '', ''),
+(25, 'login', 'User roles', '', 'login', '', '', '', ''),
+(26, 'register', 'User roles', '', 'register', '', '', '', ''),
+(27, 'resetpassword', 'User roles', '', 'resetpassword', '', '', '', ''),
+(28, 'saconfig', 'User roles', '', 'saconfig', '', '', '', ''),
+(29, 'sasplash', 'User roles', '', 'sasplash', '', '', '', ''),
+(30, 'sauth_oauth', 'User roles', '', 'sauth_oauth', '', '', '', ''),
+(31, 'sauth_sessionlogout', 'User roles', '', 'sauth_sessionlogout', '', '', '', ''),
+(32, 'sauth_sessionmonitor', 'User roles', '', 'sauth_sessionmonitor', '', '', '', ''),
+(33, 'sa_access', 'User roles', '', 'sa_access', '', '', '', ''),
+(34, 'superadmin_acc_control', 'User roles', '', 'superadmin_acc_control', '', '', '', ''),
+(35, 'userdenied', 'Basic pages', '', 'userdenied', '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE IF NOT EXISTS `payments` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `paid_on` datetime DEFAULT NULL,
+  `amount_paid` decimal(10,2) DEFAULT NULL,
+  `payment_for` varchar(500) DEFAULT NULL,
+  `payment_notes` longtext,
+  `transaction_ref` varchar(500) DEFAULT NULL,
+  `receipt_number` varchar(500) DEFAULT NULL,
+  `invoice_id` varchar(500) DEFAULT NULL,
+  `deal_id` varchar(500) DEFAULT NULL,
+  `client_id` varchar(500) DEFAULT NULL,
+  `payment_channel` varchar(500) DEFAULT NULL,
+  `payment_method` varchar(500) DEFAULT NULL,
+  `payment_status` varchar(500) DEFAULT NULL,
+  `currency_code` varchar(500) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`primkey`, `record_id`, `paid_on`, `amount_paid`, `payment_for`, `payment_notes`, `transaction_ref`, `receipt_number`, `invoice_id`, `deal_id`, `client_id`, `payment_channel`, `payment_method`, `payment_status`, `currency_code`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, 'XQEI4UG', '0000-00-00 00:00:00', '9500.00', '', '', '', '', NULL, '8BKE07M', 'A98QVSQ', '', '', 'Paid', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, '58I0RLD', '0000-00-00 00:00:00', '5000.00', '', '', 'SDJKSJDSDJ-tROPICAL dESSERT', '', '3URUWIG', '8BKE07M', 'A98QVSQ', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, 'W4XY907', '2026-06-03 06:54:00', '8000.00', 'Mpesa restoration', '', '', '', 'TYPESON', 'E5X16AV', 'ICG6O5J', '', '', '', '', '2026-06-03 06:54:00', '2026-06-03 06:54:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `product_name` varchar(500) DEFAULT NULL,
+  `price_range` varchar(500) NOT NULL,
+  `unit_price` decimal(10,2) DEFAULT NULL,
+  `product_code` varchar(500) DEFAULT NULL,
+  `category` varchar(500) NOT NULL,
+  `product_description` longtext,
+  `product_image` text,
+  `discount_price` decimal(10,2) DEFAULT NULL,
+  `tax_percentage` varchar(500) DEFAULT NULL,
+  `currency_code` varchar(500) DEFAULT NULL,
+  `stock_quantity` varchar(500) DEFAULT NULL,
+  `product_status` varchar(500) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`primkey`, `record_id`, `product_name`, `price_range`, `unit_price`, `product_code`, `category`, `product_description`, `product_image`, `discount_price`, `tax_percentage`, `currency_code`, `stock_quantity`, `product_status`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, 'V2VVZHF', 'POS SaaS', '7500 - 100000', '70000.00', '', 'SaaS', '', NULL, '0.00', '', '', '', 'Active', '2026-05-30 07:42:00', '2026-05-30 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quotations`
+--
+
+CREATE TABLE IF NOT EXISTS `quotations` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `quotation_number` varchar(500) DEFAULT NULL,
+  `quotation_title` varchar(500) DEFAULT NULL,
+  `quotation_description` longtext,
+  `client_id` varchar(500) DEFAULT NULL,
+  `deal_id` varchar(500) DEFAULT NULL,
+  `quotation_amount` decimal(10,2) DEFAULT NULL,
+  `tax_amount` decimal(10,2) DEFAULT NULL,
+  `discount_amount` decimal(10,2) DEFAULT NULL,
+  `quotation_status` varchar(500) DEFAULT NULL,
+  `quotation_issued_on` datetime DEFAULT NULL,
+  `quotation_expiry_date` datetime DEFAULT NULL,
+  `quotation_notes` longtext,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quotations`
+--
+
+INSERT INTO `quotations` (`primkey`, `record_id`, `quotation_number`, `quotation_title`, `quotation_description`, `client_id`, `deal_id`, `quotation_amount`, `tax_amount`, `discount_amount`, `quotation_status`, `quotation_issued_on`, `quotation_expiry_date`, `quotation_notes`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, 'WCNO1DW', '456576', 'Combo website Enhancement', '', 'A98QVSQ', '8BKE07M', '5000.00', '0.00', '0.00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, 'CPBIDH6', '456576', 'Combo website Enhancement', '', 'QHMUBY5', 'AX101KB', '8500.00', '0.00', '0.00', 'Approved', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, 'LZPD5SJ', 'Infolink@020', 'Server restoration', '', 'XRJ6DII', '9ST6ZP2', '9500.00', '0.00', '0.00', 'Approved', '2026-05-28 00:00:00', '2026-05-28 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(4, '272DAFU', '456576', ' Mara welfare Platform Development balance', ' Mara welfare Platform Development balance', 'DWB8037', 'E5X16AV', '20000.00', '0.00', '0.00', '', '2026-05-28 00:00:00', '2026-05-28 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, 'Y7HK5PC', '456576', 'Server restoration', '', '53UC6IT', 'UEEX1EJ', '0.00', '0.00', '0.00', '', '2026-05-30 00:00:00', '2026-05-30 12:33:00', '', '2026-05-30 12:33:00', '2026-05-30 12:33:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quotation_items`
+--
+
+CREATE TABLE IF NOT EXISTS `quotation_items` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `quotation_id` varchar(500) DEFAULT NULL,
+  `item_type` varchar(500) DEFAULT NULL,
+  `item_id` varchar(500) DEFAULT NULL,
+  `item_name` varchar(500) DEFAULT NULL,
+  `item_description` longtext,
+  `item_quantity` varchar(500) DEFAULT NULL,
+  `item_unit_price` decimal(10,2) DEFAULT NULL,
+  `item_total_amount` decimal(10,2) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requests`
+--
+
+CREATE TABLE IF NOT EXISTS `requests` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `staff_id` varchar(500) DEFAULT NULL,
+  `request_number` varchar(500) DEFAULT NULL,
+  `amount_requested` decimal(10,2) DEFAULT NULL,
+  `request_reason` longtext,
+  `amount_approved` decimal(10,2) DEFAULT NULL,
+  `current_balance` decimal(10,2) DEFAULT NULL,
+  `requested_on` datetime DEFAULT NULL,
+  `approved_on` datetime DEFAULT NULL,
+  `paid_on` datetime DEFAULT NULL,
+  `cleared_on` datetime DEFAULT NULL,
+  `request_status` varchar(500) DEFAULT NULL,
+  `request_remarks` longtext,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE IF NOT EXISTS `services` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `service_code` varchar(500) DEFAULT NULL,
+  `service_name` varchar(500) DEFAULT NULL,
+  `category` varchar(500) NOT NULL,
+  `price_range` varchar(500) NOT NULL,
+  `service_price` decimal(10,2) DEFAULT NULL,
+  `service_description` longtext,
+  `billing_type` varchar(500) DEFAULT NULL,
+  `service_status` varchar(500) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`primkey`, `record_id`, `service_code`, `service_name`, `category`, `price_range`, `service_price`, `service_description`, `billing_type`, `service_status`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, '1NFYOGRBMT', 'Business Website Development - 5 Pages', 'Business Presence Launch', 'Website Services', '"25000-60000"', '45000.00', '"Professional 5-page business website including company profile', 'services', 'contact forms', '2026-05-30 08:05:17', '2026-05-30 08:05:17', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, 'S7CADAKEL4', 'Corporate Website Development', 'Corporate Identity Suite', 'Website Services', '"80000-250000"', '120000.00', '"Corporate website designed to strengthen brand credibility', 'showcase services', 'highlight leadership', '2026-05-30 08:05:17', '2026-05-30 08:05:17', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, 'L71MKLVF8O', 'E-Commerce Website Development', 'Digital Storefront Solution', 'Website Services', '"100000-500000"', '180000.00', '"Online store with product catalog', 'shopping cart', 'payment integration', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(4, '3S8I0ITILW', 'Custom ERP CRM POS Development', 'Enterprise Operations Platform', 'Web Applications', '"150000-2000000"', '0.00', '"Custom business management systems covering operations', 'inventory', 'CRM', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, '73G3AQKZYK', 'Customer Portal Development', 'Client Self-Service Portal', 'Web Applications', '"50000-500000"', '120000.00', '"Customer access portal for statements', 'requests', 'bookings', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(6, '6179NHOHKU', 'Website Hosting & Domain Management', 'Digital Infrastructure Management', 'Hosting & Infrastructure', '"5000-30000"', '12000.00', '"Domain registration', 'hosting', 'SSL certificates', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(7, '0XN13BUPPA', 'Managed Cloud Infrastructure Service', 'Cloud Operations Command', 'Hosting & Infrastructure', '"3000-50000"', '5000.00', '"Managed cloud infrastructure including server maintenance', 'monitoring', 'performance optimization', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(8, 'BO5G5GLY3G', 'Website Maintenance & Support', 'Site Continuity Shield', 'Maintenance & Support', '"3000-20000"', '5000.00', '"Website updates', 'backups', 'bug fixes', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(9, 'S0SHLI59F5', 'Business System Maintenance & Support', 'Systems Assurance Retainer', 'Maintenance & Support', '"5000-100000"', '15000.00', '"Ongoing support', 'upgrades', 'troubleshooting', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(10, 'CEA8X3E265', 'Automated Backup & Recovery Service', 'Data Recovery Assurance', 'Security & Backups', '"2000-20000"', '3000.00', '"Automated backups', 'restoration testing', 'disaster recovery preparation', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(11, 'BFA0RUA8U9', 'Security Monitoring & Threat Protection', 'Threat Intelligence Shield', 'Security & Backups', '"5000-50000"', '8000.00', '"Continuous monitoring', 'vulnerability assessment', 'threat detection', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(12, 'T9TJJ9EFMN', 'M-Pesa Payment Gateway Integration', 'Payment Gateway Deployment', 'Payment Solutions', '"15000-150000"', '35000.00', '"M-Pesa integration', 'callback configuration', 'transaction verification', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(13, 'ZHFWBUGQ3S', 'Payment Monitoring & Reconciliation Service', 'Revenue Reconciliation Guard', 'Payment Solutions', '"2000-20000"', '5000.00', '"Payment monitoring', 'transaction verification', 'reconciliation support', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(14, 'MKSZGO49EP', 'Bulk SMS Communication Integration', 'Mass Communication Engine', 'Messaging Services', '"1000-100000"', '0.00', '"Bulk SMS delivery platform for reminders', 'notifications', 'alerts', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(15, '8ZW5AEG10W', 'WhatsApp Business Automation Integration', 'Customer Engagement Automation', 'Messaging Services', '"20000-300000"', '50000.00', '"WhatsApp Business integration with automated messaging', 'notifications', 'customer support workflows', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(16, '9T8N9WIMMD', 'Search Engine Optimization Service', 'Search Visibility Accelerator', 'Marketing Services', '"10000-100000"', '25000.00', '"SEO audits', 'keyword optimization', 'technical improvements', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(17, 'RFQDQ9NR7G', 'Google Ads Campaign Management', 'Paid Lead Generation Engine', 'Marketing Services', '"15000-150000"', '30000.00', '"Google Ads setup', 'campaign optimization', 'lead acquisition strategy', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(18, 'P45YWWQWNN', 'AI Chatbot & Automation Development', 'Intelligent Automation Suite', 'AI & Automation', '"20000-500000"', '75000.00', '"AI chatbots', 'workflow automation', 'customer support assistants', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(19, 'U8CMHW7QV7', 'AI Assistant Monitoring & Optimization', 'AI Performance Assurance', 'AI & Automation', '"3000-50000"', '10000.00', '"Monitoring', 'prompt optimization', 'knowledge updates', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(20, 'RMWDH94MW3', 'API Integration & Data Synchronization', 'Systems Integration Bridge', 'Integrations', '"20000-500000"', '0.00', '"Third-party integrations', 'API connectivity', 'workflow automation', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(21, 'F5TRPD51Y0', 'User Training & System Onboarding', 'Technology Adoption Program', 'Training & Consulting', '"5000-100000"', '15000.00', '"User onboarding', 'staff training', 'documentation', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(22, '9TWA8PIUH9', 'Technology Strategy & Advisory Services', 'Digital Transformation Advisory', 'Training & Consulting', '"5000-200000"', '25000.00', '"Technology planning', 'software audits', 'digital transformation consulting', '2026-05-30 08:05:18', '2026-05-30 08:05:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE IF NOT EXISTS `settings` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `approval_levels` varchar(500) DEFAULT NULL,
+  `default_currency` varchar(500) DEFAULT NULL,
+  `sms_notifications` varchar(500) DEFAULT NULL,
+  `email_notifications` varchar(255) DEFAULT NULL,
+  `allow_partial_payments` varchar(500) DEFAULT NULL,
+  `allow_partial_recoveries` varchar(500) DEFAULT NULL,
+  `auto_generate_request_numbers` varchar(500) DEFAULT NULL,
+  `default_approval_workflow` varchar(500) DEFAULT NULL,
+  `system_status` varchar(500) DEFAULT NULL,
+  `setting_remarks` longtext,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `smart_messages`
+--
+
+CREATE TABLE IF NOT EXISTS `smart_messages` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `message_number` varchar(500) DEFAULT NULL,
+  `related_record_id` varchar(500) DEFAULT NULL,
+  `recipient_name` varchar(500) DEFAULT NULL,
+  `recipient_phone` varchar(50) DEFAULT NULL,
+  `recipient_email` varchar(255) DEFAULT NULL,
+  `message_channel` varchar(500) DEFAULT NULL,
+  `message_subject` varchar(500) DEFAULT NULL,
+  `message_content` longtext,
+  `message_status` varchar(500) DEFAULT NULL,
+  `delivery_status` varchar(500) DEFAULT NULL,
+  `request_source` varchar(500) DEFAULT NULL,
+  `request_id` varchar(500) DEFAULT NULL,
+  `sent_by` varchar(500) DEFAULT NULL,
+  `scheduled_for` datetime DEFAULT NULL,
+  `sent_on` datetime DEFAULT NULL,
+  `delivered_on` datetime DEFAULT NULL,
+  `read_on` datetime DEFAULT NULL,
+  `failed_on` datetime DEFAULT NULL,
+  `failure_reason` longtext,
+  `created_on` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `smart_messages`
+--
+
+INSERT INTO `smart_messages` (`primkey`, `record_id`, `message_number`, `related_record_id`, `recipient_name`, `recipient_phone`, `recipient_email`, `message_channel`, `message_subject`, `message_content`, `message_status`, `delivery_status`, `request_source`, `request_id`, `sent_by`, `scheduled_for`, `sent_on`, `delivered_on`, `read_on`, `failed_on`, `failure_reason`, `created_on`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, 'QXIHW1X', '', '', 'Jeremiah Alex', '0710766390', 'jereasanya@gmail.com', 'draft', 'Payment Request so new new', 'Hello {name} updated but new', 'draft', 'draft', 'clients_smart_message_draft', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, 'JYGDFW6', '', '', 'Jeremiah Alex', '0710766390', 'jereasanya@gmail.com', 'draft', 'Payment Request so new new', 'Hello {name} updated but new but updated', 'draft', 'draft', 'clients_smart_message_draft', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, 'EMTYPLZ', '', '', 'Jeremiah Alex', '0710766390', 'jereasanya@gmail.com', 'draft', 'Payment Request', 'Hello {name} gfg', 'draft', 'draft', 'clients_smart_message_draft', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(4, 'ZAWAJ13', 'MSG-1780400284658-sms', '', 'Jeremiah Alex', '0710766390', 'jereasanya@gmail.com', 'sms', 'Super sacco inco', 'Hello Jeremiah Alex,\n\nPlease find your payment request for Super sacco inco.\nAmount: 1,000\nPaybill Number: 4091961\nAccount Number: JAFX18\n\n\n\nThank you.', 'sent', 'sent', 'clients_smart_message_card', 'REQ-1780400284657-M1U6', 'superadmin', '0000-00-00 00:00:00', '2026-06-02 11:38:06', '2026-06-02 11:38:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '2026-06-02 00:00:00', '2026-06-02 11:38:04', '2026-06-02 11:38:06', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, '9NB4SZA', 'MSG-1780400286611-email', '', 'Jeremiah Alex', '0710766390', 'jereasanya@gmail.com', 'email', 'Super sacco inco', 'Hello Jeremiah Alex,\n\nPlease find your payment request for Super sacco inco.\nAmount: 1,000\nPaybill Number: 4091961\nAccount Number: JAFX18\n\n\n\nThank you.', 'sent', 'sent', 'clients_smart_message_card', 'REQ-1780400284657-M1U6', 'superadmin', '0000-00-00 00:00:00', '2026-06-02 11:38:10', '2026-06-02 11:38:10', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '2026-06-02 00:00:00', '2026-06-02 11:38:06', '2026-06-02 11:38:10', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(6, 'IKY3I1H', '', '', 'Jeremiah Alex', '0710766390', 'jereasanya@gmail.com', 'draft', 'Tropical dessert combo file', 'Hello Jeremiah Alex,\n\nPlease find your payment request for Tropical dessert combo file.\nAmount: 8,000\nPaybill Number: 409 1961\nAccount Number: JAG609\n\n\n\nThank you.', 'draft', 'draft', 'clients_smart_message_draft', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(7, 'E9QPLWB', 'MSG-1780449569264-whatsapp', '', 'Jeremiah Alex', '0710766390', 'jereasanya@gmail.com', 'whatsapp', 'Tropical dessert combo file', 'Hello Jeremiah Alex,\n\nPlease find your payment request for Tropical dessert combo file.\nAmount: 8,000\nPaybill Number: 409 1961\nAccount Number: JAG609\n\n\n\nThank you.', 'sent', 'sent', 'clients_smart_message_card', 'REQ-1780449569263-NLG8', 'superadmin', '0000-00-00 00:00:00', '2026-06-03 01:19:29', '2026-06-03 01:19:29', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '2026-06-03 00:00:00', '2026-06-03 01:19:29', '2026-06-03 01:19:29', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(8, 'EXEN2BH', 'MSG-1780454223212-whatsapp', 'CRVZPM2', 'Chrispine nyaroche', '0710766390', 'jereasanya@gmail.com', 'whatsapp', 'Greetings and welcome to our system', 'Hello Chrispine nyaroche', 'sent', 'sent', 'clients_smart_message_card', 'REQ-1780454223211-OC1U', 'superadmin', '0000-00-00 00:00:00', '2026-06-03 02:37:03', '2026-06-03 02:37:03', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '2026-06-03 00:00:00', '2026-06-03 02:37:03', '2026-06-03 02:37:03', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(9, 'EMPN1KN', 'MSG-1780454636724-whatsapp', 'DWB8037', 'Mara welfare', '0710766390', 'jereasanya@gmail.com', 'whatsapp', 'Greetings and welcome to our system', 'Hello Mara welfare', 'sent', 'sent', 'clients_smart_message_card', 'REQ-1780454636723-4Z3C', 'superadmin', '0000-00-00 00:00:00', '2026-06-03 02:43:56', '2026-06-03 02:43:56', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '2026-06-03 00:00:00', '2026-06-03 02:43:56', '2026-06-03 02:43:56', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(10, 'QDHARMR', '', 'W4XY907', 'Summit Lilian', '0710766390', 'jereasanya@gmail.com', 'draft', 'Invoice Reminder', 'Hello Summit Lilian,\n\nThis is a friendly reminder that an outstanding balance of 8000.00 remains due for Invoice #{invoice_number}. \nPlease make payment by {due_date} to avoid service interruption. \n\nThank you.', 'draft', 'draft', 'clients_smart_message_draft', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `smart_message_templates`
+--
+
+CREATE TABLE IF NOT EXISTS `smart_message_templates` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `template_name` varchar(500) DEFAULT NULL,
+  `template_code` varchar(500) DEFAULT NULL,
+  `template_category` varchar(500) DEFAULT NULL,
+  `message_channel` varchar(500) DEFAULT NULL,
+  `subject` varchar(500) DEFAULT NULL,
+  `message_content` longtext,
+  `template_status` varchar(500) DEFAULT NULL,
+  `created_by` varchar(500) DEFAULT NULL,
+  `last_updated_by` datetime DEFAULT NULL,
+  `created_on` datetime DEFAULT NULL,
+  `updated_on` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `smart_message_templates`
+--
+
+INSERT INTO `smart_message_templates` (`primkey`, `record_id`, `template_name`, `template_code`, `template_category`, `message_channel`, `subject`, `message_content`, `template_status`, `created_by`, `last_updated_by`, `created_on`, `updated_on`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, '00M7P6G', 'Website Stage 8', 'Payment_Balance_reminder', 'Seut', '', '', '', '', '', '2026-05-31 19:16:00', '0000-00-00 00:00:00', '2026-05-31 19:16:00', '2026-05-31 19:16:00', '2026-05-31 19:16:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, '7IJIV2Q', 'Website Stage 8', 'Payment_Balance_reminder', 'Seut', '', '', '', '', '', '2026-05-31 19:16:00', '0000-00-00 00:00:00', '2026-05-31 19:16:00', '2026-05-31 19:16:00', '2026-05-31 19:16:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, 'UCB9RLG', 'Red', 'Payment_Balance_reminder', 'Seut', '', 'Josprix hardware POS Sales Report', 'Hello {full_name} Friendly reminder to review the proposal we shared with you. Phone number {phone_number}', '', '', '2026-05-31 19:16:00', '0000-00-00 00:00:00', '2026-05-31 19:16:00', '2026-05-31 19:16:00', '2026-05-31 19:16:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(4, '7XC43W5', 'Red', 'invoice_bal', 'Seut', '', 'Invoice Reminder', 'Hello {name},\r\n\r\nThis is a friendly reminder that an outstanding balance of {amount} remains due for Invoice #{invoice_number}. \r\nPlease make payment by {due_date} to avoid service interruption. \r\n\r\nThank you.\r\n', '', '', '2026-05-31 19:16:00', '0000-00-00 00:00:00', '2026-05-31 19:16:00', '2026-05-31 19:16:00', '2026-05-31 19:16:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, '7U4P443', 'Payment Recived', 'Receipt payment acknowledgement', 'Smart Message', '', 'Payment Recived', 'Hello {name} your payment amount of {amount} has been received. \nThank you for your purchase', 'Active', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(6, 'YLYA4BY', 'Payment request note', 'payment Request note', 'Smart Message', '', 'Payment request note', 'Dear {name}, \r\nOur records indicate that your {request_title} has an outstanding balance of {amount}.\r\n\r\nKindly settle the amount by {due_date}. \r\n\r\n{request_notes}\r\n\r\nPaybill number  : {payment_shortcode}\r\nAccount : {request_reference}\r\nAmount : {amount}\r\n\r\n Thank you.', 'Active', '', '2026-06-01 11:19:00', '0000-00-00 00:00:00', '2026-06-01 11:19:00', '2026-06-01 11:19:00', '2026-06-01 11:19:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(9, 'L3V1N61', NULL, NULL, NULL, 'draft', NULL, 'Hello Jeremiah Alex your payment amount of {amount} has been received. \nThank you for your purchase', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(10, 'QR6MDGT', NULL, NULL, NULL, 'draft', NULL, 'Hello Jeremiah Alex your payment amount of {amount} has been received. \nThank you for your purchase', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(11, 'NZR67DC', NULL, NULL, NULL, 'draft', NULL, 'Hello Jeremiah Alex your payment amount of {amount} has been received. \nThank you for your purchase', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(12, 'GAHRSUB', NULL, NULL, NULL, 'draft', NULL, 'Hello {name}', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(13, 'HBRWE47', NULL, NULL, NULL, 'draft', NULL, 'Hello {name}', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(14, 'U9MJHXA', NULL, NULL, NULL, 'draft', NULL, 'Hello {name}', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(15, 'IMZ57AB', NULL, NULL, NULL, 'draft', NULL, 'Hello {name}', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(16, 'R1D5FF5', NULL, NULL, NULL, 'draft', NULL, 'Hello {name} new one', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(17, 'CWTTRT1', NULL, NULL, NULL, 'draft', NULL, 'Hello {name} new one', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(18, '4O77Y6O', NULL, NULL, NULL, 'draft', NULL, 'Hello {name} new one', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(19, 'WOFQVE7', NULL, NULL, NULL, 'draft', NULL, 'Hello {name}', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(20, 'UIAP2PP', NULL, NULL, NULL, 'draft', NULL, 'Hello {name}  hh', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(21, 'H0QRNKB', NULL, NULL, NULL, 'draft', NULL, 'Hello {name}', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(22, '91YSVDL', NULL, NULL, NULL, 'draft', NULL, 'Hello {name}', NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `smart_payments`
+--
+
+CREATE TABLE IF NOT EXISTS `smart_payments` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `payment_date` datetime DEFAULT NULL,
+  `transaction_code` varchar(500) DEFAULT NULL,
+  `amount_paid` decimal(10,2) DEFAULT NULL,
+  `payer_name` varchar(500) DEFAULT NULL,
+  `payer_phone` varchar(50) DEFAULT NULL,
+  `request_reference` varchar(500) DEFAULT NULL,
+  `payment_description` varchar(500) DEFAULT NULL,
+  `related_module` varchar(500) DEFAULT NULL,
+  `payment_reference` varchar(500) DEFAULT NULL,
+  `related_record_id` varchar(500) DEFAULT NULL,
+  `receipt_number` varchar(500) DEFAULT NULL,
+  `payer_email` varchar(255) DEFAULT NULL,
+  `payment_method` varchar(500) DEFAULT NULL,
+  `payment_channel` varchar(500) DEFAULT NULL,
+  `currency` varchar(500) DEFAULT NULL,
+  `payment_notes` longtext,
+  `payment_status` varchar(500) DEFAULT NULL,
+  `processed_by` varchar(500) DEFAULT NULL,
+  `created_on` datetime DEFAULT NULL,
+  `updated_on` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `smart_payments`
+--
+
+INSERT INTO `smart_payments` (`primkey`, `record_id`, `payment_date`, `transaction_code`, `amount_paid`, `payer_name`, `payer_phone`, `request_reference`, `payment_description`, `related_module`, `payment_reference`, `related_record_id`, `receipt_number`, `payer_email`, `payment_method`, `payment_channel`, `currency`, `payment_notes`, `payment_status`, `processed_by`, `created_on`, `updated_on`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, 'C5OREAB', '2026-06-01 00:00:00', 'QVCHKNE5O8', '638.00', 'John mwende', '+254***59', 'SPR-1780300651356', 'Invoice payment', 'smartpaymentrequests', 'PAY-1780305784442', '8I8JIET', 'QVCHKNE5O8', 'jereasanya@gmail.com', 'M-Pesa', 'Pay Bill', 'KES', 'IPN BillRef: MARAJUN2026; OrgBalance: 000.00; ThirdPartyTransID: 0', 'Completed', 'ipn-webhook', '2026-06-01 00:00:00', '2026-06-01 12:23:04', '2026-06-01 12:23:04', '2026-06-01 12:23:04', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, 'ZPOFVVJ', '2026-06-01 00:00:00', 'QVN017YFBG', '1205.00', 'Francis mwende', '+254***46', 'SPR-1780300651356', 'Invoice payment', 'smartpaymentrequests', 'PAY-1780306010626', '8I8JIET', 'QVN017YFBG', 'jereasanya@gmail.com', 'M-Pesa', 'Pay Bill', 'KES', 'IPN BillRef: MARAJUN2026; OrgBalance: 000.00; ThirdPartyTransID: 0', 'Completed', 'ipn-webhook', '2026-06-01 00:00:00', '2026-06-01 12:26:50', '2026-06-01 12:26:50', '2026-06-01 12:26:50', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, 'NEIF2RW', '2026-06-01 00:00:00', 'QVZ4KKOPZR', '1573.00', 'Francis mwende', '+254***21', 'SPR-1780300651356', 'Invoice payment', 'smartpaymentrequests', 'PAY-1780306285717', '8I8JIET', 'QVZ4KKOPZR', 'jereasanya@gmail.com', 'M-Pesa', 'Pay Bill', 'KES', 'IPN BillRef: MARAJUN2026; OrgBalance: 000.00; ThirdPartyTransID: 0', 'Completed', 'ipn-webhook', '2026-06-01 00:00:00', '2026-06-01 12:31:25', '2026-06-01 12:31:25', '2026-06-01 12:31:25', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(4, 'KV44SHG', '2026-06-01 00:00:00', 'QV8A52BW4P', '472.00', 'Michael Wanjiku', '+254***12', 'SPR-1780300651356', 'Invoice payment', 'smartpaymentrequests', 'PAY-1780306332225', '8I8JIET', 'QV8A52BW4P', 'jereasanya@gmail.com', 'M-Pesa', 'Pay Bill', 'KES', 'IPN BillRef: MARAJUN2026; OrgBalance: 000.00; ThirdPartyTransID: 0', 'Completed', 'ipn-webhook', '2026-06-01 00:00:00', '2026-06-01 12:32:12', '2026-06-01 12:32:12', '2026-06-01 12:32:12', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, '3X465JH', '2026-06-01 00:00:00', 'QV89CSXLJQ', '1834.00', 'Steven mwende', '+254***32', 'SPR-1780300651356', 'Invoice payment', 'smartpaymentrequests', 'PAY-1780306352939', '8I8JIET', 'QV89CSXLJQ', 'jereasanya@gmail.com', 'M-Pesa', 'Pay Bill', 'KES', 'IPN BillRef: MARAJUN2026; OrgBalance: 000.00; ThirdPartyTransID: 0', 'Completed', 'ipn-webhook', '2026-06-01 00:00:00', '2026-06-01 12:32:32', '2026-06-01 12:32:32', '2026-06-01 12:32:32', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(6, '5EAREEN', '2026-06-01 00:00:00', 'QVKYRLYCSQ', '963.00', 'Michael Okoye', '+254***35', 'SPR-1780300651356', 'Invoice payment', 'smartpaymentrequests', 'PAY-1780306355108', '8I8JIET', 'QVKYRLYCSQ', 'jereasanya@gmail.com', 'M-Pesa', 'Pay Bill', 'KES', 'IPN BillRef: MARAJUN2026; OrgBalance: 000.00; ThirdPartyTransID: 0', 'Completed', 'ipn-webhook', '2026-06-01 00:00:00', '2026-06-01 12:32:35', '2026-06-01 12:32:35', '2026-06-01 12:32:35', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(7, 'TASPRW3', '2026-06-01 00:00:00', 'QVNFNMNDQH', '1449.00', 'Jeremiah moraa', '+254***35', 'SPR-1780300651356', 'Invoice payment', 'smartpaymentrequests', 'PAY-1780306355500', '8I8JIET', 'QVNFNMNDQH', 'jereasanya@gmail.com', 'M-Pesa', 'Pay Bill', 'KES', 'IPN BillRef: MARAJUN2026; OrgBalance: 000.00; ThirdPartyTransID: 0', 'Completed', 'ipn-webhook', '2026-06-01 00:00:00', '2026-06-01 12:32:35', '2026-06-01 12:32:35', '2026-06-01 12:32:35', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(8, 'P7Z5ULU', '2026-06-01 00:00:00', 'QVUQRXFN0Q', '605.00', 'Wambui mwambi', '+254***10', 'SPR-1780300651356', 'Invoice payment', 'smartpaymentrequests', 'PAY-1780306819046', '8I8JIET', 'QVUQRXFN0Q', 'jereasanya@gmail.com', 'M-Pesa', 'Pay Bill', 'KES', 'IPN BillRef: MARAJUN2026; OrgBalance: 000.00; ThirdPartyTransID: 0', 'Completed', 'ipn-webhook', '2026-06-01 00:00:00', '2026-06-01 12:40:18', '2026-06-01 12:40:18', '2026-06-01 12:40:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(9, 'BXRAYMA', '2026-06-01 00:00:00', 'QV5BT2QITX', '5000.00', 'Francis moraa', '+254***58', 'SPR-1780300651356', 'Invoice payment', 'smartpaymentrequests', 'PAY-1780309865426', '8I8JIET', 'QV5BT2QITX', 'jereasanya@gmail.com', 'M-Pesa', 'Pay Bill', 'KES', 'IPN BillRef: TKYK4B; OrgBalance: 000.00; ThirdPartyTransID: 0', 'Completed', 'ipn-webhook', '2026-06-01 00:00:00', '2026-06-01 13:31:05', '2026-06-01 13:31:05', '2026-06-01 13:31:05', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(10, 'X8Z9G3L', '2026-06-02 00:00:00', 'QVT1CX75IU', '1000.00', 'Jane waishu', '+254***17', 'JAFX18', 'Super sacco inco', 'smartpaymentrequests', 'PAY-1780400421517', 'B9M25GO', 'QVT1CX75IU', 'jereasanya@gmail.com', 'M-Pesa', 'Pay Bill', 'KES', 'IPN BillRef: JAFX18; OrgBalance: 000.00; ThirdPartyTransID: 0', 'Completed', 'ipn-webhook', '2026-06-02 00:00:00', '2026-06-02 14:40:21', '2026-06-02 14:40:21', '2026-06-02 14:40:21', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `smart_payment_requests`
+--
+
+CREATE TABLE IF NOT EXISTS `smart_payment_requests` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `request_reference` varchar(500) DEFAULT NULL,
+  `request_title` varchar(500) DEFAULT NULL,
+  `related_module` varchar(500) DEFAULT NULL,
+  `related_record_id` varchar(500) DEFAULT NULL,
+  `payer_name` varchar(500) DEFAULT NULL,
+  `payer_phone` varchar(50) DEFAULT NULL,
+  `payer_email` varchar(255) DEFAULT NULL,
+  `amount_requested` decimal(10,2) DEFAULT NULL,
+  `amount_paid` decimal(10,2) DEFAULT NULL,
+  `balance_amount` decimal(10,2) DEFAULT NULL,
+  `payment_shortcode` varchar(500) DEFAULT NULL,
+  `payment_link` varchar(500) DEFAULT NULL,
+  `request_notes` longtext,
+  `expiry_date` datetime DEFAULT NULL,
+  `request_status` varchar(500) DEFAULT NULL,
+  `created_by` varchar(500) DEFAULT NULL,
+  `created_on` datetime DEFAULT NULL,
+  `updated_on` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `smart_payment_requests`
+--
+
+INSERT INTO `smart_payment_requests` (`primkey`, `record_id`, `request_reference`, `request_title`, `related_module`, `related_record_id`, `payer_name`, `payer_phone`, `payer_email`, `amount_requested`, `amount_paid`, `balance_amount`, `payment_shortcode`, `payment_link`, `request_notes`, `expiry_date`, `request_status`, `created_by`, `created_on`, `updated_on`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, '6MJCCZ4', 'dfghjkl', 'invoice web design ', '', '', '', '', '', '0.00', '0.00', '0.00', '', '', '', '2026-06-01 09:20:00', '', '', '0000-00-00 00:00:00', '2026-06-01 09:20:00', '2026-06-01 09:20:00', '2026-06-01 09:20:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, '8I8JIET', 'SPR-1780300651356', 'Invoice payment', 'smartpaymentrequests', '', 'Suneka inco', '0710766390', 'jereasanya@gmail.com', '25000.00', '1843.00', '23157.00', '490923', '', 'Please pay now nwo', '0000-00-00 00:00:00', 'Partially Paid', 'superadmin', '2026-06-01 00:00:00', '2026-06-01 12:26:50', '2026-06-01 08:20:55', '2026-06-01 12:26:50', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, '7ZVPPA3', 'SPR-1780300124929', 'Invoice payment', 'smartpaymentrequests', '', 'Jeremiah Asanya', '0710766390', 'jereasanya@gmail.com', '25000.00', '0.00', '25000.00', '490923', '', 'Please pay now nwo', '0000-00-00 00:00:00', 'Pending', 'superadmin', '2026-06-01 00:00:00', '2026-06-01 07:48:44', '2026-06-01 07:48:44', '2026-06-01 07:48:44', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(4, 'QKUDGTK', 'SPR-1780300531519', 'Invoice payment', 'smartpaymentrequests', '', 'Jeremiah Asanya', '0710766390', 'jereasanya@gmail.com', '25000.00', '0.00', '25000.00', '490923', '', 'Please pay now nwo', '0000-00-00 00:00:00', 'Pending', 'superadmin', '2026-06-01 00:00:00', '2026-06-01 07:55:31', '2026-06-01 07:55:31', '2026-06-01 07:55:31', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, 'EQIKQHJ', 'MARAJUN2026', 'Mara welfare Platform Development balance', 'smartpaymentrequests', '', 'Jeremiah Asanya', '0710766390', 'jereasanya@gmail.com', '20000.00', '6896.00', '13104.00', '490923', '', '', '0000-00-00 00:00:00', 'Partially Paid', 'superadmin', '2026-06-01 00:00:00', '2026-06-01 12:40:18', '2026-06-01 08:45:34', '2026-06-01 12:40:18', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(6, 'IJRR1HX', 'COMBOINCO', 'Tropical dessert combo file', 'smartpaymentrequests', '', 'Jeremiah Asanya', '0710766390', 'jereasanya@gmail.com', '9500.00', '0.00', '9500.00', '490923', '', '', '0000-00-00 00:00:00', 'Pending', 'superadmin', '2026-06-01 00:00:00', '2026-06-01 09:35:15', '2026-06-01 09:35:15', '2026-06-01 09:35:15', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(7, 'DJJ3AP0', 'TKYK4B', 'Invoice payment', 'smartpaymentrequests', '', 'Trufinds Kargo', '0710766390', 'jereasanya@gmail.com', '8000.00', '5000.00', '3000.00', '490923', '', '', '0000-00-00 00:00:00', 'Partially Paid', 'superadmin', '2026-06-01 00:00:00', '2026-06-01 13:31:05', '2026-06-01 10:28:41', '2026-06-01 13:31:05', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(8, '5XQKTDR', 'ECR9PE', 'Mpesa Ipn set up', 'smartpaymentrequests', '', 'Eugene Chrysolite', '0710766390', 'jereasanya@gmail.com', '7000.00', '0.00', '7000.00', '490923', '', '', '0000-00-00 00:00:00', 'Pending', 'superadmin', '2026-06-01 00:00:00', '2026-06-01 10:43:58', '2026-06-01 10:43:58', '2026-06-01 10:43:58', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(9, '99S2AR9', 'JABXX3', 'Payment request for Jeremiah Alex', 'smartpaymentrequests', '', 'Jeremiah Alex', '0710766390', 'jereasanya@gmail.com', '8898.00', '0.00', '8898.00', '409 - 1961', '', '', '0000-00-00 00:00:00', 'Pending', 'superadmin', '2026-06-02 00:00:00', '2026-06-02 08:53:06', '2026-06-02 08:53:06', '2026-06-02 08:53:06', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(10, 'H6810OL', 'JAPKWS', 'Super sacco inco', 'smartpaymentrequests', '', 'Jeremiah Alex', '0710766390', 'jereasanya@gmail.com', '80.00', '0.00', '80.00', '490923', '', '', '0000-00-00 00:00:00', 'Pending', 'superadmin', '2026-06-02 00:00:00', '2026-06-02 11:37:17', '2026-06-02 11:37:17', '2026-06-02 11:37:17', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(11, 'B9M25GO', 'JAFX18', 'Super sacco inco', 'smartpaymentrequests', '', 'Jeremiah Alex', '0710766390', 'jereasanya@gmail.com', '1000.00', '1000.00', '0.00', '4091961', '', '', '0000-00-00 00:00:00', 'Paid', 'superadmin', '2026-06-02 00:00:00', '2026-06-02 14:40:21', '2026-06-02 11:37:55', '2026-06-02 14:40:21', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(12, 'U5NWAOZ', 'JAG609', 'Tropical dessert combo file', 'smartpaymentrequests', '', 'Jeremiah Alex', '0710766390', 'jereasanya@gmail.com', '8000.00', '0.00', '8000.00', '409 1961', '', '', '0000-00-00 00:00:00', 'Pending', 'superadmin', '2026-06-03 00:00:00', '2026-06-03 01:19:05', '2026-06-03 01:19:05', '2026-06-03 01:19:05', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `smart_payment_settings`
+--
+
+CREATE TABLE IF NOT EXISTS `smart_payment_settings` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `setting_name` varchar(500) DEFAULT NULL,
+  `setting_code` varchar(500) DEFAULT NULL,
+  `setting_value` longtext,
+  `setting_category` varchar(500) DEFAULT NULL,
+  `setting_status` varchar(500) DEFAULT NULL,
+  `created_by` varchar(500) DEFAULT NULL,
+  `last_updated_by` datetime DEFAULT NULL,
+  `created_on` datetime DEFAULT NULL,
+  `updated_on` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `smart_payment_settings`
+--
+
+INSERT INTO `smart_payment_settings` (`primkey`, `record_id`, `setting_name`, `setting_code`, `setting_value`, `setting_category`, `setting_status`, `created_by`, `last_updated_by`, `created_on`, `updated_on`, `created_at`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, 'AJXP3G6', '', 'admin_email', 'jereasanya@gmail.com', '', '', '', '2026-06-01 12:37:00', '0000-00-00 00:00:00', '2026-06-01 12:37:00', '2026-06-01 12:37:00', '2026-06-01 12:37:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, '2K8XG6W', '', 'admin_tel', '0710766390', '', '', '', '2026-06-01 12:37:00', '0000-00-00 00:00:00', '2026-06-01 12:37:00', '2026-06-01 12:37:00', '2026-06-01 12:37:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff`
+--
+
+CREATE TABLE IF NOT EXISTS `staff` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `full_name` varchar(500) DEFAULT NULL,
+  `staff_number` varchar(500) DEFAULT NULL,
+  `phone_number` varchar(50) DEFAULT NULL,
+  `email_address` varchar(255) DEFAULT NULL,
+  `department` varchar(500) DEFAULT NULL,
+  `position` varchar(500) DEFAULT NULL,
+  `advance_limit` varchar(500) DEFAULT NULL,
+  `current_outstanding_balance` decimal(10,2) DEFAULT NULL,
+  `staff_status` varchar(500) DEFAULT NULL,
+  `registered_on` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `system_module_manifest_`
+--
+
+CREATE TABLE IF NOT EXISTS `system_module_manifest_` (
+  `primkey` int(255) NOT NULL,
+  `record_id` varchar(255) NOT NULL,
+  `component_name` varchar(255) NOT NULL,
+  `module_key` varchar(255) NOT NULL,
+  `module_name` varchar(255) NOT NULL,
+  `permission_type` varchar(100) NOT NULL,
+  `capability_key` varchar(255) NOT NULL,
+  `access_name` varchar(255) NOT NULL,
+  `relative_path` varchar(500) NOT NULL,
+  `hive_site_id` varchar(500) NOT NULL,
+  `hive_site_name` varchar(500) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `system_module_manifest_`
+--
+
+INSERT INTO `system_module_manifest_` (`primkey`, `record_id`, `component_name`, `module_key`, `module_name`, `permission_type`, `capability_key`, `access_name`, `relative_path`, `hive_site_id`, `hive_site_name`) VALUES
+(1, '', 'SystemmodulemanifestList', 'ACCESSCONTROL', 'Accesscontrol', 'VIEW', 'VIEW_SYSTEM_MODULE_MANIFEST_', 'View system module manifest ', 'accesscontrol/uiControl/SystemmodulemanifestList.jsx', '', ''),
+(2, '', 'SystemmodulemanifestProfile', 'ACCESSCONTROL', 'Accesscontrol', 'MANAGE', 'MANAGE_SYSTEM_MODULE_MANIFEST_', 'Manage system module manifest ', 'accesscontrol/uiControl/SystemmodulemanifestProfile.jsx', '', ''),
+(3, '', 'AppUsersProfile', 'APP_USERS', 'App users', 'MANAGE', 'APP_USERS_MANAGE', 'App users manage', 'app_users/uiControl/AppUsersProfile.jsx', '', ''),
+(4, '', 'DigitalassetlistList', 'ASSETS', 'Assets', 'VIEW', 'VIEW_ASSETS', 'View assets', 'assets/uiControl/DigitalassetlistList.jsx', '', ''),
+(5, '', 'DigitalassetlistProfile', 'ASSETS', 'Assets', 'MANAGE', 'MANAGE_ASSETS', 'Manage assets', 'assets/uiControl/DigitalassetlistProfile.jsx', '', ''),
+(6, '', 'AssetpricingList', 'ASSET_PRICING', 'Asset pricing', 'VIEW', 'VIEW_ASSET_PRICING', 'View asset pricing', 'asset_pricing/uiControl/AssetpricingList.jsx', '', ''),
+(7, '', 'AssetpricingProfile', 'ASSET_PRICING', 'Asset pricing', 'MANAGE', 'MANAGE_ASSET_PRICING', 'Manage asset pricing', 'asset_pricing/uiControl/AssetpricingProfile.jsx', '', ''),
+(8, '', 'UserrolefunctionsList', 'BUNDLEFUNCTIONS', 'Bundlefunctions', 'VIEW', 'VIEW_USER_BUNDLE_ROLE_FUNCTIONS', 'View user bundle role functions', 'bundlefunctions/uiControl/UserrolefunctionsList.jsx', '', ''),
+(9, '', 'UserrolefunctionsProfile', 'BUNDLEFUNCTIONS', 'Bundlefunctions', 'MANAGE', 'MANAGE_USER_BUNDLE_ROLE_FUNCTIONS', 'Manage user bundle role functions', 'bundlefunctions/uiControl/UserrolefunctionsProfile.jsx', '', ''),
+(10, '', 'EntitlementsList', 'ENTITLEMENTS', 'Entitlements', 'VIEW', 'ENTITLEMENTS_VIEW', 'Entitlements view', 'entitlements/uiControl/EntitlementsList.jsx', '', ''),
+(11, '', 'InvoicesList', 'INVOICES', 'Invoices', 'VIEW', 'VIEW_INVOICES', 'View invoices', 'invoices/uiControl/InvoicesList.jsx', '', ''),
+(12, '', 'InvoicesProfile', 'INVOICES', 'Invoices', 'MANAGE', 'MANAGE_INVOICES', 'Manage invoices', 'invoices/uiControl/InvoicesProfile.jsx', '', ''),
+(13, '', 'ManageassetpricingList', 'MANAGEPRICING', 'Managepricing', 'VIEW', 'VIEW_ASSET_PRICING', 'View asset pricing', 'managepricing/uiControl/ManageassetpricingList.jsx', '', ''),
+(14, '', 'ManageassetpricingProfile', 'MANAGEPRICING', 'Managepricing', 'MANAGE', 'MANAGE_ASSET_PRICING', 'Manage asset pricing', 'managepricing/uiControl/ManageassetpricingProfile.jsx', '', ''),
+(15, '', 'SentmessagesList', 'MESSAGES', 'Messages', 'VIEW', 'VIEW_SENT_MESSAGES', 'View sent messages', 'messages/uiControl/SentmessagesList.jsx', '', ''),
+(16, '', 'SentmessagesProfile', 'MESSAGES', 'Messages', 'MANAGE', 'MANAGE_SENT_MESSAGES', 'Manage sent messages', 'messages/uiControl/SentmessagesProfile.jsx', '', ''),
+(17, '', 'OrdersList', 'ORDERS', 'Orders', 'VIEW', 'VIEW_ORDERS', 'View orders', 'orders/uiControl/OrdersList.jsx', '', ''),
+(18, '', 'OrdersProfile', 'ORDERS', 'Orders', 'MANAGE', 'MANAGE_ORDERS', 'Manage orders', 'orders/uiControl/OrdersProfile.jsx', '', ''),
+(19, '', 'OrderItemsList', 'ORDER_ITEMS', 'Order items', 'VIEW', 'ORDER_ITEMS_VIEW', 'Order items view', 'order_items/uiControl/OrderItemsList.jsx', '', ''),
+(20, '', 'PaymentsList', 'PAYMENTS', 'Payments', 'VIEW', 'VIEW_PAYMENTS', 'View payments', 'payments/uiControl/PaymentsList.jsx', '', ''),
+(21, '', 'PaymentsProfile', 'PAYMENTS', 'Payments', 'MANAGE', 'MANAGE_PAYMENTS', 'Manage payments', 'payments/uiControl/PaymentsProfile.jsx', '', ''),
+(22, '', 'SystemrolesList', 'ROLEBUNDLES', 'Rolebundles', 'VIEW', 'VIEW_SYSTEM_ROLE_BUNDLES', 'View system role bundles', 'rolebundles/uiControl/SystemrolesList.jsx', '', ''),
+(23, '', 'SystemrolesProfile', 'ROLEBUNDLES', 'Rolebundles', 'MANAGE', 'MANAGE_SYSTEM_ROLE_BUNDLES', 'Manage system role bundles', 'rolebundles/uiControl/SystemrolesProfile.jsx', '', ''),
+(24, '', 'SelectsubscriptiontoinvoiceList', 'SUBSCRIPTIONS', 'Subscriptions', 'VIEW', 'VIEW_SUBSCRIPTIONS', 'View subscriptions', 'subscriptions/uiControl/SelectsubscriptiontoinvoiceList.jsx', '', ''),
+(25, '', 'SelectsubscriptiontoinvoiceProfile', 'SUBSCRIPTIONS', 'Subscriptions', 'MANAGE', 'MANAGE_SUBSCRIPTIONS', 'Manage subscriptions', 'subscriptions/uiControl/SelectsubscriptiontoinvoiceProfile.jsx', '', ''),
+(26, '', 'SubscriptionsList', 'SUBSCRIPTIONS', 'Subscriptions', 'VIEW', 'VIEW_SUBSCRIPTIONS', 'View subscriptions', 'subscriptions/uiControl/SubscriptionsList.jsx', '', ''),
+(27, '', 'SubscriptionsProfile', 'SUBSCRIPTIONS', 'Subscriptions', 'MANAGE', 'MANAGE_SUBSCRIPTIONS', 'Manage subscriptions', 'subscriptions/uiControl/SubscriptionsProfile.jsx', '', ''),
+(28, '', 'SystemusersList', 'SYSUSERS', 'Sysusers', 'VIEW', 'VIEW_SYSTEM_USERS', 'View system users', 'sysusers/uiControl/SystemusersList.jsx', '', ''),
+(29, '', 'SystemusersProfile', 'SYSUSERS', 'Sysusers', 'MANAGE', 'MANAGE_SYSTEM_USERS', 'Manage system users', 'sysusers/uiControl/SystemusersProfile.jsx', '', ''),
+(30, '', 'ActiveappusersList', 'USERS', 'Users', 'VIEW', 'VIEW_APP_USERS', 'View app users', 'users/uiControl/ActiveappusersList.jsx', '', ''),
+(31, '', 'ActiveappusersProfile', 'USERS', 'Users', 'MANAGE', 'MANAGE_APP_USERS', 'Manage app users', 'users/uiControl/ActiveappusersProfile.jsx', '', ''),
+(32, '', 'ApiuserlistList', 'USERS', 'Users', 'VIEW', 'VIEW_APP_USERS', 'View app users', 'users/uiControl/ApiuserlistList.jsx', '', ''),
+(33, '', 'ApiuserlistProfile', 'USERS', 'Users', 'MANAGE', 'MANAGE_APP_USERS', 'Manage app users', 'users/uiControl/ApiuserlistProfile.jsx', '', ''),
+(34, '', 'InactiveusersList', 'USERS', 'Users', 'VIEW', 'VIEW_APP_USERS', 'View app users', 'users/uiControl/InactiveusersList.jsx', '', ''),
+(35, '', 'InactiveusersProfile', 'USERS', 'Users', 'MANAGE', 'MANAGE_APP_USERS', 'Manage app users', 'users/uiControl/InactiveusersProfile.jsx', '', ''),
+(36, '', 'PlatformuserlistList', 'USERS', 'Users', 'VIEW', 'VIEW_APP_USERS', 'View app users', 'users/uiControl/PlatformuserlistList.jsx', '', ''),
+(37, '', 'PlatformuserlistProfile', 'USERS', 'Users', 'MANAGE', 'MANAGE_APP_USERS', 'Manage app users', 'users/uiControl/PlatformuserlistProfile.jsx', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `system_role_bundles`
+--
+
+CREATE TABLE IF NOT EXISTS `system_role_bundles` (
+  `primkey` int(255) NOT NULL,
+  `record_id` varchar(500) NOT NULL,
+  `bundle_id` varchar(500) NOT NULL,
+  `bundle_name` varchar(500) NOT NULL,
+  `remark` longtext NOT NULL,
+  `hive_site_id` varchar(500) NOT NULL,
+  `hive_site_name` varchar(500) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `system_role_bundles`
+--
+
+INSERT INTO `system_role_bundles` (`primkey`, `record_id`, `bundle_id`, `bundle_name`, `remark`, `hive_site_id`, `hive_site_name`) VALUES
+(2, 'SAKKRGH', 'ZHQBB44RD1', 'Station manager', 'Station manager role', '', ''),
+(4, 'EEYP1J3', '', 'Station attendant', 'Station attendant', '', ''),
+(5, 'OY9TU6C', '', 'Regional manager', 'Regional manager', '', ''),
+(6, '3TT9BJ2', '', 'Finance manager', 'Finance manager', '', ''),
+(7, '4I9JFN3', '', 'Team lead', '', '', ''),
+(8, 'YEPA2OZ', '', 'Invoice manager', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `system_users`
+--
+
+CREATE TABLE IF NOT EXISTS `system_users` (
+  `primkey` int(255) NOT NULL,
+  `record_id` varchar(500) NOT NULL,
+  `name` varchar(500) NOT NULL,
+  `email` varchar(500) NOT NULL,
+  `tel` varchar(500) NOT NULL,
+  `login_password` varchar(500) NOT NULL,
+  `ref_id` varchar(500) NOT NULL,
+  `regdate` datetime NOT NULL,
+  `user_no` varchar(500) NOT NULL,
+  `user_pic` varchar(500) NOT NULL,
+  `user_gender` varchar(500) NOT NULL,
+  `last_seen` varchar(500) NOT NULL,
+  `about` longtext NOT NULL,
+  `hive_site_id` varchar(500) NOT NULL,
+  `hive_site_name` varchar(500) NOT NULL,
+  `auth_token` varchar(500) NOT NULL,
+  `token_status` varchar(500) NOT NULL,
+  `token_expiring_in` varchar(500) NOT NULL,
+  `project_id` varchar(500) NOT NULL,
+  `project_name` varchar(500) NOT NULL,
+  `user_role` varchar(500) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `system_users`
+--
+
+INSERT INTO `system_users` (`primkey`, `record_id`, `name`, `email`, `tel`, `login_password`, `ref_id`, `regdate`, `user_no`, `user_pic`, `user_gender`, `last_seen`, `about`, `hive_site_id`, `hive_site_name`, `auth_token`, `token_status`, `token_expiring_in`, `project_id`, `project_name`, `user_role`) VALUES
+(1, '1FN4ZHN', 'Superadmin', 'superadmin', '', 'admin001', 'ZH1OA9PUWQ', '2024-12-28 00:00:00', '', 'media/system_users/1771736164066_4f364804-58bb-427b-a566-2ffbd2f78268.png', '', '', '', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin', '08ZQCN6TVG02X3LPBJJGGAWJ49COOYV2ZC5FDV9ZPJRHASR40LVL6G66MAAJRL9WCCP0SZP2WIWS1DBE1JMM9HUOJ6L9630M37MGKYKZHCEY6T9JHCPIQEV1SYBV0H477XWSQTRTG1A0O4KLA079L69AFLDC7QMOOKKZ9JDHSM', 'Active', '2025-03-18 16:42:55', '', '', 'OY9TU6C'),
+(3, 'NCPLHWZ', 'Jeremiah Alex mgr', 'jereasanya@gmail.com', '0710766390', 'alex', 'SHZMXAWFO0', '2025-03-12 00:00:00', '', 'media/system_users/1771710613108_gift_basket (1).png', 'Male', '', '', '', '', '', '', '', '', '', 'YEPA2OZ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tasks`
+--
+
+CREATE TABLE IF NOT EXISTS `tasks` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `task_title` varchar(500) DEFAULT NULL,
+  `task_description` longtext,
+  `task_type` varchar(500) DEFAULT NULL,
+  `task_priority` varchar(500) DEFAULT NULL,
+  `task_status` varchar(500) DEFAULT NULL,
+  `client_id` varchar(500) DEFAULT NULL,
+  `lead_id` varchar(500) NOT NULL,
+  `deal_id` varchar(500) DEFAULT NULL,
+  `due_date` datetime DEFAULT NULL,
+  `completed_on` datetime DEFAULT NULL,
+  `task_notes` longtext,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `assigned_sales_rep` varchar(500) DEFAULT NULL,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` (`primkey`, `record_id`, `task_title`, `task_description`, `task_type`, `task_priority`, `task_status`, `client_id`, `lead_id`, `deal_id`, `due_date`, `completed_on`, `task_notes`, `created_at`, `assigned_sales_rep`, `updated_at`, `hive_site_id`, `hive_site_name`) VALUES
+(1, 'S1ZUIRO', 'Call Jimmy kermal', '', '', '', 'Overdue', 'A98QVSQ', '', '8BKE07M', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(2, 'NR8QLPR', 'Set a meet with tru finds', 'Met set up', '', 'Urgent', 'Overdue', NULL, '', '0TZ5QCI', '2026-05-28 00:00:00', '2026-05-28 00:00:00', '', '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(3, 'OWYFX6E', 'Call Peris Remind of balcne', '', 'Follow up  call', 'Urgent', 'Overdue', 'A98QVSQ', '', 'E8YDQNI', '2026-05-28 00:00:00', '2026-05-28 00:00:00', '', '0000-00-00 00:00:00', NULL, '0000-00-00 00:00:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(4, '0FYA27I', 'Set upa call', '', '', '', '', NULL, '', NULL, '2026-06-03 04:58:00', '2026-06-03 00:00:00', '', '2026-06-03 04:58:00', '', '2026-06-03 04:58:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin'),
+(5, 'SP2YHVE', 'Call Peris Remind of balcne', '', '', '', '', NULL, 'V5S9XZL', NULL, '2026-06-03 05:02:00', '2026-06-03 00:00:00', '', '2026-06-03 05:02:00', '', '2026-06-03 05:02:00', 'LLRR0ZKOXRTCOHN_2024-12-28-07-45-56-pm', 'Superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `primkey` int(11) NOT NULL,
+  `record_id` varchar(100) NOT NULL,
+  `full_name` varchar(500) DEFAULT NULL,
+  `phone_number` varchar(50) DEFAULT NULL,
+  `email_address` varchar(255) DEFAULT NULL,
+  `user_password` varchar(500) DEFAULT NULL,
+  `user_role` varchar(500) DEFAULT NULL,
+  `department_name` varchar(500) DEFAULT NULL,
+  `profile_photo` text,
+  `account_status` varchar(500) DEFAULT NULL,
+  `last_login` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `hive_site_id` varchar(100) DEFAULT NULL,
+  `hive_site_name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_bundle_role_functions`
+--
+
+CREATE TABLE IF NOT EXISTS `user_bundle_role_functions` (
+  `primkey` int(255) NOT NULL,
+  `record_id` varchar(500) NOT NULL,
+  `bundle_id` varchar(500) NOT NULL,
+  `bundle_name` varchar(500) NOT NULL,
+  `role_id` varchar(500) NOT NULL,
+  `role_name` varchar(500) NOT NULL,
+  `remark` longtext NOT NULL,
+  `hive_site_id` varchar(500) NOT NULL,
+  `hive_site_name` varchar(500) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_bundle_role_functions`
+--
+
+INSERT INTO `user_bundle_role_functions` (`primkey`, `record_id`, `bundle_id`, `bundle_name`, `role_id`, `role_name`, `remark`, `hive_site_id`, `hive_site_name`) VALUES
+(1, 'RHZGTZE', '5PT77YI2YB', 'Accountant', 'Basic pages', '', '', '', ''),
+(2, 'T5D609X', '5PT77YI2YB', 'Accountant', 'User roles', '', '', '', ''),
+(3, 'G6C5BJX', '5PT77YI2YB', 'Accountant', 'Mpesa', '', '', '', ''),
+(4, 'NYZME5V', '5PT77YI2YB', 'Accountant', 'User role management', '', '', '', ''),
+(10, 'MRKWT1A', '', '', 'MAKE_PAYMENTS', '', '', '', ''),
+(12, 'MILI2X3', '', '', 'MAKE_PAYMENTS', '', '', '', ''),
+(13, 'IF6U5QX', '', '', 'MAKE_PAYMENTS', '', '', '', ''),
+(14, '1X2VHDW', '', '', 'MAKE_PAYMENTS', 'Make payments', '', '', ''),
+(15, 'HRO5F9S', '3TT9BJ2', 'Finance manager', 'MAKE_PAYMENTS', 'Make payments', '', '', ''),
+(16, 'MLDYGNJ', '3TT9BJ2', 'Finance manager', 'MANAGE_SUBSCRIPTIONS', 'Manage subscriptions', '', '', ''),
+(17, 'NTE4MS2', '3TT9BJ2', 'Finance manager', 'MANAGE_INVOICES', 'Manage invoices', '', '', ''),
+(18, 'JEGJRHY', '3TT9BJ2', 'Finance manager', 'MANAGE_ASSETS', 'Manage assets', '', '', ''),
+(19, 'ZJBOCIM', '3TT9BJ2', 'Finance manager', 'VIEW_ASSETS', 'View assets', '', '', ''),
+(21, '9XN90ZB', '3TT9BJ2', 'Finance manager', 'VIEW_ASSET_PRICING', 'View asset pricing', '', '', ''),
+(22, '3N4THMW', '3TT9BJ2', 'Finance manager', 'VIEW_APP_USERS', 'View app users', '', '', ''),
+(24, '966AV2A', 'OY9TU6C', 'Regional manager', 'VIEW_ASSETS', 'View assets', '', '', ''),
+(25, 'Z37NJL1', 'OY9TU6C', 'Regional manager', 'MANAGE_ASSETS', 'Manage assets', '', '', ''),
+(26, 'VIE12XX', 'OY9TU6C', 'Regional manager', 'MANAGE_INVOICES', 'Manage invoices', '', '', ''),
+(27, 'T7R2WBG', 'OY9TU6C', 'Regional manager', 'VIEW_INVOICES', 'View invoices', '', '', ''),
+(28, 'T2SZOQO', 'OY9TU6C', 'Regional manager', 'VIEW_APP_USERS', 'View app users', '', '', ''),
+(29, 'SOMU4LO', 'OY9TU6C', 'Regional manager', 'MANAGE_APP_USERS', 'Manage app users', '', '', ''),
+(30, 'LVJHQ6R', 'EEYP1J3', 'Station attendant', 'VIEW_APP_USERS', 'View app users', '', '', ''),
+(32, '9DJY1WW', '4I9JFN3', 'Team lead', 'VIEW_SYSTEM_MODULE_MANIFEST_', 'View system module manifest ', '', '', ''),
+(33, 'QI3S2ZC', '4I9JFN3', 'Team lead', 'MAKE_PAYMENTS', 'Make payments', '', '', ''),
+(34, 'HU6I303', 'SAKKRGH', 'Station manager', 'MANAGE_APP_USERS', 'Manage app users', '', '', ''),
+(35, 'I056CXU', 'SAKKRGH', 'Station manager', 'MANAGE_SUBSCRIPTIONS', 'Manage subscriptions', '', '', ''),
+(36, 'I53TGRW', 'YEPA2OZ', 'Invoice manager', 'VIEW_INVOICES', 'View invoices', '', '', ''),
+(37, '4PMTKIZ', 'YEPA2OZ', 'Invoice manager', 'VIEW_PAYMENTS', 'View payments', '', '', ''),
+(39, 'VV2USQ6', 'YEPA2OZ', 'Invoice manager', 'MANAGE_SYSTEM_ROLE_BUNDLES', 'Manage system role bundles', '', '', ''),
+(41, '2KKNSL3', 'YEPA2OZ', 'Invoice manager', 'VIEW_USER_BUNDLE_ROLE_FUNCTIONS', 'View user bundle role functions', '', '', ''),
+(42, 'Q7HQFR3', 'YEPA2OZ', 'Invoice manager', 'MANAGE_USER_BUNDLE_ROLE_FUNCTIONS', 'Manage user bundle role functions', '', '', ''),
+(43, 'ZGL4382', 'YEPA2OZ', 'Invoice manager', 'MANAGE_APP_USERS', 'Manage app users', '', '', ''),
+(44, '0SXKKYM', 'YEPA2OZ', 'Invoice manager', 'VIEW_APP_USERS', 'View app users', '', '', ''),
+(45, 'TBWG3G1', 'YEPA2OZ', 'Invoice manager', 'VIEW_SYSTEM_ROLE_BUNDLES', 'View system role bundles', '', '', ''),
+(46, 'FVZROJU', 'YEPA2OZ', 'Invoice manager', 'VIEW_SYSTEM_MODULE_MANIFEST_', 'View system module manifest ', '', '', ''),
+(47, 'ZPQ8AJF', 'YEPA2OZ', 'Invoice manager', 'MANAGE_SYSTEM_MODULE_MANIFEST_', 'Manage system module manifest ', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_manifest_`
+--
+
+CREATE TABLE IF NOT EXISTS `user_manifest_` (
+  `primkey` int(255) NOT NULL,
+  `admin_mkey` varchar(500) NOT NULL,
+  `user_id` varchar(500) NOT NULL,
+  `user_name` varchar(500) NOT NULL,
+  `role_id` varchar(500) NOT NULL,
+  `site_id` varchar(500) NOT NULL,
+  `role_name` varchar(500) NOT NULL,
+  `hive_site_id` varchar(500) NOT NULL,
+  `hive_site_name` varchar(500) NOT NULL,
+  `project_id` varchar(500) NOT NULL,
+  `project_name` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `activities`
+--
+ALTER TABLE `activities`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `approvals`
+--
+ALTER TABLE `approvals`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `deals`
+--
+ALTER TABLE `deals`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `disbursements`
+--
+ALTER TABLE `disbursements`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `expected_revenue`
+--
+ALTER TABLE `expected_revenue`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `invoice_items`
+--
+ALTER TABLE `invoice_items`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `leads`
+--
+ALTER TABLE `leads`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `mosy_sql_roll_back`
+--
+ALTER TABLE `mosy_sql_roll_back`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `page_manifest_`
+--
+ALTER TABLE `page_manifest_`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `quotations`
+--
+ALTER TABLE `quotations`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `quotation_items`
+--
+ALTER TABLE `quotation_items`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `requests`
+--
+ALTER TABLE `requests`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `smart_messages`
+--
+ALTER TABLE `smart_messages`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `smart_message_templates`
+--
+ALTER TABLE `smart_message_templates`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `smart_payments`
+--
+ALTER TABLE `smart_payments`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `smart_payment_requests`
+--
+ALTER TABLE `smart_payment_requests`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `smart_payment_settings`
+--
+ALTER TABLE `smart_payment_settings`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `system_module_manifest_`
+--
+ALTER TABLE `system_module_manifest_`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `system_role_bundles`
+--
+ALTER TABLE `system_role_bundles`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `system_users`
+--
+ALTER TABLE `system_users`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `user_bundle_role_functions`
+--
+ALTER TABLE `user_bundle_role_functions`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- Indexes for table `user_manifest_`
+--
+ALTER TABLE `user_manifest_`
+  ADD PRIMARY KEY (`primkey`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `activities`
+--
+ALTER TABLE `activities`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `approvals`
+--
+ALTER TABLE `approvals`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT for table `deals`
+--
+ALTER TABLE `deals`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `disbursements`
+--
+ALTER TABLE `disbursements`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `expected_revenue`
+--
+ALTER TABLE `expected_revenue`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `invoice_items`
+--
+ALTER TABLE `invoice_items`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `leads`
+--
+ALTER TABLE `leads`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `mosy_sql_roll_back`
+--
+ALTER TABLE `mosy_sql_roll_back`
+  MODIFY `primkey` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=149;
+--
+-- AUTO_INCREMENT for table `page_manifest_`
+--
+ALTER TABLE `page_manifest_`
+  MODIFY `primkey` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `quotations`
+--
+ALTER TABLE `quotations`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `quotation_items`
+--
+ALTER TABLE `quotation_items`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `requests`
+--
+ALTER TABLE `requests`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `smart_messages`
+--
+ALTER TABLE `smart_messages`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `smart_message_templates`
+--
+ALTER TABLE `smart_message_templates`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT for table `smart_payments`
+--
+ALTER TABLE `smart_payments`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `smart_payment_requests`
+--
+ALTER TABLE `smart_payment_requests`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `smart_payment_settings`
+--
+ALTER TABLE `smart_payment_settings`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `system_module_manifest_`
+--
+ALTER TABLE `system_module_manifest_`
+  MODIFY `primkey` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
+--
+-- AUTO_INCREMENT for table `system_role_bundles`
+--
+ALTER TABLE `system_role_bundles`
+  MODIFY `primkey` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `system_users`
+--
+ALTER TABLE `system_users`
+  MODIFY `primkey` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `tasks`
+--
+ALTER TABLE `tasks`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `primkey` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `user_bundle_role_functions`
+--
+ALTER TABLE `user_bundle_role_functions`
+  MODIFY `primkey` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=48;
+--
+-- AUTO_INCREMENT for table `user_manifest_`
+--
+ALTER TABLE `user_manifest_`
+  MODIFY `primkey` int(255) NOT NULL AUTO_INCREMENT;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
