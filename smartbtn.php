@@ -22053,3 +22053,1761 @@ name : smart_messagesNode?.recipient_name,
 
     }}
 />
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : send: Send reminder */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_SmartMsg_sendReminderMessage_btn"
+    label="Send reminder"
+    icon="send"
+
+    onClick={()=>{
+
+        sendReminderMessage({
+
+            profileDataNode:
+            {
+                tel : expected_revenueNode?.tel,
+email : expected_revenueNode?.email,
+record_id : expected_revenueNode?.record_id,
+name : expected_revenueNode?.name,
+amount : expected_revenueNode?.expected_amount,
+
+            },
+
+            uiOptions:
+            {
+                title:`Send reminder to ${expected_revenueNode?.name}`,
+                modalTitle:`Send message`,
+                subject:`Payment reminder`,
+                message:`Hello ${expected_revenueNode?.name}`
+            }
+
+        });
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : copy: Request payment */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_SmartMsg_generateRequestPayment_btn"
+    label="Request payment"
+    icon="copy"
+
+    onClick={()=>{
+
+        generateRequestPayment({
+
+            requestData:
+            {
+                payer_phone : expected_revenueNode?.tel,
+payer_email : expected_revenueNode?.email,
+related_record_id : expected_revenueNode?.record_id,
+payer_name : expected_revenueNode?.name,
+payment_shortcode : '4091961',
+
+            },
+
+            title:`Create payment request to ${expected_revenueNode?.name}`
+
+        });
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : check-circle: Mark Complete */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenueComplete_btn"
+    label="Mark Complete"
+    icon="check-circle"
+
+    onClick={()=>{
+
+        markRevenueComplete({
+
+            title: `Mark {{revenue_title}} complete`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Completed',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : clock: Mark Pending */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenuePending_btn"
+    label="Mark Pending"
+    icon="clock"
+
+    onClick={()=>{
+
+        markRevenuePending({
+
+            title: `Mark {{revenue_title}} pending`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Pending',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : pause-circle: Mark Postponed */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenuePostponed_btn"
+    label="Mark Postponed"
+    icon="pause-circle"
+
+    onClick={()=>{
+
+        markRevenuePostponed({
+
+            title: `Mark {{revenue_title}} postponed`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Postponed',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : x-circle: Mark Cancelled */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenueCancelled_btn"
+    label="Mark Cancelled"
+    icon="x-circle"
+
+    onClick={()=>{
+
+        markRevenueCancelled({
+
+            title: `Mark {{revenue_title}} cancelled`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Cancelled',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : badge-check: Mark Paid */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenuePaid_btn"
+    label="Mark Paid"
+    icon="badge-check"
+
+    onClick={()=>{
+
+        markRevenuePaid({
+
+            title: `Mark {{revenue_title}} paid`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'payment_status|Paid',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : alert-circle: Mark Unpaid */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenueUnpaid_btn"
+    label="Mark Unpaid"
+    icon="alert-circle"
+
+    onClick={()=>{
+
+        markRevenueUnpaid({
+
+            title: `Mark {{revenue_title}} unpaid`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'payment_status|Unpaid',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : file-text: Create Invoice */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_createRevenueInvoice_btn"
+    label="Create Invoice"
+    icon="file-text"
+
+    onClick={()=>{
+
+        createRevenueInvoice({
+
+            title: `Create invoice for {{revenue_title}}`,
+
+            component: InvoicesProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "invoices",
+
+            fieldsetstr: "expected_revenue:revenue_title|record_id:expected_revenue_id",
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : calendar: Add Activity */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_addRevenueActivity_btn"
+    label="Add Activity"
+    icon="calendar"
+
+    onClick={()=>{
+
+        addRevenueActivity({
+
+            title: `Add activity for {{revenue_title}}`,
+
+            component: ActivitiesProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "activities",
+
+            fieldsetstr: "expected_revenue:revenue_title|record_id:revenue_id",
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Client Details */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_client_details_profile_action_btn"
+    label="View Client Details"
+    icon="list"
+
+    onClick={()=>{
+
+        viewClients({childCol:`recordId`,parentColVal:expected_revenueNode.client_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Deal */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_deal_profile_action_btn"
+    label="View Deal"
+    icon="list"
+
+    onClick={()=>{
+
+        viewDeals({childCol:`recordId`,parentColVal:expected_revenueNode.deal_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Invoices */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_invoices_profile_action_btn"
+    label="View Invoices"
+    icon="list"
+
+    onClick={()=>{
+
+        viewInvoices({childCol:`recordId`,parentColVal:expected_revenueNode.invoice_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Payments */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_payments_profile_action_btn"
+    label="View Payments"
+    icon="list"
+
+    onClick={()=>{
+
+        viewPayments({childCol:`transactionRef`,parentColVal:expected_revenueNode.payment_ref_no,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Activities */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_activities_profile_action_btn"
+    label="View Activities"
+    icon="list"
+
+    onClick={()=>{
+
+        viewActivities({childCol:`dealId`,parentColVal:expected_revenueNode.record_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : building: Filter By Client */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByClient_btn"
+    label="Filter By Client"
+    icon="building"
+
+    onClick={()=>{
+
+        filterRevenueByClient({
+
+            title : "Filter by client",
+            customQueryStr : customQueryStr,
+            stateItemSetters : stateItemSetters,
+            parentColName : "record_id",
+            childColName : "client_id",
+            displayField : "full_name",
+            parentTableName : "clients",
+            childTableName : "expected_revenue"
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : briefcase: Filter By Deal */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByDeal_btn"
+    label="Filter By Deal"
+    icon="briefcase"
+
+    onClick={()=>{
+
+        filterRevenueByDeal({
+
+            title : "Filter by deal",
+            customQueryStr : customQueryStr,
+            stateItemSetters : stateItemSetters,
+            parentColName : "record_id",
+            childColName : "deal_id",
+            displayField : "deal_title",
+            parentTableName : "deals",
+            childTableName : "expected_revenue"
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list-alt: Filter By Status */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByStatus_btn"
+    label="Filter By Status"
+    icon="list-alt"
+
+    onClick={()=>{
+
+        filterRevenueByStatus({
+
+            customQueryStr : customQueryStr,
+
+            stateItemSetters: stateItemSetters,
+
+            title: "Filter by status",
+
+            parentColName: "payment_status",
+
+            parentTableName: "expected_revenue",
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : calendar: Filter By Month */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByMonth_btn"
+    label="Filter By Month"
+    icon="calendar"
+
+    onClick={()=>{
+
+        filterRevenueByMonth({
+
+            customQueryStr : customQueryStr,
+
+            stateItemSetters: stateItemSetters,
+
+            title: "Filter by Month",
+
+            parentColName: "revenue_month",
+
+            parentTableName: "expected_revenue",
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : send: Send reminder */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_SmartMsg_sendReminderMessage_btn"
+    label="Send reminder"
+    icon="send"
+
+    onClick={()=>{
+
+        sendReminderMessage({
+
+            profileDataNode:
+            {
+                tel : expected_revenueNode?.tel,
+email : expected_revenueNode?.email,
+record_id : expected_revenueNode?.record_id,
+name : expected_revenueNode?.name,
+amount : expected_revenueNode?.expected_amount,
+
+            },
+
+            uiOptions:
+            {
+                title:`Send reminder to ${expected_revenueNode?.name}`,
+                modalTitle:`Send message`,
+                subject:`Payment reminder`,
+                message:`Hello ${expected_revenueNode?.name}`
+            }
+
+        });
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : copy: Request payment */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_SmartMsg_generateRequestPayment_btn"
+    label="Request payment"
+    icon="copy"
+
+    onClick={()=>{
+
+        generateRequestPayment({
+
+            requestData:
+            {
+                amount : expected_revenueNode?.expected_amount,
+payer_phone : expected_revenueNode?.tel,
+payer_email : expected_revenueNode?.email,
+related_record_id : expected_revenueNode?.record_id,
+payer_name : expected_revenueNode?.name,
+payment_shortcode : '4091961',
+
+            },
+
+            title:`Create payment request to ${expected_revenueNode?.name}`
+
+        });
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : check-circle: Mark Complete */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenueComplete_btn"
+    label="Mark Complete"
+    icon="check-circle"
+
+    onClick={()=>{
+
+        markRevenueComplete({
+
+            title: `Mark {{revenue_title}} complete`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Completed',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : clock: Mark Pending */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenuePending_btn"
+    label="Mark Pending"
+    icon="clock"
+
+    onClick={()=>{
+
+        markRevenuePending({
+
+            title: `Mark {{revenue_title}} pending`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Pending',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : pause-circle: Mark Postponed */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenuePostponed_btn"
+    label="Mark Postponed"
+    icon="pause-circle"
+
+    onClick={()=>{
+
+        markRevenuePostponed({
+
+            title: `Mark {{revenue_title}} postponed`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Postponed',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : x-circle: Mark Cancelled */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenueCancelled_btn"
+    label="Mark Cancelled"
+    icon="x-circle"
+
+    onClick={()=>{
+
+        markRevenueCancelled({
+
+            title: `Mark {{revenue_title}} cancelled`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Cancelled',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : badge-check: Mark Paid */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenuePaid_btn"
+    label="Mark Paid"
+    icon="badge-check"
+
+    onClick={()=>{
+
+        markRevenuePaid({
+
+            title: `Mark {{revenue_title}} paid`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'payment_status|Paid',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : alert-circle: Mark Unpaid */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenueUnpaid_btn"
+    label="Mark Unpaid"
+    icon="alert-circle"
+
+    onClick={()=>{
+
+        markRevenueUnpaid({
+
+            title: `Mark {{revenue_title}} unpaid`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'payment_status|Unpaid',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : file-text: Create Invoice */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_createRevenueInvoice_btn"
+    label="Create Invoice"
+    icon="file-text"
+
+    onClick={()=>{
+
+        createRevenueInvoice({
+
+            title: `Create invoice for {{revenue_title}}`,
+
+            component: InvoicesProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "invoices",
+
+            fieldsetstr: "expected_revenue:revenue_title|record_id:expected_revenue_id",
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : calendar: Add Activity */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_addRevenueActivity_btn"
+    label="Add Activity"
+    icon="calendar"
+
+    onClick={()=>{
+
+        addRevenueActivity({
+
+            title: `Add activity for {{revenue_title}}`,
+
+            component: ActivitiesProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "activities",
+
+            fieldsetstr: "expected_revenue:revenue_title|record_id:revenue_id",
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Client Details */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_client_details_profile_action_btn"
+    label="View Client Details"
+    icon="list"
+
+    onClick={()=>{
+
+        viewClients({childCol:`recordId`,parentColVal:expected_revenueNode.client_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Deal */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_deal_profile_action_btn"
+    label="View Deal"
+    icon="list"
+
+    onClick={()=>{
+
+        viewDeals({childCol:`recordId`,parentColVal:expected_revenueNode.deal_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Invoices */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_invoices_profile_action_btn"
+    label="View Invoices"
+    icon="list"
+
+    onClick={()=>{
+
+        viewInvoices({childCol:`recordId`,parentColVal:expected_revenueNode.invoice_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Payments */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_payments_profile_action_btn"
+    label="View Payments"
+    icon="list"
+
+    onClick={()=>{
+
+        viewPayments({childCol:`transactionRef`,parentColVal:expected_revenueNode.payment_ref_no,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Activities */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_activities_profile_action_btn"
+    label="View Activities"
+    icon="list"
+
+    onClick={()=>{
+
+        viewActivities({childCol:`dealId`,parentColVal:expected_revenueNode.record_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : building: Filter By Client */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByClient_btn"
+    label="Filter By Client"
+    icon="building"
+
+    onClick={()=>{
+
+        filterRevenueByClient({
+
+            title : "Filter by client",
+            customQueryStr : customQueryStr,
+            stateItemSetters : stateItemSetters,
+            parentColName : "record_id",
+            childColName : "client_id",
+            displayField : "full_name",
+            parentTableName : "clients",
+            childTableName : "expected_revenue"
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : briefcase: Filter By Deal */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByDeal_btn"
+    label="Filter By Deal"
+    icon="briefcase"
+
+    onClick={()=>{
+
+        filterRevenueByDeal({
+
+            title : "Filter by deal",
+            customQueryStr : customQueryStr,
+            stateItemSetters : stateItemSetters,
+            parentColName : "record_id",
+            childColName : "deal_id",
+            displayField : "deal_title",
+            parentTableName : "deals",
+            childTableName : "expected_revenue"
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list-alt: Filter By Status */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByStatus_btn"
+    label="Filter By Status"
+    icon="list-alt"
+
+    onClick={()=>{
+
+        filterRevenueByStatus({
+
+            customQueryStr : customQueryStr,
+
+            stateItemSetters: stateItemSetters,
+
+            title: "Filter by status",
+
+            parentColName: "payment_status",
+
+            parentTableName: "expected_revenue",
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : calendar: Filter By Month */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByMonth_btn"
+    label="Filter By Month"
+    icon="calendar"
+
+    onClick={()=>{
+
+        filterRevenueByMonth({
+
+            customQueryStr : customQueryStr,
+
+            stateItemSetters: stateItemSetters,
+
+            title: "Filter by Month",
+
+            parentColName: "revenue_month",
+
+            parentTableName: "expected_revenue",
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : send: Send reminder */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_SmartMsg_sendReminderMessage_btn"
+    label="Send reminder"
+    icon="send"
+
+    onClick={()=>{
+
+        sendReminderMessage({
+
+            profileDataNode:
+            {
+                tel : expected_revenueNode?.tel,
+email : expected_revenueNode?.email,
+record_id : expected_revenueNode?.record_id,
+name : expected_revenueNode?.name,
+amount : expected_revenueNode?.expected_amount,
+
+            },
+
+            uiOptions:
+            {
+                title:`Send reminder to ${expected_revenueNode?.name}`,
+                modalTitle:`Send message`,
+                subject:`Payment reminder`,
+                message:`Hello ${expected_revenueNode?.name}`
+            }
+
+        });
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : copy: Request payment */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_SmartMsg_generateRequestPayment_btn"
+    label="Request payment"
+    icon="copy"
+
+    onClick={()=>{
+
+        generateRequestPayment({
+
+            requestData:
+            {
+                amount : expected_revenueNode?.expected_amount,
+payer_phone : expected_revenueNode?.tel,
+payer_email : expected_revenueNode?.email,
+payment_for : expected_revenueNode?.revenue_title,
+related_record_id : expected_revenueNode?.record_id,
+payer_name : expected_revenueNode?.name,
+payment_shortcode : '4091961',
+
+            },
+
+            title:`Create payment request to ${expected_revenueNode?.name}`
+
+        });
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : check-circle: Mark Complete */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenueComplete_btn"
+    label="Mark Complete"
+    icon="check-circle"
+
+    onClick={()=>{
+
+        markRevenueComplete({
+
+            title: `Mark {{revenue_title}} complete`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Completed',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : clock: Mark Pending */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenuePending_btn"
+    label="Mark Pending"
+    icon="clock"
+
+    onClick={()=>{
+
+        markRevenuePending({
+
+            title: `Mark {{revenue_title}} pending`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Pending',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : pause-circle: Mark Postponed */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenuePostponed_btn"
+    label="Mark Postponed"
+    icon="pause-circle"
+
+    onClick={()=>{
+
+        markRevenuePostponed({
+
+            title: `Mark {{revenue_title}} postponed`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Postponed',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : x-circle: Mark Cancelled */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenueCancelled_btn"
+    label="Mark Cancelled"
+    icon="x-circle"
+
+    onClick={()=>{
+
+        markRevenueCancelled({
+
+            title: `Mark {{revenue_title}} cancelled`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'revenue_status|Cancelled',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : badge-check: Mark Paid */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenuePaid_btn"
+    label="Mark Paid"
+    icon="badge-check"
+
+    onClick={()=>{
+
+        markRevenuePaid({
+
+            title: `Mark {{revenue_title}} paid`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'payment_status|Paid',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : alert-circle: Mark Unpaid */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_markRevenueUnpaid_btn"
+    label="Mark Unpaid"
+    icon="alert-circle"
+
+    onClick={()=>{
+
+        markRevenueUnpaid({
+
+            title: `Mark {{revenue_title}} unpaid`,
+
+            component: ExpectedRevenueProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "expected_revenue",
+
+            fieldsetstr: 'payment_status|Unpaid',
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : file-text: Create Invoice */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_createRevenueInvoice_btn"
+    label="Create Invoice"
+    icon="file-text"
+
+    onClick={()=>{
+
+        createRevenueInvoice({
+
+            title: `Create invoice for {{revenue_title}}`,
+
+            component: InvoicesProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "invoices",
+
+            fieldsetstr: "expected_revenue:revenue_title|record_id:expected_revenue_id",
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : calendar: Add Activity */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMap_addRevenueActivity_btn"
+    label="Add Activity"
+    icon="calendar"
+
+    onClick={()=>{
+
+        addRevenueActivity({
+
+            title: `Add activity for {{revenue_title}}`,
+
+            component: ActivitiesProfile,
+
+            stateitemsetters: stateItemSetters,
+
+            parentTable: "expected_revenue",
+
+            destTable: "activities",
+
+            fieldsetstr: "expected_revenue:revenue_title|record_id:revenue_id",
+
+            profileDataNode: expected_revenueNode,
+
+            dataInterpreter: InteprateExpectedRevenueEvent
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Client Details */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_client_details_profile_action_btn"
+    label="View Client Details"
+    icon="list"
+
+    onClick={()=>{
+
+        viewClients({childCol:`recordId`,parentColVal:expected_revenueNode.client_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Deal */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_deal_profile_action_btn"
+    label="View Deal"
+    icon="list"
+
+    onClick={()=>{
+
+        viewDeals({childCol:`recordId`,parentColVal:expected_revenueNode.deal_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Invoices */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_invoices_profile_action_btn"
+    label="View Invoices"
+    icon="list"
+
+    onClick={()=>{
+
+        viewInvoices({childCol:`recordId`,parentColVal:expected_revenueNode.invoice_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Payments */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_payments_profile_action_btn"
+    label="View Payments"
+    icon="list"
+
+    onClick={()=>{
+
+        viewPayments({childCol:`transactionRef`,parentColVal:expected_revenueNode.payment_ref_no,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list : View Activities */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="view_activities_profile_action_btn"
+    label="View Activities"
+    icon="list"
+
+    onClick={()=>{
+
+        viewActivities({childCol:`dealId`,parentColVal:expected_revenueNode.record_id,parentName:expected_revenueNode.revenue_title})
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : building: Filter By Client */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByClient_btn"
+    label="Filter By Client"
+    icon="building"
+
+    onClick={()=>{
+
+        filterRevenueByClient({
+
+            title : "Filter by client",
+            customQueryStr : customQueryStr,
+            stateItemSetters : stateItemSetters,
+            parentColName : "record_id",
+            childColName : "client_id",
+            displayField : "full_name",
+            parentTableName : "clients",
+            childTableName : "expected_revenue"
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : briefcase: Filter By Deal */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByDeal_btn"
+    label="Filter By Deal"
+    icon="briefcase"
+
+    onClick={()=>{
+
+        filterRevenueByDeal({
+
+            title : "Filter by deal",
+            customQueryStr : customQueryStr,
+            stateItemSetters : stateItemSetters,
+            parentColName : "record_id",
+            childColName : "deal_id",
+            displayField : "deal_title",
+            parentTableName : "deals",
+            childTableName : "expected_revenue"
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : list-alt: Filter By Status */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByStatus_btn"
+    label="Filter By Status"
+    icon="list-alt"
+
+    onClick={()=>{
+
+        filterRevenueByStatus({
+
+            customQueryStr : customQueryStr,
+
+            stateItemSetters: stateItemSetters,
+
+            title: "Filter by status",
+
+            parentColName: "payment_status",
+
+            parentTableName: "expected_revenue",
+
+        })
+
+    }}
+/>
+
+/* ====================================================== */
+/* PRIMARY TABLE : expected_revenue */
+/* BUTTON        : calendar: Filter By Month */
+/* ====================================================== */
+
+
+<MosyActionButton
+    source="ExpectedRevenueProfile"
+    action="expected_revenue_DataMapQCol_filterRevenueByMonth_btn"
+    label="Filter By Month"
+    icon="calendar"
+
+    onClick={()=>{
+
+        filterRevenueByMonth({
+
+            customQueryStr : customQueryStr,
+
+            stateItemSetters: stateItemSetters,
+
+            title: "Filter by Month",
+
+            parentColName: "revenue_month",
+
+            parentTableName: "expected_revenue",
+
+        })
+
+    }}
+/>

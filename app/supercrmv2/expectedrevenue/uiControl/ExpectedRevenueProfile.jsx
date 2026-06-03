@@ -72,6 +72,11 @@ import {
   sendReminderMessage
 } from '../logicControl/send-payment-reminder-msg';
 
+// Imports from request-client-payment.jsx
+import {
+  generateRequestPayment
+} from '../logicControl/request-client-payment';
+
 // Imports from mark-complete.jsx
 import {
   markRevenueComplete
@@ -445,6 +450,34 @@ export default function ExpectedRevenueProfile({ dataIn = {}, dataOut = {} }) {
                   />
                   <MosyActionButton
                   source="ExpectedRevenueProfile"
+                  action="expected_revenue_SmartMsg_generateRequestPayment_btn"
+                  label="Request payment"
+                  icon="copy"
+                  
+                  onClick={()=>{
+                    
+                    generateRequestPayment({
+                      
+                      requestData:
+                      {
+                        amount : expected_revenueNode?.expected_amount,
+                        payer_phone : expected_revenueNode?.tel,
+                        payer_email : expected_revenueNode?.email,
+                        payment_for : expected_revenueNode?.revenue_title,
+                        related_record_id : expected_revenueNode?.record_id,
+                        payer_name : expected_revenueNode?.name,
+                        payment_shortcode : '4091961',
+                        
+                      },
+                      
+                      title:`Create payment request to ${expected_revenueNode?.name}`
+                      
+                    });
+                    
+                  }}
+                  />
+                  <MosyActionButton
+                  source="ExpectedRevenueProfile"
                   action="expected_revenue_DataMap_markRevenueComplete_btn"
                   label="Mark Complete"
                   icon="check-circle"
@@ -494,36 +527,6 @@ export default function ExpectedRevenueProfile({ dataIn = {}, dataOut = {} }) {
                       destTable: "expected_revenue",
                       
                       fieldsetstr: 'revenue_status|Pending',
-                      
-                      profileDataNode: expected_revenueNode,
-                      
-                      dataInterpreter: InteprateExpectedRevenueEvent
-                      
-                    })
-                    
-                  }}
-                  />
-                  <MosyActionButton
-                  source="ExpectedRevenueProfile"
-                  action="expected_revenue_DataMap_markRevenuePostponed_btn"
-                  label="Mark Postponed"
-                  icon="pause-circle"
-                  
-                  onClick={()=>{
-                    
-                    markRevenuePostponed({
-                      
-                      title: `Mark {{revenue_title}} postponed`,
-                      
-                      component: ExpectedRevenueProfile,
-                      
-                      stateitemsetters: stateItemSetters,
-                      
-                      parentTable: "expected_revenue",
-                      
-                      destTable: "expected_revenue",
-                      
-                      fieldsetstr: 'revenue_status|Postponed',
                       
                       profileDataNode: expected_revenueNode,
                       
@@ -638,6 +641,39 @@ export default function ExpectedRevenueProfile({ dataIn = {}, dataOut = {} }) {
                   <div className="row m-0 align-items-center">
                     
                     
+                    <div className="col-auto p-1">
+                      
+                      <MosyActionButton
+                      source="ExpectedRevenueProfile"
+                      action="expected_revenue_DataMap_markRevenuePostponed_btn"
+                      label="Mark Postponed"
+                      icon="pause-circle"
+                      
+                      onClick={()=>{
+                        
+                        markRevenuePostponed({
+                          
+                          title: `Mark {{revenue_title}} postponed`,
+                          
+                          component: ExpectedRevenueProfile,
+                          
+                          stateitemsetters: stateItemSetters,
+                          
+                          parentTable: "expected_revenue",
+                          
+                          destTable: "expected_revenue",
+                          
+                          fieldsetstr: 'revenue_status|Postponed',
+                          
+                          profileDataNode: expected_revenueNode,
+                          
+                          dataInterpreter: InteprateExpectedRevenueEvent
+                          
+                        })
+                        
+                      }}
+                      />
+                    </div>
                     <div className="col-auto p-1">
                       
                       <MosyActionButton

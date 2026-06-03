@@ -218,6 +218,9 @@ expected_revenue:send-payment-reminder-msg:profile|''|send, Send reminder, sendR
 @sendReminderMessage  :SmartMsg:expected_revenue=Send reminder to \${expected_revenueNode?.name}, tel:tel,email:email,record_id:record_id,name:name,amount:expected_amount|Send message;Payment reminder; Hello \${expected_revenueNode?.name} 
 
 
+expected_revenue:request-client-payment:profile|''|copy, Request payment, generateRequestPayment ,../logicControl
+@generateRequestPayment :SmartPay:leads=Create payment request to \${expected_revenueNode?.name},amount:expected_amount,payer_phone:tel,payer_email:email,payment_for:revenue_title,related_record_id:record_id,payer_name:name,payment_shortcode:;'4091961'|blue ribbon
+
 expected_revenue:mark-complete:profile|'record_id'|check-circle,Mark Complete,markRevenueComplete,../logicControl
 @markRevenueComplete:DataMapUpdate:expected_revenue=Mark {{revenue_title}} complete,revenue_status|Completed
 
@@ -1055,6 +1058,17 @@ $eventMappingArray=[
                 "destTable" => "expected_revenue",
                 "logicFlow" => "Send reminder to \${expected_revenueNode?.name}, tel:tel,email:email,record_id:record_id,name:name,amount:expected_amount|Send message;Payment reminder; Hello \${expected_revenueNode?.name}",
                 "functionType" => "SmartMsg",
+                "basePath"=>"../logicControl"
+            ],
+
+            "copy: Request payment" => [
+                "fe" => "generateRequestPayment('')",
+                "be" => "generateRequestPayment()",
+                "file" => "request-client-payment",
+                "funName" => "generateRequestPayment",
+                "destTable" => "leads",
+                "logicFlow" => "Create payment request to \${expected_revenueNode?.name},amount:expected_amount,payer_phone:tel,payer_email:email,payment_for:revenue_title,related_record_id:record_id,payer_name:name,payment_shortcode:;'4091961'|blue ribbon",
+                "functionType" => "SmartPay",
                 "basePath"=>"../logicControl"
             ],
 

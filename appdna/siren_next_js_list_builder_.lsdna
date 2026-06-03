@@ -23,7 +23,7 @@ $overwrite_dna_file = "yes"; // yes | no
    ========================= */
 eval(find_snippet("1171"));   // camelCase converter
 
-$table_config_file__ = "../appdna/supercrmv2/smart_messages/tbl_attr/smart_messages_preset_config.php";
+$table_config_file__ = "../appdna/supercrmv2/expected_revenue/tbl_attr/expected_revenue_preset_config.php";
 
 include($table_config_file__);
 
