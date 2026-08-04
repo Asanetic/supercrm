@@ -1,0 +1,107 @@
+{
+    "accesscontrol": {
+        "base": "/api/supererpv5/accesscontrol/accesscontrol",
+        "delete": "/api/supererpv5/accesscontrol/delete",
+        "import": "/api/supererpv5/accesscontrol/accesscontrol/import"
+    },
+    "accessmatrix": {
+        "base": "/api/supererpv5/accessmatrix/accessmatrix",
+        "delete": "/api/supererpv5/accessmatrix/delete",
+        "import": "/api/supererpv5/accessmatrix/accessmatrix/import"
+    },
+    "AppCore": {
+        "base": "/api/supererpv5/AppCore/AppCore",
+        "delete": "/api/supererpv5/AppCore/delete",
+        "import": "/api/supererpv5/AppCore/AppCore/import"
+    },
+    "AppRoutes": {
+        "base": "/api/supererpv5/AppRoutes/AppRoutes",
+        "delete": "/api/supererpv5/AppRoutes/delete",
+        "import": "/api/supererpv5/AppRoutes/AppRoutes/import"
+    },
+    "companies": {
+        "base": "/api/supererpv5/companies/companies",
+        "delete": "/api/supererpv5/companies/delete",
+        "import": "/api/supererpv5/companies/companies/import"
+    },
+    "contacts": {
+        "base": "/api/supererpv5/contacts/contacts",
+        "delete": "/api/supererpv5/contacts/delete",
+        "import": "/api/supererpv5/contacts/contacts/import"
+    },
+    "dashboard": {
+        "base": "/api/supererpv5/dashboard/dashboard",
+        "delete": "/api/supererpv5/dashboard/delete",
+        "import": "/api/supererpv5/dashboard/dashboard/import"
+    },
+    "DataControl": {
+        "base": "/api/supererpv5/DataControl/DataControl",
+        "delete": "/api/supererpv5/DataControl/delete",
+        "import": "/api/supererpv5/DataControl/DataControl/import"
+    },
+    "import": {
+        "base": "/api/supererpv5/import/import",
+        "delete": "/api/supererpv5/import/delete",
+        "import": "/api/supererpv5/import/import/import"
+    },
+    "leads": {
+        "base": "/api/supererpv5/leads/leads",
+        "delete": "/api/supererpv5/leads/delete",
+        "import": "/api/supererpv5/leads/leads/import"
+    },
+    "moduleControl": {
+        "base": "/api/supererpv5/moduleControl/moduleControl",
+        "delete": "/api/supererpv5/moduleControl/delete",
+        "import": "/api/supererpv5/moduleControl/moduleControl/import"
+    },
+    "systemmodules": {
+        "base": "/api/supererpv5/systemmodules/systemmodules",
+        "delete": "/api/supererpv5/systemmodules/delete",
+        "import": "/api/supererpv5/systemmodules/systemmodules/import"
+    },
+    "systemrolebundles": {
+        "base": "/api/supererpv5/systemrolebundles/systemrolebundles",
+        "delete": "/api/supererpv5/systemrolebundles/delete",
+        "import": "/api/supererpv5/systemrolebundles/systemrolebundles/import"
+    },
+    "systemroles": {
+        "base": "/api/supererpv5/systemroles/systemroles",
+        "delete": "/api/supererpv5/systemroles/delete",
+        "import": "/api/supererpv5/systemroles/systemroles/import"
+    },
+    "systemusers": {
+        "base": "/api/supererpv5/systemusers/systemusers",
+        "delete": "/api/supererpv5/systemusers/delete",
+        "import": "/api/supererpv5/systemusers/systemusers/import"
+    },
+    "UiControl": {
+        "base": "/api/supererpv5/UiControl/UiControl",
+        "delete": "/api/supererpv5/UiControl/delete",
+        "import": "/api/supererpv5/UiControl/UiControl/import"
+    },
+    "userbundlerolefunctions": {
+        "base": "/api/supererpv5/userbundlerolefunctions/userbundlerolefunctions",
+        "delete": "/api/supererpv5/userbundlerolefunctions/delete",
+        "import": "/api/supererpv5/userbundlerolefunctions/userbundlerolefunctions/import"
+    },
+    "usermanifest": {
+        "base": "/api/supererpv5/usermanifest/usermanifest",
+        "delete": "/api/supererpv5/usermanifest/delete",
+        "import": "/api/supererpv5/usermanifest/usermanifest/import"
+    },
+    "usersledger": {
+        "base": "/api/supererpv5/usersledger/usersledger",
+        "delete": "/api/supererpv5/usersledger/delete",
+        "import": "/api/supererpv5/usersledger/usersledger/import"
+    },
+    "_mosy_module_1": {
+        "base": "/api/supererpv5/_mosy_module_1/_mosy_module_1",
+        "delete": "/api/supererpv5/_mosy_module_1/delete",
+        "import": "/api/supererpv5/_mosy_module_1/_mosy_module_1/import"
+    },
+    "_mosy_module_v1": {
+        "base": "/api/supererpv5/_mosy_module_v1/_mosy_module_v1",
+        "delete": "/api/supererpv5/_mosy_module_v1/delete",
+        "import": "/api/supererpv5/_mosy_module_v1/_mosy_module_v1/import"
+    }
+}
