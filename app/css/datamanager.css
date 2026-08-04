@@ -604,6 +604,7 @@
 
   .etc-more-panel { right: -121px; left: auto; width: 100%; max-width: none; }
 
+  
   /* Print List / Export to Excel — these render as raw Bootstrap
      .badge buttons, not .etc-btn, which is why they look like two
      mismatched pills instead of a clean row. Stack them full-width
