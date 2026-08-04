@@ -1,20 +1,21 @@
 import { Suspense } from 'react';
+import Activitiesv1List from '../uiControl/Activitiesv1List';
 import { hiveRoutes } from '../../../appConfigs/hiveRoutes';
-import ActivitiesProfile from '../uiControl/ActivitiesProfile';
 
 
 export async function generateMetadata({ searchParams }) {
-  const mosyTitle = "Activities profile"//searchParams?.mosyTitle || "Tasks";
+  const mosyTitle = "Activitiesv1"//searchParams?.mosyTitle || "Tasks";
 
   return {
-    title: mosyTitle ? decodeURIComponent(mosyTitle) : `Activities Profile`,
-    description: 'Activities profile / item details',
+    title: mosyTitle ? decodeURIComponent(mosyTitle) : `Activitiesv1`,
+    description: 'supercrm Tasks',
     
     icons: {
       icon: `${hiveRoutes.hiveBaseRoute}/logo.png`
     },    
   };
 }
+
 export default function Page() {
 
 return (
@@ -23,7 +24,7 @@ return (
           <div className="page-wrapper">
             <div className="content container-fluid p-0 m-0 ">
                <Suspense fallback={<div className="col-md-12 p-5 text-center h3">Loading...</div>}>
-                 <ActivitiesProfile />
+                 <Activitiesv1List />
                </Suspense>
             </div>
           </div>
@@ -31,4 +32,3 @@ return (
     </>
 )
 }
-

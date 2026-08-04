@@ -4,12 +4,12 @@ import ImportCSVComponent from '../../import/uploadData';
 import { hiveRoutes } from '../../../appConfigs/hiveRoutes';
 
 import { getApiRoutes } from '../../AppRoutes/apiRoutesHandler';
-import { ActivitiesSchema } from '../schema';
+import { Activitiesv1Schema } from '../schema';
 
 const apiRoutes = getApiRoutes()
 
 export async function generateMetadata({ searchParams }) {
-  const mosyTitle = 'Import Activities data ';
+  const mosyTitle = 'Import Activitiesv1 data ';
 
   return {
     title: mosyTitle ,
@@ -24,7 +24,7 @@ export async function generateMetadata({ searchParams }) {
 
 export default function UploadCsvPage() {
 
-   const colsArray = ActivitiesSchema.exportColumns
+   const colsArray = Activitiesv1Schema.exportColumns
 
    return (
      <>
@@ -33,7 +33,7 @@ export default function UploadCsvPage() {
              <div className='content container-fluid p-0 m-0'>
               <div className='p-3'>
                <Suspense fallback={<div className='col-md-12 p-5 text-center h3'>Loading...</div>}>
-               <ImportCSVComponent colsArray={colsArray} title='Import Activities data ' endpoint={ActivitiesSchema.importDataEndpoint} templateName={`import_Activities_data__template.csv`}/>
+               <ImportCSVComponent colsArray={colsArray} title='Import Activitiesv1 data ' endpoint={Activitiesv1Schema.importDataEndpoint} templateName={`import_Activitiesv1_data__template.csv`}/>
               </Suspense>
             </div>
              </div>

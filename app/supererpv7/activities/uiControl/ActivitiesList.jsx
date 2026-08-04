@@ -1,20 +1,20 @@
 'use client';
-import { Activitiesv1Schema } from '../schema';
+import { ActivitiesSchema } from '../schema';
 import SmartGrid from '../../moduleControl/UiControl/SmartGrid';
-import Activitiesv1Actions from '../logicControl/actionsRegistry';
+import ActivitiesActions from '../logicControl/actionsRegistry';
 
 // Thin wrapper only — all real grid logic lives in components/EntityGrid.jsx
-// export default function Activitiesv1List() {
-//   return <SmartGrid moduleActions={Activitiesv1Actions} schema={Activitiesv1Schema} title="Activitiesv1" />;
+// export default function ActivitiesList() {
+//   return <SmartGrid moduleActions={ActivitiesActions} schema={ActivitiesSchema} title="Activities" />;
 // }
-export default function Activitiesv1List({
+export default function ActivitiesList({
   fixedQuery = {},
   dataOut = {},
-  title = 'Activitiesv1',
-  description = 'Activitiesv1 list ',
+  title = 'Activities',
+  description = 'Activities list ',
   customProfilePath = './profile',
-  moduleActions = Activitiesv1Actions,
-  schema = Activitiesv1Schema,
+  moduleActions = ActivitiesActions,
+  schema = ActivitiesSchema,
 }) {
   return (
     <SmartGrid

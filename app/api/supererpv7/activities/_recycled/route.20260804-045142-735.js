@@ -18,7 +18,7 @@ import {
 import { mutateInputArray } from '../beMonitor';
 import { validateRoleAccess } from '../validateRoleAccess';
 import { processAuthToken } from '../../auth/authManager';
-import { ActivitiesSchema as schema } from './schema';
+import { Activitiesv1Schema as schema } from './schema';
 
 // schema.fields[0] and [1] are always the system PK columns (primkey, record_id)
 // — see db-cli.js. Resolve them here instead of hardcoding the column names,

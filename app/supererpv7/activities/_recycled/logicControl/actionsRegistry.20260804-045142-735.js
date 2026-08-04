@@ -35,7 +35,7 @@
 // import { closeMosyCard } from "../../../components/MosyCard";
 // import { RegisterCompanyAction } from "./companyActions";
 
-const ActivitiesActions = {
+const Activitiesv1Actions = {
   sms_inactive: async ({ rows }) => {
     const numbers = rows.map((r) => r.phone).filter(Boolean);
     await fetch('/api/sms/send', {
@@ -137,4 +137,4 @@ const ActivitiesActions = {
 };
 
 
-export default ActivitiesActions
+export default Activitiesv1Actions

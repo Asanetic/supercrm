@@ -2,7 +2,7 @@
 import { magicRandomStr, mosySqlInsert, processImport } from "../../../apiUtils/dataControl/dataUtils";
 import { processAuthToken } from "../../../auth/authManager";
 import { mutateInputArray } from "../../beMonitor";
-import { ActivitiesSchema as schema } from '../schema';
+import { Activitiesv1Schema as schema } from '../schema';
 
 //role access control 
 
