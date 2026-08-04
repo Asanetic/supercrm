@@ -1,0 +1,38 @@
+{
+    "smartapi": {
+        "base": "/api/supererp/smartapi"
+    },
+    "dashboard": {
+        "admin": "/api/supercrm/dashboard/admin"
+    },
+    "products": {
+        "base": "/api/supererpv7/products",
+        "delete": "/api/supererpv7/products/delete",
+        "import": "/api/supererpv7/products/import"
+    },
+    "leads": {
+        "base": "/api/supererpv7/leads",
+        "delete": "/api/supererpv7/leads/delete",
+        "import": "/api/supererpv7/leads/import"
+    },
+    "clients": {
+        "base": "/api/supererpv7/clients",
+        "delete": "/api/supererpv7/clients/delete",
+        "import": "/api/supererpv7/clients/import"
+    },
+    "deals": {
+        "base": "/api/supererpv7/deals",
+        "delete": "/api/supererpv7/deals/delete",
+        "import": "/api/supererpv7/deals/import"
+    },
+    "activities": {
+        "base": "/api/supererpv7/activities",
+        "delete": "/api/supererpv7/activities/delete",
+        "import": "/api/supererpv7/activities/import"
+    },
+    "services": {
+        "base": "/api/supererpv7/services",
+        "delete": "/api/supererpv7/services/delete",
+        "import": "/api/supererpv7/services/import"
+    }
+}
