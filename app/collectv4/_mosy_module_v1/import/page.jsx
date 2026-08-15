@@ -4,7 +4,7 @@ import ImportCSVComponent from '../../import/uploadData';
 import { hiveRoutes } from '../../../appConfigs/hiveRoutes';
 
 import { getApiRoutes } from '../../AppRoutes/apiRoutesHandler';
-import { Smarttemplatev1Schema } from '../schema';
+import { Smarttemplatev1Schema } from '../Smarttemplatev1Schema';
 
 const apiRoutes = getApiRoutes()
 
