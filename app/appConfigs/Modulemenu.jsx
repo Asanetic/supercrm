@@ -4,7 +4,7 @@
 // AssetGuardSidebar.jsx (instead of a local `menu` const) AND from
 // app/registry.js (which flattens it for the module-coming-soon page).
 // Add/remove modules here only — both places update automatically.
-
+//
 import {
     LayoutDashboard,
     MapPin,
