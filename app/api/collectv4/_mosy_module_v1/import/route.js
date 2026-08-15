@@ -2,7 +2,7 @@
 import { magicRandomStr, mosySqlInsert, processImport } from "../../../apiUtils/dataControl/dataUtils";
 import { processAuthToken } from "../../../auth/authManager";
 import { mutateInputArray } from "../../beMonitor";
-import { Smarttemplatev1Schema as schema } from './Smarttemplatev1Schema';
+import { Smarttemplatev1Schema as schema } from '../list/Smarttemplatev1Schema';
 
 //role access control 
 
