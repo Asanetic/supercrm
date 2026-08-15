@@ -2,7 +2,7 @@
 // using your existing secure DB utils (auth, role checks, tenant scoping,
 // parameterized queries) — same utils DisbursementsRequestHandler.jsx uses.
 // Clone the module, edit schema.js, this file just works.
-
+//
 import {
   base64Decode,
   magicRandomStr,
