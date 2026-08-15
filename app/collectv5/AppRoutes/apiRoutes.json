@@ -229,5 +229,15 @@
         "base": "/api/collectv5/tasks/complete",
         "delete": "/api/collectv5/tasks/complete/delete",
         "import": "/api/collectv5/tasks/import"
+    },
+    "users": {
+        "base": "/api/collectv5/users/list",
+        "delete": "/api/collectv5/users/list/delete",
+        "import": "/api/collectv5/users/import"
+    },
+    "activeusers": {
+        "base": "/api/collectv5/users/active",
+        "delete": "/api/collectv5/users/active/delete",
+        "import": "/api/collectv5/users/import"
     }
 }
