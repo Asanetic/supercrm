@@ -4,7 +4,7 @@ import ImportCSVComponent from '../../import/uploadData';
 import { hiveRoutes } from '../../../appConfigs/hiveRoutes';
 
 import { getApiRoutes } from '../../AppRoutes/apiRoutesHandler';
-import { ClientsSchema } from '../ClientsSchema';
+import { ClientsSchema } from '../schema';
 
 const apiRoutes = getApiRoutes()
 
