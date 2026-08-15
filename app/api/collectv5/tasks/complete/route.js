@@ -26,6 +26,7 @@ import { CompleteTasksSchema as schema } from './CompleteTasksSchema';
 const primkeyCol = schema.fields[0]?.key || 'primkey';
 const recordIdCol = schema.fields[1]?.key || 'record_id';
 
+//
 // Converts a snake_case DB column name into the camelCase name the public
 // API/URL uses, e.g. "regist_date_user" -> "registDateUser".
 function toCamelCase(str) {
