@@ -1,0 +1,73 @@
+{
+    "smartapi": {
+        "base": "/api/novaerpv9/smartapi"
+    },
+    "dashboard": {
+        "admin": "/api/novaerpv9/dashboard/admin"
+    },
+    "clients": {
+        "base": "/api/novaerpv9/clients/list",
+        "delete": "/api/novaerpv9/clients/list/delete",
+        "import": "/api/novaerpv9/clients/import"
+    },
+    "deals": {
+        "base": "/api/novaerpv9/deals/list",
+        "delete": "/api/novaerpv9/deals/list/delete",
+        "import": "/api/novaerpv9/deals/import"
+    },
+    "leads": {
+        "base": "/api/novaerpv9/leads/list",
+        "delete": "/api/novaerpv9/leads/list/delete",
+        "import": "/api/novaerpv9/leads/import"
+    },
+    "smartmessages": {
+        "base": "/api/novaerpv9/messages/list",
+        "delete": "/api/novaerpv9/messages/list/delete",
+        "import": "/api/novaerpv9/messages/import"
+    },
+    "messages": {
+        "base": "/api/novaerpv9/messages/list",
+        "delete": "/api/novaerpv9/messages/list/delete",
+        "import": "/api/novaerpv9/messages/import"
+    },
+    "messagetemplates": {
+        "base": "/api/novaerpv9/messagetemplates/list",
+        "delete": "/api/novaerpv9/messagetemplates/list/delete",
+        "import": "/api/novaerpv9/messagetemplates/import"
+    },
+    "smartmessagetemplates": {
+        "base": "/api/novaerpv9/messagetemplates/list",
+        "delete": "/api/novaerpv9/messagetemplates/list/delete",
+        "import": "/api/novaerpv9/messagetemplates/import"
+    },
+    "callhistory": {
+        "base": "/api/novaerpv9/callhistory/list",
+        "delete": "/api/novaerpv9/callhistory/list/delete",
+        "import": "/api/novaerpv9/callhistory/import"
+    },
+    "expectedrevenue": {
+        "base": "/api/novaerpv8/expectedrevenue/list",
+        "delete": "/api/novaerpv8/expectedrevenue/list/delete",
+        "import": "/api/novaerpv8/expectedrevenue/import"
+    },
+    "revenueplan": {
+        "base": "/api/novaerpv9/revenueplan/list",
+        "delete": "/api/novaerpv9/revenueplan/list/delete",
+        "import": "/api/novaerpv9/revenueplan/import"
+    },
+    "payments": {
+        "base": "/api/novaerpv9/payments/list",
+        "delete": "/api/novaerpv9/payments/list/delete",
+        "import": "/api/novaerpv9/payments/import"
+    },
+    "smartpaymentrequests": {
+        "base": "/api/novaerpv9/smartpaymentrequests/list",
+        "delete": "/api/novaerpv9/smartpaymentrequests/list/delete",
+        "import": "/api/novaerpv9/smartpaymentrequests/import"
+    },
+    "quotations": {
+        "base": "/api/novaerpv9/quotations/list",
+        "delete": "/api/novaerpv9/quotations/list/delete",
+        "import": "/api/novaerpv9/quotations/import"
+    }
+}
