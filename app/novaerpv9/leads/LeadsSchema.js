@@ -20,9 +20,11 @@ export const LeadsSchema = {
   label: 'Leads',                 // optional, defaults to entity capitalized
   apiBase: moduleApi,
 
+
   //api endpint for importing data from csv
   importDataEndpoint : apiRoutes.leads.import,
 
+  
   // Page-level UI gate — checked once, for the WHOLE grid AND the WHOLE
   // profile/form page, via mosyACTRLHasRole. No moduleRole set -> open to
   // anyone (same additive convention as every other role/flag in this
