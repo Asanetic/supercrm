@@ -10,6 +10,18 @@
  * quick-edit modals, grid-toolbar smart filters, sending messages, etc).
  * Copy the block that matches what you're building from there.
  *
+ * RELOAD CONTRACT: whatever a registered function returns goes through
+ * normalizeActionResult() (actionsRegistry.js). If you return an object,
+ * it reads `reload` off it; if you return nothing/undefined, it DEFAULTS
+ * TO reload: true (see normalizeActionResult's final fallback) — that
+ * default is meant for actions that actually mutate data inline and
+ * don't bother building a result object. Any action here that only OPENS
+ * a modal/composer/filter picker — where the real reload (if any) should
+ * happen later, from inside that UI, not from this click — must
+ * explicitly `return false` to opt out. Forgetting this makes the grid
+ * reload the instant the button is clicked, before the opened UI has
+ * done anything.
+ *
  * NOTE: "delete" and "clone" are intercepted directly by
  * useEntityFormController before they ever reach this registry — don't
  * register functions under those two keys, they will never fire.
@@ -20,6 +32,8 @@ import { MosyCommsSmartCall } from "../../UiControl/MosySmartCommsCalls";
 import { MosyCreatePayRequest } from "../../UiControl/MosyGeneratePaymentRequest";
 import { mosyGetData } from "../../../MosyUtils/hiveUtils";
 import { getApiRoutes } from "../../AppRoutes/apiRoutesHandler";
+import { openSmartTagFilter, openSmartMapFilter } from "../../moduleControl/UiControl/smartFilterActions";
+import { ClientsSchema } from "../../clients/ClientsSchema";
 
 const apiRoutes = getApiRoutes();
 
@@ -60,28 +74,36 @@ const DealsActions = {
   },
 
   // Opens the shared smart-message composer, prefilled with the deal's
-  // linked client's contact details (SMS/email/WhatsApp).
+  // linked client's contact details (SMS/email/WhatsApp). Only OPENS the
+  // composer — sending happens later from inside it, on its own timeline
+  // — so this returns false to keep the grid from reloading the instant
+  // the composer opens.
   send_message: async ({ rows }) => {
     const row = rows?.[0];
-    if (!row) return;
+    if (!row) return false;
     const client = await resolveDealClient(row);
     MosySendSmartMessage({ profileDataNode: buildDealCommsProfile(row, client) });
+    return false;
   },
 
   // Opens the shared call launcher (phone/WhatsApp) against the deal's
-  // linked client, and logs the call against this deal.
+  // linked client, and logs the call against this deal. Same reasoning as
+  // send_message above: opening the launcher isn't itself a mutation, so
+  // return false rather than letting the grid reload on open.
   call: async ({ rows }) => {
     const row = rows?.[0];
-    if (!row) return;
+    if (!row) return false;
     const client = await resolveDealClient(row);
     MosyCommsSmartCall({ profileDataNode: buildDealCommsProfile(row, client) });
+    return false;
   },
 
   // Opens the payment-request builder pre-filled with the deal's linked
-  // client's details and this deal's value.
+  // client's details and this deal's value. Same reasoning — opening the
+  // builder isn't a mutation, so no reload here either.
   request_payment: async ({ rows }) => {
     const row = rows?.[0];
-    if (!row) return;
+    if (!row) return false;
     const client = await resolveDealClient(row);
     MosyCreatePayRequest({
       requestData: {
@@ -93,6 +115,38 @@ const DealsActions = {
       },
       title: `Request payment — ${row?.deal_title || ''}`,
     });
+    return false;
+  },
+
+  // Grid-toolbar smart filters — open the picker; the actual re-scoping
+  // happens inside it via ctx.filter()/ctx.setFilterValue(), which
+  // already reloads the grid itself once a value is picked. Returning
+  // false here stops THIS click from also reloading before that happens.
+  filter_by_deal_status: (ctx) => {
+    openSmartTagFilter(ctx, {
+      title: 'Filter by deal status',
+      columnKey: 'deal_status',
+    });
+    return false;
+  },
+
+  filter_by_deal_stage: (ctx) => {
+    openSmartTagFilter(ctx, {
+      title: 'Filter by deal stage',
+      columnKey: 'deal_stage',
+    });
+    return false;
+  },
+
+  filter_by_client: (ctx) => {
+    openSmartMapFilter(ctx, {
+      title: 'Filter by client',
+      searchSchema: ClientsSchema,
+      displayField: 'full_name',
+      valueField: 'record_id',
+      localColumnKey: 'client_id',
+    });
+    return false;
   },
 
   // Add more as needed — see actionRegistryDocs.md for patterns to copy.

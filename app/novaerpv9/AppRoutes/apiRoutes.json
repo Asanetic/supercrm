@@ -69,5 +69,15 @@
         "base": "/api/novaerpv9/quotations/list",
         "delete": "/api/novaerpv9/quotations/list/delete",
         "import": "/api/novaerpv9/quotations/import"
+    },
+    "quicknotes": {
+        "base": "/api/novaerpv9/quicknotes/list",
+        "delete": "/api/novaerpv9/quicknotes/list/delete",
+        "import": "/api/novaerpv9/quicknotes/import"
+    },
+    "phonebook": {
+        "base": "/api/novaerpv9/phonebook/list",
+        "delete": "/api/novaerpv9/phonebook/list/delete",
+        "import": "/api/novaerpv9/phonebook/import"
     }
 }

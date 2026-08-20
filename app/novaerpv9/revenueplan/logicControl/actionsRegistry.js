@@ -25,6 +25,9 @@ import MessagesList from "../../messages/uiControl/MessagesList";
 import CallhistoryList from "../../callhistory/uiControl/CallhistoryList";
 import SmartpaymentrequestsList from "../../smartpaymentrequests/uiControl/SmartpaymentrequestsList";
 import PaymentsList from "../../payments/uiControl/PaymentsList";
+import { openSmartTagFilter, openSmartMapFilter } from "../../moduleControl/UiControl/smartFilterActions";
+import { quickEditFromRow } from "../../moduleControl/UiControl/QuickEditModal";
+import { ClientsSchema } from "../../clients/ClientsSchema";
 
 const apiRoutes = getApiRoutes();
 
@@ -189,6 +192,35 @@ const RevenueplanActions = {
       "mosycard_wide"
     );
   },
+
+  // Grid-toolbar smart filters — pick a value and re-scope the grid.
+  filter_by_month: (ctx) => openSmartTagFilter(ctx, {
+    title: 'Filter by month',
+    columnKey: 'revenue_month',
+  }),
+
+  filter_by_payment_status: (ctx) => openSmartTagFilter(ctx, {
+    title: 'Filter by payment status',
+    columnKey: 'payment_status',
+  }),
+
+  // Quick-edit modal — flip payment_status between Paid/Unpaid (options
+  // come straight off the schema field now that it's a select).
+  update_status: (ctx) => {
+    quickEditFromRow(ctx, {
+      fieldKeys: ['payment_status'],
+      title: 'Update payment status — {{revenue_title}}',
+      getId : (row) => btoa(row.primkey),
+    });
+  },
+
+  filter_by_client: (ctx) => openSmartMapFilter(ctx, {
+    title: 'Filter by client',
+    searchSchema: ClientsSchema,
+    displayField: 'full_name',
+    valueField: 'record_id',
+    localColumnKey: 'client_id',
+  }),
 
   // Add more as needed — see actionRegistryDocs.md for patterns to copy.
   // Every one of them gets whatever's on ctx: { rows, schema, router,

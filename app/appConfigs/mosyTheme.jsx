@@ -17,7 +17,7 @@ const mosyThemeConfigs = {
 
   // Color Scheme
   themeName: "Mosy",
-  btnBg: "#7BB13C",
+  btnBg: "#F21C14",
   btnTxt: "#fff",
   ctnBg: "#FCFCFC",
   ctnTxt: "#000",
@@ -37,7 +37,7 @@ const mosyThemeConfigs = {
 
   // Gradient and Sidebar
   btnFirstColor: "#000000",
-  btnSecondColor: "#7BB13C",
+  btnSecondColor: "#F21C14",
   get sideBarBg() {
     return `linear-gradient(225deg, ${this.btnFirstColor}, ${this.btnSecondColor})`;
     //return this.btnBg;

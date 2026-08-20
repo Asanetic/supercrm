@@ -54,6 +54,7 @@ function toCamelCase(text = '') {
  *     combine: true,
  *   }),
  */
+
 export function openSmartDateFilter(ctx, { columnKey, title = 'Filter by date', inputType = 'datetime-local', combine = false }) {
   const filterKey = toCamelCase(columnKey); // e.g. date_created -> dateCreated
 
@@ -84,6 +85,7 @@ export function openSmartDateFilter(ctx, { columnKey, title = 'Filter by date', 
  *     localColumnKey: 'company_id',
  *   }),
  */
+
 export function openSmartMapFilter(ctx, { title, searchSchema, displayField, valueField, localColumnKey, combine = false }) {
   const filterKey = toCamelCase(localColumnKey); // e.g. company_id -> companyId
 

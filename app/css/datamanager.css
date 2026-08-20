@@ -639,7 +639,6 @@
   .etc-btn-group {
     /* display: flex; */
     /* flex-direction: column; */
-    width: 100%;
     gap: 0.5rem;
   }
   /* .etc-btn-group .etc-btn {
@@ -654,6 +653,33 @@
   .etc-btn-group .etc-btn-danger {
     order: -1;
   }
+
+  /* Only kicks in with 2+ profile/toolbar actions — a single action
+   (e.g. just "New Deal") stays on the existing flex:1 1 0 sizing
+   above, so it keeps hugging Refresh at its own content width instead
+   of being stretched into a lone half-width grid cell. Compound
+   selector (.etc-btn-group.etc-btn-group--grid) deliberately outranks
+   the plain .etc-btn-group rules above regardless of source order. */
+.etc-btn-group.etc-btn-group--grid,
+.etc-btn-row.etc-btn-row--grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.etc-btn-group.etc-btn-group--grid .etc-btn,
+.etc-btn-row.etc-btn-row--grid .etc-btn {
+  flex: none;      /* grid owns sizing now, not flex-grow */
+  min-width: 0;      /* still allow long labels ("Filter by status") to ellipsis/shrink rather than force the column wider */
+  justify-content: center;
+}
+
+/* An odd number of actions leaves the last one alone on its row —
+   let it span both columns rather than sit stranded at half width. */
+.etc-btn-group.etc-btn-group--grid .etc-btn:last-child:nth-child(odd),
+.etc-btn-row.etc-btn-row--grid .etc-btn:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
 
   /* Print List / Export to Excel sit side-by-side as a pair, not
      stacked full-width. */
@@ -682,3 +708,4 @@
     justify-content: center;
   }
 }
+

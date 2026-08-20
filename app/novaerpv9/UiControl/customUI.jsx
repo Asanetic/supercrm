@@ -81,7 +81,7 @@ export function MosyLiveSearch({
     // Render your card and LiveSearchDropdown
     MosyCard(
       "",
-      <>
+      <div className="col-md-12 text-left h4 m-0 pt-2 px-lg-0 px-3 py-3">
         <div className="col-md-12 text-left h4 m-0 pt-2 pl-0 pr-0 pb-2">
           <span className="m-0 p-0 label_text">{title}</span>
         </div>
@@ -102,7 +102,7 @@ export function MosyLiveSearch({
           labelClassName="d-none"
           mosyFilterOptions={actionData?.mosyFilterOptions}
         />
-      </>
+      </div>
     );
   }
 

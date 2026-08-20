@@ -32,6 +32,13 @@ const MAX_VISIBLE_ACTIONS = 4;
 // text, hand it to DynamicForm, done. Beyond MAX_VISIBLE_ACTIONS the rest
 // collapse into a "More" popover so the header stays a fixed height no
 // matter how many profileActions a schema defines.
+//
+// TOP vs BOTTOM tray: Save/Update and Clone are treated as "commit"
+// actions and live in a tray under the form fields, not in the header —
+// Back/Delete/Activate/etc (anything else from schema.profileActions)
+// stay in the top toolbar. This mirrors the usual "review, then commit
+// at the bottom" flow instead of putting Save above content the person
+// hasn't seen yet.
 
 export default function DynamicForm({ controller, title, eyebrow, hiddenActions = [] }) {  
   const themeVars = useMemo(
@@ -89,21 +96,25 @@ export default function DynamicForm({ controller, title, eyebrow, hiddenActions 
   const suppressFirstLabel = variant === 'card' && schema.sections?.length === 1;
 
   // Overflow logic (MAX_VISIBLE_ACTIONS + "More" popover) only applies to
-  // schema.profileActions (Back/Delete/Clone/etc). Save/Update is the
-  // primary action for this page — it always stays visible in the tray,
-  // never collapses into "More", and is rendered last.
-  // 'save'/'submit' is resolved separately below (it always needs to run
-  // controller.submit(), not whatever onClick the controller wired up for
-  // it), so strip it out here to avoid rendering it twice. editOnly and
-  // role filtering are ALREADY done by useEntityFormController's own
+  // the top toolbar. Save/Update and Clone are pulled out below and
+  // rendered in the bottom tray instead — they never count toward
+  // MAX_VISIBLE_ACTIONS or collapse into "More". editOnly and role
+  // filtering are ALREADY done by useEntityFormController's own
   // `actions` computation — no need to re-derive that here.
   const profileActions = (controller.actions || [])
     .filter((a) => a.key !== 'save' && a.key !== 'submit')
     .filter((a) => !hiddenActions.includes(a.key));
 
-  const hasOverflow = profileActions.length > MAX_VISIBLE_ACTIONS;
-  const visibleActions = hasOverflow ? profileActions.slice(0, MAX_VISIBLE_ACTIONS) : profileActions;
-  const overflowActions = hasOverflow ? profileActions.slice(MAX_VISIBLE_ACTIONS) : [];
+  // Clone ships in the bottom tray next to Save/Update instead of the
+  // top actions row, so pull it out here before computing overflow —
+  // otherwise it could get pushed into the "More" popover or eat one of
+  // the MAX_VISIBLE_ACTIONS slots meant for Back/Delete/Activate/etc.
+  const cloneAction = profileActions.find((a) => a.key === 'clone') || null;
+  const topActions = profileActions.filter((a) => a.key !== 'clone');
+
+  const hasOverflow = topActions.length > MAX_VISIBLE_ACTIONS;
+  const visibleActions = hasOverflow ? topActions.slice(0, MAX_VISIBLE_ACTIONS) : topActions;
+  const overflowActions = hasOverflow ? topActions.slice(MAX_VISIBLE_ACTIONS) : [];
 
   // The Save/Update button itself is schema-driven too — it only exists
   // because schema.js defines a profileActions entry flagged `form: true`
@@ -169,6 +180,59 @@ export default function DynamicForm({ controller, title, eyebrow, hiddenActions 
     </>
   );
 
+  // Bottom tray — Clone + Save/Update. Kept off the top toolbar on
+  // purpose: these are the two actions that commit to a change
+  // (duplicate the record, or write the current edits), so they sit
+  // under the fields the person just reviewed instead of above content
+  // they haven't seen yet. Rendered *inside* dyn-page-card below (for
+  // the 'card' variant) so the buttons sit within the same shadowed
+  // white box as the fields, instead of floating in the plain page
+  // background underneath it and looking like they belong to a
+  // different container.
+  //
+  // Extra bottom clearance (pb-5 + inline marginBottom) is deliberate,
+  // not decorative: when DynamicForm renders inside a modal, the tray
+  // otherwise ends up flush against the modal's bottom edge and gets
+  // buried under modal chrome (rounded corner clipping, a fixed footer,
+  // a close affordance, etc). The padding gives the modal's own scroll
+  // container room to scroll the buttons fully into view instead of
+  // stopping right at their edge. Safe to trim if a given modal wrapper
+  // already reserves its own footer space.
+  const bottomTray = (cloneAction || submitAction) && (
+    <div
+      className="dyn-bottom-tray row justify-content-end mx-0 px-0 mt-4 pt-3 pb-5 border-top"
+      style={{ marginBottom: '1.5rem' }}
+    >
+      {cloneAction && (
+        <div className="col-6 col-sm-auto mb-2 mb-sm-0 px-1">
+          <button
+            type="button"
+            className={`dyn-btn dyn-btn-${cloneAction.variant || 'outline-secondary'} ${cloneAction.colorClass || ''} w-100`}
+            onClick={cloneAction.onClick}
+            disabled={controller.submitting}
+          >
+            {cloneAction.icon && <i className={`fa fa-${cloneAction.icon}`}></i>}
+            <span>{cloneAction.label}</span>
+          </button>
+        </div>
+      )}
+
+      {submitAction && (
+        <div className="col-6 col-sm-auto px-1">
+          <button
+            type="button"
+            className={`dyn-btn dyn-btn-${submitAction.variant} ${submitAction.colorClass || ''} w-100`}
+            onClick={() => controller.submit()}
+            disabled={controller.submitting}
+          >
+            {submitAction.icon && <i className={`fa fa-${submitAction.icon}`}></i>}
+            <span>{submitAction.label}</span>
+          </button>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="dyn-form-scope pt-3" style={themeVars}>
       {(resolvedTitle || eyebrow) && (
@@ -180,11 +244,11 @@ export default function DynamicForm({ controller, title, eyebrow, hiddenActions 
         </div>
       )}
 
-      {/* Actions tray — Back/Delete/Clone/etc from schema.profileActions,
-          plus Save/Update, all in one row. Bootstrap col-6/col-sm-auto on
-          each button wrapper drives the stacking (2-up on phones, inline
-          from sm up, Save always full-width on its own row) — dyn-btn
-          itself carries zero layout, only color/type/spacing.
+      {/* Top toolbar tray — everything from schema.profileActions EXCEPT
+          Save/Update and Clone (Back/Delete/Activate/Disable/etc).
+          Bootstrap col-6/col-sm-auto on each button wrapper drives the
+          stacking (2-up on phones, inline from sm up) — dyn-btn itself
+          carries zero layout, only color/type/spacing.
 
           Color: variant (outline-secondary/success/warning/danger/
           primary) picks the base dyn-btn-<variant> look. An optional
@@ -196,7 +260,7 @@ export default function DynamicForm({ controller, title, eyebrow, hiddenActions 
       <div className="dyn-toolbar-tray row justify-content-end justify-content-sm-end mx-0 px-0 ">
         <div className="dyn-toolbar-actions row justify-content-lg-end justify-content-end  px-0 mx-0 w-100">
           {visibleActions.map((a) => (
-            <div key={a.key} className="col-4 col-sm-auto mb-2 mb-sm-0 px-1">
+            <div key={a.key} className="col-6 col-sm-auto mb-2 mb-sm-0 px-1">
               <button
                 type="button"
                 className={`dyn-btn dyn-btn-${a.variant || 'outline-secondary'} ${a.colorClass || ''} w-100`}
@@ -210,7 +274,7 @@ export default function DynamicForm({ controller, title, eyebrow, hiddenActions 
           ))}
 
           {hasOverflow && (
-            <div className="col-4 col-sm-auto mb-2 mb-sm-0 px-1 dyn-more-wrap" ref={moreRef}>
+            <div className="col-6 col-sm-auto mb-2 mb-sm-0 px-1 dyn-more-wrap" ref={moreRef}>
               <button
                 type="button"
                 className="dyn-btn dyn-btn-outline-secondary w-100"
@@ -221,7 +285,12 @@ export default function DynamicForm({ controller, title, eyebrow, hiddenActions 
                 <span>More</span>
               </button>
               {moreOpen && (
-                <div className="dyn-more-panel">
+                // Anchored right:0/left:auto so the panel hangs off the
+                // right edge of the "More" button rather than the left —
+                // on mobile the button usually sits at the right edge of
+                // the tray, and a left-anchored panel would render
+                // partially (or fully) off-screen.
+                <div className="dyn-more-panel" style={{ right: 0, left: 'auto' }}>
                   {overflowActions.map((a) => (
                     <button
                       key={a.key}
@@ -241,20 +310,6 @@ export default function DynamicForm({ controller, title, eyebrow, hiddenActions 
               )}
             </div>
           )}
-
-          {submitAction && (
-            <div className="col-4 col-sm-auto px-1">
-              <button
-                type="button"
-                className={`dyn-btn dyn-btn-${submitAction.variant} ${submitAction.colorClass || ''} w-100`}
-                onClick={() => controller.submit()}
-                disabled={controller.submitting}
-              >
-                {submitAction.icon && <i className={`fa fa-${submitAction.icon}`}></i>}
-                <span>{submitAction.label}</span>
-              </button>
-            </div>
-          )}
         </div>
       </div>
 
@@ -262,9 +317,18 @@ export default function DynamicForm({ controller, title, eyebrow, hiddenActions 
 
       <form onSubmit={handleSubmit}>
         {variant === 'card' ? (
-          <div className="dyn-page-card">{sections}</div>
+          // bottomTray lives INSIDE dyn-page-card here — same shadowed
+          // white box as the fields, so Save/Clone read as part of the
+          // container instead of floating below it.
+          <div className="dyn-page-card">
+            {sections}
+            {bottomTray}
+          </div>
         ) : (
-          sections
+          <>
+            {sections}
+            {bottomTray}
+          </>
         )}
       </form>
 

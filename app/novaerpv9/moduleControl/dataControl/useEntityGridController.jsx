@@ -94,7 +94,13 @@ export function useEntityGridController(
   const urlFilter = useMemo(() => MosySecureFilterEngine(schema.entity), [schema.entity]);
   const mergedFixedQuery = useMemo(() => ({ ...urlFilter, ...fixedQuery }), [urlFilter, fixedQuery]);
 
-  const c = useEntityController(schema, { fixedQuery: mergedFixedQuery });
+  // moduleActions must reach the engine too, not just this hook's own
+  // direct runRegisteredAction(...) calls below — c.runAction/
+  // c.runRowAction (what runToolbarAction and handleRunAction's fallback
+  // branch call) delegate to EntityDataEngine.runAction/runRowAction,
+  // which needs this.moduleActions to actually invoke the registered
+  // handler instead of silently no-op'ing while still reloading.
+  const c = useEntityController(schema, { fixedQuery: mergedFixedQuery, moduleActions });
   const [searchInput, setSearchInput] = useState('');
 
   // Page-level gate — no moduleRole on the schema means open to anyone,

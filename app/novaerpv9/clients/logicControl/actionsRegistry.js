@@ -50,6 +50,8 @@ const ClientsActions = {
     const row = rows?.[0];
     if (!row) return;
     MosyCommsSmartCall({ profileDataNode: row });
+
+    return false
   },
 
   // Opens the payment-request builder pre-filled with this client's
@@ -65,6 +67,8 @@ const ClientsActions = {
       },
       title: `Request payment — ${row?.full_name || row?.business_name || ''}`,
     });
+
+    return false
   },
 
   // Popup a list of deals scoped to this client — deals' route.js resolves
@@ -101,6 +105,8 @@ const ClientsActions = {
       sectionFieldOrder: { basic_information: ['deal_title', 'client_id'] },
       onSaved: refresh,
     });
+
+    return false
   },
 
   // Popup message history scoped to this client — messages written via

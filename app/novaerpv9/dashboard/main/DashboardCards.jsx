@@ -34,7 +34,7 @@ export default function DashboardCards({ cards = defaultCardData }) {
     <div className="col-md-12 row justify-content-center py-4 m-0">
       {/* Title Ribbon */}
       <div className="col-md-12 text-center p-0 m-0">
-        <h4 className="text-left col-md-12 p-0 m-0 ">Dashboard</h4>
+        <h4 className="text-left col-md-12 p-0 m-0 ">CRM Overview</h4>
         <div className="bg-dark mt-3" style={{ height: '1px' }}></div>
         <h3 className="m-2"></h3>
       </div>

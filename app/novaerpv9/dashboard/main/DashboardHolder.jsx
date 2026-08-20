@@ -19,20 +19,25 @@ export default function DashboardHolder() {
   const [chartData, setChartData] = useState([]);
   const [cardData, setCardData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
-     MosyNotify({message : "Loading chart data" , icon:"line-chart", addTimer:false})
+      MosyNotify({ message: 'Loading dashboard...', icon: 'line-chart', addTimer: false });
+
       const response = await mosyGetData({
         endpoint: apiRoutes.dashboard.admin,
         params: {}
       });
 
-      if (response) {
+      closeMosyModal();
 
-        setChartData(response?.chart_data);
-        setCardData(response?.cards_data);
-        closeMosyModal()
+      if (response?.status === 'success') {
+        setChartData(response?.chart_data || []);
+        setCardData(response?.cards_data || []);
+        setError(null);
+      } else {
+        setError(response?.message || 'Failed to load dashboard data');
       }
 
       setLoading(false);
@@ -40,6 +45,28 @@ export default function DashboardHolder() {
 
     fetchData();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="col-md-12 text-center py-5">
+        <div className="spinner-border text-primary" role="status" style={{ width: '2.5rem', height: '2.5rem' }}>
+          <span className="visually-hidden d-none">Loading...</span>
+        </div>
+        <p className="text-muted mt-3 mb-0">Loading dashboard...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="col-md-12 py-5">
+        <div className="alert alert-danger text-center mb-0">
+          <i className="fa fa-exclamation-triangle mr-2"></i>
+          {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
 	<>

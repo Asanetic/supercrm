@@ -25,6 +25,14 @@ export class EntityDataEngine {
   constructor(schema, options = {}) {
     this.schema = schema;
     this.fixedQuery = options.fixedQuery || {};
+    // The { key: fn } registry a module wires up (actionsRegistry.js's
+    // exported object) — needed so runAction()/runRowAction() below can
+    // actually invoke the real handler instead of silently no-op'ing.
+    // Constructor-time snapshot, same convention as fixedQuery above:
+    // this engine instance is built once per useEntityController() call
+    // and never rebuilt on a later render, so there's no live prop to
+    // resync here.
+    this.moduleActions = options.moduleActions || {};
 
     this.state = {
       rows: [],
@@ -373,7 +381,16 @@ export class EntityDataEngine {
       : this.state.rows;
   
     const result = normalizeActionResult(
-      await runRegisteredAction(action.key, {
+      // runRegisteredAction's signature is (moduleActions, key, ctx). This
+      // was previously called as (action.key, ctx) — one arg short, so
+      // every param shifted: moduleActions became the key STRING, key
+      // became the ctx OBJECT, ctx was undefined. moduleActions[key] then
+      // resolved to undefined every time, so the real handler never ran —
+      // but normalizeActionResult(undefined) still defaults to
+      // { ok: true, reload: true }, so the engine reloaded from the API
+      // regardless, as if the action had actually done something. Passing
+      // this.moduleActions first fixes that.
+      await runRegisteredAction(this.moduleActions, action.key, {
         rows: targetRows,
         schema: this.schema,
         refresh: () => this.load(),
@@ -393,7 +410,9 @@ export class EntityDataEngine {
   
   async runRowAction(actionKey, row, router) {
     const result = normalizeActionResult(
-      await runRegisteredAction(actionKey, {
+      // Same missing-argument bug as runAction() above — see the comment
+      // there for the full explanation.
+      await runRegisteredAction(this.moduleActions, actionKey, {
         rows: [row],
         schema: this.schema,
         router,

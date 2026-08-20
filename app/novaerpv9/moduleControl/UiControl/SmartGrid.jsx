@@ -45,11 +45,12 @@ function TrimmedCell({ value, trim }) {
 // working with zero extra logic written in the new template.
 //
 // Visual layer lives in EntityTableCard.css under the "etc-" class
-// namespace. Only ONE color comes from your theme (--etc-primary, read
-// straight off mosyThemeConfigs.btnBg below — same pattern mosyUi.js
-// uses, no derived shades to maintain). Below 640px the table switches
-// to a stacked "card per row" layout driven by the data-label
-// attributes on each <td> — no separate mobile markup to maintain.
+// namespace. Theme color comes from mosyThemeConfigs.btnBg, exposed
+// through themeVars below as BOTH --etc-primary* (legacy name) and
+// --etc-accent* (name used by the newer mobile-refinement stylesheet) —
+// see the themeVars comment for why. Below 640px the table switches to
+// a horizontal-scroll layout driven by the etc-table-data-wrap rules —
+// no separate mobile markup to maintain.
 //
 // dataOut / customProfilePath mirror the legacy TasksList props — pass
 // them through if your app's nested drill-down pattern (setChildDataOut)
@@ -113,10 +114,17 @@ function GridActionGroup({ actions, onRun }) {
   return (
     <>
       {visible.map((action) => (
+        // Plain .etc-btn, same as Refresh — no per-action wrapper div.
+        // Equal sizing with Refresh comes from sharing one CSS class and
+        // one flex-wrap parent, not from a Bootstrap grid column (a
+        // col-6/row wrapper here would force this whole group onto its
+        // own line, since .row is full-width by design — fine for
+        // DynamicForm's standalone action tray, wrong here where New
+        // needs to sit inline with Refresh).
         <button
           key={action.key}
           type="button"
-          className={`etc-btn btn ${variantClass(action.variant)} ${action.colorClass || ''}`.trim()}
+          className={`etc-btn ${variantClass(action.variant)} ${action.colorClass || ''}`.trim()}
           onClick={() => onRun(action)}
         >
           {action.icon && <i className={`fa fa-${action.icon}`}></i>} {action.label}
@@ -127,7 +135,7 @@ function GridActionGroup({ actions, onRun }) {
         <div className="etc-more-wrap" ref={moreRef}>
           <button
             type="button"
-            className="etc-btn btn"
+            className="etc-btn"
             onClick={() => setMoreOpen((o) => !o)}
             aria-expanded={moreOpen}
           >
@@ -281,12 +289,27 @@ export default function SmartGrid({
   const visibleToolbarActions = g.toolbarActions.filter((a) => !isActionHidden(a.key));
   const visibleGridProfileActions = g.gridProfileActions.filter((a) => !isActionHidden(a.key));
 
-  // Single brand color, passed straight through — no shading logic to
-  // keep in sync. Change btnBg in mosyTheme.jsx and this follows.
+  // Theme color, passed straight through — no shading logic to keep in
+  // sync except the two derived shades below. Change btnBg in
+  // mosyTheme.jsx and this follows.
+  //
+  // Emits BOTH naming schemes on purpose: --etc-primary* is what the
+  // original EntityTableCard.css reads, --etc-accent* is what the newer
+  // mobile-refinement stylesheet reads. Whichever CSS file is actually
+  // loaded on a given page, its variables resolve instead of silently
+  // falling back to nothing (which was the root cause of "the buttons
+  // have no color" — the CSS was pointed at --etc-accent-* while this
+  // object only ever set --etc-primary-*). Safe to delete the
+  // --etc-primary-* lines once every consumer of this component is
+  // confirmed to be on the newer stylesheet.
   const themeVars = useMemo(
     () => ({
       '--etc-primary': mosyThemeConfigs.btnBg,
       '--etc-primary-contrast': mosyThemeConfigs.btnTxt,
+      '--etc-accent': mosyThemeConfigs.btnBg,
+      '--etc-accent-contrast': mosyThemeConfigs.btnTxt,
+      '--etc-accent-dark': `color-mix(in srgb, ${mosyThemeConfigs.btnBg} 85%, #000000)`,
+      '--etc-accent-soft': `color-mix(in srgb, ${mosyThemeConfigs.btnBg} 15%, transparent)`,
       '--etc-radius': mosyThemeConfigs.systemBorderRadius,
     }),
     []
@@ -336,23 +359,29 @@ export default function SmartGrid({
               </button>
             </div>
 
-            {!isActionHidden('refresh') && (
-              <button type="button" className="etc-btn btn mb-2 mb-lg-0 mr-2" onClick={g.handleRefresh} title="Refresh" aria-label="Refresh">
-                <i className="fa fa-refresh"></i> Refresh
-              </button>
-            )}
+            {/* Refresh now lives INSIDE etc-btn-group, as the first cell —
+                on mobile the whole group (Refresh + profileActions)
+                renders as one 3-up grid (see .etc-btn-group--grid),
+                Refresh/New/first-filter on row 1, the rest wrapping to
+                row 2, etc. On desktop the group is still a plain
+                flex-wrap row so this doesn't change larger screens. */}
+            <div className="etc-btn-group d-flex flex-wrap mb-2 mb-lg-0 etc-btn-group--grid">
+              {!isActionHidden('refresh') && (
+                <button type="button" className="etc-btn mr-2" onClick={g.handleRefresh} title="Refresh" aria-label="Refresh">
+                  <i className="fa fa-refresh"></i> Refresh
+                </button>
+              )}
 
-            {/* Schema-driven — anything in schema.profileActions flagged
-                grid: true renders here (e.g. 'new', 'import', ...).
-                Past MAX_VISIBLE_GRID_ACTIONS the rest collapse into
-                their own "More" popover (GridActionGroup), same
-                pattern as DynamicForm.jsx's profileActions tray.
-                Color: variant picks the base etc-btn-<variant> look;
-                an optional colorClass on the schema entry appends
-                a dyn-btn-accent-* class (or any custom class) after
-                it to override/complement that color, reusing the
-                same globally-loaded accent classes. */}
-            <div className="etc-btn-group d-flex flex-wrap mb-2 mb-lg-0">
+              {/* Schema-driven — anything in schema.profileActions flagged
+                  grid: true renders here (e.g. 'new', 'import', ...).
+                  Past MAX_VISIBLE_GRID_ACTIONS the rest collapse into
+                  their own "More" popover (GridActionGroup), same
+                  pattern as DynamicForm.jsx's profileActions tray.
+                  Color: variant picks the base etc-btn-<variant> look;
+                  an optional colorClass on the schema entry appends
+                  a dyn-btn-accent-* class (or any custom class) after
+                  it to override/complement that color, reusing the
+                  same globally-loaded accent classes. */}
               <GridActionGroup actions={visibleGridProfileActions} onRun={g.runProfileAction} />
             </div>
           </div>
@@ -363,7 +392,7 @@ export default function SmartGrid({
               independent 4-visible/overflow split via GridActionGroup,
               separate from the profileActions group above. */}
           {visibleToolbarActions.length > 0 && (
-            <div className="etc-btn-row d-flex flex-wrap mt-2 justify-content-start justify-content-lg-end">
+            <div className="etc-btn-row d-flex flex-wrap mt-2 justify-content-start justify-content-lg-end etc-btn-row--grid">
               <GridActionGroup actions={visibleToolbarActions} onRun={g.runToolbarAction} />
             </div>
           )}

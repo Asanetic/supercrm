@@ -4,7 +4,7 @@ const mosyDbConfig = {
     DB_HOST: 'localhost',
     DB_USER: 'root',
     DB_PASS: '',
-    DB_NAME: 'supercrm',
+    DB_NAME: 'novaerp',
     dateStrings: true
   },
   production: {

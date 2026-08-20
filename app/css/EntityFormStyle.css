@@ -21,7 +21,6 @@
         margin-bottom: 0.4rem;
       }
       .dyn-page-title {
-        font-family: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
         font-size: 1.55rem;
         font-weight: 600;
         color: var(--dyn-ink);
@@ -394,7 +393,7 @@
       }
     
       @media (max-width: 768px) {
-        .dyn-page-card { padding: 1.5rem 1.25rem 1.75rem; border-radius: 14px; }
+        .dyn-page-card { padding: 1px; border: 0px; border-radius: 14px; }
     
         .dyn-page-header { flex-direction: column; align-items: flex-start; }
     

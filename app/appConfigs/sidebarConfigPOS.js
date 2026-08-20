@@ -42,7 +42,7 @@ export const sidebarConfig = [
 
   {
     type: "submenu",
-    label: "Deals",
+    label: " Deals",
     icon: "fa fa-handshake-o",
     roles: [],
     items: [
@@ -103,6 +103,21 @@ export const sidebarConfig = [
       { label: "Payment Requests", href: (routes) => `${routes.novaerpv9}/smartpaymentrequests/list`, roles: [] },
       { label: "New Payment Request", href: (routes) => `${routes.novaerpv9}/smartpaymentrequests/profile`, roles: [] },
       { label: "Import Payment Requests", href: (routes) => `${routes.novaerpv9}/smartpaymentrequests/import`, roles: [] },
+    ],
+  },
+
+  {
+    type: "submenu",
+    label: "Personal Tools",
+    icon: "fa fa-address-book",
+    roles: [],
+    items: [
+      { label: "Phonebook", href: (routes) => `${routes.novaerpv9}/phonebook/list`, roles: [] },
+      { label: "Add Contact", href: (routes) => `${routes.novaerpv9}/phonebook/profile`, roles: [] },
+      { label: "Import Contacts", href: (routes) => `${routes.novaerpv9}/phonebook/import`, roles: [] },
+      { label: "Quick Notes", href: (routes) => `${routes.novaerpv9}/quicknotes/list`, roles: [] },
+      { label: "Add Note", href: (routes) => `${routes.novaerpv9}/quicknotes/profile`, roles: [] },
+      { label: "Import Notes", href: (routes) => `${routes.novaerpv9}/quicknotes/import`, roles: [] },
     ],
   },
 

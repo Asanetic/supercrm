@@ -42,11 +42,11 @@
     color: var(--etc-muted);
   }
   
-  .etc-toolbar {
+  /* .etc-toolbar {
     /* No layout rules here anymore — col-12 col-lg-8 on the wrapping
-       div in SmartGrid.jsx handles width/stacking. */
+       div in SmartGrid.jsx handles width/stacking. 
   }
-  
+   */
   /* ---------------------------------------------------------------- */
   /* Search                                                             */
   /* ---------------------------------------------------------------- */
@@ -465,10 +465,10 @@
       padding: 1rem 1.1rem 1.25rem;
     }
   
-    .etc-btn-group .etc-btn:not(.etc-btn-icon) {
+    /* .etc-btn-group .etc-btn:not(.etc-btn-icon) {
       flex: 1 1 auto;
     }
-  
+   */
     /* ---- Stacked "card" table for phones ---- */
     .etc-table-wrap {
       border: none;
@@ -672,7 +672,7 @@
 
   /* Refresh + primary CTA (e.g. "Upload new build") sit side by side,
      each a rounded, shadowed pill-ish button — not stacked. */
-  .etc-btn-group {
+  /* .etc-btn-group {
     flex-wrap: nowrap;
     gap: 0.7rem;
   }
@@ -683,7 +683,21 @@
     border-radius: 14px;
     font-size: 0.85rem;
     box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+  } */
+
+  .etc-btn-group {
+    display: flex;
+    gap: 0.7rem;
   }
+  
+  .etc-btn-group .etc-btn {
+    flex: 1 1 0;
+    min-width: 0; /* lets the button shrink below its text's natural width instead of forcing the row wider than the card */
+    border-radius: 8px;
+    font-size: 0.85rem;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+  }
+
 
   .etc-btn-group .etc-btn-primary {
     background: var(--etc-primary-gradient, linear-gradient(135deg, var(--etc-primary), color-mix(in srgb, var(--etc-primary) 70%, #14043a)));
@@ -694,9 +708,30 @@
 
   /* Print List / Export to Excel become full-width-split pills instead
      of left-aligned auto-width badges. */
-  .etc-btn-pill {
-    /* flex: 1 1 0; */
-  }
+  /* .etc-btn-pill {
+    /* flex: 1 1 0; 
+  } */
+
+  /* Refresh now lives inside .etc-btn-group as its first cell, so this
+   is a single 3-up grid covering Refresh + every profileAction —
+   col-4 equivalent. Row 1 fills left-to-right (Refresh, New, first
+   filter), remaining actions wrap to row 2, etc. A partial last row
+   just leaves its unused cell(s) blank — matches how Bootstrap's
+   col-4 grid behaves, no stretching logic needed. */
+.etc-btn-group.etc-btn-group--grid,
+.etc-btn-row.etc-btn-row--grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.etc-btn-group.etc-btn-group--grid .etc-btn,
+.etc-btn-row.etc-btn-row--grid .etc-btn {
+  flex: none;       /* grid owns sizing, not flex-grow */
+  min-width: 0;       /* long labels ("Filter by status") shrink/wrap instead of forcing the column wider */
+  margin: 0;       /* Refresh's old mr-2 no longer applies once it's a grid cell */
+  justify-content: center;
+}
 
   /* Schema.actions row — sits below Refresh/primary, buttons wrap
      side by side at their own content width instead of stretching. */
@@ -718,3 +753,4 @@
     box-shadow: none;
   }
 }
+

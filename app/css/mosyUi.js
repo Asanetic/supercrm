@@ -159,6 +159,10 @@ const MosyUiTheme = () => (
     font-size: 16px; /* better for mobile tap/zoom */
   }
 
+  .dyn-form-scope {
+   padding: 1 !important;
+  }
+
   .premium_search_btn,
   .premium_refresh_link {
     flex: 1;
@@ -656,6 +660,11 @@ body {
   #toggle_btn {
     color: ${mosyThemeConfigs.sideBarChipBg};
   }
+
+.modal-content{
+  padding: 1px;
+}
+   
 }
 
 .table-search button {
