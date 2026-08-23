@@ -1,0 +1,98 @@
+{
+    "smartapi": {
+        "base": "/api/imsv2/smartapi"
+    },
+    "dashboard": {
+        "admin": "/api/imsv2/dashboard/admin"
+    },
+    "smartmessages": {
+        "base": "/api/imsv2/messages/list",
+        "delete": "/api/imsv2/messages/list/delete",
+        "import": "/api/imsv2/messages/import"
+    },
+    "messages": {
+        "base": "/api/imsv2/messages/list",
+        "delete": "/api/imsv2/messages/list/delete",
+        "import": "/api/imsv2/messages/import"
+    },
+    "messagetemplates": {
+        "base": "/api/imsv2/messagetemplates/list",
+        "delete": "/api/imsv2/messagetemplates/list/delete",
+        "import": "/api/imsv2/messagetemplates/import"
+    },
+    "smartmessagetemplates": {
+        "base": "/api/imsv2/messagetemplates/list",
+        "delete": "/api/imsv2/messagetemplates/list/delete",
+        "import": "/api/imsv2/messagetemplates/import"
+    },
+    "smartpaymentrequests": {
+        "base": "/api/imsv2/smartpaymentrequests/list",
+        "delete": "/api/imsv2/smartpaymentrequests/list/delete",
+        "import": "/api/imsv2/smartpaymentrequests/import"
+    },
+    "contacts": {
+        "base": "/api/imsv2/contacts/list",
+        "delete": "/api/imsv2/contacts/list/delete",
+        "import": "/api/imsv2/contacts/import"
+    },
+    "opportunities": {
+        "base": "/api/imsv2/opportunities/list",
+        "delete": "/api/imsv2/opportunities/list/delete",
+        "import": "/api/imsv2/opportunities/import"
+    },
+    "systemrolebundles": {
+        "base": "/api/imsv2/systemrolebundles/list",
+        "delete": "/api/imsv2/systemrolebundles/list/delete",
+        "import": "/api/imsv2/systemrolebundles/import"
+    },
+    "systemusers": {
+        "base": "/api/imsv2/systemusers/list",
+        "delete": "/api/imsv2/systemusers/list/delete",
+        "import": "/api/imsv2/systemusers/import"
+    },
+    "systemmodules": {
+        "base": "/api/imsv2/systemmodules/list",
+        "delete": "/api/imsv2/systemmodules/list/delete",
+        "import": "/api/imsv2/systemmodules/import"
+    },
+    "systemroles": {
+        "base": "/api/imsv2/systemroles/list",
+        "delete": "/api/imsv2/systemroles/list/delete",
+        "import": "/api/imsv2/systemroles/import"
+    },
+    "ledger": {
+        "base": "/api/imsv2/ledger/list",
+        "delete": "/api/imsv2/ledger/list/delete",
+        "import": "/api/imsv2/ledger/import"
+    },
+    "notes": {
+        "base": "/api/imsv2/notes/list",
+        "delete": "/api/imsv2/notes/list/delete",
+        "import": "/api/imsv2/notes/import"
+    },
+    "calls": {
+        "base": "/api/imsv2/calls/list",
+        "delete": "/api/imsv2/calls/list/delete",
+        "import": "/api/imsv2/calls/import"
+    },
+    "smartpayments": {
+        "base": "/api/imsv2/smartpayments/list",
+        "delete": "/api/imsv2/smartpayments/list/delete",
+        "import": "/api/imsv2/smartpayments/import"
+    },
+    "paymentrequests": {
+        "base": "/api/imsv2/paymentrequests/list",
+        "delete": "/api/imsv2/paymentrequests/list/delete",
+        "import": "/api/imsv2/paymentrequests/import"
+    },
+    "revenueplan": {
+        "base": "/api/imsv2/revenueplan/list",
+        "delete": "/api/imsv2/revenueplan/list/delete",
+        "import": "/api/imsv2/revenueplan/import"
+    },
+    "activities": {
+        "base": "/api/imsv2/activities/list",
+        "delete": "/api/imsv2/activities/list/delete",
+        "import": "/api/imsv2/activities/import"
+    }
+}
