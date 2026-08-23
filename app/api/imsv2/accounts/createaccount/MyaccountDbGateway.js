@@ -5,7 +5,7 @@ import { mosySqlDelete  , mosySqlInsert , mosySqlUpdate } from "../../../apiUtil
 export async function AddMyaccount(newId, mutatedDataArray, body, authData)
 {
 
-  const result = await mosySqlInsert("system_users", mutatedDataArray, body);
+  const result = await mosySqlInsert("system_users", mutatedDataArray, body, "txt_");
    
   return result;
 }
