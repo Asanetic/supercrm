@@ -18,10 +18,14 @@
 import { quickEditFromRow } from "../../moduleControl/UiControl/QuickEditModal";
 import { openSmartTagFilter, openSmartDateFilter, openSmartMapFilter } from "../../moduleControl/UiControl/smartFilterActions";
 import { openEntityCreateModal, buildPresetFromRow } from "../../moduleControl/UiControl/EntityCreateModal";
-import { callContactAction, messageContactAction } from "../../moduleControl/UiControl/contactTouchActions";
+import { callContactAction, messageContactAction, resolveContactRecipient } from "../../moduleControl/UiControl/contactTouchActions";
 import { ContactsSchema } from "../../contacts/ContactsSchema";
 import ActivitiesProfile from "../../activities/uiControl/ActivitiesProfile";
 import { ActivitiesSchema } from "../../activities/ActivitiesSchema";
+import NotesProfile from "../../notes/uiControl/NotesProfile";
+import { NotesSchema } from "../../notes/NotesSchema";
+import { MosyCreatePayRequest } from "../../UiControl/MosyGeneratePaymentRequest";
+import { MosySendSmartReminder } from "../../UiControl/MosySmartReminder";
 
 const OpportunitiesActions = {
   // Bound by gridOptions.checkFunction in schema.js. Fires with every row
@@ -52,6 +56,58 @@ const OpportunitiesActions = {
         { sourceKey: 'contact_id', destKey: 'contact_id', destSchema: ActivitiesSchema, labelValue: row.contact_name },
       ]),
       onSaved: refresh,
+    });
+  },
+
+  // A deal row only carries the linked contact's CACHED name
+  // (contact_name) — not phone/email. resolveContactRecipient() looks the
+  // real contact record up via contact_id and merges phone_number/email
+  // onto a copy of the row before handing it to the payment/reminder UIs,
+  // same lookup `call`/`send_message` above already rely on.
+  request_payment: async ({ rows }) => {
+    const row = rows?.[0];
+    if (!row) return;
+    const recipient = await resolveContactRecipient(row);
+    MosyCreatePayRequest({
+      requestData: {
+        payer_name: recipient?.full_name || recipient?.contact_name || row.contact_name,
+        payer_phone: recipient?.phone_number,
+        payer_email: recipient?.email,
+        related_record_id: row.opportunity_id,
+      },
+      title: `Request payment — ${row.title || row.contact_name || ''}`,
+    });
+  },
+
+  // Pops a preset Note create form, locking the new note's contact_id AND
+  // opportunity_id to this deal (and its linked contact).
+  add_note: ({ rows, refresh }) => {
+    const row = rows?.[0];
+    if (!row) return;
+    openEntityCreateModal({
+      ProfileComponent: NotesProfile,
+      schema: NotesSchema,
+      title: `New Note — ${row.title || row.contact_name || ''}`,
+      presetValues: buildPresetFromRow(row, [
+        { sourceKey: 'contact_id', destKey: 'contact_id', destSchema: NotesSchema, labelValue: row.contact_name },
+        { sourceKey: 'opportunity_id', destKey: 'opportunity_id', destSchema: NotesSchema, labelValue: row.title },
+      ]),
+      onSaved: refresh,
+    });
+  },
+
+  // Opens the shared Smart Reminder composer for this deal's linked
+  // contact — same phone/email lookup as request_payment above.
+  set_reminder: async ({ rows }) => {
+    const row = rows?.[0];
+    if (!row) return;
+    const recipient = await resolveContactRecipient(row);
+    MosySendSmartReminder({
+      profileDataNode: {
+        ...recipient,
+        related_record_id: row.opportunity_id,
+      },
+      uiOptions: { modalTitle: `Set Reminder — ${row.title || row.contact_name || ''}` },
     });
   },
 

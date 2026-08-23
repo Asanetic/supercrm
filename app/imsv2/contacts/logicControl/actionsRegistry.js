@@ -17,18 +17,21 @@
 
 import React from 'react';
 import { MosySendSmartMessage } from "../../UiControl/MosySmartComms";
+import { MosySendSmartReminder } from "../../UiControl/MosySmartReminder";
 import { MosyCommsSmartCall } from "../../UiControl/MosySmartCommsCalls";
 import { MosyCreatePayRequest } from "../../UiControl/MosyGeneratePaymentRequest";
 import { openEntityCreateModal, buildPresetFromRow } from "../../moduleControl/UiControl/EntityCreateModal";
 import { MosyCard } from "../../../components/MosyCard";
-import { MosyNotify } from "../../../MosyUtils/ActionModals";
 import OpportunitiesList from "../../opportunities/uiControl/OpportunitiesList";
 import OpportunitiesProfile from "../../opportunities/uiControl/OpportunitiesProfile";
 import { OpportunitiesSchema } from "../../opportunities/OpportunitiesSchema";
 import PaymentrequestsList from "../../paymentrequests/uiControl/PaymentrequestsList";
 import SmartpaymentsList from "../../smartpayments/uiControl/SmartpaymentsList";
+import CallsList from "../../calls/uiControl/CallsList";
+import MessagesList from "../../messages/uiControl/MessagesList";
 import ActivitiesProfile from "../../activities/uiControl/ActivitiesProfile";
 import { ActivitiesSchema } from "../../activities/ActivitiesSchema";
+import { openSmartTagFilter } from '../../moduleControl/UiControl/smartFilterActions';
 
 // The shared Smart Call / Smart Messenger UIs read recipient info off
 // generic keys (full_name / record_id) — a contacts row carries them as
@@ -57,11 +60,44 @@ const ContactsActions = {
     MosyCommsSmartCall({ profileDataNode: toRecipient(row) });
   },
 
+    filter_by_status: (ctx) => {
+      openSmartTagFilter(ctx, {
+      title: 'Filter by status',
+      columnKey: 'status',
+    })
+    return false
+  },
+  filter_by_type: (ctx) => {
+    openSmartTagFilter(ctx, {
+    title: 'Filter by type',
+    columnKey: 'type',
+  })
+  return false
+},
+
+filter_by_source: (ctx) => {
+  openSmartTagFilter(ctx, {
+  title: 'Filter by source',
+  columnKey: 'source',
+})
+return false
+},
+
   // Opens the shared Smart Messenger composer for this contact.
   send_message: ({ rows }) => {
     const row = rows?.[0];
     if (!row) return;
     MosySendSmartMessage({ profileDataNode: toRecipient(row) });
+  },
+
+  // Opens the shared Smart Reminder composer for this contact.
+  set_reminder: ({ rows }) => {
+    const row = rows?.[0];
+    if (!row) return;
+    MosySendSmartReminder({
+      profileDataNode: { ...toRecipient(row), related_record_id: row.contact_id },
+      uiOptions: { modalTitle: `Set Reminder — ${row.contact_name || ''}` },
+    });
   },
 
   // Opens the shared "generate payment request" card, prefilled with this
@@ -128,7 +164,7 @@ const ContactsActions = {
         hiddenActions: ['new'],
       }),
       true,
-      'modal1',
+      'modal3',
       'mosycard_wide'
     );
   },
@@ -147,7 +183,7 @@ const ContactsActions = {
         hiddenActions: ['new'],
       }),
       true,
-      'modal1',
+      'modal3',
       'mosycard_wide'
     );
   },
@@ -164,19 +200,49 @@ const ContactsActions = {
         hiddenActions: ['new'],
       }),
       true,
-      'modal1',
+      'modal3',
       'mosycard_wide'
     );
   },
 
-  // The calls module only has a schema.js so far — no list/profile page or
-  // API route to pop open yet. Flag it instead of silently doing nothing.
-  view_call_history: () => {
-    MosyNotify({
-      message: "Call history isn't available yet — the calls module has no list page built.",
-      icon: 'info-circle',
-      iconColor: 'text-warning',
-    });
+  // smart_calls/smart_messages rows carry related_record_id set to the
+  // contact's contact_id at send time (see MosySmartCommsCalls.jsx /
+  // send-util-message.js, both of which take it from `record_id` on the
+  // profileDataNode `call`/`send_message` above hand them — mapped from
+  // contact_id via toRecipient()) — same relatedRecordId scoping as
+  // view_payment_requests/view_payments above.
+  view_call_history: ({ rows }) => {
+    const row = rows?.[0];
+    if (!row) return;
+    MosyCard(
+      '',
+      React.createElement(CallsList, {
+        customProfilePath: '../calls/profile',
+        title: `Call History — ${row.contact_name || ''}`,
+        fixedQuery: { relatedRecordId: btoa(row.contact_id) },
+        hiddenActions: ['new'],
+      }),
+      true,
+      'modal3',
+      'mosycard_wide'
+    );
+  },
+
+  view_message_history: ({ rows }) => {
+    const row = rows?.[0];
+    if (!row) return;
+    MosyCard(
+      '',
+      React.createElement(MessagesList, {
+        customProfilePath: '../messages/profile',
+        title: `Message History — ${row.contact_name || ''}`,
+        fixedQuery: { relatedRecordId: btoa(row.contact_id) },
+        hiddenActions: ['new'],
+      }),
+      true,
+      'modal3',
+      'mosycard_wide'
+    );
   },
 
   // Add more as needed — see actionRegistryDocs.md for patterns to copy.

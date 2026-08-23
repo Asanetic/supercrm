@@ -90,6 +90,9 @@ export const OpportunitiesSchema = {
     { key: 'call', label: 'Call', icon: 'phone', variant: 'outline-success', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'send_message', label: 'Send Message', icon: 'comment', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'add_activity', label: 'Add Activity', icon: 'calendar-plus-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'request_payment', label: 'Request Payment', icon: 'money', variant: 'outline-info', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'add_note', label: 'Add Note', icon: 'sticky-note-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'set_reminder', label: 'Set Reminder', icon: 'bell', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
 
     // Quick-edit the pipeline stage without leaving the grid/list.
     { key: 'update_stage', label: 'Update Stage', icon: 'flag', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },

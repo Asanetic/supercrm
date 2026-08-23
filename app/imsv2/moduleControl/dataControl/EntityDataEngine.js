@@ -3,23 +3,11 @@
 // by creating one instance and calling .subscribe() to get notified when data changes.
 
 import { mosyGetData, mosyPostData } from '../../../MosyUtils/hiveUtils';
-import { runRegisteredAction } from '../logicControl/actionsRegistry';
-
-// ---- Normalize whatever a registered action returns into one shape, so
-// runAction/runRowAction never hand back a mystery `undefined`.
-function normalizeActionResult(raw) {
-  if (raw === false) return { ok: true, reload: false };
-  if (raw && typeof raw === 'object') {
-    return {
-      ok: raw.ok !== false,
-      message: raw.message,
-      reload: raw.reload !== undefined ? !!raw.reload : raw.ok !== false,
-      data: raw.data,
-      navigateTo: raw.navigateTo,
-    };
-  }
-  return { ok: true, reload: true };
-}
+import { runRegisteredAction, normalizeActionResult } from '../logicControl/actionsRegistry';
+// normalizeActionResult used to be duplicated here (byte-for-byte, easy to
+// drift out of sync with the copy actionsRegistry.jsx itself exports and
+// useEntityGridController.jsx's dispatchAction() uses) — now a single
+// shared definition backs both call paths.
 
 export class EntityDataEngine {
   constructor(schema, options = {}) {
@@ -385,11 +373,8 @@ export class EntityDataEngine {
       // was previously called as (action.key, ctx) — one arg short, so
       // every param shifted: moduleActions became the key STRING, key
       // became the ctx OBJECT, ctx was undefined. moduleActions[key] then
-      // resolved to undefined every time, so the real handler never ran —
-      // but normalizeActionResult(undefined) still defaults to
-      // { ok: true, reload: true }, so the engine reloaded from the API
-      // regardless, as if the action had actually done something. Passing
-      // this.moduleActions first fixes that.
+      // resolved to undefined every time, so the real handler never ran.
+      // Passing this.moduleActions first fixes that.
       await runRegisteredAction(this.moduleActions, action.key, {
         rows: targetRows,
         schema: this.schema,

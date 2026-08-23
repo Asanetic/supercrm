@@ -86,16 +86,22 @@ export const ContactsSchema = {
 
     // Contact-touch actions — route through logicControl/actionsRegistry.js.
     { key: 'call', label: 'Call', icon: 'phone', variant: 'outline-success', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
-    { key: 'send_message', label: 'Message', icon: 'comment', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'send_message', label: 'Message', icon: 'comment', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true , rowAction: true},
+    { key: 'set_reminder', label: 'Set Reminder', icon: 'bell', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true },
     { key: 'request_payment', label: 'Request Payment', icon: 'money', variant: 'outline-info', type: 'action', editOnly: true, grid: false, form: true },
-    { key: 'add_deal', label: 'Create Deal', icon: 'handshake-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
-    { key: 'add_activity', label: 'Add Activity', icon: 'calendar-plus-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'add_deal', label: 'Create Deal', icon: 'handshake-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true },
+    { key: 'add_activity', label: 'Add Activity', icon: 'calendar-plus-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true},
 
     // Related-record popups — scoped to this contact.
     { key: 'view_deals', label: 'Deals', icon: 'briefcase', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'view_payment_requests', label: 'Payment Requests', icon: 'file-text-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
-    { key: 'view_payments', label: 'Payments', icon: 'credit-card', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
-    { key: 'view_call_history', label: 'Call History', icon: 'history', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'view_payments', label: 'Payments', icon: 'credit-card', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true },
+    { key: 'view_call_history', label: 'Call History', icon: 'history', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true},
+    { key: 'view_message_history', label: 'Message History', icon: 'comments-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+
+    {key :'filter_by_status', label: 'Filter by Status', icon: 'filter', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
+    {key :'filter_by_type', label: 'Filter by type', icon: 'user', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
+    {key :'filter_by_source', label: 'Filter by Source', icon: 'bolt', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
   ],
 
 

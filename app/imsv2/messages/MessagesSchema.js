@@ -83,6 +83,11 @@ export const MessagesSchema = {
     { key: 'new', label: 'New Message', icon: 'plus', variant: 'outline-primary', navigateTo: '/imsv2/messages/profile', grid: true, form: false, rowAction: false },
     { key: 'clone', label: 'Clone Record', icon: 'copy', variant: 'outline-secondary', editOnly: true, grid: false, form: true, rowAction: false, role: 'manage_messages' },
     //{ key: 'filterByDate', label: 'Filter by date', icon: 'calendar', variant: 'outline-primary', type: 'action', grid: true, form: false, rowAction: false },
+
+    // Routes through logicControl/actionsRegistry.js.
+    { key: 'call', label: 'Call', icon: 'phone', variant: 'outline-success', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'forward_message', label: 'Forward', icon: 'share', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'resend_message', label: 'Resend', icon: 'refresh', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
   ],
 
 

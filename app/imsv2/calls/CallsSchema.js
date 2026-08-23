@@ -83,6 +83,10 @@ export const CallsSchema = {
     { key: 'new', label: 'New Call', icon: 'plus', variant: 'outline-primary', navigateTo: '/imsv2/calls/profile', grid: true, form: false, rowAction: false },
     { key: 'clone', label: 'Clone Record', icon: 'copy', variant: 'outline-secondary', editOnly: true, grid: false, form: true, rowAction: false, role: 'manage_calls' },
     //{ key: 'filterByDate', label: 'Filter by date', icon: 'calendar', variant: 'outline-primary', type: 'action', grid: true, form: false, rowAction: false },
+
+    // Routes through logicControl/actionsRegistry.js.
+    { key: 'call_again', label: 'Call Again', icon: 'phone', variant: 'outline-success', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'send_message', label: 'Send Message', icon: 'comment', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
   ],
 
 

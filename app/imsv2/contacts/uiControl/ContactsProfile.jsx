@@ -5,6 +5,9 @@ import { ContactsSchema } from '../ContactsSchema';
 import { useEntityFormController } from '../../moduleControl/dataControl/useEntityFormController';
 import { mosyGetSchemaTitle } from '../../../MosyUtils/hiveUtils';
 import ContactsActions from '../logicControl/actionsRegistry';
+import OpportunitiesList from '../../opportunities/uiControl/OpportunitiesList';
+import { MosyTitleTag } from '../../UiControl/componentControl';
+import RevenueplanList from '../../revenueplan/uiControl/RevenueplanList';
 
 // ContactsProfile — pure shell. It resolves the id, wires up the
 // controller, and hands DynamicForm the two strings that make this page
@@ -25,12 +28,26 @@ export default function ContactsProfile({ id: idProp, onDone, hiddenActions = []
   });
 
   return (
+    <div className='col-md-12'>
     <DynamicForm
       controller={form}
       eyebrow={form.isEditing ? `${schema.label}  Profile` : `${schema.label}  Directory`}
       title={form.isEditing ? mosyGetSchemaTitle(schema, form.values, '') : `New ${schema.label}`}
       hiddenActions={hiddenActions}
     />
+    {form.isEditing && !!form.values?.contact_id && (
+      <>
+        <MosyTitleTag title={`Opportunities history for ${form.values?.contact_name || ''}`}/>
+        <OpportunitiesList customProfilePath='../opportunities/profile' title={`${form.values?.contact_name || ''} - Deal history`}  hiddenActions={['new']} fixedQuery={{ contactId: btoa(form.values?.contact_id) }}/>
+
+        <MosyTitleTag title={`Revenue history for ${form.values?.contact_name || ''}`}/>
+        <RevenueplanList customProfilePath='../revenueplan/profile' title={`${form.values?.contact_name || ''} - Revenue history`}  hiddenActions={['new']} fixedQuery={{ relatedRecordId: btoa(form.values?.contact_id) }}/>
+
+
+      </>
+    )}
+    </div>
+
   );
 }
 

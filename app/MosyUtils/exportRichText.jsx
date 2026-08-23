@@ -67,9 +67,7 @@ export function exportRichTextToPdf({ title = 'Document', htmlContent = '' } = {
         </style>
       </head>
       <body>
-        <h1>${title}</h1>
-        <div class="export-meta">Exported ${new Date().toLocaleString()}</div>
-        ${content}
+          ${content}
       </body>
     </html>
   `);

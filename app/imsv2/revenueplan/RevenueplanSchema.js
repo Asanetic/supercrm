@@ -88,6 +88,18 @@ export const RevenueplanSchema = {
     // Contact-touch actions — route through logicControl/actionsRegistry.js.
     { key: 'call', label: 'Call', icon: 'phone', variant: 'outline-success', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'send_message', label: 'Send Message', icon: 'comment', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'set_reminder', label: 'Set Reminder', icon: 'bell', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true},
+    { key: 'request_payment', label: 'Request Payment', icon: 'money', variant: 'outline-info', type: 'action', editOnly: true, grid: false, form: true },
+    { key: 'add_deal', label: 'Create Deal', icon: 'handshake-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true },
+    { key: 'add_activity', label: 'Add Activity', icon: 'calendar-plus-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true},
+
+    // Related-record popups — scoped to this plan's linked client (call/
+    // message history) or to this plan's own record (reminders, which
+    // follow the same self-referencing convention set_reminder above uses).
+    { key: 'view_call_history', label: 'Call History', icon: 'history', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'view_message_history', label: 'Message History', icon: 'comments-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'view_reminders', label: 'Reminders', icon: 'bell', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'view_activities', label: 'Activities', icon: 'calendar-check-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true},
   ],
 
 

@@ -84,6 +84,11 @@ export const NotesSchema = {
     { key: 'new', label: 'New Note', icon: 'plus', variant: 'outline-primary', navigateTo: '/imsv2/notes/profile', grid: true, form: false, rowAction: false },
     { key: 'clone', label: 'Clone Record', icon: 'copy', variant: 'outline-secondary', editOnly: true, grid: false, form: true, rowAction: false, role: 'manage_notes' },
     //{ key: 'filterByDate', label: 'Filter by date', icon: 'calendar', variant: 'outline-primary', type: 'action', grid: true, form: false, rowAction: false },
+
+    // Routes through logicControl/actionsRegistry.js.
+    { key: 'send_message', label: 'Send Message', icon: 'comment', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'print_note', label: 'Print / PDF', icon: 'print', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'download_docx', label: 'Download as DOCX', icon: 'file-word-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
   ],
 
 
@@ -117,7 +122,7 @@ export const NotesSchema = {
     ...resolveField('contact_id', { as: 'contact_name', colSpan:4 }),
     ...resolveField('opportunity_id', { as: 'deal' , colSpan:4 }),
     { key: 'type', label: 'Type', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'type' },
-    { key: 'title', label: 'Title', type: 'text' },
+    { key: 'title', label: 'Title', type: 'text' , title :true },
     { key: 'content', label: 'Content', type: 'richtext', colSpan: 12 },
     { key: 'status', label: 'Status', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'status' },
     { key: 'reg_date', label: 'Reg Date', type: 'datetime', editOnly: true },

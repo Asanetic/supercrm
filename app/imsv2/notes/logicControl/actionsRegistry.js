@@ -15,6 +15,9 @@
  * register functions under those two keys, they will never fire.
  */
 
+import { messageContactAction } from "../../moduleControl/UiControl/contactTouchActions";
+import { exportRichTextToPdf, exportRichTextToDocx } from "../../../MosyUtils/exportRichText";
+
 const NotesActions = {
   // Bound by gridOptions.checkFunction in schema.js. Fires with every row
   // the user ticked in the grid's checkbox column. Swap the display-name
@@ -22,6 +25,23 @@ const NotesActions = {
   gridCheckBoxAction: async ({ rows }) => {
     const displayName = (row) => row?.title || row?.name || row?.record_id || 'record';
     alert(`${rows.length} record(s) selected: ${rows.map(displayName).join(', ')}`);
+  },
+
+  // Opens the shared Smart Messenger composer for this note's linked
+  // contact — a notes row already carries contact_id/contact_name
+  // (resolveField's defaults), so no field mapping needed.
+  send_message: (ctx) => messageContactAction(ctx),
+
+  print_note: ({ rows }) => {
+    const row = rows?.[0];
+    if (!row) return;
+    exportRichTextToPdf({ title: row.title || 'Note', htmlContent: row.content || '' });
+  },
+
+  download_docx: ({ rows }) => {
+    const row = rows?.[0];
+    if (!row) return;
+    exportRichTextToDocx({ title: row.title || 'Note', htmlContent: row.content || '' });
   },
 
   // Add more as needed — see actionRegistryDocs.md for patterns to copy.

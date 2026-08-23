@@ -43,7 +43,7 @@ export async function resolveContactRecipient(row, { contactIdKey = 'contact_id'
   if (!contactId) return row;
 
   try {
-    const res = await mosyGetData({ endpoint: apiRoutes.contacts.base, params: { recordId: contactId } });
+    const res = await mosyGetData({ endpoint: apiRoutes.contacts.base, params: { contactId: btoa(contactId) } });
     const contact = Array.isArray(res?.data) ? res.data[0] : null;
     if (!contact) return row;
 

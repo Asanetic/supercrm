@@ -128,3 +128,68 @@ $notes_ideas_table_script = "
 $notes_ideas_table = 'notes_ideas';
 
 create_table($mysqliconn, $dbname, $notes_ideas_table, $notes_ideas_table_script);
+
+
+//=========================================================
+// REMINDERS TABLE
+//=========================================================
+$reminders_table_script = "
+    `primkey` int(11) PRIMARY KEY AUTO_INCREMENT,
+    `reminder_id` varchar(100) NOT NULL,
+    `tenant_id` varchar(100) NOT NULL,
+    `app_name` varchar(100) NOT NULL,
+    `related_record_id` varchar(100),
+    `time_of_day` time NOT NULL,
+    `days_of_week` varchar(50) NOT NULL,
+    `repeat_type` varchar(20) DEFAULT 'repeat',
+    `recipients_phone` longtext,
+    `recipients_email` longtext,
+    `subject` varchar(255),
+    `message` text NOT NULL,
+    `variable_source` varchar(100),
+    `last_sent_date` date DEFAULT NULL,
+    `status` varchar(50) DEFAULT 'active',
+    `reg_date` datetime DEFAULT CURRENT_TIMESTAMP
+";
+
+$reminders_table = 'mosy_reminders';
+create_table($mysqliconn, $dbname, $reminders_table, $reminders_table_script);
+
+
+//=========================================================
+// METRICS TABLE (dynamic placeholder registry)
+//=========================================================
+$metrics_table_script = "
+    `primkey` int(11) PRIMARY KEY AUTO_INCREMENT,
+    `metric_id` varchar(100) NOT NULL,
+    `app_name` varchar(100) NOT NULL,
+    `metric_key` varchar(100) NOT NULL,
+    `label` varchar(255) NOT NULL,
+    `sql_query` text NOT NULL,
+    `db_connection_key` varchar(100) NOT NULL,
+    `status` varchar(50) DEFAULT 'active',
+    `reg_date` datetime DEFAULT CURRENT_TIMESTAMP
+";
+
+$metrics_table = 'mosy_metrics';
+create_table($mysqliconn, $dbname, $metrics_table, $metrics_table_script);
+
+
+//=========================================================
+// REMINDER LOG TABLE (send history / debugging)
+//=========================================================
+$reminder_log_table_script = "
+    `primkey` int(11) PRIMARY KEY AUTO_INCREMENT,
+    `log_id` varchar(100) NOT NULL,
+    `reminder_id` varchar(100) NOT NULL,
+    `tenant_id` varchar(100) NOT NULL,
+    `channel` varchar(50) NOT NULL,
+    `recipient` varchar(255),
+    `rendered_message` text,
+    `status` varchar(50) DEFAULT 'sent',
+    `error_message` text,
+    `reg_date` datetime DEFAULT CURRENT_TIMESTAMP
+";
+
+$reminder_log_table = 'mosy_reminder_log';
+create_table($mysqliconn, $dbname, $reminder_log_table, $reminder_log_table_script);

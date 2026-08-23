@@ -15,10 +15,20 @@
  * register functions under those two keys, they will never fire.
  */
 
+import React from 'react';
 import { openSmartTagFilter, openSmartDateFilter, openSmartMapFilter } from "../../moduleControl/UiControl/smartFilterActions";
-import { callContactAction, messageContactAction } from "../../moduleControl/UiControl/contactTouchActions";
+import { callContactAction, messageContactAction, resolveContactRecipient } from "../../moduleControl/UiControl/contactTouchActions";
+import { openEntityCreateModal, buildPresetFromRow } from "../../moduleControl/UiControl/EntityCreateModal";
 import { ContactsSchema } from "../../contacts/ContactsSchema";
 import { OpportunitiesSchema } from "../../opportunities/OpportunitiesSchema";
+import { MosySendSmartReminder } from "../../UiControl/MosySmartReminder";
+import { MosyCard } from "../../../components/MosyCard";
+import CallsList from "../../calls/uiControl/CallsList";
+import MessagesList from "../../messages/uiControl/MessagesList";
+import MosyremindersList from "../../mosyreminders/uiControl/MosyremindersList";
+import NotesProfile from "../../notes/uiControl/NotesProfile";
+import NotesList from "../../notes/uiControl/NotesList";
+import { NotesSchema } from "../../notes/NotesSchema";
 
 const ActivitiesActions = {
   // Bound by gridOptions.checkFunction in schema.js. Fires with every row
@@ -32,6 +42,113 @@ const ActivitiesActions = {
   // activity's linked contact — see moduleControl/UiControl/contactTouchActions.jsx.
   call: (ctx) => callContactAction(ctx),
   send_message: (ctx) => messageContactAction(ctx),
+
+  // Was passing the raw activities row straight through — activities rows
+  // have no phone_number/email of their own (only contact_id/contact_name),
+  // so the composer's recipient fields came up blank, and related_record_id
+  // was never set at all (nothing for view_reminders below to scope by).
+  // resolveContactRecipient() does the same contact_id lookup call/
+  // send_message already rely on.
+  add_reminder: async ({ rows }) => {
+    const row = rows?.[0];
+    if (!row) return;
+    const recipient = await resolveContactRecipient(row);
+    MosySendSmartReminder({
+      profileDataNode: { ...recipient, related_record_id: row.activity_id },
+      uiOptions: { modalTitle: `Set Reminder — ${row.title || row.contact_name || ''}` },
+    });
+  },
+
+  // Pops a preset Note create form, locking the new note's contact_id
+  // (and opportunity_id, when this activity has one) to match.
+  add_note: ({ rows, refresh }) => {
+    const row = rows?.[0];
+    if (!row) return;
+    openEntityCreateModal({
+      ProfileComponent: NotesProfile,
+      schema: NotesSchema,
+      title: `New Note — ${row.title || row.contact_name || ''}`,
+      presetValues: buildPresetFromRow(row, [
+        { sourceKey: 'contact_id', destKey: 'contact_id', destSchema: NotesSchema, labelValue: row.contact_name },
+        { sourceKey: 'opportunity_id', destKey: 'opportunity_id', destSchema: NotesSchema, labelValue: row.title },
+      ]),
+      onSaved: refresh,
+    });
+  },
+
+  // Related-record popups — Notes only carries contact_id/opportunity_id
+  // FKs (no activity_id column), and every call/message sent from any
+  // module ends up scoped to the CONTACT (see contactTouchActions.jsx),
+  // so all four scope by this activity's linked contact_id — except
+  // Reminders, which (like Contacts'/Opportunities' own set_reminder)
+  // scope by the record that CREATED them, i.e. this activity's own id.
+  view_messages: ({ rows }) => {
+    const row = rows?.[0];
+    if (!row?.contact_id) return;
+    MosyCard(
+      '',
+      React.createElement(MessagesList, {
+        customProfilePath: '../messages/profile',
+        title: `Messages — ${row.contact_name || ''}`,
+        fixedQuery: { relatedRecordId: btoa(row.contact_id) },
+        hiddenActions: ['new'],
+      }),
+      true,
+      'modal3',
+      'mosycard_wide'
+    );
+  },
+
+  view_calls: ({ rows }) => {
+    const row = rows?.[0];
+    if (!row?.contact_id) return;
+    MosyCard(
+      '',
+      React.createElement(CallsList, {
+        customProfilePath: '../calls/profile',
+        title: `Calls — ${row.contact_name || ''}`,
+        fixedQuery: { relatedRecordId: btoa(row.contact_id) },
+        hiddenActions: ['new'],
+      }),
+      true,
+      'modal3',
+      'mosycard_wide'
+    );
+  },
+
+  view_reminders: ({ rows }) => {
+    const row = rows?.[0];
+    if (!row?.activity_id) return;
+    MosyCard(
+      '',
+      React.createElement(MosyremindersList, {
+        customProfilePath: '../mosyreminders/profile',
+        title: `Reminders — ${row.title || row.contact_name || ''}`,
+        fixedQuery: { relatedRecordId: btoa(row.activity_id) },
+        hiddenActions: ['new'],
+      }),
+      true,
+      'modal3',
+      'mosycard_wide'
+    );
+  },
+
+  view_notes: ({ rows }) => {
+    const row = rows?.[0];
+    if (!row?.contact_id) return;
+    MosyCard(
+      '',
+      React.createElement(NotesList, {
+        customProfilePath: '../notes/profile',
+        title: `Notes — ${row.contact_name || ''}`,
+        fixedQuery: { contactId: btoa(row.contact_id) },
+        hiddenActions: ['new'],
+      }),
+      true,
+      'modal3',
+      'mosycard_wide'
+    );
+  },
 
   // Grid-toolbar smart filters.
   filter_by_client: (ctx) => openSmartMapFilter(ctx, {

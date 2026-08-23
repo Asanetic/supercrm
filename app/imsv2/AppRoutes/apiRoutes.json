@@ -94,5 +94,26 @@
         "base": "/api/imsv2/activities/list",
         "delete": "/api/imsv2/activities/list/delete",
         "import": "/api/imsv2/activities/import"
+    },
+    "mosyreminders": {
+        "base": "/api/imsv2/mosyreminders/list",
+        "delete": "/api/imsv2/mosyreminders/list/delete",
+        "import": "/api/imsv2/mosyreminders/import",
+        "run": "/api/imsv2/runmosyreminders"
+    },
+    "mosymetrics": {
+        "base": "/api/imsv2/mosymetrics/list",
+        "delete": "/api/imsv2/mosymetrics/list/delete",
+        "import": "/api/imsv2/mosymetrics/import"
+    },
+    "mosyreminderlog": {
+        "base": "/api/imsv2/mosyreminderlog/list",
+        "delete": "/api/imsv2/mosyreminderlog/list/delete",
+        "import": "/api/imsv2/mosyreminderlog/import"
+    },
+    "mosyreminderlogs": {
+        "base": "/api/imsv2/mosyreminderlogs/list",
+        "delete": "/api/imsv2/mosyreminderlogs/list/delete",
+        "import": "/api/imsv2/mosyreminderlogs/import"
     }
 }

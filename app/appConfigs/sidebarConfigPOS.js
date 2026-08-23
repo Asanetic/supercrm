@@ -6,9 +6,12 @@
 // pointed at routes.novaerpv9, a route prefix with no corresponding app
 // directory in this project, so none of those links ever resolved.
 //
-// Modules that only have a *Schema.js so far (calls, messages) are left
-// out — there are no list/profile pages to link to yet. Add their submenu
-// blocks here once those pages exist.
+// Modules that only have a *Schema.js so far (mosymetrics) are left out —
+// there's no list/profile page to link to yet. calls/messages now have
+// full pages and are grouped into "Communications" below alongside
+// Message Templates and Reminders — every module that's a channel for
+// reaching a contact (or the log/config behind one), in one place, instead
+// of scattered standalone submenus.
 
 export const sidebarConfig = [
 
@@ -107,15 +110,25 @@ export const sidebarConfig = [
     ],
   },
 
+  // Every channel for reaching a contact (or the config/log behind one),
+  // grouped together instead of four standalone submenus.
   {
     type: "submenu",
-    label: "Message Templates",
-    icon: "fa fa-file-text-o",
+    label: "Communications",
+    icon: "fa fa-comments-o",
     roles: [],
     items: [
-      { label: "All Templates", href: (routes) => `${routes.imsv2}/messagetemplates/list`, roles: [] },
+      { label: "Messages", href: (routes) => `${routes.imsv2}/messages/list`, roles: [] },
+      { label: "New Message", href: (routes) => `${routes.imsv2}/messages/profile`, roles: [] },
+      { label: "Calls", href: (routes) => `${routes.imsv2}/calls/list`, roles: [] },
+      { label: "Log a Call", href: (routes) => `${routes.imsv2}/calls/profile`, roles: [] },
+      { label: "Message Templates", href: (routes) => `${routes.imsv2}/messagetemplates/list`, roles: [] },
       { label: "Add Template", href: (routes) => `${routes.imsv2}/messagetemplates/profile`, roles: [] },
       { label: "Import Templates", href: (routes) => `${routes.imsv2}/messagetemplates/import`, roles: [] },
+      { label: "All Reminders", href: (routes) => `${routes.imsv2}/mosyreminders/list`, roles: [] },
+      { label: "New Reminder", href: (routes) => `${routes.imsv2}/mosyreminders/profile`, roles: [] },
+      { label: "Import Reminders", href: (routes) => `${routes.imsv2}/mosyreminders/import`, roles: [] },
+      { label: "Reminder Log", href: (routes) => `${routes.imsv2}/mosyreminderlogs/list`, roles: [] },
     ],
   },
 
@@ -125,6 +138,9 @@ export const sidebarConfig = [
     icon: "fa fa-shield",
     roles: [],
     items: [
+      { label: "System Users", href: (routes) => `${routes.imsv2}/systemusers/list`, roles: [] },
+      { label: "Add System User", href: (routes) => `${routes.imsv2}/systemusers/profile`, roles: [] },
+      { label: "Import System Users", href: (routes) => `${routes.imsv2}/systemusers/import`, roles: [] },
       { label: "Access Control List", href: (routes) => `${routes.imsv2}/accesscontrol/list`, roles: [] },
       { label: "Add Access Control", href: (routes) => `${routes.imsv2}/accesscontrol/profile`, roles: [] },
       { label: "Access Matrix", href: (routes) => `${routes.imsv2}/accessmatrix`, roles: [] },

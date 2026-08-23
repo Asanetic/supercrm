@@ -90,6 +90,15 @@ export const ActivitiesSchema = {
     // opening the shared Smart Call / Smart Messenger UI.
     { key: 'call', label: 'Call', icon: 'phone', variant: 'outline-success', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'send_message', label: 'Send Message', icon: 'comment', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'add_reminder', label: 'Set reminder', icon: 'clock-o', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true },
+    { key: 'add_note', label: 'Add Note', icon: 'sticky-note-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true },
+
+    // Related-record popups — scoped to this activity's linked contact
+    // (call/send_message/set_reminder all resolve/scope by contact_id too).
+    { key: 'view_messages', label: 'Messages', icon: 'comments-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'view_calls', label: 'Calls', icon: 'history', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'view_reminders', label: 'Reminders', icon: 'bell', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+    { key: 'view_notes', label: 'Notes', icon: 'sticky-note-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
 
     // Grid-toolbar smart filters — client/deal pick a row from another
     // module and scope by this table's own FK column, status/type pick
@@ -117,7 +126,7 @@ export const ActivitiesSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'contact_name', 'title', 'type', 'direction', 'subject', 'description', 'activity_date'],
+  showInList: ['row_count', 'contact_name', 'title', 'type', 'subject', 'description', 'activity_date'],
 
   //export columns these columns are used to generate upload csv template file
   exportColumns: ['contact_id', 'opportunity_id', 'type', 'direction', 'subject', 'description', 'activity_date'],
