@@ -162,7 +162,7 @@ export async function POST(MyaccountRequest) {
     if (MyaccountFormAction === "add_system_users") 
     {
       
-      mutatedDataArray.user_id = newId;
+      mutatedDataArray.record_id = newId;
       
       // Insert into table Myaccount
       const result = await AddMyaccount(newId, mutatedDataArray, body, authData);     

@@ -35,7 +35,7 @@ export default function AuthPage({baseRoot=""}) {
   const registerUrl = saAuthConfigs.registerUrl;
 
   return (
-    <MiniWidgetLoginForm
+    <DefaultLoginForm
       loginBgImg={loginBgImg}
       appLogo={appLogo}
       appName={appName}

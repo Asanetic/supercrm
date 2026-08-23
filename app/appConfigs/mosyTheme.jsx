@@ -8,7 +8,7 @@ const commonRoot = ""; // Update this path if needed
 const mosyThemeConfigs = {
   // App Identity
   mosyAppName: "IMS",
-  mosySystemName: "imsv1",
+  mosySystemName: "imsv2",
   mosyAppLogo: logo.src,
   mosyAppLogoStyle: {
     width: "auto",
@@ -17,7 +17,7 @@ const mosyThemeConfigs = {
 
   // Color Scheme
   themeName: "Mosy",
-  btnBg: "#F21C14",
+  btnBg: "#1E951C",
   btnTxt: "#fff",
   ctnBg: "#FCFCFC",
   ctnTxt: "#000",
@@ -37,7 +37,7 @@ const mosyThemeConfigs = {
 
   // Gradient and Sidebar
   btnFirstColor: "#000000",
-  btnSecondColor: "#F21C14",
+  btnSecondColor: "#1E951C",
   get sideBarBg() {
     return `linear-gradient(225deg, ${this.btnFirstColor}, ${this.btnSecondColor})`;
     //return this.btnBg;

@@ -7,7 +7,7 @@ import mosyThemeConfigs from '../../appConfigs/mosyTheme';
 const commonRoot = "/"; // Adjust to your base path or env var if needed
 
 const saAuthConfigs = {
-  sessionPrefix: "imsv1", // Unique prefix for session keys
+  sessionPrefix: "imsv2", // Unique prefix for session keys
   oauthTable: "system_users",
   primkey: "primkey",
 
@@ -20,11 +20,11 @@ const saAuthConfigs = {
   sessionColumns : "record_id,tel,name,email,user_role,hive_site_id,hive_site_name",
 
   // Post-login redirect
-  afterSplashPage:`${hiveRoutes.main}/clients/list`,
+  afterSplashPage:`${hiveRoutes.main}/contacts/list`,
 
   // UI toggles
   showResetLink: false, // true || false
-  showCreateAccount: false, // true || false
+  showCreateAccount: true, // true || false
 
   // Routes (UI component files/pages, not PHP scripts)
   loginUrl: `${hiveRoutes.auth}/login`,
