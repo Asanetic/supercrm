@@ -78,7 +78,22 @@ export function useEntityFormController(
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const c = useEntityController(schema);
-  const [record, setRecord] = useState(null);
+  // Lazy-init from initialValues SYNCHRONOUSLY (not via the effect below)
+  // for create-mode. Previously `record` always started as `null` and only
+  // picked up a non-empty `initialValues` (e.g. presetValues from "Add
+  // Deal"/"Add Activity"-style preset-create modals) inside the effect
+  // below, which fires AFTER child fields' own mount effects (React commits
+  // child effects before parent effects). A field like FormFields.jsx's
+  // DateInput seeds itself with today's date in ITS OWN mount effect —
+  // that ran first, into `values`, then THIS effect ran and, seeing
+  // `initialValues` genuinely change from `null` to real preset content for
+  // the first time, made useFormEngine re-seed `values` from scratch,
+  // silently wiping the date field back to blank. Only mattered for
+  // preset-create modals; a plain "New Record" with no presetValues never
+  // hit it, since `initialValues` there is always falsy/unchanged.
+  const [record, setRecord] = useState(() =>
+    !id && initialValues && Object.keys(initialValues).length ? initialValues : null
+  );
   const [fetching, setFetching] = useState(!!id);
   const [fetchError, setFetchError] = useState(null);
 
@@ -91,6 +106,9 @@ export function useEntityFormController(
       // same seeding path an EDITED record uses, just synthetic instead
       // of fetched. FormFields' LiveSearchInput reads row?.[labelKey]
       // straight off this, no _tbl_col_col prefixing needed anymore.
+      // The lazy useState init above already covers the first render;
+      // this keeps a mounted create-mode form in sync if initialValues
+      // itself changes later (id staying falsy the whole time).
       setRecord(initialValues && Object.keys(initialValues).length ? initialValues : null);
       setFetching(false);
       return;
@@ -250,16 +268,27 @@ export function useEntityFormController(
           return;
         }
         if (a.key === 'clone') {
-          return cloneRecord().then((result) => {
-            // MosyNotify({
-            //   message: result?.message || (result?.ok ? 'Record cloned successfully' : 'Failed to clone record'),
-            //   icon: result?.ok ? 'check-circle' : 'times-circle',
-            //   iconColor: result?.ok ? 'text-success' : 'text-danger',
-            // });
-            mosySnackWidgetManager({ content: result?.message || (result?.ok ? 'Record cloned successfully' : 'Failed to clone record'), duration: result?.ok ? 2500 : 4000, type: result?.ok ? 'success' : 'error' });
-            ///closeMosyModal(notifyId)
-            //closeMosyCard();            
+          // Same "Sending request..." -> snack-widget-result sequence as
+          // the regular Save/Proceed submit() flow below, instead of only
+          // showing feedback after the clone had already finished.
+          const notifyId = 'modal1';
+          MosyNotify({
+            message: 'Sending request...',
+            icon: 'spinner',
+            id: notifyId,
           });
+          return cloneRecord()
+            .then((result) => {
+              const ok = result?.ok ?? true;
+              const message = result?.message || (ok ? 'Record cloned successfully' : 'Failed to clone record');
+              mosySnackWidgetManager({ content: message, duration: ok ? 2500 : 4000, type: ok ? 'success' : 'error' });
+              closeMosyCard(notifyId);
+              return result;
+            })
+            .catch((err) => {
+              mosySnackWidgetManager({ content: err?.message || 'Failed to clone record', duration: 4000, type: 'error' });
+              closeMosyCard(notifyId);
+            });
         }
         if (a.navigateTo) {
           const url = typeof a.navigateTo === 'function' ? a.navigateTo({ record, schema }) : a.navigateTo;

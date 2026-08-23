@@ -600,44 +600,59 @@ export function SmartDropdown({
   const initialDefault = useRef(defaultValue); // 👈 Keeps default persistent
 
   const groupByField = mosyToCamelCase(labelField)
+
+  // Fetch the option list once per endpoint. `defaultValue` deliberately
+  // is NOT a dependency here — callers (GroupedSelectInput) bind it to the
+  // live, keystroke-by-keystroke form value, so including it re-ran this
+  // fetch on every keystroke: each response landed with the `defaultValue`
+  // captured back when THAT fetch started and forced it into customInput,
+  // stomping over whatever the user had typed since. Seeding from the
+  // current value only happens once, below, via the initialDefault ref.
   useEffect(() => {
+    let cancelled = false;
+
     async function fetchData() {
+      setLoading(true);
       try {
         // Fetch the  data with the given key
         const res = await mosyGetData({
           endpoint: apiEndpoint,
-          params: { 
+          params: {
           groupBy : btoa(`${groupByField}`),
           src : btoa(`${inputName}`)
           },
         });
-        
+
+        if (cancelled) return;
+
         const data = res
         if (data.status === 'success') {
-          const items = data.data || [];
-          setOptions(items);
-
-          // Determine if default value exists in options
-        const isInOptions = items.some(item => item[labelField] === defaultValue);          
-
-        if (defaultValue) {
-          setSelectedValue(defaultValue);
-          setCustomInput(defaultValue);
-          if (onSelect) onSelect(defaultValue);
-        }
-          
+          setOptions(data.data || []);
         } else {
           console.error('API Error:', data.message);
         }
       } catch (err) {
-        console.error('Fetch failed:', err);
+        if (!cancelled) console.error('Fetch failed:', err);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
 
     fetchData();
-  }, [apiEndpoint, defaultValue]);
+    return () => { cancelled = true; };
+  }, [apiEndpoint]);
+
+  // Seed selectedValue/customInput from whatever value the field already
+  // had ONCE, on mount — not on every re-render, so typing never gets
+  // overwritten by this.
+  useEffect(() => {
+    const seed = initialDefault.current;
+    if (seed) {
+      setSelectedValue(seed);
+      setCustomInput(seed);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSelectChange = (e) => {
     const val = e.target.value;
