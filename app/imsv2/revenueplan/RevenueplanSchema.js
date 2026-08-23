@@ -100,6 +100,13 @@ export const RevenueplanSchema = {
     { key: 'view_message_history', label: 'Message History', icon: 'comments-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'view_reminders', label: 'Reminders', icon: 'bell', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'view_activities', label: 'Activities', icon: 'calendar-check-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true},
+
+    // Grid-toolbar smart filters — client picks a row from the Contacts
+    // module and scopes by this table's own client_id FK, status/month
+    // pick from this table's own distinct values.
+    { key: 'filter_by_client', label: 'Filter by Client', icon: 'user', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
+    { key: 'filter_by_status', label: 'Filter by Status', icon: 'filter', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
+    { key: 'filter_by_month', label: 'Filter by Month', icon: 'calendar', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
   ],
 
 

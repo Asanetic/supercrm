@@ -29,6 +29,8 @@ import ActivitiesList from "../../activities/uiControl/ActivitiesList";
 import CallsList from "../../calls/uiControl/CallsList";
 import MessagesList from "../../messages/uiControl/MessagesList";
 import MosyremindersList from "../../mosyreminders/uiControl/MosyremindersList";
+import { openSmartTagFilter, openSmartMapFilter } from "../../moduleControl/UiControl/smartFilterActions";
+import { ContactsSchema } from "../../contacts/ContactsSchema";
 
 // Revenueplan's FK column is 'client_id', not the 'contact_id' default
 // every helper below assumes — pass this everywhere a row's contact needs
@@ -185,6 +187,25 @@ const RevenueplanActions = {
       'mosycard_wide'
     );
   },
+
+  // Grid-toolbar smart filters.
+  filter_by_client: (ctx) => openSmartMapFilter(ctx, {
+    title: 'Filter by client',
+    searchSchema: ContactsSchema,
+    displayField: 'contact_name',
+    valueField: 'record_id',
+    localColumnKey: 'client_id',
+  }),
+
+  filter_by_status: (ctx) => openSmartTagFilter(ctx, {
+    title: 'Filter by status',
+    columnKey: 'payment_status',
+  }),
+
+  filter_by_month: (ctx) => openSmartTagFilter(ctx, {
+    title: 'Filter by month',
+    columnKey: 'revenue_month',
+  }),
 
   // Add more as needed — see actionRegistryDocs.md for patterns to copy.
   // Every one of them gets whatever's on ctx: { rows, schema, router,
