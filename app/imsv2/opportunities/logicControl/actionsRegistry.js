@@ -144,7 +144,7 @@ const OpportunitiesActions = {
     title: 'Filter by client',
     searchSchema: ContactsSchema,
     displayField: 'contact_name',
-    valueField: 'record_id',
+    valueField: 'contact_id',
     localColumnKey: 'contact_id',
   }),
 

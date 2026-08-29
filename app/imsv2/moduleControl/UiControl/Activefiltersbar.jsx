@@ -17,8 +17,34 @@ import { formLayoutStyles } from './FormLayout';
 // "Clear all" is wired to onClearAll — pass g.handleRefresh, the SAME
 // button the toolbar's own Refresh already uses. No separate
 // clearFilters action; one code path for "start over."
+// smartFilterActions.jsx (grid-toolbar smart filters) stores advancedQuery
+// keys in camelCase (deal_status -> dealStatus) since that's mosySecureSelect's
+// reserved-param convention, but schema.fields keys stay snake_case (real DB
+// column names) — index fieldsByKey under BOTH so a chip's label resolves
+// regardless of which convention put the key there.
+function toCamelCase(text = '') {
+  return text.replace(/_([a-z0-9])/g, (_, ch) => ch.toUpperCase());
+}
+
+// Smart filters (openSmartMapFilter/openSmartTagFilter/openSmartDateFilter in
+// smartFilterActions.jsx) btoa() every value before it lands in advancedQuery
+// — decode it back for display, or fall back to the raw value if it was never
+// base64 in the first place (e.g. a filter set some other way).
+function decodeFilterValue(value) {
+  if (value === null || value === undefined) return value;
+  try {
+    return atob(String(value));
+  } catch {
+    return value;
+  }
+}
+
 export function ActiveFiltersBar({ advancedQuery, schema, clearFilterValue, setDateRange, onClearAll }) {
-  const fieldsByKey = Object.fromEntries(schema.fields.map((f) => [f.key, f]));
+  const fieldsByKey = {};
+  schema.fields.forEach((f) => {
+    fieldsByKey[f.key] = f;
+    fieldsByKey[toCamelCase(f.key)] = f;
+  });
   const entries = Object.entries(advancedQuery || {});
   if (entries.length === 0) return null;
 
@@ -36,6 +62,7 @@ export function ActiveFiltersBar({ advancedQuery, schema, clearFilterValue, setD
       const label = fieldsByKey[baseKey]?.label || baseKey;
       const range = [advancedQuery[`${baseKey}_start`], advancedQuery[`${baseKey}_end`]]
         .filter(Boolean)
+        .map(decodeFilterValue)
         .join(' → ');
 
       chips.push({ key: baseKey, text: `${label}: ${range}`, onClear: () => setDateRange(baseKey, null, null) });
@@ -44,11 +71,11 @@ export function ActiveFiltersBar({ advancedQuery, schema, clearFilterValue, setD
 
     seen.add(key);
     const label = fieldsByKey[key]?.label || key;
-    chips.push({ key, text: `${label}: ${value}`, onClear: () => clearFilterValue(key) });
+    chips.push({ key, text: `${label}: ${decodeFilterValue(value)}`, onClear: () => clearFilterValue(key) });
   });
 
   return (
-    <div className="dyn-form-scope">
+    <div className="dyn-form-scope px-0 ">
       <div className="dyn-pills-wrap active-filters-bar">
         {chips.map((chip) => (
           <span key={chip.key} className="dyn-pill dyn-pill-active">

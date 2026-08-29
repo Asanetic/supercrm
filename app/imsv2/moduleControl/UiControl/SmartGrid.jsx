@@ -424,13 +424,13 @@ export default function SmartGrid({
               )}
             </div>
           )}
-          {/* <ActiveFiltersBar
+          <ActiveFiltersBar
             schema={schema}
             advancedQuery={g.advancedQuery}
             clearFilterValue={g.clearFilterValue}
             setDateRange={g.setDateRange}
             onClearAll={g.handleRefresh}
-          /> */}
+          />
           <div className="etc-table-data-wrap mt-2" style={{paddingBottom: '150px'}} id={g.printCardId}>
             <table className="etc-table-data" id={g.tableId}>
               <thead>

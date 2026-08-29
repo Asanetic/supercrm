@@ -28,6 +28,7 @@ export const RevenueplanSchema = {
     { key: 'currency_code', type: 'text', title: true, searchable: true },
     { key: 'payment_status', type: 'text', searchable: true },
     { key: 'payment_ref_no', type: 'text', searchable: true },
+    { key : "collection_status", label:"Collection Type"},
     { key: 'expected_close_date', type: 'datetime' },
     { key: 'probability_percent', type: 'text', searchable: true },
     { key: 'revenue_source_type', type: 'text', searchable: true },

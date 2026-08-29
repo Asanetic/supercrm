@@ -230,23 +230,35 @@ const RevenueplanActions = {
     );
   },
 
-  // Grid-toolbar smart filters.
+  // Grid-toolbar smart filters. combine:true on all four so they stack
+  // (client AND status AND month AND collection type) instead of each
+  // new pick wiping out the previous one — see openSmartTagFilter's/
+  // openSmartMapFilter's "EXCLUSIVE BY DEFAULT" note in smartFilterActions.jsx.
   filter_by_client: (ctx) => openSmartMapFilter(ctx, {
     title: 'Filter by client',
     searchSchema: ContactsSchema,
     displayField: 'contact_name',
-    valueField: 'record_id',
+    valueField: 'contact_id',
     localColumnKey: 'client_id',
+    combine: true,
   }),
 
   filter_by_status: (ctx) => openSmartTagFilter(ctx, {
     title: 'Filter by status',
     columnKey: 'payment_status',
+    combine: true,
   }),
 
   filter_by_month: (ctx) => openSmartTagFilter(ctx, {
     title: 'Filter by month',
     columnKey: 'revenue_month',
+    combine: true,
+  }),
+
+  filter_by_collection_type: (ctx) => openSmartTagFilter(ctx, {
+    title: 'Filter by collection type',
+    columnKey: 'collection_status',
+    combine: true,
   }),
 
   // Add more as needed — see actionRegistryDocs.md for patterns to copy.
