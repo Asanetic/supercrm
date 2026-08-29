@@ -18,6 +18,7 @@
 import React from 'react';
 import { callContactAction, messageContactAction, resolveContactRecipient } from "../../moduleControl/UiControl/contactTouchActions";
 import { openEntityCreateModal, buildPresetFromRow } from "../../moduleControl/UiControl/EntityCreateModal";
+import { quickEditFromRow } from "../../moduleControl/UiControl/QuickEditModal";
 import { MosyCard } from "../../../components/MosyCard";
 import { MosyCreatePayRequest } from "../../UiControl/MosyGeneratePaymentRequest";
 import { MosySendSmartReminder } from "../../UiControl/MosySmartReminder";
@@ -228,6 +229,19 @@ const RevenueplanActions = {
       'modal3',
       'mosycard_wide'
     );
+  },
+
+  // Quick-edit modal — update collection type + payment status without
+  // leaving the grid/list. Same pattern as opportunities' update_stage.
+  update_status: (ctx) => {
+    quickEditFromRow(ctx, {
+      fieldKeys: ['collection_status', 'payment_status'],
+      title: 'Update status — {{title}}',
+      fieldOverrides: {
+        collection_status: { colSpan: 6 },
+        payment_status: { colSpan: 6 },
+      },
+    });
   },
 
   // Grid-toolbar smart filters. combine:true on all four so they stack

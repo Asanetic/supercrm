@@ -85,6 +85,10 @@ export const RevenueplanSchema = {
     { key: 'clone', label: 'Clone Record', icon: 'copy', variant: 'outline-secondary', editOnly: true, grid: false, form: true, rowAction: false, role: 'manage_revenueplan' },
     //{ key: 'filterByDate', label: 'Filter by date', icon: 'calendar', variant: 'outline-primary', type: 'action', grid: true, form: false, rowAction: false },
 
+    // Quick-edit collection type + payment status without leaving the
+    // grid/list — same pattern as opportunities' update_stage.
+    { key: 'update_status', label: 'Update Status', icon: 'flag', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
+
     // Contact-touch actions — route through logicControl/actionsRegistry.js.
     { key: 'call', label: 'Call', icon: 'phone', variant: 'outline-success', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'send_message', label: 'Send Message', icon: 'comment', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
@@ -127,7 +131,7 @@ export const RevenueplanSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'revenue_month', 'contact_name', 'title', 'expected_amount', 'payment_status', 'payment_ref_no','collection_status'],
+  showInList: ['row_count', 'revenue_month', 'contact_name', 'title', 'expected_amount', 'payment_status','collection_status', 'revenue_description'],
 
   //export columns these columns are used to generate upload csv template file
   exportColumns: ['revenue_month', 'client_id', 'deal_id', 'expected_amount', 'payment_status', 'payment_ref_no'],
@@ -157,7 +161,7 @@ export const RevenueplanSchema = {
     { key: 'invoice_id', label: 'Invoice Id', type: 'text' },
     { key: 'lead_id', label: 'Lead Id', type: 'text' },
     { key: 'revenue_status', label: 'Revenue Status', type: 'text' },
-    { key: 'revenue_description', label: 'Revenue Description', type: 'textarea', colSpan: 12 },
+    { key: 'revenue_description', label: 'Notes / Action', type: 'textarea', colSpan: 12 },
     { key: 'assigned_to', label: 'Assigned To', type: 'text' },
     { key: 'row_count', label: '#', type: 'number', computed: true, editable: false },
     //  live search field sample 
