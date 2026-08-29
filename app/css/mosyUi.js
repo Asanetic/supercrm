@@ -46,7 +46,7 @@ const MosyUiTheme = () => (
     --dyn-success: #0d7a6c;
     --dyn-warning: #b45309;
     --dyn-danger: #b91c1c;
-    --dyn-radius: 10px;
+    --dyn-radius: 20px;
 
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto,
       "Helvetica Neue", Arial, sans-serif;
@@ -1113,14 +1113,14 @@ body {
   .dyn-section-panel {
     background: ${mosyThemeConfigs.ctnBg};
     border: ${mosyThemeConfigs.genBorderSize}px solid ${mosyThemeConfigs.genBorderColor};
-    border-radius: var(--dyn-radius);
+    border-radius: ${mosyThemeConfigs.genBorderRadius}px;
     padding: 1.25rem 1.25rem 1.4rem;
   }
 
   .dyn-input {
     width: 100%;
     box-sizing: border-box;
-    border: ${mosyThemeConfigs.genBorderSize}px solid ${mosyThemeConfigs.genBorderColor};
+    border: ${mosyThemeConfigs.genBorderSize}px solid ${mosyThemeConfigs.inputBorderColor};
     border-radius: 8px;
     padding: 0.65rem 0.9rem;
     font-size: 0.92rem;

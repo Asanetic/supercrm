@@ -27,6 +27,16 @@ const apiRoute = getApiRoutes();
 
 export const globalRelations = {
 
+  assigned_to: {
+    table: "system_users",
+    endpoint: apiRoute.systemusers.base,
+    valueField: "record_id",
+    displayField: "name",
+    cacheField: "name",
+    label: "User",
+    // used by: expected_revenue
+  },
+
   bundle_id: {
     table: "system_role_bundles",
     endpoint: apiRoute.systemrolebundles.base,
@@ -54,7 +64,7 @@ export const globalRelations = {
     displayField: "contact_name",
     cacheField: "contact_name",
     label: "Contact",
-    // used by: activities, ledger, notes_ideas, opportunities
+    // used by: activities, ledger, notes_ideas, opportunities, payment_history
   },
 
   created_by: {
@@ -64,7 +74,7 @@ export const globalRelations = {
     displayField: "name",
     cacheField: "name",
     label: "User",
-    // used by: activities, notes_ideas, expected_revenue
+    // used by: activities, expected_revenue, notes_ideas, payment_history
   },
 
   deal_id: {
@@ -75,6 +85,26 @@ export const globalRelations = {
     cacheField: "title",
     label: "Opportunity",
     // used by: expected_revenue
+  },
+
+  expected_income_id: {
+    table: "expected_revenue",
+    endpoint: apiRoute.revenueplan.base,
+    valueField: "record_id",
+    displayField: "title",
+    cacheField: "title",
+    label: "Expected Revenue",
+    // used by: payment_history
+  },
+
+  income_source_id: {
+    table: "income_sources",
+    endpoint: apiRoute.incomesources.base,
+    valueField: "income_source_id",
+    displayField: "name",
+    cacheField: "name",
+    label: "Income Source",
+    // used by: income_plan
   },
 
   module_id: {
@@ -94,7 +124,27 @@ export const globalRelations = {
     displayField: "title",
     cacheField: "title",
     label: "Opportunity",
-    // used by: activities, ledger, notes_ideas
+    // used by: activities, ledger, notes_ideas, payment_history
+  },
+
+  related_record_id: {
+    table: "expected_revenue",
+    endpoint: apiRoute.expectedrevenue.base,
+    valueField: "record_id",
+    displayField: "revenue_month",
+    cacheField: "revenue_month",
+    label: "Expected Revenue",
+    // used by: mosy_reminders
+  },
+
+  reminder_id: {
+    table: "mosy_reminders",
+    endpoint: apiRoute.mosyreminders.base,
+    valueField: "reminder_id",
+    displayField: "subject",
+    cacheField: "subject",
+    label: "Reminder",
+    // used by: mosy_reminder_log
   },
 
   role_id: {
@@ -105,6 +155,16 @@ export const globalRelations = {
     cacheField: "role_name",
     label: "Role",
     // used by: system_role_permissions, user_bundle_role_functions, user_manifest_
+  },
+
+  tenant_id: {
+    table: "system_users",
+    endpoint: apiRoute.systemusers.base,
+    valueField: "record_id",
+    displayField: "name",
+    cacheField: "name",
+    label: "User",
+    // used by: mosy_reminder_log
   },
 
   user_id: {

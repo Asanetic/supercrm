@@ -126,13 +126,13 @@ export const ActivitiesSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'contact_name', 'title', 'type', 'subject', 'description', 'activity_date'],
+  showInList: ['row_count', 'contact_name', 'title', 'type', 'subject', 'description', 'activity_date', 'tag'],
 
   //export columns these columns are used to generate upload csv template file
-  exportColumns: ['contact_id', 'opportunity_id', 'type', 'direction', 'subject', 'description', 'activity_date'],
+  exportColumns: ['contact_id', 'opportunity_id', 'type', 'direction', 'subject', 'description', 'activity_date', 'tag'],
 
   sections: [
-    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['contact_id', 'opportunity_id', 'type', 'activity_date', 'subject', 'description'] },
+    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['contact_id', 'opportunity_id', 'type', 'activity_date', 'tag', 'subject', 'description'] },
     { key: 'other_details', label: 'Other Details', columns: 3, fields: ['end_date', 'venue', 'agenda', 'outcome', 'status', 'reg_date'] },
   ],
 
@@ -149,6 +149,7 @@ export const ActivitiesSchema = {
     { key: 'subject', label: 'Subject', type: 'text' },
     { key: 'description', label: 'Description', type: 'textarea', colSpan: 12 },
     { key: 'activity_date', label: 'Activity Date', type: 'datetime' },
+    { key: 'tag', label: 'Tag', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'tag', colSpan: 4 },
     { key: 'end_date', label: 'End Date', type: 'datetime' },
     { key: 'venue', label: 'Venue', type: 'groupedSelect', endpoint: moduleApi , colSpan : 8 },
     { key: 'agenda', label: 'Agenda', type: 'textarea', colSpan :12 },

@@ -29,6 +29,7 @@ export const OpportunitiesSchema = {
     { key: 'amount', type: 'money' },
     { key: 'currency', type: 'select', searchable: true },
     { key: 'expected_date', type: 'datetime' },
+    { key: 'tag', type: 'groupedSelect', endpoint: '/api/imsv2/opportunities/list', groupByField: 'tag', searchable: true },
     { key: 'next_action', type: 'text', searchable: true },
     { key: 'next_action_date', type: 'datetime' },
     { key: 'status', type: 'groupedSelect', endpoint: '/api/imsv2/opportunities/list', groupByField: 'status', searchable: true },

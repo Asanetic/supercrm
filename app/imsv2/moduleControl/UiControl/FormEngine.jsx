@@ -38,8 +38,20 @@ export function useFormEngine(schema, initialValues = {}) {
     setErrors({});
   }
 
+  // schema.computeOnChange(changedKey, nextValues) -> patch|null — optional
+  // escape hatch for fields that derive from other fields (e.g. an
+  // "expected amount" = quantity * unit price, or a "variance" = actual -
+  // expected). Called AFTER the just-typed value is applied, with the full
+  // next values object, so it can read every other field as it currently
+  // stands and return a patch of derived fields to merge in on top. Keep it
+  // pure — no side effects, just old values in, patch out.
   const setValue = (key, value) => {
-    setValues((v) => ({ ...v, [key]: value }));
+    setValues((v) => {
+      const next = { ...v, [key]: value };
+      if (typeof schema.computeOnChange !== 'function') return next;
+      const patch = schema.computeOnChange(key, next);
+      return patch ? { ...next, ...patch } : next;
+    });
     if (errors[key]) setErrors((e) => ({ ...e, [key]: null }));
   };
 

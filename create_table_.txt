@@ -43,6 +43,7 @@ $opportunities_table_script = "
 `amount` decimal(15,2) DEFAULT 0.00,
 `currency` varchar(10) DEFAULT 'KES',
 `expected_date` date,
+`tag` varchar(50),
 `next_action` varchar(100),
 `next_action_date` datetime,
 `status` varchar(50) DEFAULT 'active',
@@ -94,6 +95,7 @@ $activities_table_script = "
 `subject` varchar(255),
 `description` text,
 `activity_date` datetime DEFAULT CURRENT_TIMESTAMP,
+`tag` varchar(50),
 `end_date` datetime,
 `venue` varchar(255),
 `agenda` text,
@@ -193,3 +195,72 @@ $reminder_log_table_script = "
 
 $reminder_log_table = 'mosy_reminder_log';
 create_table($mysqliconn, $dbname, $reminder_log_table, $reminder_log_table_script);
+
+
+//=========================================================
+// PAYMENT HISTORY TABLE
+//=========================================================
+$payment_history_table_script = "
+`primkey` int(11) PRIMARY KEY AUTO_INCREMENT,
+`payment_id` varchar(100) NOT NULL,
+`expected_income_id` varchar(100),
+`contact_id` varchar(100),
+`opportunity_id` varchar(100),
+`amount` decimal(15,2) NOT NULL DEFAULT 0.00,
+`currency` varchar(10) DEFAULT 'KES',
+`payment_date` datetime DEFAULT CURRENT_TIMESTAMP,
+`payment_method` varchar(50),
+`payment_reference` varchar(255),
+`description` text,
+`status` varchar(50) DEFAULT 'completed',
+`created_by` varchar(100),
+`reg_date` datetime DEFAULT CURRENT_TIMESTAMP
+";
+
+$payment_history_table = 'payment_history';
+
+create_table($mysqliconn, $dbname, $payment_history_table, $payment_history_table_script);
+
+
+//=========================================================
+// INCOME PLAN TABLE
+//=========================================================
+$income_plan_table_script = "
+`primkey` int(11) PRIMARY KEY AUTO_INCREMENT,
+`income_plan_id` varchar(100) NOT NULL,
+`income_source_id` varchar(100) NOT NULL,
+`plan_month` date NOT NULL,
+`target_amount` decimal(15,2) DEFAULT 0.00,
+`lead_target` decimal(12,2) DEFAULT 0.00,
+`opportunity_target` decimal(12,2) DEFAULT 0.00,
+`conversion_target` decimal(12,2) DEFAULT 0.00,
+`expected_customers` decimal(12,2) DEFAULT 0.00,
+`average_deal_amount` decimal(15,2) DEFAULT 0.00,
+`status` varchar(50) DEFAULT 'planned',
+`notes` text,
+`reg_date` datetime DEFAULT CURRENT_TIMESTAMP
+";
+
+$income_plan_table = 'income_plan';
+
+create_table($mysqliconn, $dbname, $income_plan_table, $income_plan_table_script);
+
+//=========================================================
+// INCOME SOURCES TABLE
+//=========================================================
+$income_sources_table_script = "
+`primkey` int(11) PRIMARY KEY AUTO_INCREMENT,
+`income_source_id` varchar(100) NOT NULL,
+`name` varchar(255) NOT NULL,
+`description` text,
+`income_type` varchar(50) DEFAULT 'one_off',
+`niche` varchar(150),
+`default_amount` decimal(15,2) DEFAULT 0.00,
+`currency` varchar(10) DEFAULT 'KES',
+`status` varchar(50) DEFAULT 'active',
+`reg_date` datetime DEFAULT CURRENT_TIMESTAMP
+";
+
+$income_sources_table = 'income_sources';
+
+create_table($mysqliconn, $dbname, $income_sources_table, $income_sources_table_script);

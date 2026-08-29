@@ -121,13 +121,13 @@ export const OpportunitiesSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'contact_name', 'title', 'description', 'type', 'stage', 'amount', 'expected_date', 'status'],
+  showInList: ['row_count', 'contact_name', 'title', 'description', 'type', 'stage', 'amount', 'expected_date', 'tag', 'status'],
 
   //export columns these columns are used to generate upload csv template file
-  exportColumns: ['contact_id', 'title', 'description', 'type', 'stage', 'amount', 'currency'],
+  exportColumns: ['contact_id', 'title', 'description', 'type', 'stage', 'amount', 'currency', 'tag'],
 
   sections: [
-    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['contact_id', 'title', 'type'] },
+    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['contact_id', 'title', 'type', 'tag'] },
     { key: 'deal_details', label: 'Deal Details', columns: 3, fields: ['stage', 'amount', 'currency'] },
     { key: 'description', label: 'Description', columns: 1, fields: ['description'] },
     { key: 'follow_up', label: 'Follow-up', columns: 3, fields: ['expected_date', 'next_action', 'next_action_date'] },
@@ -147,6 +147,7 @@ export const OpportunitiesSchema = {
     { key: 'contact_name', label: 'Contact', type: 'text', computed: true, editable: false, title: true },
     { key: 'currency', label: 'Currency', type: 'select', options: ['USD', 'KES', 'EUR', 'GBP'] },
     { key: 'expected_date', label: 'Expected Date', type: 'datetime' },
+    { key: 'tag', label: 'Tag', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'tag', colSpan: 4 },
     { key: 'next_action', label: 'Next Action', type: 'groupedSelect', endpoint: moduleApi},
     { key: 'next_action_date', label: 'Next Action Date', type: 'datetime' },
     { key: 'status', label: 'Status', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'status' },

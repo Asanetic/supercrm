@@ -115,5 +115,25 @@
         "base": "/api/imsv2/mosyreminderlogs/list",
         "delete": "/api/imsv2/mosyreminderlogs/list/delete",
         "import": "/api/imsv2/mosyreminderlogs/import"
+    },
+    "incomeplan": {
+        "base": "/api/imsv2/incomeplan/list",
+        "delete": "/api/imsv2/incomeplan/list/delete",
+        "import": "/api/imsv2/incomeplan/import"
+    },
+    "incomesources": {
+        "base": "/api/imsv2/incomesources/list",
+        "delete": "/api/imsv2/incomesources/list/delete",
+        "import": "/api/imsv2/incomesources/import"
+    },
+    "paymenthistory": {
+        "base": "/api/imsv2/paymenthistory/list",
+        "delete": "/api/imsv2/paymenthistory/list/delete",
+        "import": "/api/imsv2/paymenthistory/import"
+    },
+    "expectedrevenue": {
+        "base": "/api/imsv2/expectedrevenue/list",
+        "delete": "/api/imsv2/expectedrevenue/list/delete",
+        "import": "/api/imsv2/expectedrevenue/import"
     }
 }

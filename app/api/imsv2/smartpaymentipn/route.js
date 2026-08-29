@@ -330,13 +330,7 @@ export async function POST(request) {
       ResultCode: 0,
       ResultDesc: "Accepted",
       status: "success",
-      data: {
-        request_reference: relatedRequest?.request_reference || String(BillRefNumber || ""),
-        hive_site_id,
-        hive_site_name,
-        notify_result: notifyResult,
-        payer_notify_result: payerNotifyResult
-      },
+ 
     });
   } catch (error) {
     console.error(error);

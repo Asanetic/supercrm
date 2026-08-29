@@ -19,7 +19,7 @@ const mosyThemeConfigs = {
   themeName: "Mosy",
   btnBg: "#1E951C",
   btnTxt: "#fff",
-  ctnBg: "#FCFCFC",
+  ctnBg: "#fff",
   ctnTxt: "#000",
   bodyColor: "#fff",//"rgba(247, 244, 244, 0.9)",
   bodyTxt: "#000",
@@ -30,6 +30,7 @@ const mosyThemeConfigs = {
   genBorderColor: "#ccc",
   genBorderSize: "1",
   wildColor: "",
+  inputBorderColor:"#ccc",
   skinPlasma: "rgba(255, 255, 255, 0.0)",
   bodySkinCss: "#fff",
 

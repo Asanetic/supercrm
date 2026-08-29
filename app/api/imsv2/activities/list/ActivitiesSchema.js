@@ -28,6 +28,7 @@ export const ActivitiesSchema = {
     { key: 'subject', type: 'text', searchable: true },
     { key: 'description', type: 'textarea', colSpan: 3, searchable: true },
     { key: 'activity_date', type: 'datetime' },
+    { key: 'tag', type: 'groupedSelect', endpoint: '/api/imsv2/activities/list', groupByField: 'tag', searchable: true },
     { key: 'end_date', type: 'datetime' },
     { key: 'venue', type: 'text', searchable: true },
     { key: 'agenda', type: 'textarea', searchable: true },

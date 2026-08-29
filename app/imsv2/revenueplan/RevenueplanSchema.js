@@ -18,7 +18,7 @@ const moduleApi = apiRoutes.revenueplan.base;
 export const RevenueplanSchema = {
   entity: 'expected_revenue',              // DB table name; also drives default role names
                                      // (view_revenueplan / manage_revenueplan) and apiBase
-  label: 'Income plan',                 // optional, defaults to entity capitalized
+  label: 'Expected revenue plan',                 // optional, defaults to entity capitalized
   apiBase: moduleApi,
 
   //api endpint for importing data from csv
@@ -90,12 +90,14 @@ export const RevenueplanSchema = {
     { key: 'send_message', label: 'Send Message', icon: 'comment', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'set_reminder', label: 'Set Reminder', icon: 'bell', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true},
     { key: 'request_payment', label: 'Request Payment', icon: 'money', variant: 'outline-info', type: 'action', editOnly: true, grid: false, form: true },
+    { key: 'record_payment', label: 'Record Payment', icon: 'credit-card', variant: 'outline-success', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'add_deal', label: 'Create Deal', icon: 'handshake-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true },
     { key: 'add_activity', label: 'Add Activity', icon: 'calendar-plus-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true},
 
     // Related-record popups — scoped to this plan's linked client (call/
     // message history) or to this plan's own record (reminders, which
     // follow the same self-referencing convention set_reminder above uses).
+    { key: 'view_payment_history', label: 'Payment History', icon: 'money', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'view_call_history', label: 'Call History', icon: 'history', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'view_message_history', label: 'Message History', icon: 'comments-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'view_reminders', label: 'Reminders', icon: 'bell', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
@@ -124,13 +126,13 @@ export const RevenueplanSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'revenue_month', 'contact_name', 'title', 'expected_amount', 'payment_status', 'payment_ref_no'],
+  showInList: ['row_count', 'revenue_month', 'contact_name', 'title', 'expected_amount', 'payment_status', 'payment_ref_no','collection_status'],
 
   //export columns these columns are used to generate upload csv template file
   exportColumns: ['revenue_month', 'client_id', 'deal_id', 'expected_amount', 'payment_status', 'payment_ref_no'],
 
   sections: [
-    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['revenue_month', 'client_id', 'deal_id', 'expected_amount', 'payment_status', 'payment_ref_no', 'revenue_description',] },
+    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['revenue_month', 'client_id', 'deal_id', 'expected_amount', 'payment_status', 'collection_status', 'payment_ref_no', 'revenue_description',] },
    ],
 
   fields: [
@@ -142,6 +144,7 @@ export const RevenueplanSchema = {
     ...resolveField('deal_id', { as: 'title', colSpan:4 }),
     {key : "title", type:"text", title:true,  computed: true, editable: false},
     {key : "contact_name", label:"Contact Name", type:"text", title:true,  computed: true, editable: false},
+    {key : "collection_status", label:"Collection Type", type:"groupedSelect", title:true,  endpoint:moduleApi},
     { key: 'expected_amount', label: 'Expected Amount', type: 'money' , sum:true },
     { key: 'currency_code', label: 'Currency Code', type: 'text' },
     { key: 'payment_status', label: 'Payment Status', type: 'select' , options: ['Paid', 'Unpaid', 'Partially Paid'] },

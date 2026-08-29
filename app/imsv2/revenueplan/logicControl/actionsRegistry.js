@@ -29,6 +29,9 @@ import ActivitiesList from "../../activities/uiControl/ActivitiesList";
 import CallsList from "../../calls/uiControl/CallsList";
 import MessagesList from "../../messages/uiControl/MessagesList";
 import MosyremindersList from "../../mosyreminders/uiControl/MosyremindersList";
+import PaymenthistoryList from "../../paymenthistory/uiControl/PaymenthistoryList";
+import PaymenthistoryProfile from "../../paymenthistory/uiControl/PaymenthistoryProfile";
+import { PaymenthistorySchema } from "../../paymenthistory/PaymenthistorySchema";
 import { openSmartTagFilter, openSmartMapFilter } from "../../moduleControl/UiControl/smartFilterActions";
 import { ContactsSchema } from "../../contacts/ContactsSchema";
 
@@ -82,6 +85,25 @@ const RevenueplanActions = {
     });
   },
 
+  // Pops a preset Payment history create form, locking the new payment's
+  // expected_income_id/contact_id to this plan's own record/linked client
+  // — see paymenthistory/PaymenthistorySchema.js's resolveField('expected_income_id', ...)
+  // / resolveField('contact_id', ...) for the liveSearch fields being preset.
+  record_payment: ({ rows, refresh }) => {
+    const row = rows?.[0];
+    if (!row?.record_id) return;
+    openEntityCreateModal({
+      ProfileComponent: PaymenthistoryProfile,
+      schema: PaymenthistorySchema,
+      title: `Record Payment — ${row.title || row.contact_name || ''}`,
+      presetValues: buildPresetFromRow(row, [
+        { sourceKey: 'record_id', destKey: 'expected_income_id', destSchema: PaymenthistorySchema, labelValue: row.title },
+        { sourceKey: 'client_id', destKey: 'contact_id', destSchema: PaymenthistorySchema, labelValue: row.contact_name },
+      ]),
+      onSaved: refresh,
+    });
+  },
+
   // Pops a preset Deals create form, locking the new deal's contact_id to
   // this plan's linked client.
   add_deal: ({ rows, refresh }) => {
@@ -120,6 +142,26 @@ const RevenueplanActions = {
   // scoped to the CONTACT (see contactTouchActions.jsx), so those two
   // scope by this plan's client_id; Reminders/Activities scope by
   // whichever id set_reminder/add_deal/add_activity above actually lock.
+  // Scoped by this plan's OWN record_id, since payment_history rows point
+  // back at the expected_revenue record they pay off (expected_income_id),
+  // not at the client — see resolveField('expected_income_id', ...) above.
+  view_payment_history: ({ rows }) => {
+    const row = rows?.[0];
+    if (!row?.record_id) return;
+    MosyCard(
+      '',
+      React.createElement(PaymenthistoryList, {
+        customProfilePath: '../paymenthistory/profile',
+        title: `Payment History — ${row.title || row.contact_name || ''}`,
+        fixedQuery: { expectedIncomeId: btoa(row.record_id) },
+        hiddenActions: ['new'],
+      }),
+      true,
+      'modal3',
+      'mosycard_wide'
+    );
+  },
+
   view_call_history: ({ rows }) => {
     const row = rows?.[0];
     if (!row?.client_id) return;

@@ -1,26 +1,17 @@
-# schemamap.txt
-# One line per table:
-#   table:displayField|localCol:otherCol:otherTable(Label),localCol:otherCol:otherTable(Label),...
-#
-# - displayField = column on THIS table shown as its label elsewhere.
-# - localCol "record_id" = a child/grid relation (other table points back at this one).
-# - localCol anything else = this table's FK pointing OUT to a parent.
-# - Table with no relations after "|" is still worth a line so OTHER
-#   tables can find its displayField.
-#
-# Example:
-# fuel_sales:record_id|fuel_station_id:record_id:fuel_stations(Fuel Station),sold_by_staff_id:record_id:staff(Staff)
-# fuel_stations:station_name|
-# staff:full_name|
-
 activities:subject|contact_id:contact_id:contacts(Contact),opportunity_id:opportunity_id:opportunities(Opportunity),created_by:record_id:system_users(User)
 contacts:contact_name|
+expected_revenue:revenue_month|client_id:contact_id:contacts(Contact),deal_id:opportunity_id:opportunities(Opportunity),created_by:record_id:system_users(User),assigned_to:record_id:system_users(User)
+income_plan:income_plan_id|income_source_id:income_source_id:income_sources(Income Source)
+income_sources:name|
 ledger:reference|contact_id:contact_id:contacts(Contact),opportunity_id:opportunity_id:opportunities(Opportunity)
+mosy_metrics:label|
+mosy_reminder_log:log_id|reminder_id:reminder_id:mosy_reminders(Reminder),tenant_id:record_id:system_users(User)
+mosy_reminders:subject|related_record_id:record_id:expected_revenue(Expected Revenue)
 mosy_sql_roll_back:roll_bk_key|
 notes_ideas:title|contact_id:contact_id:contacts(Contact),opportunity_id:opportunity_id:opportunities(Opportunity),created_by:record_id:system_users(User)
-expected_revenue:revenue_month|client_id:contact_id:contacts(Contact),deal_id:opportunity_id:opportunities(Opportunity),created_by:record_id:system_users(User)
 opportunities:title|contact_id:contact_id:contacts(Contact)
 page_manifest_:page_url|
+payment_history:payment_reference|expected_income_id:record_id:expected_revenue(Expected Revenue),contact_id:contact_id:contacts(Contact),opportunity_id:opportunity_id:opportunities(Opportunity),created_by:record_id:system_users(User)
 smart_calls:call_number|
 smart_message_templates:template_name|
 smart_messages:message_number|
