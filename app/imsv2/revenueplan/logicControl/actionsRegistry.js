@@ -233,14 +233,19 @@ const RevenueplanActions = {
 
   // Quick-edit modal — update collection type + payment status without
   // leaving the grid/list. Same pattern as opportunities' update_stage.
+  // getId uses btoa(primkey) — the one id shape every module's update
+  // endpoint accepts, unlike row.record_id which points at a different
+  // column depending on schema.
   update_status: (ctx) => {
     quickEditFromRow(ctx, {
-      fieldKeys: ['collection_status', 'payment_status'],
+      fieldKeys: ['collection_status', 'payment_status','revenue_description'],
       title: 'Update status — {{title}}',
       fieldOverrides: {
         collection_status: { colSpan: 6 },
         payment_status: { colSpan: 6 },
+        revenue_description: { colSpan: 12 },
       },
+      getId: (row) => btoa(String(row.primkey)),
     });
   },
 

@@ -112,7 +112,10 @@ const OpportunitiesActions = {
   },
 
   // Quick-edit modal — advance the pipeline stage (and status) without
-  // leaving the grid/list.
+  // leaving the grid/list. getId uses btoa(primkey) — the one id shape
+  // every module's update endpoint accepts (decoded server-side straight
+  // to the primkey column), unlike row.record_id which points at a
+  // different column depending on schema.
   update_stage: (ctx) => {
     quickEditFromRow(ctx, {
       fieldKeys: ['stage', 'status'],
@@ -121,6 +124,7 @@ const OpportunitiesActions = {
         stage: { colSpan: 6 },
         status: { colSpan: 6 },
       },
+      getId: (row) => btoa(String(row.primkey)),
     });
   },
 
