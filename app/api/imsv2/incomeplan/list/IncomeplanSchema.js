@@ -23,6 +23,7 @@ export const IncomeplanSchema = {
     { key: 'income_plan_id', type: 'text', system: true, editable: false },
     { key: 'plan_month', type: 'datetime' },
     { key: 'income_source_id', type: 'text', searchable: true },
+    { key: 'tag', type: 'text', searchable: true },
     { key: 'expected_customers', type: 'money' },
     { key: 'average_deal_amount', type: 'money' },
     { key: 'actual_earnings', label: 'Actual Earnings', type: 'text', sum:true }, //actual_earnings

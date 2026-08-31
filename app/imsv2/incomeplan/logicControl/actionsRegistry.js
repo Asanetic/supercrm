@@ -25,6 +25,8 @@ import ActivitiesProfile from "../../activities/uiControl/ActivitiesProfile";
 import { ActivitiesSchema } from "../../activities/ActivitiesSchema";
 import ActivitiesList from "../../activities/uiControl/ActivitiesList";
 import PaymenthistoryList from "../../paymenthistory/uiControl/PaymenthistoryList";
+import { IncomesourcesSchema } from '../../incomesources/IncomesourcesSchema';
+import { openSmartMapFilter, openSmartTagFilter } from '../../moduleControl/UiControl/smartFilterActions';
 
 // [start, end] (plain YYYY-MM-DD strings) of the calendar month THIS
 // income plan record is actually for — plan_month is a real `date` column
@@ -145,6 +147,35 @@ const IncomeplanActions = {
       'mosycard_wide'
     );
   },
+  filter_by_source: (ctx) => openSmartMapFilter(ctx, {
+    title: 'Filter by source',
+    searchSchema: IncomesourcesSchema,
+    displayField: 'name',
+    valueField: 'income_source_id',
+    localColumnKey: 'income_source_id',
+    combine: true,
+  }),
+
+  // income_source_id: {
+  //   table: "income_sources",
+  //   endpoint: apiRoute.incomesources.base,
+  //   valueField: "income_source_id",
+  //   displayField: "name",
+  //   cacheField: "name",
+  //   label: "Income Source",
+  //   // used by: income_plan
+  // },
+    filter_by_tag: (ctx) => openSmartTagFilter(ctx, {
+      title: 'Filter by tag',
+      columnKey: 'tag',
+      combine: true,
+    }),
+
+    filter_by_month: (ctx) => openSmartTagFilter(ctx, {
+      title: 'Filter by month',
+      columnKey: 'plan_month',
+      combine: true,
+    }),
 
   // Payment history has no FK to income plan either — scoped by month,
   // against payment_history's own payment_date column.
