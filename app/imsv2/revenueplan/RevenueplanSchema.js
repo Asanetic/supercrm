@@ -114,6 +114,7 @@ export const RevenueplanSchema = {
     { key: 'filter_by_status', label: 'Filter by Status', icon: 'filter', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
     { key: 'filter_by_month', label: 'Filter by Month', icon: 'calendar', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
     { key: 'filter_by_collection_type', label: 'Filter by Collection Type', icon: 'tags', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
+    { key : 'filter_by_tag', label: 'Filter by Tag', icon: 'tags', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
   ],
 
 
@@ -131,13 +132,13 @@ export const RevenueplanSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'revenue_month', 'contact_name', 'title', 'expected_amount', 'payment_status','collection_status', 'revenue_description'],
+  showInList: ['row_count', 'revenue_month', 'contact_name', 'title', 'expected_amount', 'payment_status','collection_status', 'revenue_description', 'tag'],
 
   //export columns these columns are used to generate upload csv template file
   exportColumns: ['revenue_month', 'client_id', 'deal_id', 'expected_amount', 'payment_status', 'payment_ref_no'],
 
   sections: [
-    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['revenue_month', 'client_id', 'deal_id', 'expected_amount', 'payment_status', 'collection_status', 'payment_ref_no', 'revenue_description',] },
+    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['revenue_month', 'client_id', 'deal_id', 'expected_amount', 'payment_status', 'collection_status', 'tag', 'payment_ref_no', 'revenue_description',] },
    ],
 
   fields: [
@@ -147,9 +148,10 @@ export const RevenueplanSchema = {
     { key: 'revenue_month', label: 'Revenue Month', type: 'groupedSelect' , endpoint:moduleApi, title:true },
     ...resolveField('client_id', { as: 'contact_name', colSpan:4 }),
     ...resolveField('deal_id', { as: 'title', colSpan:4 }),
-    {key : "title", type:"text", title:true,  computed: true, editable: false},
-    {key : "contact_name", label:"Contact Name", type:"text", title:true,  computed: true, editable: false},
-    {key : "collection_status", label:"Collection Type", type:"groupedSelect", title:true,  endpoint:moduleApi},
+    { key : "title", type:"text", title:true,  computed: true, editable: false},
+    { key : "contact_name", label:"Contact Name", type:"text", title:true,  computed: true, editable: false},
+    { key : "collection_status", label:"Collection Type", type:"groupedSelect", title:true,  endpoint:moduleApi},
+    { key : "tag", label:"Tag", type:"groupedSelect", title:true,  endpoint:moduleApi},
     { key: 'expected_amount', label: 'Expected Amount', type: 'money' , sum:true },
     { key: 'currency_code', label: 'Currency Code', type: 'text' },
     { key: 'payment_status', label: 'Payment Status', type: 'select' , options: ['Paid', 'Unpaid', 'Partially Paid'] },
