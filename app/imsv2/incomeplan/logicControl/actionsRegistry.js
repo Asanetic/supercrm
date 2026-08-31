@@ -170,7 +170,11 @@ const IncomeplanActions = {
       columnKey: 'tag',
       combine: true,
     }),
-
+    filter_by_status: (ctx) => openSmartTagFilter(ctx, {
+      title: 'Filter by status',
+      columnKey: 'status',
+      combine: true,
+    }),
     filter_by_month: (ctx) => openSmartTagFilter(ctx, {
       title: 'Filter by month',
       columnKey: 'plan_month',

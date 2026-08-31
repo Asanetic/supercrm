@@ -95,6 +95,7 @@ export const IncomeplanSchema = {
     { key: 'add_deal', label: 'Create Deal', icon: 'handshake-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'view_deals', label: 'Deals', icon: 'briefcase', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key : 'filter_by_tag', label: 'Filter by Tag', icon: 'tags', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
+    { key : 'filter_by_status', label: 'Filter by Status', icon: 'info', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
     { key : 'filter_by_month', label: 'Filter by Month', icon: 'calendar', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
 
     { key: 'view_payment_history', label: 'Payment History', icon: 'money', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
@@ -115,14 +116,14 @@ export const IncomeplanSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'plan_month', 'name', 'expected_customers', 'tag','average_deal_amount', 'expected_amt', 'actual_earnings', 'variance','notes'],
+  showInList: ['row_count', 'plan_month', 'name', 'expected_customers', 'tag','average_deal_amount', 'expected_amt', 'actual_earnings', 'variance','status','notes'],
 
   //export columns these columns are used to generate upload csv template file
   exportColumns: ['plan_month', 'income_source_id', 'expected_customers', 'average_deal_amount', 'expected_amt', 'status', 'notes'],
 
   sections: [
     { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['plan_month', 'income_source_id', 'tag', 'expected_customers', 'average_deal_amount', 'expected_amt', 'actual_earnings', 'variance', 'notes'] },
-    { key: 'other_details', label: 'Other Details', columns: 3, fields: ['reg_date'] },
+    { key: 'other_details', label: 'Other Details', columns: 3, fields: ['status','reg_date'] },
   ],
 
   fields: [
