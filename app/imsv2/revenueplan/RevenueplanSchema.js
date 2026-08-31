@@ -113,7 +113,7 @@ export const RevenueplanSchema = {
     { key: 'filter_by_client', label: 'Filter by Client', icon: 'user', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
     { key: 'filter_by_status', label: 'Filter by Status', icon: 'filter', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
     { key: 'filter_by_month', label: 'Filter by Month', icon: 'calendar', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
-    { key: 'filter_by_collection_type', label: 'Filter by Collection Type', icon: 'tags', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
+    { key: 'filter_by_collection_type', label: 'Filter by Collection Type', icon: 'bolt', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
     { key : 'filter_by_tag', label: 'Filter by Tag', icon: 'tags', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
   ],
 
