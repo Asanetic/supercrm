@@ -268,6 +268,12 @@ const RevenueplanActions = {
     combine: true,
   }),
 
+  filter_by_cnf: (ctx) => openSmartTagFilter(ctx, {
+    title: 'Filter by confidence level',
+    columnKey: 'confidence',
+    combine: true,
+  }),
+
   filter_by_tag: (ctx) => openSmartTagFilter(ctx, {
     title: 'Filter by tag',
     columnKey: 'tag',
