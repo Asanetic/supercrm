@@ -170,6 +170,13 @@ const IncomeplanActions = {
       columnKey: 'tag',
       combine: true,
     }),
+    
+    filter_by_cnf: (ctx) => openSmartTagFilter(ctx, {
+      title: 'Filter by confidence level',
+      columnKey: 'confidence',
+      combine: true,
+    }),
+
     filter_by_status: (ctx) => openSmartTagFilter(ctx, {
       title: 'Filter by status',
       columnKey: 'status',

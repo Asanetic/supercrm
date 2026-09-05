@@ -132,13 +132,13 @@ export const RevenueplanSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'revenue_month', 'contact_name', 'title', 'expected_amount', 'payment_status','collection_status', 'revenue_description', 'tag'],
+  showInList: ['row_count', 'revenue_month', 'contact_name', 'title', 'expected_amount', 'payment_status','collection_status', 'confidence', 'revenue_description', 'tag'],
 
   //export columns these columns are used to generate upload csv template file
   exportColumns: ['revenue_month', 'client_id', 'deal_id', 'expected_amount', 'payment_status', 'payment_ref_no'],
 
   sections: [
-    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['revenue_month', 'client_id', 'deal_id', 'expected_amount', 'payment_status', 'collection_status', 'tag', 'payment_ref_no', 'revenue_description',] },
+    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['revenue_month', 'client_id', 'deal_id', 'expected_amount', 'payment_status', 'collection_status', 'tag', 'confidence', 'payment_ref_no', 'revenue_description',] },
    ],
 
   fields: [
@@ -148,7 +148,8 @@ export const RevenueplanSchema = {
     { key: 'revenue_month', label: 'Revenue Month', type: 'groupedSelect' , endpoint:moduleApi, title:true },
     ...resolveField('client_id', { as: 'contact_name', colSpan:4 }),
     ...resolveField('deal_id', { as: 'title', colSpan:4 }),
-    { key : "title", type:"text", title:true,  computed: true, editable: false},
+    { key : "confidence", label:"Confidence (%)", type:"groupedSelect", title:true,  endpoint:moduleApi},
+    { key : "title", type:"text", label:"Title", title:true,  computed: true, editable: false},
     { key : "contact_name", label:"Contact Name", type:"text", title:true,  computed: true, editable: false},
     { key : "collection_status", label:"Collection Type", type:"groupedSelect", title:true,  endpoint:moduleApi},
     { key : "tag", label:"Tag", type:"groupedSelect", title:true,  endpoint:moduleApi},

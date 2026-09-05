@@ -25,6 +25,7 @@ export const IncomeplanSchema = {
     { key: 'income_source_id', type: 'text', searchable: true },
     { key: 'tag', type: 'text', searchable: true },
     { key: 'expected_customers', type: 'money' },
+    { key: 'confidence', type: 'text', searchable: true },
     { key: 'average_deal_amount', type: 'money' },
     { key: 'actual_earnings', label: 'Actual Earnings', type: 'text', sum:true }, //actual_earnings
     { key: 'variance', label: 'Variance', type: 'text', sum:true }, //variance
