@@ -92,6 +92,7 @@ export const ActivitiesSchema = {
     { key: 'send_message', label: 'Send Message', icon: 'comment', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'add_reminder', label: 'Set reminder', icon: 'clock-o', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true },
     { key: 'add_note', label: 'Add Note', icon: 'sticky-note-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true },
+    { key: 'update_status', label: 'Update Status', icon: 'refresh', variant: 'outline-primary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
 
     // Related-record popups — scoped to this activity's linked contact
     // (call/send_message/set_reminder all resolve/scope by contact_id too).

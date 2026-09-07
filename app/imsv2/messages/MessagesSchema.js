@@ -105,37 +105,36 @@ export const MessagesSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'message_number', 'related_record_id', 'recipient_name', 'recipient_phone', 'recipient_email', 'message_channel', 'message_subject'],
+  showInList: ['row_count', 'sent_on', 'recipient_name', 'recipient_phone', 'recipient_email', 'message_channel', 'message_subject','message_content', 'message_status'],
 
   //export columns these columns are used to generate upload csv template file
   exportColumns: ['message_number', 'related_record_id', 'recipient_name', 'recipient_phone', 'recipient_email', 'message_channel', 'message_subject'],
 
   sections: [
-    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['message_number', 'related_record_id', 'recipient_name', 'recipient_phone', 'recipient_email', 'message_channel', 'message_subject'] },
-    { key: 'other_details', label: 'Other Details', columns: 3, fields: ['message_content', 'message_status', 'delivery_status', 'request_source', 'request_id', 'sent_by', 'scheduled_for', 'sent_on', 'delivered_on', 'read_on', 'failed_on', 'failure_reason', 'created_on'] },
+    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['recipient_name', 'recipient_phone', 'recipient_email', 'message_channel', 'message_subject','message_content' ,'related_record_id',  'message_number','message_status'] },
   ],
 
   fields: [
     // key: DB column name | label: shown on screen | type: drives input + SQL type
     { key: 'primkey', label: 'Primkey', type: 'number', system: true, editable: false },
     { key: 'record_id', label: 'Record Id', type: 'text', system: true, editable: false },
-    { key: 'message_number', label: 'Message Number', type: 'textarea', colSpan: 3 },
-    { key: 'related_record_id', label: 'Related Record Id', type: 'text' },
+    { key: 'message_number', label: 'Message Number', type: 'text', editable: false },
+    { key: 'related_record_id', label: 'Related Record Id', type: 'text',editable: false },
     { key: 'recipient_name', label: 'Recipient Name', type: 'text', title: true },
     { key: 'recipient_phone', label: 'Recipient Phone', type: 'text' },
     { key: 'recipient_email', label: 'Recipient Email', type: 'text' },
-    { key: 'message_channel', label: 'Message Channel', type: 'textarea', colSpan: 3 },
-    { key: 'message_subject', label: 'Message Subject', type: 'textarea', colSpan: 3 },
-    { key: 'message_content', label: 'Message Content', type: 'textarea', colSpan: 3 },
-    { key: 'message_status', label: 'Message Status', type: 'textarea', colSpan: 3 },
-    { key: 'delivery_status', label: 'Delivery Status', type: 'text' },
+    { key: 'message_channel', label: 'Message Channel', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'message_channel' },
+    { key: 'message_subject', label: 'Message Subject', type: 'text', colSpan: 8 },
+    { key: 'message_content', label: 'Message Content', type: 'textarea', colSpan: 12 },
+    { key: 'message_status', label: 'Status', type: 'text' , editable: false},
+    { key: 'delivery_status', label: 'Delivery Status', type: 'text' , editable: false},
     { key: 'request_source', label: 'Request Source', type: 'text' },
-    { key: 'request_id', label: 'Request Id', type: 'text' },
+    { key: 'request_id', label: 'Request Id', type: 'text' , editable: false},
     { key: 'sent_by', label: 'Sent By', type: 'text' },
     { key: 'scheduled_for', label: 'Scheduled For', type: 'datetime' },
-    { key: 'sent_on', label: 'Sent On', type: 'datetime' },
-    { key: 'delivered_on', label: 'Delivered On', type: 'datetime' },
-    { key: 'read_on', label: 'Read On', type: 'datetime' },
+    { key: 'sent_on', label: 'Sent On', type: 'datetime', editable: false },
+    { key: 'delivered_on', label: 'Delivered On', type: 'datetime' , editable: false},
+    { key: 'read_on', label: 'Read On', type: 'datetime' , editable: false},
     { key: 'failed_on', label: 'Failed On', type: 'datetime' },
     { key: 'failure_reason', label: 'Failure Reason', type: 'textarea' },
     { key: 'created_on', label: 'Created On', type: 'datetime' },

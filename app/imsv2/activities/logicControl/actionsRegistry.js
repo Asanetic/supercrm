@@ -19,6 +19,7 @@ import React from 'react';
 import { openSmartTagFilter, openSmartDateFilter, openSmartMapFilter } from "../../moduleControl/UiControl/smartFilterActions";
 import { callContactAction, messageContactAction, resolveContactRecipient } from "../../moduleControl/UiControl/contactTouchActions";
 import { openEntityCreateModal, buildPresetFromRow } from "../../moduleControl/UiControl/EntityCreateModal";
+import { quickEditFromRow } from "../../moduleControl/UiControl/QuickEditModal";
 import { ContactsSchema } from "../../contacts/ContactsSchema";
 import { OpportunitiesSchema } from "../../opportunities/OpportunitiesSchema";
 import { MosySendSmartReminder } from "../../UiControl/MosySmartReminder";
@@ -73,6 +74,24 @@ const ActivitiesActions = {
         { sourceKey: 'opportunity_id', destKey: 'opportunity_id', destSchema: NotesSchema, labelValue: row.title },
       ]),
       onSaved: refresh,
+    });
+  },
+
+  // Pops a quick-edit modal to update this activity's status alongside
+  // its linked contact/opportunity, outcome and description — without
+  // leaving the list/grid to open the full profile form.
+  update_status: (ctx) => {
+    quickEditFromRow(ctx, {
+      fieldKeys: ['status', 'contact_id', 'opportunity_id', 'tag','outcome', 'description'],
+      title: 'Update status — {{title}}',
+      fieldOverrides: {
+        status: { colSpan: 6 },
+        tag: { colSpan: 6 },
+        contact_id: { colSpan: 6 },
+        opportunity_id: { colSpan: 6 },
+        outcome: { colSpan: 12 },
+        description: { colSpan: 12 },
+      },
     });
   },
 
