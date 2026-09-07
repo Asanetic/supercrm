@@ -7,6 +7,7 @@ export function closeMosyCard(id = "smartmodaldefaultId") {
   }
 }
 
+
 export function registerModal(showFn, closeFn, id = "smartmodaldefaultId") {
   modals[id] = {
     show: showFn,

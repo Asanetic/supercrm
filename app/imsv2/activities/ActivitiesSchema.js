@@ -126,14 +126,14 @@ export const ActivitiesSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'contact_name', 'title', 'type', 'subject', 'description', 'activity_date', 'tag'],
+  showInList: ['row_count', 'contact_name', 'status', 'title', 'type', 'description', 'outcome',  'activity_date', 'tag'],
 
   //export columns these columns are used to generate upload csv template file
   exportColumns: ['contact_id', 'opportunity_id', 'type', 'direction', 'subject', 'description', 'activity_date', 'tag'],
 
   sections: [
-    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['contact_id', 'opportunity_id', 'type', 'activity_date', 'tag', 'subject', 'description'] },
-    { key: 'other_details', label: 'Other Details', columns: 3, fields: ['end_date', 'venue', 'agenda', 'outcome', 'status', 'reg_date'] },
+    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: [ 'contact_id', 'opportunity_id', 'subject',  'type', 'activity_date', 'tag', 'status',  'description', 'outcome'] },
+    { key: 'other_details', label: 'Other Details', columns: 3, fields: ['end_date', 'venue', 'agenda',  'reg_date'] },
   ],
 
   fields: [
@@ -146,7 +146,7 @@ export const ActivitiesSchema = {
     { key: 'title', label: 'Title', type: 'text' , title:true },
     { key: 'direction', label: 'Direction', type: 'text' },
     { key: 'contact_name', label: 'Contact', type: 'text', title:true },
-    { key: 'subject', label: 'Subject', type: 'text' },
+    { key: 'subject', label: 'Subject', type: 'text' , colSpan: 8},
     { key: 'description', label: 'Description', type: 'textarea', colSpan: 12 },
     { key: 'activity_date', label: 'Activity Date', type: 'datetime' },
     { key: 'tag', label: 'Tag', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'tag', colSpan: 4 },
@@ -154,8 +154,8 @@ export const ActivitiesSchema = {
     { key: 'venue', label: 'Venue', type: 'groupedSelect', endpoint: moduleApi , colSpan : 8 },
     { key: 'agenda', label: 'Agenda', type: 'textarea', colSpan :12 },
     { key: 'outcome', label: 'Outcome', type: 'textarea', colSpan :12 },
-    { key: 'status', label: 'Status', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'status' },
-    { key: 'reg_date', label: 'Reg Date', type: 'datetime' },
+    { key: 'status', label: 'Status', type: 'select', options: ['Done', 'Not done', 'Cancelled'], title: true },
+    { key: 'reg_date', label: 'Date created', type: 'datetime', editable: false },
     { key: 'row_count', label: '#', type: 'number', computed: true, editable: false },
     //  live search field sample 
     // { key: 'permissions', label: 'Permissions',

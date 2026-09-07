@@ -2,6 +2,7 @@
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 // UI-only role gate — same convention as CompaniesGrid.jsx/useEntityFormController.jsx
 import { mosyACTRLHasRole } from '../../../auth/authAccesControl';
+import { closeMosyCard } from '../../../components/MosyCard';
 
 // EntityRowActionsMenu — the per-row dropdown, owned by this module
 // instead of borrowed from componentControl.jsx. Same markup/classes as
@@ -49,6 +50,13 @@ export default function EntityRowActionsMenu({
   };
 
   const handleSelect = () => {
+    closeMosyCard("modal1")
+    closeMosyCard("modal2")
+    closeMosyCard("modal3")
+    closeMosyCard("modal4")
+    closeMosyCard("modal5")
+    closeMosyCard("topmost")
+    closeMosyCard()
     onChildDataOut({
       actionType: 'select',
       actionName: `select_${schema.entity}`,
