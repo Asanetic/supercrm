@@ -18,7 +18,7 @@
 import { quickEditFromRow } from "../../moduleControl/UiControl/QuickEditModal";
 import { openSmartTagFilter, openSmartDateFilter, openSmartMapFilter } from "../../moduleControl/UiControl/smartFilterActions";
 import { openEntityCreateModal, buildPresetFromRow } from "../../moduleControl/UiControl/EntityCreateModal";
-import { callContactAction, messageContactAction, resolveContactRecipient } from "../../moduleControl/UiControl/contactTouchActions";
+import { callContactAction, messageContactAction, resolveContactRecipient, deriveReminderHeadline, buildActionNeededReminder } from "../../moduleControl/UiControl/contactTouchActions";
 import { ContactsSchema } from "../../contacts/ContactsSchema";
 import ActivitiesProfile from "../../activities/uiControl/ActivitiesProfile";
 import { ActivitiesSchema } from "../../activities/ActivitiesSchema";
@@ -97,17 +97,34 @@ const OpportunitiesActions = {
   },
 
   // Opens the shared Smart Reminder composer for this deal's linked
-  // contact — same phone/email lookup as request_payment above.
+  // contact — same phone/email lookup as request_payment above. Subject
+  // falls back to a trimmed description when the deal has no title; the
+  // message body is the same "Action needed" brief activities' own
+  // add_reminder builds — who's involved, their phone/email, what the
+  // deal's about (description), and the suggested next step (next_action).
   set_reminder: async ({ rows }) => {
     const row = rows?.[0];
     if (!row) return;
     const recipient = await resolveContactRecipient(row);
+    const headline = deriveReminderHeadline(row.title, row.description);
     MosySendSmartReminder({
       profileDataNode: {
         ...recipient,
         related_record_id: row.opportunity_id,
       },
-      uiOptions: { modalTitle: `Set Reminder — ${row.title || row.contact_name || ''}` },
+      uiOptions: {
+        modalTitle: `Set Reminder — ${row.title || row.contact_name || ''}`,
+        subject: `Action needed — ${headline}`,
+        message: buildActionNeededReminder({
+          headline,
+          contactName: recipient?.full_name || recipient?.contact_name || row.contact_name,
+          note: row.stage ? `${row.stage} deal awaiting follow-up` : undefined,
+          phone: recipient?.phone_number,
+          email: recipient?.email,
+          askedAbout: row.description,
+          suggested: row.next_action,
+        }),
+      },
     });
   },
 

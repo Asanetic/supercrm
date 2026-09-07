@@ -17,7 +17,7 @@
 
 import React from 'react';
 import { openSmartTagFilter, openSmartDateFilter, openSmartMapFilter } from "../../moduleControl/UiControl/smartFilterActions";
-import { callContactAction, messageContactAction, resolveContactRecipient } from "../../moduleControl/UiControl/contactTouchActions";
+import { callContactAction, messageContactAction, resolveContactRecipient, deriveReminderHeadline, buildActionNeededReminder } from "../../moduleControl/UiControl/contactTouchActions";
 import { openEntityCreateModal, buildPresetFromRow } from "../../moduleControl/UiControl/EntityCreateModal";
 import { quickEditFromRow } from "../../moduleControl/UiControl/QuickEditModal";
 import { ContactsSchema } from "../../contacts/ContactsSchema";
@@ -50,13 +50,31 @@ const ActivitiesActions = {
   // was never set at all (nothing for view_reminders below to scope by).
   // resolveContactRecipient() does the same contact_id lookup call/
   // send_message already rely on.
+  // Subject falls back to a trimmed description when the activity has no
+  // title/subject; the message body is the same "Action needed" brief
+  // Opportunities' own set_reminder builds — who's involved, their
+  // phone/email, what the activity's about (description), and the
+  // suggested next step (outcome, when one's already been logged).
   add_reminder: async ({ rows }) => {
     const row = rows?.[0];
     if (!row) return;
     const recipient = await resolveContactRecipient(row);
+    const headline = deriveReminderHeadline(row.title || row.subject, row.description);
     MosySendSmartReminder({
       profileDataNode: { ...recipient, related_record_id: row.activity_id },
-      uiOptions: { modalTitle: `Set Reminder — ${row.title || row.contact_name || ''}` },
+      uiOptions: {
+        modalTitle: `Set Reminder — ${row.title || row.contact_name || ''}`,
+        subject: `Action needed — ${headline}`,
+        message: buildActionNeededReminder({
+          headline,
+          contactName: recipient?.full_name || recipient?.contact_name || row.contact_name,
+          note: row.type ? `${row.type} — ${row.status || 'pending'}` : undefined,
+          phone: recipient?.phone_number,
+          email: recipient?.email,
+          askedAbout: row.description,
+          suggested: row.outcome,
+        }),
+      },
     });
   },
 

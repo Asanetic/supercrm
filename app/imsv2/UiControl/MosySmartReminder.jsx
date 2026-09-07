@@ -12,6 +12,15 @@ const apiRoutes = getApiRoutes();
 
 const WEEK_DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
+// Every reminder created from ANY module (contacts, deals, activities,
+// revenue plan, ...) should also loop in this fixed number/address, in
+// addition to whatever contact the reminder is actually about — so the
+// rep who owns these reminders always gets pinged too, not just the
+// client. Appended once, at creation time only (editing an existing
+// reminder keeps whatever recipients it was already saved with).
+const ALWAYS_NOTIFY_PHONE = '0710766390';
+const ALWAYS_NOTIFY_EMAIL = 'jereasanya@gmail.com';
+
 const MESSAGE_PLACEHOLDERS = [
   { key: 'first_name', label: 'First Name' },
   { key: 'tel', label: 'Tel' },
@@ -186,10 +195,16 @@ function ReminderComposerUI({ profileDataNode = {}, uiOptions = {}, reminderData
   const defaultMessage = isEditing ? (reminderData?.message || '') : (uiOptions?.message || uiOptions?.body || '');
   const defaultTel = isEditing
     ? (reminderData?.recipients_phone || '')
-    : (profileDataNode?.phone_number || profileDataNode?.tel || profileDataNode?.phone || '');
+    : [
+        profileDataNode?.phone_number || profileDataNode?.tel || profileDataNode?.phone,
+        ALWAYS_NOTIFY_PHONE,
+      ].filter(Boolean).join(', ');
   const defaultEmail = isEditing
     ? (reminderData?.recipients_email || '')
-    : (profileDataNode?.email_address || profileDataNode?.primary_email || profileDataNode?.email || '');
+    : [
+        profileDataNode?.email_address || profileDataNode?.primary_email || profileDataNode?.email,
+        ALWAYS_NOTIFY_EMAIL,
+      ].filter(Boolean).join(', ');
   // DB stores TIME as "HH:MM:SS" — <input type="time"> only accepts "HH:MM".
   const defaultTime = String(reminderData?.time_of_day || '').slice(0, 5);
   const defaultRepeat = reminderData?.repeat_type || 'repeat';

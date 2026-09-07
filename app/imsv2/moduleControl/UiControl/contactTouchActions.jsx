@@ -84,3 +84,39 @@ export async function messageContactFromRow(row, opts) {
 //   call: (ctx) => callContactAction(ctx, { contactIdKey: 'client_id' }),
 export const callContactAction = ({ rows } = {}, opts) => callContactFromRow(rows?.[0], opts);
 export const messageContactAction = ({ rows } = {}, opts) => messageContactFromRow(rows?.[0], opts);
+
+// Reminder subject line: prefer a real title; a title-less record (some
+// deals/activities are logged with only a description) falls back to the
+// description itself, trimmed down to a headline length.
+export function deriveReminderHeadline(title, description, maxLen = 60) {
+  const t = (title || '').trim();
+  if (t) return t;
+  const d = (description || '').trim();
+  return d.length > maxLen ? `${d.slice(0, maxLen).trim()}…` : d;
+}
+
+// "Action needed" reminder body — same shape for any module with a linked
+// contact (deals, activities): headline, who's involved and why, their
+// phone/email, what they asked about, and a suggested next step. Any
+// missing piece is just skipped rather than leaving a blank line.
+//
+//   ⚠️ Action needed — TruFinds Kargo
+//
+//   Peter Mwangi — Negotiation deal awaiting follow-up
+//   📞 0723 456 789 | ✉️ peter.m@gmail.com
+//   Asked about: Mombasa–Nairobi container shipping
+//   Suggested: "Rate holds till Monday, shall I lock your slot?"
+export function buildActionNeededReminder({ headline, contactName, note, phone, email, askedAbout, suggested }) {
+  const lines = [`Action needed — ${headline || 'Follow up'}`, ''];
+
+  const nameLine = [contactName, note].filter(Boolean).join(' — ');
+  if (nameLine) lines.push(nameLine);
+
+  const contactLine = [phone && `Tel:  ${phone}`, email && `\nemail: ${email}`].filter(Boolean).join(' | ');
+  if (contactLine) lines.push(contactLine);
+
+  if (askedAbout) lines.push(`Asked about: ${askedAbout}`);
+  if (suggested) lines.push(`Suggested: "${suggested}"`);
+
+  return lines.join('\n');
+}
