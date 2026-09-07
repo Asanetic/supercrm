@@ -92,6 +92,8 @@ const ActivitiesActions = {
         outcome: { colSpan: 12 },
         description: { colSpan: 12 },
       },
+      getId: (row) => btoa(String(row.primkey)),
+
     });
   },
 

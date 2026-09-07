@@ -33,6 +33,7 @@ export const IncomeplanSchema = {
     { key: 'status', type: 'groupedSelect', endpoint: '/api/imsv2/incomeplan/list', groupByField: 'status', searchable: true },
     { key: 'notes', type: 'textarea', colSpan: 3, searchable: true },
     { key: 'reg_date', type: 'datetime' },
+    { key: 'activities', computed: true, searchable: true },
     { key: 'hive_site_id', type: 'text', searchable: true },
     { key: 'hive_site_name', type: 'text', title: true, required: true, searchable: true },
     { key: 'row_count', type: 'number', computed: true, editable: false },
@@ -42,6 +43,9 @@ export const IncomeplanSchema = {
   // Same shape as your existing *BatchMutations.js files.
   batchMutations: {
     ...resolveJoin('income_source_id', { as: 'name' }),
+    "activities": {
+      type: "count", table: "activities", link: "related_record_id:income_plan_id" 
+    }
   },
 
   roles: { view: 'view_incomeplan', manage: 'manage_incomeplan' },

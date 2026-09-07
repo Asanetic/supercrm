@@ -85,9 +85,10 @@ export const IncomeplanSchema = {
     { key: 'clone', label: 'Clone Record', icon: 'copy', variant: 'outline-secondary', editOnly: true, grid: false, form: true, rowAction: false, role: 'manage_incomeplan' },
     //{ key: 'filterByDate', label: 'Filter by date', icon: 'calendar', variant: 'outline-primary', type: 'action', grid: true, form: false, rowAction: false },
 
-    // Activities/Deals have no FK back to income plan — both scope by a
-    // shared `tag` column instead (e.g. "Aug-2026", derived from this
-    // plan's own plan_month) — see actionsRegistry.js's tagFromPlan().
+    // Deals have no FK back to income plan — scoped by a shared `tag`
+    // column instead (e.g. "Aug-2026", derived from this plan's own
+    // plan_month) — see actionsRegistry.js's tagFromPlan(). Activities
+    // scope by a real related_record_id pointer instead (set on create).
     // Payment History still scopes by real date range (payment_date).
     { key: 'add_activity', label: 'Add Activity', icon: 'calendar-plus-o', variant: 'outline-warning', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
     { key: 'view_activities', label: 'Activities', icon: 'calendar-check-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
@@ -117,14 +118,14 @@ export const IncomeplanSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'plan_month', 'name', 'confidence', 'tag', 'expected_amt', 'actual_earnings', 'variance','status','notes'],
+  showInList: ['row_count', 'plan_month', 'name', 'confidence', 'tag', 'expected_amt', 'actual_earnings', 'variance','activities','status','notes'],
 
   //export columns these columns are used to generate upload csv template file
   exportColumns: ['plan_month', 'income_source_id', 'expected_customers', 'average_deal_amount', 'expected_amt', 'status', 'notes'],
 
   sections: [
     { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['plan_month', 'income_source_id', 'tag', 'confidence', 'expected_customers', 'average_deal_amount', 'expected_amt', 'actual_earnings', 'variance', 'notes'] },
-    { key: 'other_details', label: 'Other Details', columns: 3, fields: ['status','reg_date'] },
+    { key: 'other_details', label: 'Other Details', columns: 3, fields: ['activities','status','reg_date'] },
   ],
 
   fields: [
@@ -142,6 +143,7 @@ export const IncomeplanSchema = {
     { key: 'status', label: 'Status', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'status' },
     { key: 'notes', label: 'Notes', type: 'textarea', colSpan: 12 },
     { key: 'actual_earnings', label: 'Actual Earnings', type: 'text', sum:true }, //actual_earnings
+    { key: 'activities', label: 'Activities', type: 'text',  computed: true, sum:true , editable: false}, //actual_earnings
     { key: 'variance', label: 'Variance', type: 'text', sum:true, editable: false }, //variance
     { key: 'reg_date', label: 'Reg Date', type: 'datetime', editable: false },
     { key: 'row_count', label: '#', type: 'number', computed: true, editable: false },

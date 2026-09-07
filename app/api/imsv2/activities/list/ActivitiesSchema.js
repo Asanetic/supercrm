@@ -34,6 +34,7 @@ export const ActivitiesSchema = {
     { key: 'agenda', type: 'textarea', searchable: true },
     { key: 'outcome', type: 'text', searchable: true },
     { key: 'status', type: 'groupedSelect', endpoint: '/api/imsv2/activities/list', groupByField: 'status', searchable: true },
+    { key: 'related_record_id', type: 'text', editable: false, searchable: true },
     { key: 'created_by', type: 'text', searchable: true },
     { key: 'reg_date', type: 'datetime' },
     { key: 'hive_site_id', type: 'text', searchable: true },
@@ -47,6 +48,7 @@ export const ActivitiesSchema = {
     ...resolveJoin('contact_id', { as: 'contact_name' }),
     ...resolveJoin('opportunity_id', { as: 'title' }),
     ...resolveJoin('created_by', { as: 'name' }),
+
   },
 
   roles: { view: 'view_activities', manage: 'manage_activities' },

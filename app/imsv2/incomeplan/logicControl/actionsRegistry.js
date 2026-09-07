@@ -45,11 +45,12 @@ function monthRangeFromPlan(planMonth) {
 }
 
 // "Aug-2026"-style tag derived from THIS plan's own plan_month — shared
-// with Activities/Opportunities' own `tag` groupedSelect column (see
-// ActivitiesSchema.js / OpportunitiesSchema.js) since neither table has a
-// real FK back to income plan. Presetting a new activity/deal's tag with
-// this same value is what makes it show up under view_activities/
-// view_deals below — a plain string match, not a relational join.
+// with Opportunities' own `tag` groupedSelect column (see
+// OpportunitiesSchema.js) since that table has no real FK back to income
+// plan. Presetting a new deal's tag with this same value is what makes it
+// show up under view_deals below — a plain string match, not a relational
+// join. Activities moved off this hack onto a real related_record_id
+// pointer — see add_activity/view_activities below.
 function tagFromPlan(planMonth) {
   const d = planMonth ? new Date(planMonth) : new Date();
   const month = d.toLocaleString('en-US', { month: 'short' });
@@ -65,15 +66,15 @@ const IncomeplanActions = {
     alert(`${rows.length} record(s) selected: ${rows.map(displayName).join(', ')}`);
   },
 
-  // Pops a preset Activity create form. Income plan has no contact/deal FK
-  // of its own, so this only prefills free-text fields plus `tag`
-  // (e.g. "Aug-2026") — that's what makes a freshly-added activity
-  // actually show up under view_activities below, since both sides key
-  // off the same tag string, not a record link.
+  // Pops a preset Activity create form. Activities now carries a generic
+  // `related_record_id` pointer column (same convention as
+  // mosy_reminders.related_record_id) — presetting it to this income
+  // plan's own id is what makes the new activity show up under
+  // view_activities below, via a real pointer instead of the old
+  // tag-matching hack.
   add_activity: ({ rows, refresh }) => {
     const row = rows?.[0];
     if (!row) return;
-    const tag = tagFromPlan(row.plan_month);
     openEntityCreateModal({
       ProfileComponent: ActivitiesProfile,
       schema: ActivitiesSchema,
@@ -81,24 +82,24 @@ const IncomeplanActions = {
       presetValues: {
         subject: `Income plan — ${row.name || ''}`,
         description: `Regarding income plan for ${row.plan_month || ''} (${row.name || ''})`.trim(),
-        tag,
+        related_record_id: row.income_plan_id,
       },
       onSaved: refresh,
     });
   },
 
-  // No FK either way between income plan and Activities — scoped by the
-  // shared `tag` column instead of a relational join.
+  // Scoped by Activities' related_record_id pointing back at this income
+  // plan's own id — relatedRecordId is the camelCase URL param Activities'
+  // route.js maps back to that real column.
   view_activities: ({ rows }) => {
     const row = rows?.[0];
-    if (!row) return;
-    const tag = tagFromPlan(row.plan_month);
+    if (!row?.income_plan_id) return;
     MosyCard(
       '',
       React.createElement(ActivitiesList, {
         customProfilePath: '../activities/profile',
-        title: `Activities — ${tag}`,
-        fixedQuery: { tag: btoa(tag) },
+        title: `Activities — ${row.name || ''}`,
+        fixedQuery: { relatedRecordId: btoa(row.income_plan_id) },
         hiddenActions: ['new'],
       }),
       true,

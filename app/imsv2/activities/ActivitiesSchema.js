@@ -134,7 +134,7 @@ export const ActivitiesSchema = {
 
   sections: [
     { key: 'basic_information', label: 'Basic Information', columns: 3, fields: [ 'contact_id', 'opportunity_id', 'subject',  'type', 'activity_date', 'tag', 'status',  'description', 'outcome'] },
-    { key: 'other_details', label: 'Other Details', columns: 3, fields: ['end_date', 'venue', 'agenda',  'reg_date'] },
+    { key: 'other_details', label: 'Other Details', columns: 3, fields: ['end_date', 'venue', 'agenda', 'related_record_id', 'reg_date'] },
   ],
 
   fields: [
@@ -156,6 +156,11 @@ export const ActivitiesSchema = {
     { key: 'agenda', label: 'Agenda', type: 'textarea', colSpan :12 },
     { key: 'outcome', label: 'Outcome', type: 'textarea', colSpan :12 },
     { key: 'status', label: 'Status', type: 'select', options: ['Done', 'Not done', 'Cancelled'], title: true },
+    // Generic reverse pointer (same convention as mosy_reminders.related_record_id)
+    // used by other modules with no real FK back to activities — e.g. income
+    // plan's add_activity/view_activities scope by this instead of the older
+    // tag-matching hack. Not tied to one specific target table.
+    { key: 'related_record_id', label: 'Related Record Id', type: 'text', editable: false, colSpan: 4 },
     { key: 'reg_date', label: 'Date created', type: 'datetime', editable: false },
     { key: 'row_count', label: '#', type: 'number', computed: true, editable: false },
     //  live search field sample 
