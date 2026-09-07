@@ -115,7 +115,7 @@ export function buildActionNeededReminder({ headline, contactName, note, phone, 
   const contactLine = [phone && `Tel:  ${phone}`, email && `\nemail: ${email}`].filter(Boolean).join(' | ');
   if (contactLine) lines.push(contactLine);
 
-  if (askedAbout) lines.push(`Asked about: ${askedAbout}`);
+  if (askedAbout) lines.push(`Agenda: ${askedAbout}`);
   if (suggested) lines.push(`Suggested: "${suggested}"`);
 
   return lines.join('\n');
