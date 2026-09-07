@@ -124,17 +124,26 @@ const RevenueplanActions = {
   // Pops a preset Activity create form, locking the new activity's
   // contact_id (and opportunity_id, when this plan is tied to a deal) to
   // match this plan.
+  // Carries this plan's own title (cached off deal_id, falling back to
+  // revenue_title when there's no linked deal) and revenue_description
+  // across, same as opportunities'/income plan's own add_activity, so the
+  // activity doesn't start blank.
   add_activity: ({ rows, refresh }) => {
     const row = rows?.[0];
     if (!row?.client_id) return;
+    const planTitle = row.title || row.revenue_title || '';
     openEntityCreateModal({
       ProfileComponent: ActivitiesProfile,
       schema: ActivitiesSchema,
       title: `New Activity — ${row.contact_name || ''}`,
-      presetValues: buildPresetFromRow(row, [
-        { sourceKey: 'client_id', destKey: 'contact_id', destSchema: ActivitiesSchema, labelValue: row.contact_name },
-        { sourceKey: 'deal_id', destKey: 'opportunity_id', destSchema: ActivitiesSchema, labelValue: row.title },
-      ]),
+      presetValues: {
+        ...buildPresetFromRow(row, [
+          { sourceKey: 'client_id', destKey: 'contact_id', destSchema: ActivitiesSchema, labelValue: row.contact_name },
+          { sourceKey: 'deal_id', destKey: 'opportunity_id', destSchema: ActivitiesSchema, labelValue: row.title },
+        ]),
+        subject: planTitle ? `Revenue plan — ${planTitle}` : '',
+        description: (row.revenue_description || '').trim(),
+      },
       onSaved: refresh,
     });
   },

@@ -43,7 +43,8 @@ const OpportunitiesActions = {
 
   // Pops a preset Activity create form (Meet / Call / Task / Follow Up /
   // Message), locking the new activity's opportunity_id AND contact_id to
-  // this deal.
+  // this deal, and carrying the deal's own title/description across so the
+  // activity doesn't start blank.
   add_activity: ({ rows, refresh }) => {
     const row = rows?.[0];
     if (!row) return;
@@ -51,10 +52,14 @@ const OpportunitiesActions = {
       ProfileComponent: ActivitiesProfile,
       schema: ActivitiesSchema,
       title: `New Activity — ${row.title || ''}`,
-      presetValues: buildPresetFromRow(row, [
-        { sourceKey: 'opportunity_id', destKey: 'opportunity_id', destSchema: ActivitiesSchema, labelValue: row.title },
-        { sourceKey: 'contact_id', destKey: 'contact_id', destSchema: ActivitiesSchema, labelValue: row.contact_name },
-      ]),
+      presetValues: {
+        ...buildPresetFromRow(row, [
+          { sourceKey: 'opportunity_id', destKey: 'opportunity_id', destSchema: ActivitiesSchema, labelValue: row.title },
+          { sourceKey: 'contact_id', destKey: 'contact_id', destSchema: ActivitiesSchema, labelValue: row.contact_name },
+        ]),
+        subject: row.title ? `Deal — ${row.title}` : '',
+        description: (row.description || '').trim(),
+      },
       onSaved: refresh,
     });
   },
