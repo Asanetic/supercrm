@@ -75,13 +75,17 @@ const IncomeplanActions = {
   add_activity: ({ rows, refresh }) => {
     const row = rows?.[0];
     if (!row) return;
+    const description = [
+      `Regarding income plan for ${row.plan_month || ''} (${row.name || ''})`.trim(),
+      row.notes ? `Notes: ${row.notes.trim()}` : '',
+    ].filter(Boolean).join('\n');
     openEntityCreateModal({
       ProfileComponent: ActivitiesProfile,
       schema: ActivitiesSchema,
       title: `New Activity — ${row.name || ''}`,
       presetValues: {
         subject: `Income plan — ${row.name || ''}`,
-        description: `Regarding income plan for ${row.plan_month || ''} (${row.name || ''})`.trim(),
+        description,
         related_record_id: row.income_plan_id,
       },
       onSaved: refresh,
