@@ -5,6 +5,7 @@ import { mutateInputArray } from "../../beMonitor";
 import { Smarttemplatev1Schema as schema } from '../list/Smarttemplatev1Schema';
 
 //role access control 
+const recordIdCol = schema.fields[1]?.key || 'record_id';
 
 export async function POST(req) {
   try {
@@ -27,8 +28,8 @@ export async function POST(req) {
     for (const node of processedInsertObj) {
       ///mutate record id       
       const newRecordId = magicRandomStr(10) ;      
-      node.record_id = newRecordId;
-      
+      node[recordIdCol] = newRecordId;
+
       const mutatedObj = mutateInputArray(`${schema.entity}`, node, req, newRecordId, authData);
 
      const insertResult = await mosySqlInsert(`${schema.entity}`, mutatedObj, req);
