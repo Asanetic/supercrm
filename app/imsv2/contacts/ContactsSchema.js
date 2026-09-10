@@ -100,6 +100,7 @@ export const ContactsSchema = {
     { key: 'view_message_history', label: 'Message History', icon: 'comments-o', variant: 'outline-secondary', type: 'action', editOnly: true, grid: false, form: true, rowAction: true },
 
     {key :'filter_by_status', label: 'Filter by Status', icon: 'filter', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
+    {key :'filter_by_industry', label: 'Filter by industry', icon: 'wrench', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
     {key :'filter_by_type', label: 'Filter by type', icon: 'user', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
     {key :'filter_by_source', label: 'Filter by Source', icon: 'bolt', variant: 'outline-secondary', type: 'action', grid: true, form: false, rowAction: false },
   ],
@@ -119,13 +120,13 @@ export const ContactsSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'contact_name', 'company_name', 'phone_number', 'email', 'type', 'status', 'source'],
+  showInList: ['row_count', 'logo', 'contact_name', 'company_name', 'phone_number', 'email', 'type', 'status', 'source','industry', 'rating', 'reviews'],
 
   //export columns these columns are used to generate upload csv template file
-  exportColumns: ['contact_name', 'company_name', 'phone_number', 'email', 'type', 'status', 'source'],
+  exportColumns: ['contact_name', 'company_name', 'phone_number', 'email', 'type', 'status', 'source','industry','rating','reviews'],
 
   sections: [
-    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['contact_name', 'company_name', 'phone_number', 'email', 'type', 'status', 'source', 'reg_date'] },
+    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['logo','contact_name', 'company_name', 'phone_number', 'email', 'industry','type', 'status', 'source', , 'rating', 'reviews', 'reg_date'] },
     { key: 'other_details', label: 'Other Details', columns: 3, fields: ['notes'] },
   ],
 
@@ -137,8 +138,12 @@ export const ContactsSchema = {
     { key: 'company_name', label: 'Company Name', type: 'text', title: true },
     { key: 'phone_number', label: 'Phone Number', type: 'text' },
     { key: 'email', label: 'Email', type: 'text' },
-    { key: 'type', label: 'Type', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'type' },
-    { key: 'status', label: 'Status', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'status' },
+    { key: 'type', label: 'Type', type: 'select', options:['Lead','Customer'] },
+    { key: 'logo', label: 'Profile photo', type: 'image' , colSpan:12 , imageClass:"useravatar_120" },
+    { key: 'industry', label: 'Industry', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'status' },
+    { key: 'rating', label: 'Rating', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'status' },
+    { key: 'reviews', label: 'Review', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'status' },
+    { key: 'status', label: 'Tag', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'status' },
     { key: 'source', label: 'Source', type: 'groupedSelect', endpoint: moduleApi, groupByField: 'source' ,},
     { key: 'notes', label: 'Notes', type: 'textarea', colSpan: 12 },
     { key: 'reg_date', label: 'Reg Date', type: 'datetime' },

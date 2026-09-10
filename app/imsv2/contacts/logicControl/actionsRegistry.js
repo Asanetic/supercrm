@@ -60,17 +60,31 @@ const ContactsActions = {
     MosyCommsSmartCall({ profileDataNode: toRecipient(row) });
   },
 
-    filter_by_status: (ctx) => {
+  filter_by_industry: (ctx) => {
       openSmartTagFilter(ctx, {
-      title: 'Filter by status',
-      columnKey: 'status',
+      title: 'Filter by industry',
+      columnKey: 'industry',
+      combine: true,
+
     })
     return false
   },
+
+  filter_by_status: (ctx) => {
+    openSmartTagFilter(ctx, {
+    title: 'Filter by status',
+    columnKey: 'status',
+    combine: true,
+
+  })
+  return false
+},
   filter_by_type: (ctx) => {
     openSmartTagFilter(ctx, {
     title: 'Filter by type',
     columnKey: 'type',
+    combine: true,
+
   })
   return false
 },
@@ -79,6 +93,8 @@ filter_by_source: (ctx) => {
   openSmartTagFilter(ctx, {
   title: 'Filter by source',
   columnKey: 'source',
+  combine: true,
+
 })
 return false
 },
