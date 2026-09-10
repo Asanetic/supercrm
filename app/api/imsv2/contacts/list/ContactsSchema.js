@@ -26,6 +26,8 @@ export const ContactsSchema = {
     { key: 'type', type: 'text', searchable: true },
     { key: 'logo', label: 'Profile photo', type: 'image' },
     { key: 'industry', type: 'text', searchable: true },
+    { key: 'rating', type: 'text', searchable: true },
+    { key: 'reviews', type: 'text', searchable: true },
     { key: 'status', type: 'groupedSelect', endpoint: '/api/imsv2/contacts/list', groupByField: 'status', searchable: true },
     { key: 'source', type: 'text', searchable: true },
     { key: 'notes', type: 'textarea', colSpan: 3, searchable: true },
