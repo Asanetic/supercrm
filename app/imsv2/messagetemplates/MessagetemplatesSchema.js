@@ -114,7 +114,7 @@ export const MessagetemplatesSchema = {
     // key: DB column name | label: shown on screen | type: drives input + SQL type
     { key: 'primkey', label: 'Primkey', type: 'number', system: true, editable: false },
     { key: 'record_id', label: 'Record Id', type: 'text', system: true, editable: false },
-    { key: 'template_name', label: 'Template Name', type: 'text', title: true },
+    { key: 'template_name', label: 'Template Name', type: 'text'},
     { key: 'template_code', label: 'Template Code', type: 'text', title: true },
     { key: 'template_category', label: 'Template Category', type: 'text' },
     { key: 'message_channel', label: 'Message Channel', type: 'groupedSelect', endpoint : moduleApi, groupByField: 'message_channel', colSpan: 3 },
