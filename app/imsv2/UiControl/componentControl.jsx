@@ -683,7 +683,7 @@ export function SmartDropdown({
   
   return (
     <>
-      <label className="cpointer text-left">
+      <label className="cpointer text-left py-0">
         {label}
         <span className="pr-2">{' '}</span> | 
         {!isCustom ? (

@@ -101,14 +101,13 @@ export const MessagetemplatesSchema = {
 
   fieldGroups: [],
   // Field keys shown as columns in list view, in display order.
-  showInList: ['row_count', 'template_name', 'template_code', 'template_category', 'message_channel', 'subject', 'message_content', 'template_status'],
+  showInList: ['row_count', 'template_code', 'message_channel', 'subject', 'message_content'],
 
   //export columns these columns are used to generate upload csv template file
   exportColumns: ['template_name', 'template_code', 'template_category', 'message_channel', 'subject', 'message_content', 'template_status'],
 
   sections: [
-    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['template_name', 'template_code', 'template_category', 'message_channel', 'subject', 'message_content', 'template_status'] },
-    { key: 'other_details', label: 'Other Details', columns: 3, fields: ['created_by', 'last_updated_by', 'created_on', 'updated_on'] },
+    { key: 'basic_information', label: 'Basic Information', columns: 3, fields: ['template_code', 'message_channel', 'subject', 'message_content'] },
   ],
 
   fields: [
@@ -118,9 +117,9 @@ export const MessagetemplatesSchema = {
     { key: 'template_name', label: 'Template Name', type: 'text', title: true },
     { key: 'template_code', label: 'Template Code', type: 'text', title: true },
     { key: 'template_category', label: 'Template Category', type: 'text' },
-    { key: 'message_channel', label: 'Message Channel', type: 'textarea', colSpan: 3 },
+    { key: 'message_channel', label: 'Message Channel', type: 'groupedSelect', endpoint : moduleApi, groupByField: 'message_channel', colSpan: 3 },
     { key: 'subject', label: 'Subject', type: 'text' },
-    { key: 'message_content', label: 'Message Content', type: 'textarea', colSpan: 3 },
+    { key: 'message_content', label: 'Message Content', type: 'textarea', colSpan: 12 },
     { key: 'template_status', label: 'Template Status', type: 'text' },
     ...resolveField('created_by', { as: 'name' }),
     { key: 'last_updated_by', label: 'Last Updated By', type: 'datetime' },
