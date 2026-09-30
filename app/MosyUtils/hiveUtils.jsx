@@ -352,9 +352,19 @@ export function mosyDeleteCookie(name) {
 }
 
 
-export function mosyToday() {
+// dateOnly (default true, unchanged from before this param existed) keeps
+// every existing call getting the same "YYYY-MM-DD" it always has. Pass
+// `mosyToday(false)` only where a caller genuinely wants the full
+// timestamp — never for anything that ends up in server-rendered HTML
+// (e.g. a sidebar nav href): a value carrying live seconds will almost
+// never match between the server's render instant and the client's
+// hydration instant a moment later, which is exactly what causes a
+// React hydration mismatch. Pass `mosyToday(true)` explicitly at any
+// fragile call site like that so it stays self-documented rather than
+// silently depending on this function's default never changing.
+export function mosyToday(dateOnly = true) {
   const now = new Date();
-  return now.toISOString().split('T')[0]; // "YYYY-MM-DD"
+  return dateOnly ? now.toISOString().split('T')[0] : now.toISOString();
 }
 
 export function mosyRightNow() {
@@ -428,6 +438,27 @@ export function toNum(value, decimalPlaces = 0) {
     minimumFractionDigits: decimalPlaces,
     maximumFractionDigits: decimalPlaces,
   });
+}
+
+// KES 12,500.00 — exact amount, for anywhere the real figure matters
+// (profile pages, tables, receipts).
+export function formatKes(value) {
+  const n = Number(value);
+  return `KES ${(isNaN(n) ? 0 : n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+// KES 2.18M / KES 186.4K — abbreviated, for dashboard-scale figures where
+// the exact cents would just be noise (spec: KES 8.42M beats KES 8420000).
+export function formatKesShort(value) {
+  const n = Number(value) || 0;
+  const abs = Math.abs(n);
+
+  let short;
+  if (abs >= 1_000_000) short = `${(n / 1_000_000).toFixed(2)}M`;
+  else if (abs >= 1_000) short = `${(n / 1_000).toFixed(1)}K`;
+  else short = n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+  return `KES ${short}`;
 }
 
 

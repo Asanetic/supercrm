@@ -18,7 +18,7 @@ export default function MiniWidgetLoginForm(
   return (
     <div className="row justify-content-center m-0 p-0 col-md-12" 
     style={{ backgroundImage: `url('${loginBgImg}')`,backgroundRepeat:"no-repeat",backgroundSize:"cover" }}>
-      <div className="col-md-12 m-0 p-0" style={{backgroundColor:"rgba(255, 255, 255, 0.7)"}}>
+      <div className="col-md-12 m-0 p-0" style={{backgroundColor:"rgba(255, 255, 255, 0.5)"}}>
         <div className="main-wrapper login-body">
           <div className="login-wrapper m-0 p-1 p-lg-0">
             <div className="m-0 p-lg-4 row justify-content-center col-md-12">

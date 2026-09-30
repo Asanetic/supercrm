@@ -66,8 +66,8 @@ device_id
           />
         </div>
 
-        <div className="col-md-6 p-0 m-0 row justify-content-center " style={{minHeight:"70vh"}}> 
-          <div className="col-md-10 p-lg-0 m-0 pt-5 row justify-content-center  ">
+        <div className="col-md-6 p-0 m-0 row pt-5 justify-content-center " style={{minHeight:"70vh"}}> 
+          <div className="col-md-10 p-lg-0 m-0 pt-5 mt-4 row justify-content-center  ">
             <MainLoginInputs
               showCreateAccount={showCreateAccount}
               appName={appName}

@@ -2,6 +2,7 @@
 import { ContactsSchema } from '../ContactsSchema';
 import SmartGrid from '../../moduleControl/UiControl/SmartGrid';
 import ContactsActions from '../logicControl/actionsRegistry';
+import SmartGridInsight from '../../moduleControl/UiControl/SmartGridInsight';
 
 // Thin wrapper only — all real grid logic lives in components/EntityGrid.jsx
 // export default function ContactsList() {
@@ -19,7 +20,7 @@ export default function ContactsList({
 
 }) {
   return (
-    <SmartGrid
+    <SmartGridInsight
       moduleActions={moduleActions}
       schema={schema}
       title={title}
