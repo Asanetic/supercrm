@@ -5,6 +5,7 @@ import { RevenueplanSchema } from '../RevenueplanSchema';
 import { useEntityFormController } from '../../moduleControl/dataControl/useEntityFormController';
 import { mosyGetSchemaTitle } from '../../../MosyUtils/hiveUtils';
 import RevenueplanActions from '../logicControl/actionsRegistry';
+import DynamicFormPro from '../../moduleControl/UiControl/Dynamicformpro';
 
 // RevenueplanProfile — pure shell. It resolves the id, wires up the
 // controller, and hands DynamicForm the two strings that make this page
@@ -25,7 +26,7 @@ export default function RevenueplanProfile({ id: idProp, onDone, hiddenActions =
   });
 
   return (
-    <DynamicForm
+    <DynamicFormPro
       controller={form}
       eyebrow={form.isEditing ? `${schema.label}  Profile` : `${schema.label}  Directory`}
       title={form.isEditing ? mosyGetSchemaTitle(schema, form.values, '') : `New ${schema.label}`}
